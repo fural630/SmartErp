@@ -11,7 +11,7 @@
   
 	<div class="mainbody clearfix"> 
 	  <!--locationTime start-->
-	  <div class="current_nav_name clearfix">用户信息管理</div>
+	  <div class="current_nav_name clearfix">用户信息管理</div>  
 	  <#include "../frame/header.ftl"/>
 	  
 	  <!--locationTime end--> 

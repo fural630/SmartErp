@@ -1,4 +1,3 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <div class="paging clearfix">
 	<div class="paging_inner">
 		<table class="tb_common">
