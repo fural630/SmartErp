@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE configuration  
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-config.dtd"> 
+<configuration>
+
+    <typeAliases>  
+        <typeAlias alias="User" type="com.smartErp.system.model.User" />
+        <typeAlias alias="Page" type="com.smartErp.util.frame.Page" />  
+    </typeAliases> 
+    
+    <plugins><plugin interceptor="com.smartErp.util.frame.PageInterceptor"/></plugins> 
+    <mappers>  
+        <mapper resource="com/smartErp/system/mapper/UserMapper.xml" />  
+    </mappers>  
+</configuration>    

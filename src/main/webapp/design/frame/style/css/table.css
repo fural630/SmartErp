@@ -1,0 +1,67 @@
+/*无框 start*/
+.tb_common {
+	width: 100%;
+	border-collapse: collapse;
+}
+.tb_common td {
+	font-size: 12px;
+	border:none;
+	padding: 5px;
+	line-height: 18px;
+}
+.tb_common .td_left {
+	text-align:left;
+}
+.tb_common .td_right {
+	text-align:right;
+}
+/*无框 end*/
+/*有框 start*/
+.tb_border {
+	width: 100%;
+	border-collapse: collapse;
+}
+.tb_border th {
+	color: #ffffff;
+	font-size: 12px;
+	border: 1px solid #3999d7;
+	padding: 5px;
+	line-height: 18px;
+	font-weight: bold;
+	text-align:center;
+	min-height:18px;/*高度最小值设置为：100px*/
+	height:auto !important; /*兼容FF,IE7也支持 !important标签*/
+	height:18px; /*兼容ie6*/
+	background:#40aaef;
+}
+.tb_border td {
+	font-size: 12px;
+	border:none;
+	padding: 5px;
+	line-height: 18px;
+	border:1px solid #dedede;
+	text-align:center;
+}
+.tb_border .td_left {
+	text-align:left;
+}
+.tb_border .td_right {
+	text-align:right;
+}
+/*有框 end*/
+/*table full screen start*/
+.tb_full {
+	border:none;
+	border-top: 1px solid #dedede;
+	border-bottom: 1px solid #dedede;
+}
+.tb_full > tbody > tr > td:first-child, .tb_full > thead > tr > th:first-child, .tb_full > tfoot > tr > td:first-child {
+	border-left:none;
+}
+.tb_full > tbody > tr > td:last-child, .tb_full > thead > tr > th:last-child, .tb_full > tfoot > tr > td:last-child {
+	border-right:none;
+}
+.tb_striped > tbody > tr:nth-child(even)>td {
+background-color: #f9f9f9;
+}
+/*table full screen end*/

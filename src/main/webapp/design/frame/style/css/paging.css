@@ -1,0 +1,43 @@
+.paging {
+	width:100%;
+}
+.paging_inner {
+	margin:10px;
+}
+.pging_btn {
+	background:#FcFcFc;
+	border: 1px solid #ccc;
+	margin-left: 4px;
+	height: 16px;
+	padding: 4px 8px;
+	cursor:pointer;
+	color:#5f5f5f;
+	-webkit-border-radius:2px;
+	-moz-border-radius:2px;
+	border-radius:2px;
+	box-shadow: 1px 1px 2px #ddd;
+	top:1px;
+}
+.pging_btn:hover {
+	background: #ddd;
+	border: 1px solid #ccc;
+	cursor: pointer;
+	color: #333;
+}
+.paging td {
+	padding:0;
+}
+.pging_disable {
+	cursor:not-allowed;
+	color:#c0c0c0;
+}
+.pging_disable:hover {
+	background:#FcFcFc;
+	border:1px solid #ccc;
+	color:#c0c0c0;
+	cursor:not-allowed;
+}
+
+.page_box {
+	margin-bottom: 10px;
+}

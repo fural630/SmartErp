@@ -1,0 +1,50 @@
+.popup_tb {
+	width:100%;
+	margin: 0 auto;
+	border-collapse: collapse;
+	padding:0;
+}
+.popup_tb td {
+	font-size: 12px;
+	border: 1px solid #dedede;
+	line-height: 18px;
+	text-align:center;
+	padding:5px;
+}
+.popup_tb td.title {
+	background:#f6f6f6;
+}
+.popup_tb td.right {
+	text-align:right;
+}
+.popup_tb td.left {
+	text-align:left;
+}
+.star {
+	vertical-align:-3px;
+	padding-right:5px;
+	color:red;
+}
+.remark {
+	height:100px;
+}
+/*widht start*/
+.width_100 {
+	width:100%;
+}
+.width_99 {
+	width:99%;
+}
+.width_98 {
+	width:98%;
+}
+.width_97 {
+	width:97%;
+}
+.width_96 {
+	width:96%;
+}
+.width_95 {
+	width:95;
+}
+/*widht end*/
