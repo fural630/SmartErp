@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="SmartErp"
+  id="myeclipse.1471093259528"
+  context-root="/SmartErp"
+  j2ee-spec="1.7"
+  archive="SmartErp.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+
