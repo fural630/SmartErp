@@ -1,6 +1,5 @@
 target/
 .mymetadata
-/.classpath
+.classpath
 .project
-/.settings/
-README.md
+.settings/
