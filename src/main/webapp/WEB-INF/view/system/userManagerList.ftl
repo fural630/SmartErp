@@ -42,7 +42,6 @@
 	        <div class="fr"> <a class="btn"><img src="/design/frame/style/img/add.png"/>新增</a> <a class="btn"><img src="/design/frame/style/img/edite.png"/>修改</a> <a class="btn"><img src="/design/frame/style/img/del.png"/>删除</a> <a class="btn"><img src="/design/frame/style/img/view.png"/>查看</a> </div>
 	      </div>
 	      <table class="tb_border tb_full stripe">
-	        <thead>
 	          <tr>
 	          	<th></th>
 	          	<th>ID</th>
@@ -53,20 +52,20 @@
 	            <th>电话</th>
 	            <th>操作</th>
 	          </tr>
-	        </thead>
-	        <tbody>
-	          <tr>
-	            <td><input name="test1" type="checkbox" value="" /></td>
-	            <td>1</td>
-	            <td>13000000000</td>
-	            <td>13000000000</td>
-	            <td>广西壮族自治区南宁市青秀区广西壮族自治区南宁市青秀区广西壮族自治区南宁市青秀区</td>
-	            <td>13000000000</td>
-	            <td>13000000000</td>
-	            <td><a class="operate">查看</a><a class="operate">编辑</a><a class="operate">删除</a><a class="operate">审核</a></td>
-	          </tr>
-	        </tbody>
+          	<#list userList as user>
+	      		 <tr>
+		            <td><input name="test1" type="checkbox" value="${user.id}" /></td>
+		            <td>${user.id}</td>
+		            <td>${user.name}</td>
+		            <td>${user.username}</td>
+		            <td></td>
+		            <td>13000000000</td>
+		            <td>${user.phone}</td>
+		            <td><a class="operate">查看</a><a class="operate">编辑</a><a class="operate">删除</a><a class="operate">审核</a></td>
+		          </tr>
+          	</#list>
 	      </table>
+	      <#include "../frame/batchOption.ftl"/>
 	    </div>
 	  </div>
 	  <!-- tableview end --> 
