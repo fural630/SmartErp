@@ -14,7 +14,7 @@
 			</select>&nbsp;条
 		</div>
 		<div class="fr">
-			<a class="btn">重置</a> <a class="btn" onclick="queryMainPage()"><img src="design/frame/style/img/query.png" />查询</a>
+			<a class="btn">重置</a> <a class="btn" onclick="queryMainPage()"><img src="/design/frame/style/img/query.png" />查询</a>
 		</div>
 	</div>
 </div>

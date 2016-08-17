@@ -17,7 +17,7 @@
 	    	<span class="first_level_span"><a href="javaScript:void(0);">系统管理</a></span>
 	    	<div class="nav_content">
 	    		<ul>
-	    			<li class="nav_li"><a href="${projectPath}system/getUserManagerList">用户管理</a></li>
+	    			<li class="nav_li"><a href="/system/getUserManagerList">用户管理</a></li>
 	    			<li class="nav_li"><a href="#">权限管理</a></li>
 	    			<li class="nav_li"><a href="#">权限管理</a></li>
 	    			<li class="nav_li"><a href="#">权限管理</a></li>
@@ -27,7 +27,7 @@
 	    	</div>
 	    </li> 
 	    <li class="nav_logout">
-	    	<a href="#"><img src="design/frame/style/img/exit.png">&nbsp;退出 </a>
+	    	<a href="#"><img src="/design/frame/style/img/exit.png">&nbsp;退出 </a>
 	    </li>
 	</ul>
 </div>

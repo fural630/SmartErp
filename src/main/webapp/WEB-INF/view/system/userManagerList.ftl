@@ -2,17 +2,17 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>右侧主体内容</title>
+	<title>用户信息管理</title>
 	<#include "../frame/common.ftl"/>
   </head>
   
   <body>
   	<#include "../frame/header.ftl"/>
-  
 	<div class="mainbody clearfix"> 
 	  <!--locationTime start-->
 	  <div class="current_nav_name clearfix">用户信息管理</div>  
 	  <!--locationTime end--> 
+	  <#include "../frame/page.ftl"/>
 	  <!-- tableview start -->
 	  <div class="tableview clearfix">
 	    <div class="heading clearfix">
@@ -39,7 +39,7 @@
 	            </ul>
 	          </div>
 	        </div>
-	        <div class="fr"> <a class="btn"><img src="${basePath}frame/style/img/add.png"/>新增</a> <a class="btn"><img src="${basePath}frame/style/img/edite.png"/>修改</a> <a class="btn"><img src="${basePath}frame/style/img/del.png"/>删除</a> <a class="btn"><img src="${basePath}frame/style/img/view.png"/>查看</a> </div>
+	        <div class="fr"> <a class="btn"><img src="/design/frame/style/img/add.png"/>新增</a> <a class="btn"><img src="/design/frame/style/img/edite.png"/>修改</a> <a class="btn"><img src="/design/frame/style/img/del.png"/>删除</a> <a class="btn"><img src="/design/frame/style/img/view.png"/>查看</a> </div>
 	      </div>
 	      <table class="tb_border tb_full stripe">
 	        <thead>

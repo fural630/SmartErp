@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<system class="com.smartErp.system.model.User">
+		<header>
+			<title>amazon.online.product.infomation</title>
+			<script>
+				<js>app/sale/amazon/reviseAmazonItem.js</js>
+				<js>app/product/productCertification.js</js>
+				<js>autocomplete.js</js>
+				<js>main.js</js>
+				<js>plugins/ckeditor/ckeditor.js</js>
+			</script>
+		</header>
+		<collection>
+			<massaction>
+				<param uri="/sale/amazonProductUpdateStock" function="batchAmazonProductUpdateStock"
+					key="batchAmazonProductUpdateStock" limit="2000">update.stock</param>
+			</massaction>
+			<head>
+				<titles>
+					<param type="sort" title="symbol" name="accountId" />
+					<param type="text" title="site" name="siteCodeId" />
+					<param type="sort" title="ASIN" name="asin" />
+					<param type="sort" title="basic.information" name="spu|sku|itemName" />
+					<param type="sort" title="product.state" name="productState" />
+					<param type="text" title="price.information.add.blank" name="price" />
+					<param type="sort" title="goods.type" name="cid" />
+					<param type="sort" title="quantity" name="quantity" />
+					<param type="sort" title="sale.amount.statistics" name="sevenDaysSales" />
+					<param type="date" title="new.product.date" name="time" />
+					<param type="date" title="amazon.online.store.protect.update.date" name="time" />
+					<param type="sort" title="creator" name="creator" />
+					<param type="sort" title="fba.state" name="fulfillmentId" />
+					<param type="action" title="action" name="action" uri="" />
+				</titles>
+				<widths>
+					<param value="" />
+					<param value="" />
+					<param value="" />
+					<param value="" />
+					<param value="" />
+					<param value="" />
+					<param value="" />
+					<param value="" />
+					<param value="" />
+					<param value="" />
+					<param value="" />
+					<param value="" />
+					<param value="2%" />
+					<param value="3%" />
+				</widths>
+				<conditions>
+					<condition>
+						<param type="AmazonUserSymbol" name="accountId[string]" />
+						<param type="text" name="accountId[string]" />
+					</condition>
+					<condition>
+						<param type="AmazonSiteInfo" name="siteCodeId[int]" />
+					</condition>
+					<condition>
+						<param type="text" name="productId[string]" 
+							   text="ASIN"/>
+					</condition>
+					<condition>
+						<param type="text"
+							name="sku[string]|spu[string]|realSku[string]|upcOrGcid[string]|pid[int]|itemName[string]"
+							text="sku|spu|realSku|UPC/GCID|product.id|good.name" split="1"/>
+					</condition>
+					<condition>
+						<param type="AmazonProductState" name="productState" />
+						<param type="AmazonProductPublishType" name="sourceType"/>
+					</condition>
+
+					<condition>
+						<param type="range"
+							name="price[double]|lowestPrice[double]|listingLowestPrice[double]"
+							text="sku.price|reserved.price|lowest.price" />
+					</condition>
+					<condition>
+						<param type="ProductCatalog">
+							<arg value="-1" />
+						</param>
+					</condition>
+					<condition>
+						<param type="range" name="quantity[int]" />
+					</condition>
+					<condition>
+						<param type="range"
+							name="sevenDaysSales|fourteenDaysSales|thirtyDaysSales"
+							text="sale.in.7.days|sale.in.14.days|sale.in.30.days" />
+					</condition>
+					<condition>
+						<param type="datetime" name="localTime[string]|openDate[string]"
+							text="new.product.date|originallyTime">
+						</param>
+					</condition>
+					<condition>
+						<param type="datetime" name="lastUpdateTime|syncDate"
+							text="amazon.online.store.protect.update.date|synchronization.time">
+						</param>
+					</condition>
+					<condition>
+						<param type="User" name="creator[int]" />
+					</condition>
+					<condition>
+						<param type="AmazonFBAState" name="fulfillmentId" />
+						<param type="text" name="operationLog" />
+					</condition>
+					<condition/>
+				</conditions>
+			</head>
+			<content>
+				<column>
+					<cell name="accountId" />
+				</column>
+				<column>
+					<cell name="siteCodeId" />
+				</column>
+				<column>
+					<cell name="productId" ftl="sale/amazon/asin-url.ftl" />
+				</column>
+				<column>
+					<cell name="spu" ftl="sale/amazon/fetchSpu.ftl" />
+				</column>
+				<column>
+					<cell name="productState" />
+					<cell ftl="sale/amazon/amazon-online-status.ftl"></cell>
+				</column>
+				<column>
+					<cell name="price" ftl="sale/amazon/online-product-price.ftl" />
+				</column>
+				<column>
+					<cell name="cid" />
+					<cell ftl="sale/amazon/amazon-fetch-prodect-info.ftl" />
+				</column>
+				<column>
+					<cell name="quantity" ftl="sale/amazon/online-product-quantity.ftl" />
+				</column>
+				<column>
+					<cell title="follow.sale" ftl="sale/amazon/follow-sale-count.ftl"></cell>
+					<cell title="sale.in.7.days" name="sevenDaysSales"></cell>
+					<cell title="sale.in.14.days" name="fourteenDaysSales"></cell>
+					<cell title="sale.in.30.days" name="thirtyDaysSales"></cell>
+					<cell title="statistical.time" name="statisticalTime"></cell>
+					<cell title="ReferenceTime" name="basicTime"></cell>
+				</column>
+				<column>
+					<cell title="new.product.date" name="localTime" />
+					<cell title="originallyTime" name="openDate" />
+				</column>
+				<column>
+					<cell title="amazon.online.store.protect.update.date" name="lastUpdateTime" />
+					<cell title="synchronization.time" name="syncDate" />
+				</column>
+				<column>
+					<cell name="creator" />
+				</column>
+				<column>
+					<cell name="fulfillmentId" />
+					<cell name="operationLog" type="log" />
+				</column>
+				<column>
+					<cell title="view" name="id" type="actions">
+						<action title="save" type="js:saveModifyInfomation" uri="" />
+						<action title="revise.images" type="js:editAmazonImage"
+							uri="" />
+						<action title="revise.product.name" type="popup"
+							uri="/sale/modifyProductName" />
+						<action title="revise.key.word" type="popup" uri="/sale/editKeyWords" />
+						<action title="revise.creator" type="popup" uri="/sale/modifyCreator" />
+						<action title="revise.descriptions" type="popup"
+							uri="/sale/modifyDescription" />
+						<action title="revise.sale.point" type="popup"
+							uri="/sale/modifySalePoint" />
+						<action title="revise.variation" type="popup"
+							uri="/sale/modifyVariation" />
+						<action title="create.fba.product" type="js:createFBAProduct"
+							uri="/sale/createFBAProduct" />
+							<!--编辑condition note-->
+						<action title="edit.online.product.condition.note" type="popup"
+							uri="/sale/editConditionNote" />
+							<!--编辑sale price-->
+						<action title="edit.online.product.sale.price" type="popup"
+							uri="/sale/editSalePrice" />
+							
+						<action title="onselling" type="js:amazonProductOnline"
+							uri="/sale/amazonProductOnline" />
+						<action title="offline" type="js:amazonProductOffline" uri="/sale/amazonProductOffline" />
+						<action title="amazon.delete" type="js:amazonProductDelete"
+							uri="/sale/amazonProductDelete"/>
+						<action title="local.delete" type="js:amazonProductDelete"
+							uri="/sale/amazonProductLocalDelete" />
+						<action title="synchro.online.product.info" type="js:SynchroOnlineProductInfo"
+							uri="/sale/SynchroOnlineProductInfo" />
+						<action title="modify.freights" type="popup"
+							uri="/sale/modifyFreightTemplates" />
+						<action title="modify.freight.template" type="popup"
+							uri="/sale/modifyFreightChannel" />
+					</cell>
+				</column>
+			</content>
+		</collection>
+	</system>
+</config>
