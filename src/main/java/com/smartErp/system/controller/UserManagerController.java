@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.smartErp.code.MainPage;
 import com.smartErp.system.model.User;
 import com.smartErp.system.service.UserService;
 import com.smartErp.util.code.Dumper;
@@ -16,13 +17,14 @@ import com.smartErp.util.frame.Page;
 
 @Controller
 @RequestMapping("system")
-public class UserManagerController {
+public class UserManagerController extends MainPage{
 	
 	@Autowired
 	private UserService userService;
 	
 	@RequestMapping("getUserManagerList")
 	public String getUserManagerList(Model model, HttpServletRequest request){
+		_execute(model, request);
 		Page<User> page = new Page<User>();
 		String requestUrl = request.getRequestURI();
 		List<User> userList = userService.getUserPage(page);
