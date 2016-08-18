@@ -17,8 +17,8 @@
 	          <div class="query_inner">
 	            <ul class="query_ul clearfix">
 	              <li>
-	                <label>角色名：</label>
-	                <input class="txt width_80px" />
+	                <label>姓名：</label>
+	                <input type="text" class="txt width_80px" name="params.name" />
 	              </li>
 	              <li>
 	                <label>性别：</label>
@@ -27,6 +27,10 @@
 	                  <option>男</option>
 	                  <option>女</option>
 	                </select>
+	              </li>
+	              <li>
+	                <label>电话：</label>
+	                <input type="text" class="txt width_80px" name="params.phone" />
 	              </li>
 	            </ul>
 	          </div>

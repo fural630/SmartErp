@@ -27,10 +27,77 @@ $(document).ready(function(){
 
 function queryMainPage() {
 	var moduleUrl = $("#moduleUrl").val();
-	var modulePagePageNo = $("#modulePagePageNo").val();
-	var modulePagePageSize = $("#modulePagePageSize").val();
+	var pageNo = $("#pageNo").val();
+	var pageSize = $("#pageSize").val();
+	createFormAndSubmit(moduleUrl, pageNo, pageSize);
+}
+
+function previousPage (totalPage) {
+	var pageNo = parseInt($("#pageNo").val());
+	if ((pageNo-1) <= 0 || (pageNo-1) > totalPage) {
+		return;
+	}
+	var moduleUrl = $("#moduleUrl").val();
+	var pageSize = $("#pageSize").val();
+	pageNo = pageNo -1;
+	createFormAndSubmit(moduleUrl, pageNo, pageSize);
+}
+
+function nextPage(totalPage) {
+	var pageNo = parseInt($("#pageNo").val());
+	if (pageNo >= totalPage) {
+		return;
+	}
+	var moduleUrl = $("#moduleUrl").val();
+	var pageSize = $("#pageSize").val();
+	pageNo = (pageNo + 1);
+	createFormAndSubmit(moduleUrl, pageNo, pageSize);
+}
+
+function changePageSize() {
+	var moduleUrl = $("#moduleUrl").val();
+	var pageNo = parseInt($("#pageNo").val());
+	var pageSize = $("#pageSize").val();
+	createFormAndSubmit(moduleUrl, pageNo, pageSize);
+}
+
+
+function createFormAndSubmit(moduleUrl, pageNo, pageSize) {
+	var formId = moduleUrl.replace(/\//g, "_");
+	var mainPageForm = document.createElement("form");
+	mainPageForm.method = 'post';
+	mainPageForm.id = formId;
+	mainPageForm.action = moduleUrl;
 	
-	alert(moduleUrl + " ; " + modulePagePageNo + " ; " + modulePagePageSize);
+	var pageNoInput = document.createElement("input");
+	pageNoInput.setAttribute("name","pageNo");
+	pageNoInput.setAttribute("type","hidden");
+	pageNoInput.setAttribute("value", pageNo);
+	
+	var pageSizeInput = document.createElement("input");
+	pageSizeInput.setAttribute("name","pageSize");
+	pageSizeInput.setAttribute("type","hidden");
+	pageSizeInput.setAttribute("value", pageSize);
+	
+	mainPageForm.appendChild(pageNoInput);
+	mainPageForm.appendChild(pageSizeInput);
+	
+	var queryInput = $("input[name^=params]");
+	queryInput.each(function() {
+		var paramsElement = document.createElement("input");
+		paramsElement.setAttribute("name", $(this).attr("name"));
+		paramsElement.setAttribute("type","hidden");
+		paramsElement.setAttribute("value", $(this).val());
+		mainPageForm.appendChild(paramsElement);
+	});
+	
+	document.body.appendChild(mainPageForm);
+	mainPageForm.submit();
+}
+
+function createSearchCondition() {
+	
+	
 	
 }
 

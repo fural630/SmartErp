@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.smartErp.code.MainPage;
@@ -23,15 +24,16 @@ public class UserManagerController{
 	private UserService userService;
 	
 	@RequestMapping("getUserManagerList")
-	public String getUserManagerList(Model model, HttpServletRequest request){
+	public String getUserManagerList(Model model, HttpServletRequest request, Page<User> page){
 //		_execute(model, request);
-		Page<User> page = new Page<User>();
+		Dumper.dump(page);
+		Dumper.dump(request.getParameterMap());
 		String requestUrl = request.getRequestURI();
 		List<User> userList = userService.getUserPage(page);
-		Dumper.dump(page);
 		model.addAttribute("page", page);
 		model.addAttribute("userList", userList);
 		model.addAttribute("requestUrl", requestUrl);
 		return "system/userManagerList";
+		
 	}
 }
