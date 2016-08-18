@@ -17,14 +17,14 @@ import com.smartErp.util.frame.Page;
 
 @Controller
 @RequestMapping("system")
-public class UserManagerController extends MainPage{
+public class UserManagerController{
 	
 	@Autowired
 	private UserService userService;
 	
 	@RequestMapping("getUserManagerList")
 	public String getUserManagerList(Model model, HttpServletRequest request){
-		_execute(model, request);
+//		_execute(model, request);
 		Page<User> page = new Page<User>();
 		String requestUrl = request.getRequestURI();
 		List<User> userList = userService.getUserPage(page);

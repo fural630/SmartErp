@@ -1,5 +1,6 @@
 <!-- paging　start -->
 <input type="hidden" id="moduleUrl" value="${requestUrl}"/>
+<div class="current_nav_name clearfix">用户信息管理<div class="fr small_size"> <a class="btn"><img src="/design/frame/style/img/add.png"/>新增</a></div></div>  
 <div class="paging clearfix">
 	<div class="paging_inner">
 		<div class="fl page_box">

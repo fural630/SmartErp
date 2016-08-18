@@ -4,6 +4,11 @@
 .paging_inner {
 	margin:10px;
 }
+.massaction {
+	padding:10px;
+	background:#fafafa;
+	background-image:linear-gradient(to bottom, #fafafa, #f0f0f0);
+}
 .pging_btn {
 	background:#FcFcFc;
 	border: 1px solid #ccc;
@@ -40,4 +45,8 @@
 
 .page_box {
 	margin-bottom: 10px;
+}
+
+.small_size {
+	font-size: small;
 }

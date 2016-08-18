@@ -47,10 +47,11 @@
 }
 .heading h3 {
 	font-size:16px;
-	font-family:å¾®è½¯é›…é»‘;
+	font-family:Î¢ÈíÑÅºÚ;
 }
 .filters {
 	padding: 8px;
+	border-top:3px solid #6cb2e5;
 }
 .filters_tb td {
 	padding-right:10px;
@@ -82,9 +83,9 @@
 .current_nav_name {
 	margin : 0px 10px;
 	color : #FF9912;
-	border-bottom: 2px solid #e1e1e1;
+	border-bottom: 4px solid #e1e1e1;
 	text-align: left;
-	padding: 8px 8px 0px 8px;
+	padding-top: 8px;
 	font-size: 18px;
 	font-weight: bold;
 }

@@ -1,5 +1,5 @@
 <div class="paging clearfix">
-	<div class="paging_inner">
+	<div class="massaction">
 		<table class="tb_common">
 			<tr>
 				<td style="width:40%" class="td_left">
