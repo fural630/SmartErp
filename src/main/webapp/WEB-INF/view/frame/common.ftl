@@ -8,3 +8,4 @@
 <script type="text/javascript" src="/design/frame/style/js/jquery-1.7.1.min.js"></script>
 <script src="/design/frame/style/js/common.js"></script>
 <script src="/design/frame/style/js/stripe.js"></script>
+<script src="/design/static/js/plugins/jqPage.js"></script>

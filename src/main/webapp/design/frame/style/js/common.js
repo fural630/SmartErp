@@ -101,4 +101,15 @@ function createSearchCondition() {
 	
 }
 
+function resetAll() {
+	$("input[name='params.phone']").jqPage({
+		url : "",
+		method : "",
+		colNames : ["姓名","邮箱","电话"],
+		widths :[90, 200, 50],
+		
+		
+	});
+}
+
 

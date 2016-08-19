@@ -1,9 +1,4 @@
 <!-- paging　start -->
-<input type="hidden" id="moduleUrl" value="${requestUrl}"/>
-<div class="current_nav_name clearfix">用户信息管理
-	<div class="fr small_size"> <a class="btn"><img src="/design/frame/style/img/add.png"/>新增</a>
-	</div>
-</div>  
 <div class="paging clearfix">
 	<div class="paging_inner">
 		<div class="fl page_box">
@@ -18,7 +13,7 @@
 			</select>&nbsp;条
 		</div>
 		<div class="fr">
-			<a class="btn">重置</a> <a class="btn" onclick="queryMainPage()"><img src="/design/frame/style/img/query.png" />查询</a>
+			<a class="btn" onclick="resetAll()">重置</a> <a class="btn" onclick="queryMainPage()"><img src="/design/frame/style/img/query.png" />查询</a>
 		</div>
 	</div>
 </div>
