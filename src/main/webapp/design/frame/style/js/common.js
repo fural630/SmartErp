@@ -23,6 +23,26 @@ $(document).ready(function(){
 	$(this).removeClass("collapse");
 	$(this).addClass("expand");
    });
+   
+   
+   var log_notepad = $("img[name=log_notepad]");
+   log_notepad.click(function (){
+//	   var notepadleft = $(this).offset().left;
+//	   var notepadtop = $(this).offset().top;
+//	   var log_content = $(this).parent().next();
+//	   var left = 35;
+//	   var top = 15;
+//	   log_content.offset({top:(notepadtop + top),left:(notepadleft + left)});
+	   var log_content = $(this).parent().next();
+	   if (log_content.is(":hidden")){
+		   log_content.show(100);
+	   } else {
+		   log_content.hide(100);
+	   }
+
+   });
+   
+   
 });
 
 function queryMainPage() {
@@ -100,6 +120,7 @@ function createSearchCondition() {
 	
 	
 }
+
 
 function resetAll() {
 	$("input[name='params.phone']").jqPage({

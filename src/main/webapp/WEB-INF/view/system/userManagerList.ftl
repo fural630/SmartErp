@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>${title}</title>
 	<#include "../frame/common.ftl"/>
+	<script src="/design/static/js/app/system/userManagerList.js"></script>
   </head>
   <body>
   	<#include "../frame/header.ftl"/>
@@ -24,8 +25,9 @@
 	            <th width="100px;">姓名</th>
 	            <th>账号</th>
 	            <th>性别</th>
-	            <th width="100px;">级别</th>
+	            <th width="230px;">级别</th>
 	            <th>电话</th>
+	            <th>日志</th>
 	            <th>操作</th>
 	          </tr>
 	          <tr>
@@ -44,9 +46,12 @@
 					</select>
 	          	</td>
 	          	<td>
-	          		<label>从：</label><input type="text" class="txt width_80px params_margin_5px" name="params.name" /><br/>
+	          		<label>从：</label>
+	          		<input type="text" class="txt width_80px params_margin_5px" name="params.name" id="datepicker" />
+	          		<br/>
 	          		<label>到：</label><input type="text" class="txt width_80px params_margin_5px" name="params.name" /><br/>
 	          	</td>
+	          	<td></td>
 	          	<td></td>
 	          	<td></td>
 	          </tr>
@@ -57,8 +62,14 @@
 		            <td>${user.name}</td>
 		            <td>${user.username}</td>
 		            <td></td>
-		            <td>13000000000</td>
+		            <td></td>
 		            <td>${user.phone}</td>
+		            <td>
+		            	<a href="javascript:void(0)"><img name="log_notepad" src="/design/static/images/common/notepad_32px.png"/></a>
+		            	<div class="log_content">
+		            		【1、于2016-08-20 00:24 由超级管理员创建信息】<br/>
+		            	</div>
+		            </td>
 		            <td><a class="operate">查看</a><a class="operate">编辑</a><a class="operate">删除</a><a class="operate">审核</a></td>
 		          </tr>
           	</#list>
