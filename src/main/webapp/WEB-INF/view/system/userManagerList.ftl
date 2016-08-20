@@ -36,9 +36,15 @@
 	          		<label>从：</label><input type="text" class="txt width_20px params_margin_5px" name="params.name" /><br/>
 	          		<label>到：</label><input type="text" class="txt width_20px params_margin_5px" name="params.name" /><br/>
 	          	</td>
-	          	<td><input type="text" class="txt width_80px params_margin_5px" name="params.name" /></td>
-	          	<td></td>
 	          	<td>
+	          		<input type="text" class="txt width_80px params_margin_5px" name="params.name" />
+	          		<input type="checkbox"> * 
+	          	</td>
+	          	<td>
+	          		<input type="text" class="txt width_80px params_margin_5px" name="" />
+	          	</td>
+	          	<td>
+	          		<input type="text" class="txt width_80px params_margin_5px" name="" value="搜索" /><br/>
 	          		<select class="sel">
 						<option>请选择</option>
 						<option>男</option>
@@ -49,7 +55,8 @@
 	          		<label>从：</label>
 	          		<input type="text" class="txt width_80px params_margin_5px" name="params.name" id="datepicker" />
 	          		<br/>
-	          		<label>到：</label><input type="text" class="txt width_80px params_margin_5px" name="params.name" /><br/>
+	          		<label>到：</label>
+	          		<input type="text" class="txt width_80px params_margin_5px" name="params.name" /><br/>
 	          	</td>
 	          	<td></td>
 	          	<td></td>
@@ -61,7 +68,7 @@
 		            <td>${user.id}</td>
 		            <td>${user.name}</td>
 		            <td>${user.username}</td>
-		            <td></td>
+		            <td><input type="text" class="txt width_80px params_margin_5px" name="params.name"  /></td>
 		            <td></td>
 		            <td>${user.phone}</td>
 		            <td>
@@ -70,7 +77,18 @@
 		            		【1、于2016-08-20 00:24 由超级管理员创建信息】<br/>
 		            	</div>
 		            </td>
-		            <td><a class="operate">查看</a><a class="operate">编辑</a><a class="operate">删除</a><a class="operate">审核</a></td>
+		            <td>
+		            	<div name="option_btn">
+			            	<a class="btn">操作</a>
+			            	<div class="option_menu">
+			            		<ul>
+			            			<li><a href="javascript:void(0)" class="option_menu_a">编辑</a></li>
+			            			<li><a href="javascript:void(0)" class="option_menu_a">删除</a></li>
+			            			<li><a href="javascript:void(0)" class="option_menu_a">修改状态</a></li>
+			            		</ul>
+			            	</div>
+		            	</div>
+		            </td>
 		          </tr>
           	</#list>
 	      </table>
