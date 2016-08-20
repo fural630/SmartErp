@@ -4,19 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>${title}</title>
 	<#include "../frame/common.ftl"/>
-	<script src="/design/static/js/app/system/userManagerList.js"></script>
+	<script src="/design/static/js/app/system/demo.js"></script>
   </head>
   <body>
   	<#include "../frame/header.ftl"/>
-	<div class="current_nav_name clearfix">${title}
-		<div class="fr small_size"> <a class="btn"><img src="/design/frame/style/img/add.png"/>新增</a>
-		</div>
-	</div> 
-	
-	<#include "../frame/page.ftl"/>
-	<table id="userManagerTable">
-		<tr><td>test</td></tr>
-	</table>
-	
+  	<div id="demoMainPage">123</div>
   </body>
 </html>

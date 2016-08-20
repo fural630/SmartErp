@@ -60,6 +60,17 @@ $(document).ready(function(){
 		var menu_content = $(this).find("div.option_menu");
 		menu_content.hide();
 	});
+	
+	var mainPageCheckbox = $("input[name=main_page_checkbox]");
+	mainPageCheckbox.click(function() {
+		var count = 0;
+		mainPageCheckbox.each(function(){
+			if($(this).attr("checked")){
+				count++;
+			}
+		});
+		$("#pageCheckCount").html(count);
+	});
    
 });
 
@@ -154,9 +165,36 @@ function createFormAndSubmit(moduleUrl, pageNo, pageSize) {
 }
 
 function createSearchCondition() {
-	
-	
-	
+}
+
+function pageSelectAll() {
+	var mainPageCheckBox = $("input[name=main_page_checkbox]");
+	var count = 0;
+	mainPageCheckBox.each(function(){
+		$(this).attr("checked", true);
+		count++;
+	});
+	$("#pageCheckCount").html(count);
+}
+
+function pageNoSelectAll() {
+	var mainPageCheckBox = $("input[name=main_page_checkbox]");
+	mainPageCheckBox.each(function(){
+		$(this).attr("checked", false);
+	});
+	$("#pageCheckCount").html(0);
+}
+
+function pageUnselected() {
+	var mainPageCheckBox = $("input[name=main_page_checkbox]");
+	var count = 0;
+	mainPageCheckBox.each(function(){
+		if (!this.checked) {
+			count++;
+		}
+		$(this).attr("checked", !this.checked); 
+	});
+	$("#pageCheckCount").html(count);
 }
 
 

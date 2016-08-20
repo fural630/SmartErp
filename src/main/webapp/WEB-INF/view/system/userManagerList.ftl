@@ -64,7 +64,7 @@
 	          </tr>
           	  <#list userList as user>
 	      		 <tr>
-		            <td><input name="test1" type="checkbox" value="${user.id}" /></td>
+		            <td><input name="main_page_checkbox" type="checkbox" value="${user.id}" /></td>
 		            <td>${user.id}</td>
 		            <td>${user.name}</td>
 		            <td>${user.username}</td>
