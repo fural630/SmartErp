@@ -1,20 +1,16 @@
 package com.smartErp.util.frame;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.CollectionUtils;
-
-public class Page<T> {
+public class Page {
 	private int pageNo = 1;
 	private int pageSize = 10;
 	private int totalRecord;
 	private int totalPage;
-	private List<T> results;
 	private List<Integer> pageList = new ArrayList<Integer>();
-	private Map<String, Object> params = new HashMap<String, Object>();
+	private List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
 	
 	public Page() {
 		pageList.add(10);
@@ -57,19 +53,11 @@ public class Page<T> {
 		this.totalPage = totalPage;
 	}
 
-	public List<T> getResults() {
-		return results;
-	}
-
-	public void setResults(List<T> results) {
-		this.results = results;
-	}
-
-	public Map<String, Object> getParams() {
+	public List<Map<String, Object>> getParams() {
 		return params;
 	}
 
-	public void setParams(Map<String, Object> params) {
+	public void setParams(List<Map<String, Object>> params) {
 		this.params = params;
 	}
 
@@ -80,4 +68,5 @@ public class Page<T> {
 	public void setPageList(List<Integer> pageList) {
 		this.pageList = pageList;
 	}
+	
 }

@@ -2,10 +2,10 @@
 <div class="paging clearfix">
 	<div class="paging_inner">
 		<div class="fl page_box">
-			<a class="pging_btn" onclick="previousPage(${page.totalPage})">上一页</a> &nbsp;&nbsp;
+			<a class="pging_btn" onclick="previousPage()">上一页</a> &nbsp;&nbsp;
 			第&nbsp;<input class="txt width_20px ta_c" value="${page.pageNo}" id="pageNo"/>&nbsp;页 &nbsp; 
-			<a class="pging_btn" onclick="nextPage(${page.totalPage})">下一页 </a>
-			&nbsp;共&nbsp;${page.totalRecord}&nbsp;条， ${page.pageNo}/${page.totalPage} 页， 每页 
+			<a class="pging_btn" onclick="nextPage()">下一页 </a>
+			&nbsp;共&nbsp;<span id="totalRecord">${page.totalRecord}</span>&nbsp;条， ${page.pageNo}/<span id="totalPage">${page.totalPage}</span>页， 每页 
 			<select class="sel" id="pageSize" onchange="changePageSize()">
 				<#list page.pageList as pageSize>
 					<option value="${pageSize}" <#if pageSize == page.pageSize> selected="selected" </#if>>${pageSize}</option>

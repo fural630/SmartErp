@@ -101,15 +101,25 @@ function queryMainPage() {
 	createFormAndSubmit(moduleUrl, pageNo, pageSize);
 }
 
-function previousPage (totalPage) {
-	var pageNo = parseInt($("#pageNo").val());
-	if ((pageNo-1) <= 0 || (pageNo-1) > totalPage) {
+function getPageParam() {
+	var page = new Object();
+	page.pageNo = parseInt($("#pageNo").val());
+	page.pageSize = parseInt($("#pageSize").val());
+	page.totalPage = parseInt($("#totalPage").html());
+	page.totalRecord = parseInt($("#totalRecord").html());
+	return page;
+}
+
+function previousPage () {
+	var page = getPageParam();
+//	alert("pageNo :" + page.pageNo + "; pageSize = " + page.pageSize + "; totalPage = " + page.totalPage + "; totalRecord = " + page.totalRecord);
+	if ((page.pageNo-1) <= 0 || (page.pageNo-1) > page.totalPage) {
 		return;
 	}
-	var moduleUrl = $("#moduleUrl").val();
-	var pageSize = $("#pageSize").val();
-	pageNo = pageNo -1;
-	createFormAndSubmit(moduleUrl, pageNo, pageSize);
+//	var moduleUrl = $("#moduleUrl").val();
+//	var pageSize = $("#pageSize").val();
+//	pageNo = pageNo -1;
+//	createFormAndSubmit(moduleUrl, pageNo, pageSize);
 }
 
 function nextPage(totalPage) {
@@ -198,15 +208,5 @@ function pageUnselected() {
 }
 
 
-function resetAll() {
-	$("input[name='params.phone']").jqPage({
-		url : "",
-		method : "",
-		colNames : ["姓名","邮箱","电话"],
-		widths :[90, 200, 50],
-		
-		
-	});
-}
 
 

@@ -1,6 +1,7 @@
 package com.smartErp.system.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -20,7 +21,7 @@ public class UserService {
 		return userDao.findAll();
 	}
 	
-	public List<User> getUserPage(Page<User> page) {
+	public List<Map<String, Object>> getUserPage(Page page) {
 		return userDao.getUserPage(page);
 	}
 }

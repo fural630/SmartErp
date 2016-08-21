@@ -23,7 +23,7 @@
         select * from user  
     </select>  
     
-    <select id="getUserPage" resultType="User" parameterType="Page">
+    <select id="getUserPage" resultType="hashMap" parameterType="Page">
     	select * from user
     </select>
       

@@ -1,6 +1,7 @@
 package com.smartErp.system.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,12 +24,12 @@ public class UserManagerController{
 	private UserService userService;
 	
 	@RequestMapping("getUserManagerList")
-	public String getUserManagerList(Model model, HttpServletRequest request, Page<User> page){
+	public String getUserManagerList(Model model, HttpServletRequest request, Page page){
 //		_execute(model, request);
 		Dumper.dump(page);
 		Dumper.dump(request.getParameterMap());
 		String requestUrl = request.getRequestURI();
-		List<User> userList = userService.getUserPage(page);
+		List<Map<String, Object>> userList = userService.getUserPage(page);
 		MyLocale myLocale = new MyLocale();
 		model.addAttribute("title", myLocale.getText("navigator.user.manage"));
 		model.addAttribute("page", page);

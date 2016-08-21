@@ -31,8 +31,8 @@ public class PageInterceptor implements Interceptor {
 		StatementHandler delegate = (StatementHandler)ReflectUtil.getFieldValue(handler, "delegate");  
 		BoundSql boundSql = delegate.getBoundSql();
 		Object obj = boundSql.getParameterObject();  
-		if (obj instanceof Page<?>) {  
-			Page<?> page = (Page<?>) obj;
+		if (obj instanceof Page) {  
+			Page page = (Page) obj;
 			MappedStatement mappedStatement = (MappedStatement)ReflectUtil.getFieldValue(delegate, "mappedStatement");
 			Connection connection = (Connection)invocation.getArgs()[0];  
 			String sql = boundSql.getSql(); 
@@ -53,14 +53,14 @@ public class PageInterceptor implements Interceptor {
 		
 	}
 	
-	private String getPageSql(Page<?> page, String sql) {  
+	private String getPageSql(Page page, String sql) {  
        StringBuffer sqlBuffer = new StringBuffer(sql);  
        int offset = (page.getPageNo() - 1) * page.getPageSize();  
        sqlBuffer.append(" limit ").append(offset).append(",").append(page.getPageSize());  
        return sqlBuffer.toString();  
 	}  
 	
-	private void setTotalRecord(Page<?> page, MappedStatement mappedStatement, Connection connection) {  
+	private void setTotalRecord(Page page, MappedStatement mappedStatement, Connection connection) {  
 		BoundSql boundSql = mappedStatement.getBoundSql(page);
 		String sql = boundSql.getSql();
 		String countSql = this.getCountSql(sql);
