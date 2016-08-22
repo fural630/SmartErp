@@ -8,6 +8,7 @@
   </head>
   <body>
   	<#include "../frame/header.ftl"/>
+  	<input type="hidden" id="moduleAjaxTableUrl" value="/system/getUserManageCollection"/>
   	<input type="hidden" id="moduleUrl" value="${requestUrl}"/>
 	<div class="current_nav_name clearfix">${title}
 		<div class="fr small_size"> <a class="btn"><img src="/design/frame/style/img/add.png"/>新增</a>
@@ -18,7 +19,7 @@
 	  <div class="tableview clearfix">
 	    <div class="content">
 	    
-	      <table class="tb_border tb_full stripe">
+	      <table class="tb_border tb_full stripe" id="userManageTable">
 	          <tr>
 	          	<th></th>
 	          	<th>ID</th>
@@ -30,64 +31,80 @@
 	            <th>日志</th>
 	            <th>操作</th>
 	          </tr>
-	          <tr>
-	          	<td></td>
-	          	<td>
-	          		<label>从：</label><input type="text" class="txt width_20px params_margin_5px" name="params.name" /><br/>
-	          		<label>到：</label><input type="text" class="txt width_20px params_margin_5px" name="params.name" /><br/>
+	          <tr class="conditionTr">
+	          	<td style="text-align:left;"></td>
+	          	<td style="text-align:left;">
+	          		<ul>
+	          			<li><label>从：</label><input type="text" class="txt width_20px" name="id[from]" /></li>
+	          			<li><label>到：</label><input type="text" class="txt width_20px" name="id[to]" /></li>
+	          		</ul>
 	          	</td>
-	          	<td>
-	          		<input type="text" class="txt width_80px params_margin_5px" name="params.name" />
-	          		<input type="checkbox"> * 
+	          	<td style="text-align:left;">
+	          		<ul>
+	          			<li><input type="text" class="txt width_80px" name="name" /></li>
+	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找"></li>
+	          		</ul>
 	          	</td>
-	          	<td>
-	          		<input type="text" class="txt width_80px params_margin_5px" name="" />
+	          	<td style="text-align:left;">
+	          		<ul>
+	          			<li><input type="text" class="txt width_80px" name="username" /></li>
+	          			<li></li>
+	          		</ul>
 	          	</td>
-	          	<td>
-	          		<input type="text" class="txt width_80px params_margin_5px" name="" value="搜索" /><br/>
-	          		<select class="sel">
-						<option>请选择</option>
-						<option>男</option>
-						<option>女</option>
-					</select>
+	          	<td style="text-align:left;">
+	          		<ul>
+	          			<li><input type="text" class="width_80px main_input_search select_filter" name="" value="输入过滤" /></li>
+	          			<li>
+		          			<select class="sel">
+								<option>请选择</option>
+								<option>男</option>
+								<option>女</option>
+							</select>
+						</li>
+					</ul>	
 	          	</td>
-	          	<td>
-	          		<label>从：</label>
-	          		<input type="text" class="txt width_80px params_margin_5px" name="params.name" id="datepicker" />
-	          		<br/>
-	          		<label>到：</label>
-	          		<input type="text" class="txt width_80px params_margin_5px" name="params.name" /><br/>
+	          	<td style="text-align:left;">
+	          		<ul>
+	          			<li>
+	          				<label>从：</label>
+	          				<input type="text" class="txt width_80px main_data_time" name="birthday[from]" id="datepicker" />
+	          			</li>
+	          			<li>
+	          				<label>到：</label>
+	          				<input type="text" class="txt width_80px" name="birthday[to]" />
+	          			</li>
+	          		</ul>
 	          	</td>
-	          	<td></td>
-	          	<td></td>
-	          	<td></td>
+	          	<td style="text-align:left;"></td>
+	          	<td style="text-align:left;"></td>
+	          	<td style="text-align:left;"></td>
 	          </tr>
           	  <#list userList as user>
 	      		 <tr>
-		            <td><input name="main_page_checkbox" type="checkbox" value="${user.id}" /></td>
+		            <td><input name="main_page_checkbox" type="checkbox" value="${user.id}" onclick="countCheckbox()" /></td>
 		            <td>${user.id}</td>
 		            <td>${user.name}</td>
 		            <td>${user.username}</td>
-		            <td><input type="text" class="txt width_80px params_margin_5px" name="params.name"  /></td>
+		            <td></td>
 		            <td></td>
 		            <td>${user.phone}</td>
 		            <td>
-		            	<a href="javascript:void(0)"><img name="log_notepad" src="/design/static/images/common/notepad_32px.png"/></a>
+		            	<a href="javascript:void(0)" onclick="showLog(this)"><img src="/design/static/images/common/system-log.png"/></a>
 		            	<div class="log_content">
 		            		【1、于2016-08-20 00:24 由超级管理员创建信息】<br/>
 		            	</div>
 		            </td>
-		            <td>
-		            	<div name="option_btn">
-			            	<a class="btn">操作</a>
-			            	<div class="option_menu">
-			            		<ul>
-			            			<li><a href="javascript:void(0)" class="option_menu_a">编辑</a></li>
-			            			<li><a href="javascript:void(0)" class="option_menu_a">删除</a></li>
-			            			<li><a href="javascript:void(0)" class="option_menu_a">修改状态</a></li>
-			            		</ul>
-			            	</div>
-		            	</div>
+		            <td style="width:60px;">
+					 <div class="menu">
+					  <ul>
+					    <li class="option_btn" onmouseover="optionMouserover(this)" onmouseout="optionMouseout(this)"><a class="btn" href="javascript:void(0)">操作</a>
+					      <ul class="menu_ul">
+							<li><a href="javascript:void(0)" onclick="" >编辑 </a></li>
+					        <li><a href="javascript:void(0)" onclick="" >删除 </a></li>
+					      </ul>
+					    </li>
+					  </ul>
+					</div>
 		            </td>
 		          </tr>
           	</#list>
