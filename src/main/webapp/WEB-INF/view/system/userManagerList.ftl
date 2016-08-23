@@ -81,7 +81,7 @@
 	          </tr>
           	  <#list userList as user>
 	      		 <tr>
-		            <td><input name="main_page_checkbox" type="checkbox" value="${user.id}" onclick="countCheckbox()" /></td>
+		            <td style="text-align:center"><input name="main_page_checkbox" type="checkbox" value="${user.id}" onclick="countCheckbox()" /></td>
 		            <td>${user.id}</td>
 		            <td>${user.name}</td>
 		            <td>${user.username}</td>
@@ -94,7 +94,7 @@
 		            		【1、于2016-08-20 00:24 由超级管理员创建信息】<br/>
 		            	</div>
 		            </td>
-		            <td style="width:60px;">
+		            <td style="width:60px;text-align:center;">
 					 <div class="menu">
 					  <ul>
 					    <li class="option_btn" onmouseover="optionMouserover(this)" onmouseout="optionMouseout(this)"><a class="btn" href="javascript:void(0)">操作</a>

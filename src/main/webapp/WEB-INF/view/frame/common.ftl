@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="/design/frame/style/css/header.css"/>
 <link rel="stylesheet" type="text/css" href="/design/frame/style/css/paging.css"/>
 <link rel="stylesheet" type="text/css" href="/design/frame/style/css/mainbody.css"/>
+<link rel="stylesheet" type="text/css" href="/design/frame/style/css/popup.css"/>
 <link rel="stylesheet" type="text/css" href="/design/frame/jquery/jqueryui/jquery-ui.min.css"/>
 <script type="text/javascript" src="/design/frame/style/js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="/design/frame/jquery/jqueryui/jquery-ui.min.js"></script>

@@ -1,4 +1,7 @@
-/*无框 start*/
+/*鏃犳 start*/
+.td_center {
+	 text-align:center;
+}
 .tb_common {
 	width: 100%;
 	border-collapse: collapse;
@@ -15,8 +18,8 @@
 .tb_common .td_right {
 	text-align:right;
 }
-/*无框 end*/
-/*有框 start*/
+/*鏃犳 end*/
+/*鏈夋 start*/
 .tb_border {
 	width: 100%;
 	border-collapse: collapse;
@@ -29,9 +32,9 @@
 	line-height: 18px;
 	font-weight: bold;
 	text-align:center;
-	min-height:18px;/*高度最小值设置为：100px*/
-	height:auto !important; /*兼容FF,IE7也支持 !important标签*/
-	height:18px; /*兼容ie6*/
+	min-height:18px;/*楂樺害鏈�皬鍊艰缃负锛�00px*/
+	height:auto !important; /*鍏煎FF,IE7涔熸敮鎸�!important鏍囩*/
+	height:18px; /*鍏煎ie6*/
 	background:#40aaef;
 }
 .tb_border td {
@@ -40,7 +43,7 @@
 	padding: 5px;
 	line-height: 18px;
 	border:1px solid #dedede;
-	text-align:center;
+	text-align:left;
 }
 .tb_border .td_left {
 	text-align:left;
@@ -48,7 +51,7 @@
 .tb_border .td_right {
 	text-align:right;
 }
-/*有框 end*/
+/*鏈夋 end*/
 /*table full screen start*/
 .tb_full {
 	border:none;
@@ -64,4 +67,5 @@
 .tb_striped > tbody > tr:nth-child(even)>td {
 background-color: #f9f9f9;
 }
+
 /*table full screen end*/

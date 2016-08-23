@@ -132,14 +132,41 @@ button, input, select, textarea {
 }
 /*float end*/
 /*width-px start*/
+.width_10px {
+	width:10px;
+}
 .width_20px {
 	width:20px;
+}
+.width_30px {
+	width:30px;
+}
+.width_40px {
+	width:40px;
+}
+.width_50px {
+	width:50px;
+}
+.width_60px {
+	width:60px;
+}
+.width_70px {
+	width:70px;
 }
 .width_80px {
 	width:80px;
 }
+.width_90px {
+	width:80px;
+}
 .width_100px {
 	width:100px;
+}
+.width_110px {
+	width:110px;
+}
+.width_120px {
+	width:120px;
 }
 .width960px_left {
 	width:960px;

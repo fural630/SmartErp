@@ -86,7 +86,7 @@ function updatePageCollection(data) {
 	var collection = "";
 	$.each(data, function () {
 		var tableData = "<tr>";
-		tableData += "<td><input name='main_page_checkbox' type='checkbox' value='" + this.id + "' onclick='countCheckbox()' /></td>";
+		tableData += "<td style='text-align:center;'><input name='main_page_checkbox' type='checkbox' value='" + this.id + "' onclick='countCheckbox()' /></td>";
 		tableData += "<td>" + this.id + "</td>";
 		tableData += "<td>" + this.name +"</td>";
 		tableData += "<td>" + this.username + "</td>";
@@ -98,7 +98,7 @@ function updatePageCollection(data) {
 		tableData += "【1、于2016-08-20 00:24 由超级管理员创建信息】<br/>";
 		tableData += "</div>";
 		tableData += "</td>";
-		tableData += "<td style='width:60px;'>";
+		tableData += "<td style='width:60px;text-align:center;'>";
 		tableData += "<ul>";
 		tableData += "<li class='option_btn' onmouseover='optionMouserover(this)' onmouseout='optionMouseout(this)'><a class='btn' href='javascript:void(0)'>操作</a>";
 		tableData += "<ul class='menu_ul'>";

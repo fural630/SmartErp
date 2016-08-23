@@ -25,6 +25,14 @@
 	    			<li class="nav_li"><a href="#">权限管理</a></li>
 	    		</ul>
 	    	</div>
+	    </li>
+	    <li class="first_level_li">
+	    	<span class="first_level_span"><a href="javaScript:void(0);">Cdiscount</a></span>
+	    	<div class="nav_content" style="width:300px;">
+	    		<ul>
+	    			<li class="nav_li"><a href="/cdiscount/cdiscountPublishManage">Cdiscount 刊登工具</a></li>
+	    		</ul>
+	    	</div>
 	    </li> 
 	    <li class="nav_logout">
 	    	<a href="#"><img src="/design/frame/style/img/exit.png">&nbsp;退出 </a>
