@@ -1,6 +1,7 @@
 package com.smartErp.util.frame;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ public class Page {
 	private int totalRecord;
 	private int totalPage;
 	private List<Integer> pageList = new ArrayList<Integer>();
-	private List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
+	private Map<String, Object> params = new HashMap<String, Object>();
 	
 	public Page() {
 		pageList.add(10);
@@ -53,11 +54,11 @@ public class Page {
 		this.totalPage = totalPage;
 	}
 
-	public List<Map<String, Object>> getParams() {
+	public Map<String, Object> getParams() {
 		return params;
 	}
 
-	public void setParams(List<Map<String, Object>> params) {
+	public void setParams(Map<String, Object> params) {
 		this.params = params;
 	}
 

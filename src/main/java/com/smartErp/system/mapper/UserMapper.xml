@@ -25,6 +25,17 @@
     
     <select id="getUserPage" resultType="hashMap" parameterType="Page">
     	select * from user
+    	<where>
+    		<if test="params.usernameEq!=null and params.usernameEq !=''">
+    			username = #{params.usernameEq}
+    		</if>
+    		<if test="params.idTo!=null and params.idTo!=''">
+				<![CDATA[ and id <= #{params.idTo} ]]>
+    		</if>
+    		<if test="params.idFrom!=null and params.idFrom!=''">
+				<![CDATA[ and id >= #{params.idFrom} ]]>
+    		</if>
+    	</where>
     </select>
       
 </mapper>  

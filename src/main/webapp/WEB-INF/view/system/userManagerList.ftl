@@ -35,19 +35,19 @@
 	          	<td style="text-align:left;"></td>
 	          	<td style="text-align:left;">
 	          		<ul>
-	          			<li><label>从：</label><input type="text" class="txt width_20px" name="id[from]" /></li>
-	          			<li><label>到：</label><input type="text" class="txt width_20px" name="id[to]" /></li>
+	          			<li><label>从：</label><input type="text" class="txt width_20px" name="idFrom" /></li>
+	          			<li><label>到：</label><input type="text" class="txt width_20px" name="idTo" /></li>
 	          		</ul>
 	          	</td>
 	          	<td style="text-align:left;">
 	          		<ul>
-	          			<li><input type="text" class="txt width_80px" name="name" /></li>
+	          			<li><input type="text" class="txt width_80px" name="nameEq" /></li>
 	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找"></li>
 	          		</ul>
 	          	</td>
 	          	<td style="text-align:left;">
 	          		<ul>
-	          			<li><input type="text" class="txt width_80px" name="username" /></li>
+	          			<li><input type="text" class="txt width_80px" name="usernameEq" /></li>
 	          			<li></li>
 	          		</ul>
 	          	</td>
@@ -67,11 +67,11 @@
 	          		<ul>
 	          			<li>
 	          				<label>从：</label>
-	          				<input type="text" class="txt width_80px main_data_time" name="birthday[from]" id="datepicker" />
+	          				<input type="text" class="txt width_80px main_data_time" name="birthdayFrom" id="datepicker" />
 	          			</li>
 	          			<li>
 	          				<label>到：</label>
-	          				<input type="text" class="txt width_80px" name="birthday[to]" />
+	          				<input type="text" class="txt width_80px" name="birthdayTo" />
 	          			</li>
 	          		</ul>
 	          	</td>

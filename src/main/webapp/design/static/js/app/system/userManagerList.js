@@ -42,35 +42,40 @@ function changePageSize() {
 
 function queryMainPage() {
 	var page = getPageParam();
-	createSearchCondition();
+	var params = createSearchCondition();
+	getPageCollection(page, params);
 }
 
 function createSearchCondition() {
 	var condition = $(".conditionTr");
 	var inputText = condition.find("input[type=text]:not(.select_filter)");
+	var params = {};
 	inputText.each(function () {
-		var name = $(this).attr("name");
-		alert(name);
+		var key = $(this).attr("name");
+		var value = $(this).val();
+		params[key] = value;
 	});
+	return params;
 }
 
-
-function getPageCollection(page) {
+function getPageCollection(page, params) {
 	var url = $("#moduleAjaxTableUrl").val();
 	$.ajax({
 		url : url,
-		method : "post",
+		type: 'POST',
 		dataType : "json",
 		async: false,
 		data : {
 			pageNo : page.pageNo,
-			pageSize : page.pageSize
+			pageSize : page.pageSize,
+			params : params
 		},
 		success : function (data) {
 			var page = data.page;
 			updateMainPage(page);
 			updatePageCollection(data.userList);
-			$('.stripe tr:nth-child(even)').addClass("trOdd");
+			initCssStyle();
+			countCheckbox();
 		}
 	});
 }
@@ -83,7 +88,7 @@ function updatePageCollection(data) {
 		var tableData = "<tr>";
 		tableData += "<td><input name='main_page_checkbox' type='checkbox' value='" + this.id + "' onclick='countCheckbox()' /></td>";
 		tableData += "<td>" + this.id + "</td>";
-		tableData += "<td>" + this.username +"</td>";
+		tableData += "<td>" + this.name +"</td>";
 		tableData += "<td>" + this.username + "</td>";
 		tableData += "<td></td>";
 		tableData += "<td></td>";

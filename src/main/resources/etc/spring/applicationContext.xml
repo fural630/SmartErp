@@ -54,7 +54,6 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 	
-    
     <mvc:resources mapping="/design/**" location="/design/" />
    
  </beans>  

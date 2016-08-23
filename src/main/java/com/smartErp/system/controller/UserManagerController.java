@@ -44,6 +44,7 @@ public class UserManagerController{
 	@RequestMapping("getUserManageCollection")
 	@ResponseBody
 	public String getUserManageCollection(Page page) {
+		Dumper.dump(page);
 		List<Map<String, Object>> userList = userService.getUserPage(page);
 		Map<String, Object> resutMap = new HashMap<String, Object>();
 		resutMap.put("userList", userList);
