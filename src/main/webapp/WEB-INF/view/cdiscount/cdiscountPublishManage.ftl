@@ -5,6 +5,8 @@
 	<title>${title}</title>
 	<#include "../frame/common.ftl"/>
 	<script src="/design/static/js/app/cdiscount/cdiscountPublishManage.js"></script>
+	<script src="/design/frame/ckeditor/ckeditor.js"></script>
+	<link rel="stylesheet" type="text/css" href="/design/static/css/cdiscount/cdiscountPublishManage.css"/>
   </head>
   <body>
   	<#include "../frame/header.ftl"/>
@@ -202,11 +204,157 @@
 	 		</tr>
 	 		<tr>
 	 			<td class="title">市场描述<i class="star">*</i></td>
-	 			<td><textarea class="txt width_96 remark" ></textarea></td>
+	 			<td><textarea id="description"></textarea></td>
 	 		</tr>
-	 		
+	 		<tr>
+	 			<td class="title">图片<i class="star">*</i></td>
+	 			<td>
+	 				<div class="image_box">
+	 					<div class="image_title">Cdiscount选择图片</div>
+	 					<div class="image_count_info">已选择图片： 0 张 | 最多 4 张图片</div>
+	 				</div>
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title">商品类别<i class="star">*</i></td>
+	 			<td>
+	 				<div>
+	 					<a class="btn" onclick="getFirstCdiscountCategory()">类别选择</a>&nbsp;&nbsp;已选类别：<input type="text" name="categoryId" class="txt width_100px"/>
+	 				</div>
+	 				<div class="category_area">
+	 					<table class="category_table" id="cdCategoryTable">
+	 						<tr>
+	 							<td>
+	 								<div class="category_select_box" id="categoryLevel_1">
+				 						<ul>
+				 							<li>
+				 								<a href="#">
+				 									<span>qweqweqweeeeeeeeeeeeeeeeeeeeeeeee</span>
+				 								</a>
+				 							</li>
+				 							<li>
+				 								<a href="#">
+				 									<span>电子产品》》</span>
+				 								</a>
+				 							</li>
+				 							<li>
+				 								<a href="#">
+				 									<span>电子产品》》</span>
+				 								</a>
+				 							</li>
+				 							<li>
+				 								<a href="#">
+				 									<span>电子产品》》</span>
+				 								</a>
+				 							</li>
+				 							<li>
+				 								<a href="#">
+				 									<span>电子产品》》</span>
+				 								</a>
+				 							</li>
+				 							<li>
+				 								<a href="#">
+				 									<span>电子产品》》</span>
+				 								</a>
+				 							</li>
+				 							<li>
+				 								<a href="#">
+				 									<span>电子产品》》</span>
+				 								</a>
+				 							</li>
+				 							<li>
+				 								<a href="#">
+				 									<span>电子产品》》</span>
+				 								</a>
+				 							</li>
+				 							<li>
+				 								<a href="#">
+				 									<span>电子产品》》</span>
+				 								</a>
+				 							</li>
+				 							<li>
+				 								<a href="#">
+				 									<span>电子产品》》</span>
+				 								</a>
+				 							</li>
+				 							<li>
+				 								<a href="#">
+				 									<span>电子产品》》</span>
+				 								</a>
+				 							</li>
+				 							<li>
+				 								<a href="#">
+				 									<span>电子产品》》</span>
+				 								</a>
+				 							</li>
+				 							<li>
+				 								<a href="#">
+				 									<span>电子产品》》</span>
+				 								</a>
+				 							</li>
+				 							<li>
+				 								<a href="#">
+				 									<span>电子产品》》</span>
+				 								</a>
+				 							</li>
+				 							<li>
+				 								<a href="#">
+				 									<span>电子产品》》</span>
+				 								</a>
+				 							</li>
+				 							<li>
+				 								<a href="#">
+				 									<span>电子产品》》</span>
+				 								</a>
+				 							</li>
+				 							<li>
+				 								<a href="#">
+				 									<span>电子产品》》</span>
+				 								</a>
+				 							</li>
+				 							<li>
+				 							<a href="#"><span>asdfasdfasdfasdfasdfasdfasdfaasdfasdfasdfasd</span></a>
+				 						</li>
+				 						</ul>
+				 					</div>
+	 							</td>
+	 							<td>
+	 								<div class="category_select_box">
+	 								<ul>
+	 									<li>
+				 							<a href="#"><span>asdfasdfasdfasdfasdfasdfasdfaasdfasdfasdfasdfasdfasdfasdfaasdfasdfasdfasdfasdfasdfasdfaasdfasdfasdfasdfasdfasdfasdfaasdfasdfasdfasdfasdfasdfasdfa</span></a>
+				 						</li>
+				 					</ul>
+				 					</div>
+	 							</td>
+	 							<td>
+	 								<div class="category_select_box">
+				 						<ul>
+				 							<li>
+				 								<a href="#">
+				 									<span>电子产品》》</span>
+				 								</a>
+				 							</li>
+				 						</ul>
+				 					</div>
+	 							</td>
+	 							<td>
+	 								<div class="category_select_box">
+				 						<ul>
+				 							<li>
+				 								<a href="#">
+				 									<span>电子产品》》</span>
+				 								</a>
+				 							</li>
+				 						</ul>
+				 					</div>
+	 							</td>
+	 						</tr>
+	 					</table>
+	 				</div>
+	 			</td>
+	 		</tr>
 	 	</table>
 	</div>
-	
   </body>
 </html>

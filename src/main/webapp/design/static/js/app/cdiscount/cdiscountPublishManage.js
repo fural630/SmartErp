@@ -5,7 +5,7 @@ $(function() {
 		buttonImageOnly : true,
 		buttonText : "Select date"
 	});
-	
+	CKEDITOR.replace('description');
 	showCreatePublishDialog();
 });
 
@@ -24,7 +24,22 @@ function showCreatePublishDialog() {
 			click : function() {
 				$(this).dialog("close");
 			}
-		} ]
+		} ],
+		close: function( event, ui ) {
+		}
 	});
+	
+}
+
+function getFirstCdiscountCategory() {
+	$("#cdCategoryTable").show();
+	if ($("#categoryLevel_1").length == 0) {
+		var parentId = 0;
+		var categoryLevel = 1;
+		getCdiscountCategory(parentId, categoryLevel);
+	}
+}
+
+function getCdiscountCategory (parentId, categoryLevel) {
 	
 }
