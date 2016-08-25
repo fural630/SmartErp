@@ -18,7 +18,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 日期相关类
  * 
  * @version 1.00 Oct 26, 2011
- * @author Software Team Of Tomtop Technology Co., Ltd
+ * @author
  */
 public class MyDate { 
 	

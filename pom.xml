@@ -112,6 +112,11 @@
 		    <version>1.2.17</version>
 		</dependency>
 		
+		<dependency>
+		  <groupId>com.cdiscount.ws</groupId>
+		  <artifactId>cdiscount-ws-api</artifactId>
+		  <version>1.0</version>
+		</dependency>
 
 
 				
