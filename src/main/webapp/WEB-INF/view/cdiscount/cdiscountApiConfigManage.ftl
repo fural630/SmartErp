@@ -92,32 +92,34 @@
 	          	<td></td>
 	          	<td></td>
 	          </tr>
-	      		 <tr>
-		            <td></td>
-		            <td></td>
-		            <td></td>
-		            <td></td>
-		            <td></td>
-		            <td></td>
-		            <td>
-		            	<a href="javascript:void(0)" onclick="showLog(this)"><img src="/design/static/images/common/system-log.png"/></a>
-		            	<div class="log_content">
-		            		【1、于2016-08-20 00:24 由超级管理员创建信息】<br/>
-		            	</div>
-		            </td>
-		            <td style="width:60px; text-align:center;" >
-					 <div class="menu">
-					  <ul>
-					    <li class="option_btn" onmouseover="optionMouserover(this)" onmouseout="optionMouseout(this)"><a class="btn" href="javascript:void(0)">操作</a>
-					      <ul class="menu_ul">
-							<li><a href="javascript:void(0)" onclick="" >编辑 </a></li>
-					        <li><a href="javascript:void(0)" onclick="" >删除 </a></li>
-					      </ul>
-					    </li>
-					  </ul>
-					</div>
-		            </td>
-		          </tr>
+	          <#list list as cdiscountApiConfig>
+		          <tr>
+			            <td>${cdiscountApiConfig.id}</td>
+			            <td>${cdiscountApiConfig.shopName}</td>
+			            <td>${cdiscountApiConfig.apiAccount}</td>
+			            <td>${apiAccount}</td>
+			            <td></td>
+			            <td></td>
+			            <td>
+			            	<a href="javascript:void(0)" onclick="showLog(this)"><img src="/design/static/images/common/system-log.png"/></a>
+			            	<div class="log_content">
+			            		【1、于2016-08-20 00:24 由超级管理员创建信息】<br/>
+			            	</div>
+			            </td>
+			            <td style="width:60px; text-align:center;" >
+						 <div class="menu">
+						  <ul>
+						    <li class="option_btn" onmouseover="optionMouserover(this)" onmouseout="optionMouseout(this)"><a class="btn" href="javascript:void(0)">操作</a>
+						      <ul class="menu_ul">
+								<li><a href="javascript:void(0)" onclick="" >编辑 </a></li>
+						        <li><a href="javascript:void(0)" onclick="" >删除 </a></li>
+						      </ul>
+						    </li>
+						  </ul>
+						</div>
+			     	</td>
+			     </tr>
+	          </#list>
 	      </table>
 		      <div class="paging clearfix">
 				<div class="massaction">

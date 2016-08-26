@@ -2,9 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="com.smartErp.cdiscount.dao.CdiscountApiConfigDao">  
-    <select id="findAll" resultType="hashMap">  
+    <select id="findAll" resultType="CdiscountApiConfig">  
         select * from cdiscount_api_config  
-    </select>  
+    </select> 
+    
+    <select id="getById" resultType="CdiscountApiConfig" parameterType="int">
+    	select * from cdiscount_api_config where id = #{id}
+    </select>
     
     <insert id="insert" parameterType="CdiscountApiConfig">
     	insert into cdiscount_api_config values(

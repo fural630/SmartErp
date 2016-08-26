@@ -1,5 +1,7 @@
 package com.smartErp.cdiscount.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,8 @@ public class CdiscountApiManageController {
 		model.addAttribute("title", myLocale.getText("navigator.cdiscount.api.config"));
 		model.addAttribute("page", page);
 		model.addAttribute("requestUrl", requestUrl);
+		List<CdiscountApiConfig> cdiscountApiConfigList = cdiscountApiConfigService.getAllCdiscountApiConfig();
+		model.addAttribute("list", cdiscountApiConfigList);
 		return "cdiscount/cdiscountApiConfigManage";
 	}
 	
