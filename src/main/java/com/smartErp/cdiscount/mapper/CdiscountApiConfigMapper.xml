@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.smartErp.cdiscount.dao.CdiscountApiConfigDao">  
+    <select id="findAll" resultType="hashMap">  
+        select * from cdiscount_api_config  
+    </select>  
+    
+    <insert id="insert" parameterType="CdiscountApiConfig">
+    	insert into cdiscount_api_config values(
+    		null,
+	    	#{shopName},
+	    	#{apiAccount},
+	    	#{email},
+	    	#{apiPassword},
+	    	#{receivablesEmail},
+	    	#{creator},
+	    	#{systemLog},
+	    	#{lastUpdateTime}
+    	)
+    </insert>
+    
+    <update id="update" parameterType="CdiscountApiConfig">
+    	update cdiscount_api_config set 
+    		shopName = #{shopName},
+    		apiAccount = #{apiAccount},
+    		email = #{email},
+    		apiPassword = #{apiPassword},
+    		receivablesEmail = #{receivablesEmail},
+    		systemLog = #{systemLog},
+    		lastUpdateTime = #{lastUpdateTime}
+    	where id = #{id}
+    </update>
+      
+</mapper>  
