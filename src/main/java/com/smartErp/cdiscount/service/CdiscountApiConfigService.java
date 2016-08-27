@@ -10,6 +10,7 @@ import com.smartErp.cdiscount.dao.CdiscountApiConfigDao;
 import com.smartErp.cdiscount.model.CdiscountApiConfig;
 import com.smartErp.code.encryption.DESEncrypt;
 import com.smartErp.util.code.MyDate;
+import com.smartErp.util.frame.Page;
 
 @Service
 public class CdiscountApiConfigService {
@@ -39,5 +40,9 @@ public class CdiscountApiConfigService {
 	
 	public List<CdiscountApiConfig> getAllCdiscountApiConfig() {
 		return cdiscountApiConfigDao.findAll();
+	}
+	
+	public List<CdiscountApiConfig> getCdiscountApiConfigPage(Page page) {
+		return cdiscountApiConfigDao.getCdiscountApiConfigPage(page);
 	}
 }

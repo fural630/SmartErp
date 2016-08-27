@@ -60,15 +60,17 @@ public class CdiscountApiConfigTest {
 	}
 
 	private void testInsert() {
-		CdiscountApiConfig cdiscountApiConfig = new CdiscountApiConfig();
-		cdiscountApiConfig.setApiAccount("SalesNEmma201623-api");
-		cdiscountApiConfig.setApiPassword("9636");
-		cdiscountApiConfig.setEmail("cds@tomtop.com");
-		cdiscountApiConfig.setLastUpdateTime("2016-12-01 05:05:11");
-		cdiscountApiConfig.setReceivablesEmail("cds@tomtop.com");
-		cdiscountApiConfig.setShopName("Dealpark");
-		cdiscountApiConfig.setSystemLog("log1111");
-		cdiscountApiConfigService.insertCdiscountApiConfig(cdiscountApiConfig);
+		for (int i = 0; i < 16; i++) {
+			CdiscountApiConfig cdiscountApiConfig = new CdiscountApiConfig();
+			cdiscountApiConfig.setApiAccount("SalesNEmma201623-api");
+			cdiscountApiConfig.setApiPassword("9636");
+			cdiscountApiConfig.setEmail("cds@tomtop.com");
+			cdiscountApiConfig.setLastUpdateTime("2016-12-01 05:05:11");
+			cdiscountApiConfig.setReceivablesEmail("cds@tomtop.com");
+			cdiscountApiConfig.setShopName("Dealpark");
+			cdiscountApiConfig.setSystemLog("log1111");
+			cdiscountApiConfigService.insertCdiscountApiConfig(cdiscountApiConfig);
+		}
 	}
 
 }

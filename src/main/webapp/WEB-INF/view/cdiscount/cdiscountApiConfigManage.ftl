@@ -9,9 +9,8 @@
   </head>
   <body>
   	<#include "../frame/header.ftl"/>
-  	<input type="hidden" id="moduleAjaxTableUrl" value="/cdiscount/getCdiscountApiConfigCollection"/>
-  	<input type="hidden" id="moduleUrl" value="${requestUrl}"/>
-	<div class="current_nav_name clearfix">${title}
+  	<form action="/cdiscount/cdiscountApiConfigManage" id="mainPageForm" method="post">
+	<div class="current_nav_name clearfix">${title!""}
 		<div class="fr small_size"> 
 			<a class="btn" onclick="showCreateApiConfigDialog()">
 				<img src="/design/frame/style/img/add.png"/>新增
@@ -37,7 +36,7 @@
 	          <tr class="conditionTr">
 	          	<td>
 	          		<ul>
-	          			<li><input type="text" class="txt width_40px" name="id" /></li>
+	          			<li><input type="text" class="txt width_40px" name="params[id]" value="${page.params.id!""}" /></li>
 	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="idLike"></li>
 	          		</ul>
 	          	</td>
@@ -57,10 +56,10 @@
 	          		<ul>
 	          			<li><input type="text" class="width_100px main_input_search select_filter" name="" value="输入过滤" /></li>
 	          			<li>
-		          			<select class="sel width_100px">
-								<option>请选择</option>
-								<option>男</option>
-								<option>女</option>
+		          			<select class="sel width_100px" name="params[sex]">
+								<option value="3">请选择1</option>
+								<option value="1">男1</option>
+								<option value="0">女1</option>
 							</select>
 						</li>
 					</ul>	
@@ -92,34 +91,37 @@
 	          	<td></td>
 	          	<td></td>
 	          </tr>
-	          <#list list as cdiscountApiConfig>
-		          <tr>
-			            <td>${cdiscountApiConfig.id}</td>
-			            <td>${cdiscountApiConfig.shopName}</td>
-			            <td>${cdiscountApiConfig.apiAccount}</td>
-			            <td>${apiAccount}</td>
-			            <td></td>
-			            <td></td>
-			            <td>
-			            	<a href="javascript:void(0)" onclick="showLog(this)"><img src="/design/static/images/common/system-log.png"/></a>
-			            	<div class="log_content">
-			            		【1、于2016-08-20 00:24 由超级管理员创建信息】<br/>
-			            	</div>
-			            </td>
-			            <td style="width:60px; text-align:center;" >
-						 <div class="menu">
-						  <ul>
-						    <li class="option_btn" onmouseover="optionMouserover(this)" onmouseout="optionMouseout(this)"><a class="btn" href="javascript:void(0)">操作</a>
-						      <ul class="menu_ul">
-								<li><a href="javascript:void(0)" onclick="" >编辑 </a></li>
-						        <li><a href="javascript:void(0)" onclick="" >删除 </a></li>
-						      </ul>
-						    </li>
-						  </ul>
-						</div>
-			     	</td>
-			     </tr>
-	          </#list>
+	          </form>
+	          <#if (list?size > 0)>
+		          <#list list as cdiscountApiConfig>
+			          <tr>
+				            <td>${cdiscountApiConfig.id}</td>
+				            <td>${cdiscountApiConfig.shopName}</td>
+				            <td>${cdiscountApiConfig.apiAccount}</td>
+				            <td>${cdiscountApiConfig.apiAccount}</td>
+				            <td>${cdiscountApiConfig.creator}</td>
+				            <td>${cdiscountApiConfig.lastUpdateTime}</td>
+				            <td>
+				            	<a href="javascript:void(0)" onclick="showLog(this)"><img src="/design/static/images/common/system-log.png"/></a>
+				            	<div class="log_content">
+				            		${cdiscountApiConfig.systemLog!""}
+				            	</div>
+				            </td>
+				            <td style="width:60px; text-align:center;" >
+							 <div class="menu">
+							  <ul>
+							    <li class="option_btn" onmouseover="optionMouserover(this)" onmouseout="optionMouseout(this)"><a class="btn" href="javascript:void(0)">操作</a>
+							      <ul class="menu_ul">
+									<li><a href="javascript:void(0)" onclick="" >编辑 </a></li>
+							        <li><a href="javascript:void(0)" onclick="" >删除 </a></li>
+							      </ul>
+							    </li>
+							  </ul>
+							</div>
+				     	</td>
+				     </tr>
+		          </#list>
+	          </#if>
 	      </table>
 		      <div class="paging clearfix">
 				<div class="massaction">

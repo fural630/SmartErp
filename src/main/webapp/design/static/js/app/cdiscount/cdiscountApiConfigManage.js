@@ -1,13 +1,30 @@
 $(function () {
-	showCreateApiConfigDialog();
+//	showCreateApiConfigDialog();
 	
 });
+
+function previousPage () {
+	var pageNo = parseInt($("#pageNo").val());
+	var previousPageNo = pageNo - 1;
+	if (previousPageNo <= 0) {
+		return;
+	}
+	$("#pageNo").val(previousPageNo);
+	$("#mainPageForm").submit();
+}
+
+function nextPage () {
+	var pageNo = parseInt($("#pageNo").val());
+	var nextPageNo = pageNo + 1;
+	$("#pageNo").val(nextPageNo);
+	$("#mainPageForm").submit();
+}
 
 function showCreateApiConfigDialog () {
 	var title = "添加";
 	$("#cdiscountApiConfigDialog").dialog({
 		title : title,
-		autoOpen: true,
+//		autoOpen: true,
 		modal: true,
 		width: 600,
 		height: 400,

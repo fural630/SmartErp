@@ -6,6 +6,10 @@
         select * from cdiscount_api_config  
     </select> 
     
+    <select id="getCdiscountApiConfigPage" resultType="CdiscountApiConfig" parameterType="Page">
+    	select * from cdiscount_api_config
+    </select>
+    
     <select id="getById" resultType="CdiscountApiConfig" parameterType="int">
     	select * from cdiscount_api_config where id = #{id}
     </select>

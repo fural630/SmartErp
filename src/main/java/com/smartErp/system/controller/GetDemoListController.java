@@ -42,10 +42,4 @@ public class GetDemoListController extends MainPage{
 		return "system/demo";
 	}
 	
-	@RequestMapping("demoAjax")
-	@ResponseBody
-	public String demoAjax(HttpServletRequest request, Page page) {
-		List<Map<String, Object>> userList = userService.getUserPage(page);
-		return _execute(page, request, userList);
-	}
 }
