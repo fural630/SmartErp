@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>${title}</title>
+	<title>${title!""}</title>
 	<#include "../frame/common.ftl"/>
 	<script src="/design/static/js/app/cdiscount/cdiscountApiConfigManage.js"></script>
 	<link rel="stylesheet" type="text/css" href="/design/static/css/cdiscount/cdiscountApiConfigManage.css"/>

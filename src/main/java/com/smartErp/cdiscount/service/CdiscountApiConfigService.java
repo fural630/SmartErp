@@ -45,4 +45,8 @@ public class CdiscountApiConfigService {
 	public List<CdiscountApiConfig> getCdiscountApiConfigPage(Page page) {
 		return cdiscountApiConfigDao.getCdiscountApiConfigPage(page);
 	}
+	
+	public void removeAll() {
+		cdiscountApiConfigDao.removeAll();
+	}
 }

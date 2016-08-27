@@ -31,6 +31,11 @@ public class CdiscountApiConfigTest {
 //		testUpdate();
 //		testGetById();
 //		testGetAll();
+//		testDelete();
+	}
+
+	private void testDelete() {
+		cdiscountApiConfigService.removeAll();
 	}
 
 	private void testGetAll() {

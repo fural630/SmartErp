@@ -15,11 +15,20 @@
     </select>
     
     <insert id="insert" parameterType="CdiscountApiConfig">
-    	insert into cdiscount_api_config values(
-    		null,
+    	insert into cdiscount_api_config
+    	(
+    		shopName,
+    		email,
+    		apiAccount,
+    		apiPassword,
+    		receivablesEmail,
+    		creator,
+    		systemLog,
+    		lastUpdateTime
+    	) values(
 	    	#{shopName},
-	    	#{apiAccount},
 	    	#{email},
+	    	#{apiAccount},
 	    	#{apiPassword},
 	    	#{receivablesEmail},
 	    	#{creator},
@@ -39,5 +48,9 @@
     		lastUpdateTime = #{lastUpdateTime}
     	where id = #{id}
     </update>
+    
+    <delete id="removeAll">
+    	delete from cdiscount_api_config
+    </delete>
       
 </mapper>  
