@@ -68,6 +68,7 @@
 	          		<ul>
 	          			<li><input type="text" class="width_100px main_input_search select_filter" name="" value="输入过滤" /></li>
 	          			<li>
+	          				<@dictionary name="params[sex]" cssClass="sel width_100px" id="test" selected="2"/>
 		          			<select class="sel width_100px">
 								<option>请选择</option>
 								<option>男</option>

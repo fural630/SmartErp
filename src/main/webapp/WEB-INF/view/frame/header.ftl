@@ -19,12 +19,14 @@
 	    	<span class="first_level_span"><a href="javaScript:void(0);">系统</a></span>
 	    	<div class="nav_content">
 	    		<ul>
-	    			<li class="nav_li"><a href="/system/getUserManagerList">用户管理</a></li>
-	    			<li class="nav_li"><a href="/system/getDemoList">Demo</a></li>
-	    			<li class="nav_li"><a href="#">权限管理</a></li>
-	    			<li class="nav_li"><a href="#">权限管理</a></li>
-	    			<li class="nav_li"><a href="#">权限管理</a></li>
-	    			<li class="nav_li"><a href="#">权限管理</a></li>
+	    			<li class="second_li">
+	    				<span class="second_level_span">系统管理</span>
+	    				<ul class="second_ul">
+	    					<li><a href="/system/getUserManagerList">用户管理</a></li>
+	    					<li><a href="/system/getDemoList">Demo</a></li>
+	    					<li><a href="/system/dictionaryManageList" target="_blank">字典配置</a></li>
+	    				</ul>
+	    			</li>
 	    		</ul>
 	    	</div>
 	    </li>

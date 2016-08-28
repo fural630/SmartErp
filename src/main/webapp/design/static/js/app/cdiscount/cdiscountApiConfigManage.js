@@ -20,6 +20,11 @@ function nextPage () {
 	$("#mainPageForm").submit();
 }
 
+function changePageSize() {
+	$("#mainPageForm").submit();
+}
+
+
 function showCreateApiConfigDialog () {
 	var title = "添加";
 	$("#cdiscountApiConfigDialog").dialog({
@@ -44,6 +49,18 @@ function showCreateApiConfigDialog () {
 	});
 }
 
+function resetAll() {
+	$.blockUI({
+		message: '<img src="/design/static/images/common/progressbar10.gif">',
+		timeout:5000,
+		css:{
+			backgroundColor:"",
+			border:"0"
+		}
+	});
+}
+
+
 function saveCdiscountApiConfig () {
 	
 	var dialog = $("#cdiscountApiConfigDialog");
@@ -59,7 +76,7 @@ function saveCdiscountApiConfig () {
 	$.ajax({
 		url : url,
 		type: 'POST',
-		dataType : "json",
+		dataType : "text",
 		async: false,
 		data : {
 			id : id,
@@ -70,7 +87,7 @@ function saveCdiscountApiConfig () {
 			receivablesEmail : receivablesEmail
 		},
 		success : function (data) {
-			alert(data);
+			$.growlUI('Growl Notification', 'Have a nice day!'); 
 		}
 	});
 }
