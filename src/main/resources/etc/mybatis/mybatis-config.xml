@@ -14,5 +14,6 @@
     <mappers>  
         <mapper resource="com/smartErp/system/mapper/UserMapper.xml" />  
         <mapper resource="com/smartErp/cdiscount/mapper/CdiscountApiConfigMapper.xml" />  
+        <mapper resource="com/smartErp/system/mapper/DictionaryTypeMapper.xml" />
     </mappers>  
 </configuration>    
