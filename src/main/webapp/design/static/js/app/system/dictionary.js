@@ -1,12 +1,34 @@
 $(function () {
-	$(function() {
-		$('body').layout({ 
-			applyDefaultStyles: true,
-			west__size:400 
-		 });
+	$('body').layout({ 
+		applyDefaultStyles: true,
+		west__size:400 
 	});
 	initDictionaryTree();
 	initDialog();
+	
+	$.blockUI.defaults.overlayCSS.opacity=0.2;
+	$.ajaxSetup({
+		type: 'POST',
+		dataType : "json",
+		beforeSend : function (xhr) {
+			$.blockUI({
+				message: '<img src="/design/static/images/common/progressbar10.gif">',
+				timeout: 10000,
+				css:{
+					backgroundColor: "",
+					border:"0"
+				}
+			});
+		},
+		error: function (xhr, status, e) {
+			var param = {
+				status : 0,
+				message : e
+			};
+			$.message.showMessage(param);
+		}
+	});
+
 });
 
 function initDialog() {
@@ -22,6 +44,7 @@ function initDialog() {
 				primary : "ui-icon-heart"
 			},
 			click : function() {
+				saveDictionaryType();
 				$(this).dialog("close");
 			}
 		} ],
@@ -35,6 +58,24 @@ function initDialog() {
 		open: function( event, ui ) {
 		}
 	});
+}
+
+function saveDictionaryType () {
+	var url =$("#dictionaryTypeDialog input[name=action]").val();
+	var id = $("#dictionaryTypeDialog input[name=id]").val();
+	alert("url = " + url + "; id = " + id);
+	
+	$.ajax({
+		url : url,
+		data : {
+			id : id
+		},
+		success : function (data) {
+			alert(data.success);
+		}
+		
+	});
+	
 }
 
 function initDictionaryTree() {
@@ -61,7 +102,9 @@ function addDictionaryType() {
 	var nodes = treeObj.getSelectedNodes();
 	if (nodes.length > 0) {
 		var id = nodes[0].id;
-		$("#dictionaryTypeDialog input[name=parentId]").val(id);
+		var action = "/system/addDictionaryType";
+		$("#dictionaryTypeDialog input[name=action]").val(action);
+		$("#dictionaryTypeDialog input[name=id]").val(id);
 		$("#dictionaryTypeDialog").dialog("option", "title", "新增字典模块");
 		$("#dictionaryTypeDialog").dialog('open');
 		
@@ -71,7 +114,9 @@ function addDictionaryType() {
 }
 
 function addRootDictionaryType() {
-	$("#dictionaryTypeDialog input[name=parentId]").val(0);
+	var action = "/system/addRootDictionaryType";
+	$("#dictionaryTypeDialog input[name=action]").val(action);
+	$("#dictionaryTypeDialog input[name=id]").val(0);
 	$("#dictionaryTypeDialog").dialog("option", "title", "新增根节点");
 	$("#dictionaryTypeDialog").dialog("open");
 }
@@ -81,21 +126,31 @@ function editDictionaryType() {
 	if (id == undefined) {
 		alert("请选中一个节点！");
 	}
-	
 	$.ajax({
 		url : "/system/getDictionaryById",
-		type: 'POST',
-		dataType : "json",
 		data : {
 			id : id
 		},
 		success : function (data) {
-			$("#dictionaryTypeDialog input[name=parentId]").val(id);
+			var action = "/system/editDictionaryType";
+			$("#dictionaryTypeDialog input[name=action]").val(action);
+			$("#dictionaryTypeDialog input[name=id]").val(id);
 			$("#dictionaryTypeDialog input[name=moduleName]").val(data.name);
 			$("#dictionaryTypeDialog").dialog("option", "title", "修改节点");
 			$("#dictionaryTypeDialog").dialog("open");
 		}
 	});
+	
+}
+
+function deleteDictionaryType() {
+	$.ajax({
+		url : "/system/deleteDictionaryType",
+		success : function (data) {
+			var status = $.message.showMessage(data);
+		}
+	});
+	
 	
 }
 
