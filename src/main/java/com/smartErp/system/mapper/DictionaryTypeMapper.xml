@@ -2,16 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="com.smartErp.system.dao.DictionaryTypeDao">  
-    <select id="getDictionaryByParentId" resultType="hashMap" parameterType="int">  
-        select id as id,parentId as pId, moduleName as name  from dictionary_type  
-        where parentId = #{id}
+    <select id="getDictionaryByParentId" resultType="DictionaryType" parameterType="int">  
+        select *  from dictionary_type where parentId = #{id}
     </select>  
     
-    <select id="getDictionaryAll" resultType="hashMap">
+    <select id="getAllDictionaryTree" resultType="hashMap">
     	select id as id,parentId as pId, moduleName as name  from dictionary_type  
     </select>
     
-    <select id="getDictionaryById" resultType="hashMap" parameterType="int">
-    	select moduleName as name from dictionary_type where id = #{id}
+    <select id="getMaxModuleDictionaryTypeByParentId" resultType="DictionaryType" parameterType="int">
+    	select * from dictionary_type where  moduleId = (select max(moduleId) from dictionary_type where parentId = #{id})
     </select>
+    
+    <select id="getDictionaryById" resultType="DictionaryType" parameterType="int">
+    	select * from dictionary_type where id = #{id}
+    </select>
+    
+    <insert id="saveDictionaryType" parameterType="DictionaryType">
+    	insert into dictionary_type (
+    		parentId,
+    		moduleName,
+    		moduleId
+    	) values (
+    		#{parentId},
+    		#{moduleName},
+    		#{moduleId}
+    	)
+    </insert>
 </mapper>  

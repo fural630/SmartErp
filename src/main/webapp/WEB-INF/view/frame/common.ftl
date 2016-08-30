@@ -11,6 +11,7 @@
 <script type="text/javascript" src="/design/frame/jquery/jqueryui/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/design/frame/jquery/jquery.blockUI.js"></script>
 <script type="text/javascript" src="/design/static/js/plugins/message.js"></script>
+<script type="text/javascript" src="/design/static/js/plugins/myFormPlugins.js"></script>
 <script src="/design/frame/style/js/common.js"></script>
 <script src="/design/frame/style/js/stripe.js"></script>
 <script src="/design/static/js/plugins/jqPage.js"></script>

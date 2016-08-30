@@ -3,10 +3,18 @@ package com.smartErp.system.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.smartErp.system.model.DictionaryType;
+
 public interface DictionaryTypeDao {
-	public List<Map<String, Object>> getDictionaryByParentId(Integer id);
+	public List<DictionaryType> getDictionaryByParentId(Integer id);
 
-	public List<Map<String, Object>> getDictionaryAll();
+	public List<Map<String, Object>> getAllDictionaryTree();
 
-	public Map<String, Object> getDictionaryById(Integer id);
+	public DictionaryType getDictionaryById(Integer id);
+	
+	public DictionaryType getMaxModuleDictionaryTypeById(Integer id);
+	
+	public DictionaryType getMaxModuleDictionaryTypeByParentId(Integer id);
+	
+	public void saveDictionaryType(DictionaryType dictionaryType);
 }

@@ -8,6 +8,7 @@
         <typeAlias alias="User" type="com.smartErp.system.model.User" />
         <typeAlias alias="Page" type="com.smartErp.util.frame.Page" />
         <typeAlias alias="CdiscountApiConfig" type="com.smartErp.cdiscount.model.CdiscountApiConfig"/>
+        <typeAlias alias="DictionaryType" type="com.smartErp.system.model.DictionaryType"/>
     </typeAliases> 
     
     <plugins><plugin interceptor="com.smartErp.util.frame.PageInterceptor"/></plugins> 

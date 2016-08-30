@@ -8,18 +8,6 @@ $(function () {
 	
 	$.blockUI.defaults.overlayCSS.opacity=0.2;
 	$.ajaxSetup({
-		type: 'POST',
-		dataType : "json",
-		beforeSend : function (xhr) {
-			$.blockUI({
-				message: '<img src="/design/static/images/common/progressbar10.gif">',
-				timeout: 10000,
-				css:{
-					backgroundColor: "",
-					border:"0"
-				}
-			});
-		},
 		error: function (xhr, status, e) {
 			var param = {
 				status : 0,
@@ -45,17 +33,12 @@ function initDialog() {
 			},
 			click : function() {
 				saveDictionaryType();
+				$.myformPlugins.cleanForm("#dictionaryTypeDialog");
 				$(this).dialog("close");
 			}
 		} ],
 		close: function( event, ui ) {
-			$(':input','#dictionaryTypeDialog')  
-			.not(':button, :submit, :reset, :hidden')  
-			.val('')  
-			.removeAttr('checked')  
-			.removeAttr('selected');  
-		}, 
-		open: function( event, ui ) {
+			$.myformPlugins.cleanForm("#dictionaryTypeDialog");
 		}
 	});
 }
@@ -63,54 +46,79 @@ function initDialog() {
 function saveDictionaryType () {
 	var url =$("#dictionaryTypeDialog input[name=action]").val();
 	var id = $("#dictionaryTypeDialog input[name=id]").val();
-	alert("url = " + url + "; id = " + id);
+	var moduleName = $("#dictionaryTypeDialog input[name=moduleName]").val();
 	
 	$.ajax({
 		url : url,
+		type: 'POST',
+		dataType : "json",
 		data : {
-			id : id
+			id : id,
+			moduleName : moduleName
 		},
 		success : function (data) {
-			alert(data.success);
+			var status = $.message.showMessage(data);
+			if (status == 1) {
+				initDictionaryTree();
+			}
+		},
+		beforeSend : function (xhr) {
+			$.blockUI({
+				message: '<img src="/design/static/images/common/progressbar10.gif">',
+				timeout: 10000,
+				css:{
+					backgroundColor: "",
+					border:"0"
+				}
+			});
 		}
-		
 	});
 	
 }
 
 function initDictionaryTree() {
 	var setting = {
-			data: {
-				simpleData: {
-					enable: true
-				}
+		data: {
+			simpleData: {
+				enable: true
 			},
-			async: {
-				enable: true,
-				url:"/system/getDictionaryAll",
-				dataType : "json",
-				autoParam:["id=id"],
-				type: "post",
-			}
-		};
+		},
+		callback : {
+			onClick : loadDictionary
+		},
+		async: {
+			enable: true,
+			url:"/system/getAllDictionaryTree",
+			dataType : "json",
+			autoParam:["id=id"],
+			type: "post",
+		}
+	};
 	
 	$.fn.zTree.init($("#dictionaryTree"), setting);
 }
 
+function loadDictionary() {
+//	var treeObj = $.fn.zTree.getZTreeObj("tree");
+//	var sNodes = treeObj.getSelectedNodes();
+//	if (sNodes.length > 0) {
+//		var isParent = sNodes[0].isParent;
+//	}
+	alert(444);
+}
+
 function addDictionaryType() {
-	var treeObj = $.fn.zTree.getZTreeObj("dictionaryTree");
-	var nodes = treeObj.getSelectedNodes();
-	if (nodes.length > 0) {
-		var id = nodes[0].id;
-		var action = "/system/addDictionaryType";
-		$("#dictionaryTypeDialog input[name=action]").val(action);
-		$("#dictionaryTypeDialog input[name=id]").val(id);
-		$("#dictionaryTypeDialog").dialog("option", "title", "新增字典模块");
-		$("#dictionaryTypeDialog").dialog('open');
-		
-	} else {
+	var id = getTreeSelectedNodeId();
+	if (id == undefined) {
 		alert("请选中一个节点！");
+		return;
 	}
+	var action = "/system/addDictionaryType";
+	$("#dictionaryTypeDialog input[name=action]").val(action);
+	$("#dictionaryTypeDialog input[name=id]").val(id);
+	$("#dictionaryTypeDialog").dialog("option", "title", "新增字典模块");
+	$("#dictionaryTypeDialog").dialog('open');
+		
 }
 
 function addRootDictionaryType() {
@@ -125,9 +133,12 @@ function editDictionaryType() {
 	var id = getTreeSelectedNodeId();
 	if (id == undefined) {
 		alert("请选中一个节点！");
+		return;
 	}
 	$.ajax({
 		url : "/system/getDictionaryById",
+		type: 'POST',
+		dataType : "json",
 		data : {
 			id : id
 		},
