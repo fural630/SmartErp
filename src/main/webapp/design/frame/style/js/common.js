@@ -1,4 +1,7 @@
-﻿function commonHover(obj, cla) {
+﻿$(function () {
+	
+});
+function commonHover(obj, cla) {
     obj.hover(function () {
         $(this).addClass(cla);
     }, function () {

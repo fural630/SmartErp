@@ -8,7 +8,7 @@
 	<script src="/design/static/js/app/system/dictionary.js"></script>
 	<link rel="stylesheet" type="text/css" href="/design/frame/jquery/zTree_v3-master/css/zTreeStyle/zTreeStyle.css"/>
 	<script src="/design/frame/jquery/zTree_v3-master/js/jquery.ztree.core.js"></script>
-	
+
   </head>
   <body>
 		<div class="ui-layout-west">
@@ -25,7 +25,8 @@
 		</div>
 		
 		<div style="display:none" id="dictionaryTypeDialog">
-			<input type="text" value="0" name="parentId">
+			<input type="text" value="0" name="id">
+			<input type="text" name="action">
 			<table class="popup_tb">
 				<tr>
 	 				<td class="title width_100px">模块名称<i class="star">*</i></td>
