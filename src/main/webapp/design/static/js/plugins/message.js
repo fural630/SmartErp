@@ -37,7 +37,7 @@ jQuery.message = {
 		if (param.status == 0) {
 			this.error(param);
 		} else if (param.status == 1) {
-			this.warring(param);
+			this.success(param);
 		} else if (param.status == 2) {
 			this.warring(param);
 		}
