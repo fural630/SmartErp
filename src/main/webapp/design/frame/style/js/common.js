@@ -19,41 +19,48 @@
 		}
 	}).bind("input propertychange", function() {
 		var value = $.trim($(this).val());
+		var option = $(this).parent().parent().find("select option");
 		if (value != "") {
-			setSelectOption($(this), value);
+			var re = new RegExp(value, "gi");
+			var firstShow = true;
+			var count = 0;
+			option.each(function () {
+				var text = $(this).text();
+				if (re.test(text)) {
+					$(this).show();
+					if (firstShow) {
+						$(this).attr("selected", true);
+						firstShow = false;
+					}
+				} else {
+					count++;
+//					$(this).removeAttr("selected");
+					$(this).hide();
+//					if ($(this).text() == "") {
+//						$(this).attr("selected", true);
+//						$(this).show();
+//					} else {
+//						$(this).hide();
+//					}
+				}
+			});
+			if (count == option.size()) {
+				option.each(function () {
+					$(this).removeAttr("selected");
+				});
+			}
 		} else {
-			var option = $(this).parent().parent().find("select option");
-			option.each(function (){
+			option.each(function () {
 				if ($(this).text() == "") {
 					$(this).attr("selected", true);
+				} else {
+					$(this).removeAttr("selected");
 				}
 				$(this).show();
 			});
 		}
 	});
-	
 });
-
-function setSelectOption (input, value) {
-	var option = $(input).parent().parent().find("select option");
-	var re = new RegExp(value, "gi");
-	var firstShow = true;
-	option.each(function () {
-		var text = $(this).text();
-		if (re.test(text)) {
-			if (firstShow) {
-				$(this).attr("selected", true);
-				firstShow = false;
-			}
-		} else {
-			if (text != "") {
-				$(this).hide();
-			}
-		}
-	});
-	
-	
-}
 
 function commonHover(obj, cla) {
     obj.hover(function () {

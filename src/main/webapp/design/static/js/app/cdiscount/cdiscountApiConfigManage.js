@@ -1,6 +1,6 @@
 $(function () {
 //	showCreateApiConfigDialog();
-	
+	$("#test").comboSelect();
 });
 
 function previousPage () {

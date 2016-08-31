@@ -4,8 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>${title!""}</title>
 	<#include "../frame/common.ftl"/>
-	<script src="/design/static/js/app/cdiscount/cdiscountApiConfigManage.js"></script>
+	<script src="/design/frame/jquery/combo/js/jquery.combo.select.js"></script>
+	<link rel="stylesheet" type="text/css" href="/design/frame/jquery/combo/css/combo.select.css"/>
 	<link rel="stylesheet" type="text/css" href="/design/static/css/cdiscount/cdiscountApiConfigManage.css"/>
+	<script src="/design/static/js/app/cdiscount/cdiscountApiConfigManage.js"></script>
   </head>
   <body>
   	<#include "../frame/header.ftl"/>
@@ -56,15 +58,14 @@
 	          		<ul>
 	          			<li><input type="text" class="width_100px main_input_search select_filter" name="" value="输入过滤" /></li>
 	          			<li>
-		          			<@select name="params[closeStatus]" cssClass="sel width_100px" id="closeStatus" selected="2"  optionClass="YesNo" headerKey="" headerValue=""/>
+		          			<@select name="params[closeStatus]" cssClass="sel width_100px" id="closeStatus" selected="2"  optionClass="CdiscountPublishStatus" headerKey="" headerValue=""/>
 						</li>
 					</ul>	
 	          	</td>
-	          	<td>
+	          	<td width="200">
 	          		<ul>
-	          			<li><input type="text" class="width_100px main_input_search select_filter" name="" value="输入过滤" /></li>
+	          			<li><@select name="params[sex]" cssClass="sel width_100px" id="test" selected="2"  optionClass="" optionClass="CdiscountPublishStatus" headerKey="" headerValue=""/></li>
 	          			<li>
-	          				<@select name="params[sex]" cssClass="sel width_100px" id="test" selected="2"  optionClass="" optionClass="CdiscountPublishStatus" headerKey="" headerValue=""/>
 						</li>
 					</ul>	
 	          	</td>
