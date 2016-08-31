@@ -167,6 +167,10 @@
 	background-color: #F0F0F0;
 }
 
+.input_normal {
+    color: black;
+}
+
 .main_data_time{
 	margin-right : 5px;
 }

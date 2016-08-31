@@ -33,7 +33,8 @@
 		</property>
 		<property name="freemarkerVariables">
             <map >
-                <entry key="dictionary" value-ref="dictionaryTag" />
+                <entry key="select" value-ref="selectOptionTag" />
+                <entry key="matchValue" value-ref="matchValueTag" />
             </map>
         </property>
 	</bean>

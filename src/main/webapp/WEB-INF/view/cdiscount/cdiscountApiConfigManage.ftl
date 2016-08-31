@@ -27,7 +27,7 @@
 	          	<th width="80px;">ID</th>
 	            <th>店铺名称</th>
 	            <th>API账号</th>
-	            <th>状态</th>
+	            <th>关闭状态</th>
 	            <th>创建人</th>
 	            <th>创建时间</th>
 	            <th>日志</th>
@@ -56,11 +56,7 @@
 	          		<ul>
 	          			<li><input type="text" class="width_100px main_input_search select_filter" name="" value="输入过滤" /></li>
 	          			<li>
-		          			<select class="sel width_100px" name="params[sex]">
-								<option value="3">请选择1</option>
-								<option value="1">男1</option>
-								<option value="0">女1</option>
-							</select>
+		          			<@select name="params[closeStatus]" cssClass="sel width_100px" id="closeStatus" selected="2"  optionClass="YesNo" headerKey="" headerValue=""/>
 						</li>
 					</ul>	
 	          	</td>
@@ -68,12 +64,7 @@
 	          		<ul>
 	          			<li><input type="text" class="width_100px main_input_search select_filter" name="" value="输入过滤" /></li>
 	          			<li>
-	          				<@dictionary name="params[sex]" cssClass="sel width_100px" id="test" selected="2"/>
-		          			<select class="sel width_100px">
-								<option>请选择</option>
-								<option>男</option>
-								<option>女</option>
-							</select>
+	          				<@select name="params[sex]" cssClass="sel width_100px" id="test" selected="2"  optionClass="" optionClass="CdiscountPublishStatus" headerKey="" headerValue=""/>
 						</li>
 					</ul>	
 	          	</td>
@@ -99,7 +90,7 @@
 				            <td>${cdiscountApiConfig.id}</td>
 				            <td>${cdiscountApiConfig.shopName}</td>
 				            <td>${cdiscountApiConfig.apiAccount}</td>
-				            <td>${cdiscountApiConfig.apiAccount}</td>
+				            <td><@matchValue key="${cdiscountApiConfig.closeStatus}" optionClass="YesNo"/></td>
 				            <td>${cdiscountApiConfig.creator}</td>
 				            <td>${cdiscountApiConfig.lastUpdateTime}</td>
 				            <td>

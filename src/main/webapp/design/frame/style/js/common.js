@@ -1,6 +1,60 @@
 ﻿$(function () {
+	$(".select_filter").focus(function() {
+		var value = $.trim($(this).val());
+		if (value == "输入过滤"){
+			$(this).val("");
+			$(this).removeClass("main_input_search");
+			$(this).addClass("input_normal");
+		}
+	}).blur(function(){
+		var value = $.trim($(this).val());
+		if (value == ""){
+			$(this).val("输入过滤");
+			$(this).removeClass("input_normal");
+			$(this).addClass("main_input_search");
+			var option = $(this).parent().parent().find("select option");
+			option.each(function(e){
+				$(this).show();
+			});
+		}
+	}).bind("input propertychange", function() {
+		var value = $.trim($(this).val());
+		if (value != "") {
+			setSelectOption($(this), value);
+		} else {
+			var option = $(this).parent().parent().find("select option");
+			option.each(function (){
+				if ($(this).text() == "") {
+					$(this).attr("selected", true);
+				}
+				$(this).show();
+			});
+		}
+	});
 	
 });
+
+function setSelectOption (input, value) {
+	var option = $(input).parent().parent().find("select option");
+	var re = new RegExp(value, "gi");
+	var firstShow = true;
+	option.each(function () {
+		var text = $(this).text();
+		if (re.test(text)) {
+			if (firstShow) {
+				$(this).attr("selected", true);
+				firstShow = false;
+			}
+		} else {
+			if (text != "") {
+				$(this).hide();
+			}
+		}
+	});
+	
+	
+}
+
 function commonHover(obj, cla) {
     obj.hover(function () {
         $(this).addClass(cla);

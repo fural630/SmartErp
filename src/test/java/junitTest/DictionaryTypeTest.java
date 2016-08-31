@@ -2,13 +2,13 @@ package junitTest;
 
 
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.smartErp.system.model.DictionaryType;
 import com.smartErp.system.service.DictionaryTypeService;
 import com.smartErp.util.code.Dumper;
 
@@ -24,9 +24,7 @@ public class DictionaryTypeTest {
 
 	@Test
 	public void test() {
-		
-		 List<Map<String, Object>> tree = dictionaryTypeService.getDictionaryByParentId(0);
-		 
+		 List<DictionaryType> tree = dictionaryTypeService.getDictionaryByParentId(0);
 		 Dumper.dump(tree);
 	}
 

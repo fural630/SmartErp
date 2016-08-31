@@ -7,6 +7,7 @@ public class CdiscountApiConfig {
 	private String apiAccount;
 	private String apiPassword;
 	private String receivablesEmail;
+	private Integer closeStatus;
 	private Integer creator;
 	private String systemLog;
 	private String lastUpdateTime;
@@ -64,5 +65,11 @@ public class CdiscountApiConfig {
 	}
 	public void setLastUpdateTime(String lastUpdateTime) {
 		this.lastUpdateTime = lastUpdateTime;
+	}
+	public Integer getCloseStatus() {
+		return closeStatus;
+	}
+	public void setCloseStatus(Integer closeStatus) {
+		this.closeStatus = closeStatus;
 	}
 }
