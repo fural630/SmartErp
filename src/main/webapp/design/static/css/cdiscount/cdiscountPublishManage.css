@@ -15,10 +15,6 @@
 	margin: 10px;
 }
 
-.category_table {
-	display: none;
-}
-
 .category_table td{
 	border : 0px;
 }
@@ -34,24 +30,22 @@
 
 .category_select_box ul {
 	padding : 10px 15px;
-	overflow: auto;
 	line-height: 20px;
 }
 
 .category_select_box ul li {
-	height : 24px;
 	line-height: 24px;
 }
 
 .category_select_box a {
     display: block;
-    overflow: hidden;
     color: #333;
 }
 
-.category_select_box span {
-    white-space: nowrap;
+.categorySeleted {
+    background: #bbb;
 }
+
 .category_select_box a:hover {
 	background-color: #e8e8e8
 }

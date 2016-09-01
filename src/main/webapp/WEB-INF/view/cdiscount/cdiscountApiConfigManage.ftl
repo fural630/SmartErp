@@ -126,7 +126,7 @@
 	
 	
 	<div id="cdiscountApiConfigDialog" style="display:none;">
-	<input type="text" name="apiId" value=""/>
+		<input type="text" name="id"/><input type="text" name="action"/>
 	 	<table class="popup_tb">
 	 		<tr>
 	 			<td class="title width_100px">店铺名<i class="star">*</i></td>
@@ -142,13 +142,16 @@
 	 		</tr>
 	 		<tr>
 	 			<td class="title width_100px">API密码<i class="star">*</i></td>
-	 			<td><input type="text" class="txt width_96" name="apiPassword"/></td>
+	 			<td><input type="password" class="txt width_96" name="apiPassword"/></td>
 	 		</tr>
 	 		<tr>
 	 			<td class="title width_100px">收款邮箱</td>
 	 			<td><input type="text" class="txt width_96"  name="receivablesEmail"/></td>
 	 		</tr>
 	 	</table>
+	 	<div style="padding : 5px; text-align:right;">
+	 		<input type="checkbox"/>&nbsp;勾选确认已阅读<a href="#" style="color:blue">《授权须知》</a>
+	 	</div>
 	</div>
   </body>
 </html>

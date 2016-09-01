@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.smartErp.cdiscount.dao.CdiscountApiConfigDao;
 import com.smartErp.cdiscount.model.CdiscountApiConfig;
+import com.smartErp.cdiscount.util.CdiscountTokenUtil;
 import com.smartErp.code.encryption.DESEncrypt;
 import com.smartErp.util.code.MyDate;
 import com.smartErp.util.frame.Page;
@@ -48,5 +49,11 @@ public class CdiscountApiConfigService {
 	
 	public void removeAll() {
 		cdiscountApiConfigDao.removeAll();
+	}
+
+	public void testConnectApi(String apiAccount, String apiPassword) {
+		String encryptionPassword = DESEncrypt.DataEncrypt(apiPassword);
+		String token = CdiscountTokenUtil.getToken(apiAccount, encryptionPassword);
+		System.out.println(token);
 	}
 }

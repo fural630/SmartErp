@@ -1,7 +1,55 @@
 $(function () {
-//	showCreateApiConfigDialog();
-	$("#test").comboSelect();
+	init();
+	initDialog();
 });
+
+function init() {
+	$("#test").comboSelect();
+	$.blockUI.defaults.overlayCSS.opacity=0.2;
+	$.ajaxSetup({
+		error: function (xhr, status, e) {
+			var param = {
+				status : 0,
+				message : e
+			};
+			$.message.showMessage(param);
+		}
+	});
+}
+
+function initDialog () {
+	$("#cdiscountApiConfigDialog").dialog({
+		autoOpen: false,
+		modal: true,
+		width: 600,
+		height: 400,
+		resizable: false,
+		buttons : [ {
+				text : "连接测试",
+				icons : {
+					primary : "ui-icon-heart"
+				},
+				click : function() {
+					testConnectApi();
+				}
+			}, {
+				text : "保存",
+				icons : {
+					primary : "ui-icon-heart"
+				},
+				click : function() {
+					saveCdiscountApiConfig();
+					$.myformPlugins.cleanForm("#cdiscountApiConfigDialog");
+					$(this).dialog("close");
+				}
+			} 
+		],
+		close: function( event, ui ) {
+			$.myformPlugins.cleanForm("#cdiscountApiConfigDialog");
+		}
+	});
+}
+
 
 function previousPage () {
 	var pageNo = parseInt($("#pageNo").val());
@@ -26,27 +74,46 @@ function changePageSize() {
 
 
 function showCreateApiConfigDialog () {
-	var title = "添加";
-	$("#cdiscountApiConfigDialog").dialog({
-		title : title,
-//		autoOpen: true,
-		modal: true,
-		width: 600,
-		height: 400,
-		resizable: false,
-		buttons : [ {
-			text : "保存",
-			icons : {
-				primary : "ui-icon-heart"
-			},
-			click : function() {
-				saveCdiscountApiConfig();
-				$(this).dialog("close");
-			}
-		} ],
-		close: function( event, ui ) {
+	$("#cdiscountApiConfigDialog").dialog("option", "title", "添加测试API");
+	$("#cdiscountApiConfigDialog").dialog("open");
+}
+
+function testConnectApi () {
+	
+	var param = getParams();
+	
+	$.ajax({
+		url : "/cdiscount/testConnectApi",
+		type: 'POST',
+		dataType : "json",
+		data : {
+			apiAccount : param.apiAccount,
+			apiPassword : param.apiPassword
+		},
+		success : function (data) {
+			$.message.showMessage(data);
 		}
 	});
+}
+
+function getParams() {
+	
+	var param = new Object();
+	var dialog = $("#cdiscountApiConfigDialog");
+	var id = $.trim(dialog.find("input[name='id']").val());
+	var shopName = $.trim(dialog.find("input[name='shopName']").val());
+	var email = $.trim(dialog.find("input[name='email']").val());
+	var apiAccount = $.trim(dialog.find("input[name='apiAccount']").val());
+	var apiPassword = $.trim(dialog.find("input[name='apiPassword']").val());
+	var receivablesEmail = $.trim(dialog.find("input[name='receivablesEmail']").val());
+	
+	param.id = id;
+	param.shopName = shopName;
+	param.email = email;
+	param.apiAccount = apiAccount;
+	param.apiPassword = apiPassword;
+	param.receivablesEmail = receivablesEmail;
+	return param;
 }
 
 function resetAll() {
@@ -64,7 +131,7 @@ function resetAll() {
 function saveCdiscountApiConfig () {
 	
 	var dialog = $("#cdiscountApiConfigDialog");
-	var id = $.trim(dialog.find("input[name='apiId']").val());
+	var id = $.trim(dialog.find("input[name='id']").val());
 	var shopName = $.trim(dialog.find("input[name='shopName']").val());
 	var email = $.trim(dialog.find("input[name='email']").val());
 	var apiAccount = $.trim(dialog.find("input[name='apiAccount']").val());

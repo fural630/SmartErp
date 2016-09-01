@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.smartErp.cdiscount.model.CdiscountApiConfig;
 import com.smartErp.cdiscount.service.CdiscountApiConfigService;
 import com.smartErp.code.MainPage;
+import com.smartErp.system.model.ReturnMessage;
 import com.smartErp.util.code.Dumper;
+import com.smartErp.util.code.JsonUtil;
 import com.smartErp.util.code.MyLocale;
 import com.smartErp.util.frame.Page;
 
@@ -42,5 +44,13 @@ public class CdiscountApiManageController extends MainPage{
 			cdiscountApiConfigService.insertCdiscountApiConfig(cdiscountApiConfig);
 		}
 		return "T";
+	}
+	
+	@RequestMapping("testConnectApi")
+	@ResponseBody
+	public String testConnectApi (String apiAccount, String apiPassword) {
+		cdiscountApiConfigService.testConnectApi(apiAccount, apiPassword);
+		ReturnMessage returnMessage = new ReturnMessage();
+		return JsonUtil.toJsonStr(returnMessage);
 	}
 }
