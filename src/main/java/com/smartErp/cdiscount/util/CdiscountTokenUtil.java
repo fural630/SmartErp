@@ -5,13 +5,12 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import com.smartErp.cdiscount.model.CdiscountApiConfig;
 import com.smartErp.code.encryption.DESEncrypt;
-import com.smartErp.util.code.Dumper;
 
 public class CdiscountTokenUtil {
 	
@@ -43,7 +42,7 @@ public class CdiscountTokenUtil {
 				System.out.println(resultXml);
 				Document document = Jsoup.parse(resultXml);
 				token = document.text();
-				System.out.println("token = " + token);
+				System.out.println("token ===> " + token);
 				return token;
 			}
 		} catch (Exception e) {

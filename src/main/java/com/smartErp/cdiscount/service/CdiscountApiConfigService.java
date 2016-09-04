@@ -51,9 +51,10 @@ public class CdiscountApiConfigService {
 		cdiscountApiConfigDao.removeAll();
 	}
 
-	public void testConnectApi(String apiAccount, String apiPassword) {
+	public String testConnectApi(String apiAccount, String apiPassword) {
 		String encryptionPassword = DESEncrypt.DataEncrypt(apiPassword);
 		String token = CdiscountTokenUtil.getToken(apiAccount, encryptionPassword);
-		System.out.println(token);
+		return token;
 	}
+	
 }

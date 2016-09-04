@@ -38,9 +38,24 @@ function initDialog () {
 					primary : "ui-icon-heart"
 				},
 				click : function() {
-					saveCdiscountApiConfig();
-					$.myformPlugins.cleanForm("#cdiscountApiConfigDialog");
-					$(this).dialog("close");
+					var isMastRead = $("#cdiscountApiConfigDialog input[name=mastRead]").is(':checked');
+					if (!isMastRead) {
+						openMastReadDialog();
+					} else {
+						if (validate()) {
+							saveCdiscountApiConfig();
+							$.myformPlugins.cleanForm("#cdiscountApiConfigDialog");
+							$(this).dialog("close");
+						}
+					}
+				}
+			} , {
+				text : "验证",
+				icons : {
+					primary : "ui-icon-heart"
+				},
+				click : function() {
+					validate();
 				}
 			} 
 		],
@@ -48,6 +63,42 @@ function initDialog () {
 			$.myformPlugins.cleanForm("#cdiscountApiConfigDialog");
 		}
 	});
+	
+	$("#mastReadDialog").dialog({
+		autoOpen: false,
+		modal: true,
+		width: 650,
+		height: 450,
+		resizable: false,
+		buttons : [ {
+			text : "同意",
+			icons : {
+				primary : "ui-icon-heart"
+			},
+			click : function() {
+				$("#cdiscountApiConfigDialog input[name=mastRead]").attr("checked", true);
+				$(this).dialog("close");
+			}
+		}, {
+			text : "不同意",
+			icons : {
+				primary : "ui-icon-heart"
+			},
+			click : function() {
+				$(this).dialog("close");
+			}
+		}
+	]
+		
+	});
+}
+
+function validate () {
+	return $("#cdiscountApiConfigDialogForm").valid();
+}
+
+function openMastReadDialog() {
+	$("#mastReadDialog").dialog("open");
 }
 
 
@@ -73,15 +124,13 @@ function changePageSize() {
 }
 
 
-function showCreateApiConfigDialog () {
-	$("#cdiscountApiConfigDialog").dialog("option", "title", "添加测试API");
+function showCreateApiConfigDialog (title) {
+	$("#cdiscountApiConfigDialog").dialog("option", "title", title);
 	$("#cdiscountApiConfigDialog").dialog("open");
 }
 
 function testConnectApi () {
-	
 	var param = getParams();
-	
 	$.ajax({
 		url : "/cdiscount/testConnectApi",
 		type: 'POST',
@@ -89,6 +138,16 @@ function testConnectApi () {
 		data : {
 			apiAccount : param.apiAccount,
 			apiPassword : param.apiPassword
+		},
+		beforeSend : function (xhr) {
+			$.blockUI({
+				message: '<img src="/design/static/images/common/progressbar10.gif">',
+				timeout: 10000,
+				css:{
+					backgroundColor: "",
+					border:"0"
+				}
+			});
 		},
 		success : function (data) {
 			$.message.showMessage(data);
@@ -143,7 +202,7 @@ function saveCdiscountApiConfig () {
 	$.ajax({
 		url : url,
 		type: 'POST',
-		dataType : "text",
+		dataType : "json",
 		async: false,
 		data : {
 			id : id,
@@ -154,7 +213,41 @@ function saveCdiscountApiConfig () {
 			receivablesEmail : receivablesEmail
 		},
 		success : function (data) {
-			$.growlUI('Growl Notification', 'Have a nice day!'); 
+			$.message.showMessage(data);
 		}
 	});
+}
+
+function editCdiscountApiConfig(id) {
+	
+	var url = "/cdiscount/getCdiscountApiConfigById";
+	$.ajax({
+		url : url,
+		type: 'POST',
+		dataType : "json",
+		async: false,
+		data : {
+			id : id
+		},
+		success : function (data) {
+			if (null != data) {
+				fillingData(data, "#cdiscountApiConfigDialog");
+			} else {
+				var param = {
+					status : 0,
+					message : e
+				};
+				$.message.showMessage(param);
+			}
+			
+		}
+	});
+}
+
+function fillingData(obj, selector) {
+	showCreateApiConfigDialog("修改店铺信息");
+	for ( var name in obj ){ 
+		$(selector).find("input[name=" + name +"]").val(obj[name]);
+	}
+	$("#cdiscountApiConfigDialog input[name=mastRead]").attr("checked", true);
 }

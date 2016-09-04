@@ -193,4 +193,12 @@ button, input, select, textarea {
 .ta_c {
 	text-align:center;
 }
+
+.error {
+	color : red;
+	padding-left : 5px;
+}
+.hide {
+	display: none;
+}
 /*align end*/

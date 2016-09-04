@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.smartErp.cdiscount.model.CdiscountApiConfig;
 import com.smartErp.cdiscount.service.CdiscountApiConfigService;
 import com.smartErp.code.MainPage;
+import com.smartErp.system.enumerate.ReturnMessageEnum;
 import com.smartErp.system.model.ReturnMessage;
 import com.smartErp.util.code.Dumper;
 import com.smartErp.util.code.JsonUtil;
@@ -43,14 +45,34 @@ public class CdiscountApiManageController extends MainPage{
 		} else {
 			cdiscountApiConfigService.insertCdiscountApiConfig(cdiscountApiConfig);
 		}
-		return "T";
+		ReturnMessage returnMessage = new ReturnMessage();
+		return JsonUtil.toJsonStr(returnMessage);
 	}
 	
 	@RequestMapping("testConnectApi")
 	@ResponseBody
 	public String testConnectApi (String apiAccount, String apiPassword) {
-		cdiscountApiConfigService.testConnectApi(apiAccount, apiPassword);
+		MyLocale myLocale = new MyLocale();
+		String token = cdiscountApiConfigService.testConnectApi(apiAccount, apiPassword);
 		ReturnMessage returnMessage = new ReturnMessage();
+		if (StringUtils.isNotEmpty(token)) {
+			if (token.contains("Cdiscount")) {
+				returnMessage.setStatus(ReturnMessageEnum.FAIL.getValue());
+				returnMessage.setMessage(myLocale.getText("account.or.password.error"));
+			} else {
+				returnMessage.setMessage(myLocale.getText("cdiscount.api.test.success"));
+			}
+		} else {
+			returnMessage.setStatus(ReturnMessageEnum.WARRING.getValue());
+			returnMessage.setMessage(myLocale.getText("internat.error.try.again"));
+		}
 		return JsonUtil.toJsonStr(returnMessage);
+	}
+	
+	@RequestMapping("getCdiscountApiConfigById")
+	@ResponseBody
+	public String getCdiscountApiConfigById(Integer id) {
+		CdiscountApiConfig cdiscountApiConfig = cdiscountApiConfigService.getCdiscountApiConfigById(id);
+		return JsonUtil.toJsonStr(cdiscountApiConfig);
 	}
 }

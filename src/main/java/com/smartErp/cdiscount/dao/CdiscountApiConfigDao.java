@@ -13,4 +13,5 @@ public interface CdiscountApiConfigDao {
 	public List<CdiscountApiConfig> findAll();
 	public List<CdiscountApiConfig> getCdiscountApiConfigPage(Page page);
 	public void removeAll();
+	public CdiscountApiConfig getCdiscountApiConfigById(Integer id);
 }

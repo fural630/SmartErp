@@ -23,22 +23,14 @@ public class CdiscountTokenUtilTest {
 	public void test() {
 		try {
 		String name = "SalesNEmma201623-api";
-		String password = "9636";
+		String password = "96361";
 		String encryptionPassword = DESEncrypt.DataEncrypt(password);
 		CdiscountApiConfig cdiscountApiConfig = new CdiscountApiConfig();
 		cdiscountApiConfig.setApiAccount(name);
 		cdiscountApiConfig.setApiPassword(encryptionPassword);
 		String token = CdiscountTokenUtil.getToken(cdiscountApiConfig);
-		HeaderMessage headerMessage = CdiscountHeaderMessageUtil.getHeaderMessage(cdiscountApiConfig, token);
-		GetSellerInformation getSellerInformationParam = new GetSellerInformation();
-		getSellerInformationParam.setHeaderMessage(headerMessage);
 		
-		MarketplaceAPIServiceStub marketplaceAPIServiceStub;
-		marketplaceAPIServiceStub = new MarketplaceAPIServiceStub();
-		GetSellerInformationResponse response = marketplaceAPIServiceStub.getSellerInformation(getSellerInformationParam);
-		SellerMessage message = response.getGetSellerInformationResult();
-		Seller seller = message.getSeller();
-		Dumper.dump(seller);
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
