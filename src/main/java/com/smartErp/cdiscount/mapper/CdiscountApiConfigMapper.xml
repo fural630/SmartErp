@@ -8,6 +8,31 @@
     
     <select id="getCdiscountApiConfigPage" resultType="CdiscountApiConfig" parameterType="Page">
     	select * from cdiscount_api_config
+    	<where>
+    		<if test="params.id!=null and params.id !=''">
+    			id = #{params.id}
+    		</if>
+    		<choose>
+				<when test="params.shopNameLike!=null and params.shopNameLike!='' ">
+					and shopName like CONCAT('%','${params.shopName}','%')  
+				</when>
+				<when test="params.shopName!=null and params.shopName!=''">
+					and shopName = #{params.shopName}
+				</when> 		
+    		</choose>
+    		<choose>
+				<when test="params.apiAccountLike!=null and params.apiAccountLike!='' ">
+					and apiAccount like CONCAT('%','${params.apiAccount}','%')  
+				</when>
+				<when test="params.apiAccount!=null and params.apiAccount!=''">
+					and apiAccount = #{params.apiAccount}
+				</when> 		
+    		</choose>
+    		<if test="params.closeStatus!=null and params.closeStatus !=''">
+				and closeStatus = #{params.closeStatus}  		
+    		</if>
+    	</where>
+    	 order by id desc
     </select>
     
     <select id="getById" resultType="CdiscountApiConfig" parameterType="int">
@@ -22,6 +47,7 @@
     		apiAccount,
     		apiPassword,
     		receivablesEmail,
+    		closeStatus,
     		creator,
     		systemLog,
     		lastUpdateTime
@@ -31,6 +57,7 @@
 	    	#{apiAccount},
 	    	#{apiPassword},
 	    	#{receivablesEmail},
+	    	#{closeStatus},
 	    	#{creator},
 	    	#{systemLog},
 	    	#{lastUpdateTime}
@@ -43,6 +70,7 @@
     		apiAccount = #{apiAccount},
     		email = #{email},
     		apiPassword = #{apiPassword},
+    		closeStatus = #{closeStatus},
     		receivablesEmail = #{receivablesEmail},
     		systemLog = #{systemLog},
     		lastUpdateTime = #{lastUpdateTime}

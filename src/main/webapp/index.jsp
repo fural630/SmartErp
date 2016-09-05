@@ -1,3 +1,3 @@
 <% 
-	response.sendRedirect("/SmartErp/home");
+	response.sendRedirect("/SmartErp/loginForm");
 %>

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 
+import com.smartErp.util.code.Dumper;
 import com.smartErp.util.code.MyLocale;
 import com.smartErp.util.frame.Page;
 
@@ -13,5 +14,6 @@ public class MainPage {
 		MyLocale myLocale = new MyLocale();
 		model.addAttribute("title", myLocale.getText("navigator.cdiscount.api.config"));
 		model.addAttribute("page", page);
+		Dumper.dump(page);
 	}
 }

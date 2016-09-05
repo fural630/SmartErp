@@ -1,4 +1,5 @@
 $(function () {
+	$.datepicker.setDefaults( $.datepicker.regional[ "zh" ] );
 	init();
 	initDialog();
 });
@@ -14,6 +15,12 @@ function init() {
 			};
 			$.message.showMessage(param);
 		}
+	});
+	$(".datepicker").datepicker({
+		showOn : "button",
+		buttonImage : "/design/static/images/common/calendar_16px.png",
+		buttonImageOnly : true,
+		buttonText : "Select date"
 	});
 }
 
@@ -46,18 +53,11 @@ function initDialog () {
 							saveCdiscountApiConfig();
 							$.myformPlugins.cleanForm("#cdiscountApiConfigDialog");
 							$(this).dialog("close");
+							refresh(1000);
 						}
 					}
 				}
-			} , {
-				text : "验证",
-				icons : {
-					primary : "ui-icon-heart"
-				},
-				click : function() {
-					validate();
-				}
-			} 
+			}
 		],
 		close: function( event, ui ) {
 			$.myformPlugins.cleanForm("#cdiscountApiConfigDialog");
@@ -102,28 +102,6 @@ function openMastReadDialog() {
 }
 
 
-function previousPage () {
-	var pageNo = parseInt($("#pageNo").val());
-	var previousPageNo = pageNo - 1;
-	if (previousPageNo <= 0) {
-		return;
-	}
-	$("#pageNo").val(previousPageNo);
-	$("#mainPageForm").submit();
-}
-
-function nextPage () {
-	var pageNo = parseInt($("#pageNo").val());
-	var nextPageNo = pageNo + 1;
-	$("#pageNo").val(nextPageNo);
-	$("#mainPageForm").submit();
-}
-
-function changePageSize() {
-	$("#mainPageForm").submit();
-}
-
-
 function showCreateApiConfigDialog (title) {
 	$("#cdiscountApiConfigDialog").dialog("option", "title", title);
 	$("#cdiscountApiConfigDialog").dialog("open");
@@ -164,6 +142,7 @@ function getParams() {
 	var email = $.trim(dialog.find("input[name='email']").val());
 	var apiAccount = $.trim(dialog.find("input[name='apiAccount']").val());
 	var apiPassword = $.trim(dialog.find("input[name='apiPassword']").val());
+	var closeStatus = dialog.find("select[name='closeStatus']").val();
 	var receivablesEmail = $.trim(dialog.find("input[name='receivablesEmail']").val());
 	
 	param.id = id;
@@ -172,20 +151,9 @@ function getParams() {
 	param.apiAccount = apiAccount;
 	param.apiPassword = apiPassword;
 	param.receivablesEmail = receivablesEmail;
+	param.closeStatus = closeStatus;
 	return param;
 }
-
-function resetAll() {
-	$.blockUI({
-		message: '<img src="/design/static/images/common/progressbar10.gif">',
-		timeout:5000,
-		css:{
-			backgroundColor:"",
-			border:"0"
-		}
-	});
-}
-
 
 function saveCdiscountApiConfig () {
 	
@@ -196,6 +164,7 @@ function saveCdiscountApiConfig () {
 	var apiAccount = $.trim(dialog.find("input[name='apiAccount']").val());
 	var apiPassword = $.trim(dialog.find("input[name='apiPassword']").val());
 	var receivablesEmail = $.trim(dialog.find("input[name='receivablesEmail']").val());
+	var closeStatus = dialog.find("select[name='closeStatus']").val();
 	
 	var url = "/cdiscount/saveCdiscountApiConfig";
 	
@@ -210,7 +179,8 @@ function saveCdiscountApiConfig () {
 			email : email,
 			apiAccount : apiAccount,
 			apiPassword : apiPassword,
-			receivablesEmail : receivablesEmail
+			receivablesEmail : receivablesEmail,
+			closeStatus : closeStatus
 		},
 		success : function (data) {
 			$.message.showMessage(data);
@@ -247,7 +217,15 @@ function editCdiscountApiConfig(id) {
 function fillingData(obj, selector) {
 	showCreateApiConfigDialog("修改店铺信息");
 	for ( var name in obj ){ 
-		$(selector).find("input[name=" + name +"]").val(obj[name]);
+		var input = $(selector).find("input[name=" + name +"]");
+		if (input.length > 0) {
+			input.val(obj[name]);
+		}
+		var select = $(selector).find("select[name=" + name +"]");
+		if (select.length > 0) {
+			select.val(obj[name]);
+		}
 	}
+	$("#cdiscountApiConfigDialog input[name=apiPassword]").val("");
 	$("#cdiscountApiConfigDialog input[name=mastRead]").attr("checked", true);
 }

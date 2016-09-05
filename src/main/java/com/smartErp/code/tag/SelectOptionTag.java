@@ -33,7 +33,6 @@ public class SelectOptionTag implements TemplateDirectiveModel{
 			Object result = method.invoke(customClass.newInstance());
 			if ( null != result) {
 				optionMap = (Map<String, String>) result;
-				Dumper.dump(optionMap);
 				selectOption.setOptionMap(optionMap);
 			}
 		} catch (Exception e) {

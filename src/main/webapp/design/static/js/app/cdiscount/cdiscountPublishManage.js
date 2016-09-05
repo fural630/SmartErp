@@ -13,8 +13,8 @@ function showCreatePublishDialog() {
 	$("#dialog").dialog({
 		autoOpen: true,
 		modal: true,
-		width: 1000,
-		height: 600,
+		width: document.body.scrollWidth * 0.8,
+		height: document.body.scrollHeight * 0.9,
 		resizable: false,
 		buttons : [ {
 			text : "保存",
@@ -42,4 +42,9 @@ function getFirstCdiscountCategory() {
 
 function getCdiscountCategory (parentId, categoryLevel) {
 	
+}
+
+
+function resetAll () {
+	alert();
 }

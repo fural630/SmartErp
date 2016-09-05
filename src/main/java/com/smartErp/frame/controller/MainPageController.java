@@ -13,4 +13,19 @@ public class MainPageController {
 		return "frame/main";
 	} 
 	
+	@RequestMapping("loginForm")
+	public String goToLoginPage() {
+		
+		return "frame/loginForm";
+	} 
+	
+	@RequestMapping("login")
+	public String login(String username, String password) {
+		
+		System.out.println(username);
+		System.out.println(password);
+		
+		return "redirect:/SmartErp/home"; 
+	}
+	
 }

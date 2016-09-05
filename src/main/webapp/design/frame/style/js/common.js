@@ -77,6 +77,35 @@ function commonClick(obj, cla) {
     });
 }
 
+function previousPage () {
+	var pageNo = parseInt($("#pageNo").val());
+	var previousPageNo = pageNo - 1;
+	if (previousPageNo <= 0) {
+		return;
+	}
+	$("#pageNo").val(previousPageNo);
+	$("#mainPageForm").submit();
+}
+
+function nextPage () {
+	var pageNo = parseInt($("#pageNo").val());
+	var nextPageNo = pageNo + 1;
+	$("#pageNo").val(nextPageNo);
+	$("#mainPageForm").submit();
+}
+
+function changePageSize() {
+	$("#mainPageForm").submit();
+}
+
+function queryMainPage () {
+	$("#mainPageForm").submit();
+}
+
+function resetAll() {
+	location.replace(location.href);
+}
+
 function countCheckbox() {
 	var mainPageCheckbox = $("input[name=main_page_checkbox]");
 	var count = 0;
@@ -131,4 +160,14 @@ function optionMouserover(obj) {
 
 function optionMouseout(obj) {
 	$(obj).find(".menu_ul").hide();
+}
+
+function refresh(time) {
+	if (time != undefined) {
+		setTimeout(function () {
+			location.replace(location.href);
+		}, time);
+	} else {
+		location.replace(location.href);
+	}
 }

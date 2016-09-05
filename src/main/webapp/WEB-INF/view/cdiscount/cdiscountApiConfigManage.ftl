@@ -29,7 +29,7 @@
 	          	<th width="80px;">ID</th>
 	            <th>店铺名称</th>
 	            <th>API账号</th>
-	            <th>关闭状态</th>
+	            <th>是否关闭</th>
 	            <th>创建人</th>
 	            <th>创建时间</th>
 	            <th>日志</th>
@@ -39,27 +39,30 @@
 	          	<td>
 	          		<ul>
 	          			<li><input type="text" class="txt width_40px" name="params[id]" value="${page.params.id!""}" /></li>
-	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="idLike"></li>
+	          			<li></li>
 	          		</ul>
 	          	</td>
 	          	<td>
 	          		<ul>
-	          			<li><input type="text" class="txt width_100px" name="shopName" /></li>
-	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="shopNameLike"></li>
+	          			<li><input type="text" class="txt width_100px" name="params[shopName]" value="${page.params.shopName!""}" /></li>
+	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[shopNameLike]" value="${page.params.shopName!""}" <#if page.params.shopNameLike??> checked </#if></li>
 	          		</ul>
 	          	</td>
 	          	<td>
 	          		<ul>
-	          			<li><input type="text" class="txt width_100px" name="sku" /></li>
-	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="skuLike"></li>
+	          			<li><input type="text" class="txt width_100px" name="params[apiAccount]" value="${page.params.apiAccount!""}"/></li>
+	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[apiAccountLike]" value="${page.params.apiAccount!""}" <#if page.params.apiAccountLike??> checked </#if></li>
 	          		</ul>
 	          	</td>
 	          	<td>
 	          		<ul>
-	          			<li><input type="text" class="width_100px main_input_search select_filter" name="" value="输入过滤" /></li>
 	          			<li>
-		          			<@select name="params[closeStatus]" cssClass="sel width_100px" id="closeStatus" selected="2"  optionClass="CdiscountPublishStatus" headerKey="" headerValue=""/>
-						</li>
+	          				<#if page.params.closeStatus??> 
+	          					<@select id="closeStatus" name="params[closeStatus]" selected="${page.params.closeStatus}" optionClass="YesNo"  cssClass="sel width_100px" headerKey="" headerValue=""/>
+	          				<#else>
+	          					<@select id="closeStatus" name="params[closeStatus]"  optionClass="YesNo"  cssClass="sel width_100px" headerKey="" headerValue=""/>
+	          				</#if>
+	          			<li></li>
 					</ul>	
 	          	</td>
 	          	<td width="200">
@@ -73,11 +76,11 @@
 	          		<ul>
 	          			<li>
 	          				<label>从：</label>
-	          				<input type="text" class="txt width_80px main_data_time" name="birthdayFrom" id="datepicker" />
+	          				<input type="text" class="txt width_80px datepicker" name="params[createDateFrom]" value="${page.params.createDateFrom!""}" />
 	          			</li>
 	          			<li>
 	          				<label>到：</label>
-	          				<input type="text" class="txt width_80px" name="birthdayTo" />
+	          				<input type="text" class="txt width_80px datepicker" name="params[createDateTo]" value="${page.params.createDateTo!""}" />
 	          			</li>
 	          		</ul>
 	          	</td>
@@ -127,7 +130,7 @@
 	
 	<div id="cdiscountApiConfigDialog" style="display:none;">
 	<form id="cdiscountApiConfigDialogForm">
-		<input type="text" name="id"/><input type="text" name="action"/>
+		<input type="text" name="id"/>
 	 	<table class="popup_tb">
 	 		<tr>
 	 			<td class="title width_100px">店铺名<i class="star">*</i></td>
@@ -145,6 +148,13 @@
 	 			<td class="title width_100px">API密码<i class="star">*</i></td>
 	 			<td><input type="password" class="txt width_70" name="apiPassword" required/></td>
 	 		</tr>
+	 		<tr>
+	 			<td class="title width_100px">是否开启<i class="star">*</i></td>
+	 			<td>
+	 				<@select name="closeStatus" cssClass="sel width_100px" id="closeStatus" selected="1"  optionClass="YesNo"/>
+	 			</td>
+	 		</tr>
+	 		
 	 		<tr>
 	 			<td class="title width_100px">收款邮箱</td>
 	 			<td><input type="text" class="txt width_70"  name="receivablesEmail" /></td>
