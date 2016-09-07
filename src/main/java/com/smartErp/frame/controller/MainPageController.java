@@ -1,7 +1,11 @@
 package com.smartErp.frame.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.smartErp.system.model.User;
 
 @Controller
 @RequestMapping("SmartErp")
@@ -20,11 +24,9 @@ public class MainPageController {
 	} 
 	
 	@RequestMapping("login")
-	public String login(String username, String password) {
-		
-		System.out.println(username);
-		System.out.println(password);
-		
+	public String login(HttpServletRequest request, String username, String password) {
+		User user = new User();
+		request.getSession().setAttribute("user", user);
 		return "redirect:/SmartErp/home"; 
 	}
 	
