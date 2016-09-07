@@ -84,21 +84,36 @@ function previousPage () {
 		return;
 	}
 	$("#pageNo").val(previousPageNo);
-	$("#mainPageForm").submit();
+	submitMainPageForm();
 }
 
 function nextPage () {
 	var pageNo = parseInt($("#pageNo").val());
 	var nextPageNo = pageNo + 1;
 	$("#pageNo").val(nextPageNo);
-	$("#mainPageForm").submit();
+	submitMainPageForm();
 }
 
 function changePageSize() {
-	$("#mainPageForm").submit();
+	submitMainPageForm();
 }
 
 function queryMainPage () {
+	submitMainPageForm();
+}
+
+function submitMainPageForm() {
+	var condition = $(".conditionTr");
+	var inputLike = condition.find("input[name$='Like]']");
+	inputLike.each(function () {
+		if ($(this).is(":checked")) {
+			var name = $(this).attr("name");
+			var inputName = name.split("Like]")[0];
+			inputName += "]";
+			var queryValue = condition.find("input[name='" + inputName + "']").val();
+			$(this).val(queryValue);
+		}
+	});
 	$("#mainPageForm").submit();
 }
 

@@ -1,5 +1,5 @@
 $(function () {
-	$.datepicker.setDefaults( $.datepicker.regional[ "zh" ] );
+	
 	init();
 	initDialog();
 });
@@ -15,12 +15,6 @@ function init() {
 			};
 			$.message.showMessage(param);
 		}
-	});
-	$(".datepicker").datepicker({
-		showOn : "button",
-		buttonImage : "/design/static/images/common/calendar_16px.png",
-		buttonImageOnly : true,
-		buttonText : "Select date"
 	});
 }
 

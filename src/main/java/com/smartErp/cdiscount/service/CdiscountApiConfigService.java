@@ -23,6 +23,7 @@ public class CdiscountApiConfigService {
 		Integer userId = new Integer(630);
 		String createTime = new MyDate().getCurrentDateTime();
 		cdiscountApiConfig.setCreator(userId);
+		cdiscountApiConfig.setCreateDate(createTime);
 		cdiscountApiConfig.setLastUpdateTime(createTime);
 		cdiscountApiConfig.setApiPassword(DESEncrypt.DataEncrypt(cdiscountApiConfig.getApiPassword()));
 		cdiscountApiConfigDao.insert(cdiscountApiConfig);

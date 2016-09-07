@@ -26,11 +26,12 @@
 	    
 	      <table class="tb_border tb_full stripe" id="cdiscountApiConfigTable">
 	          <tr>
-	          	<th width="80px;">ID</th>
 	            <th>店铺名称</th>
 	            <th>API账号</th>
-	            <th>是否关闭</th>
+	            <th>邮箱</th>
+	            <th>是否开启</th>
 	            <th>创建人</th>
+	            <th>最近修改时间</th>
 	            <th>创建时间</th>
 	            <th>日志</th>
 	            <th>操作</th>
@@ -38,20 +39,20 @@
 	          <tr class="conditionTr">
 	          	<td>
 	          		<ul>
-	          			<li><input type="text" class="txt width_40px" name="params[id]" value="${page.params.id!""}" /></li>
+	          			<li><input type="text" class="txt width_100px" name="params[shopName]" value="${page.params.shopName!''}" /></li>
+	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[shopNameLike]"  <#if page.params.shopNameLike??> checked </#if> /></li>
+	          		</ul>
+	          	</td>
+	          	<td>
+	          		<ul>
+	          			<li><input type="text" class="txt width_100px" name="params[apiAccount]" value="${page.params.apiAccount!''}"/></li>
+	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[apiAccountLike]" <#if page.params.apiAccountLike??> checked </#if> /></li>
+	          		</ul>
+	          	</td>
+	          	<td>
+	          		<ul>
+	          			<li><input type="text" class="txt width_100px" name="params[email]" value="${page.params.email!""}"/></li>
 	          			<li></li>
-	          		</ul>
-	          	</td>
-	          	<td>
-	          		<ul>
-	          			<li><input type="text" class="txt width_100px" name="params[shopName]" value="${page.params.shopName!""}" /></li>
-	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[shopNameLike]" value="${page.params.shopName!""}" <#if page.params.shopNameLike??> checked </#if></li>
-	          		</ul>
-	          	</td>
-	          	<td>
-	          		<ul>
-	          			<li><input type="text" class="txt width_100px" name="params[apiAccount]" value="${page.params.apiAccount!""}"/></li>
-	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[apiAccountLike]" value="${page.params.apiAccount!""}" <#if page.params.apiAccountLike??> checked </#if></li>
 	          		</ul>
 	          	</td>
 	          	<td>
@@ -76,11 +77,23 @@
 	          		<ul>
 	          			<li>
 	          				<label>从：</label>
-	          				<input type="text" class="txt width_80px datepicker" name="params[createDateFrom]" value="${page.params.createDateFrom!""}" />
+	          				<input type="text" class="txt width_100px datepicker" name="params[lastUpdateTimeFrom]" value="${page.params.lastUpdateTimeFrom!""}" />
 	          			</li>
 	          			<li>
 	          				<label>到：</label>
-	          				<input type="text" class="txt width_80px datepicker" name="params[createDateTo]" value="${page.params.createDateTo!""}" />
+	          				<input type="text" class="txt width_100px datepicker" name="params[lastUpdateTimeTo]" value="${page.params.lastUpdateTimeTo!""}" />
+	          			</li>
+	          		</ul>
+	          	</td>
+	          	<td>
+	          		<ul>
+	          			<li>
+	          				<label>从：</label>
+	          				<input type="text" class="txt width_100px datepicker" name="params[createDateFrom]" value="${page.params.createDateFrom!""}" />
+	          			</li>
+	          			<li>
+	          				<label>到：</label>
+	          				<input type="text" class="txt width_100px datepicker" name="params[createDateTo]" value="${page.params.createDateTo!""}" />
 	          			</li>
 	          		</ul>
 	          	</td>
@@ -91,12 +104,13 @@
 	          <#if (list?size > 0)>
 		          <#list list as cdiscountApiConfig>
 			          <tr>
-				            <td>${cdiscountApiConfig.id}</td>
 				            <td>${cdiscountApiConfig.shopName}</td>
 				            <td>${cdiscountApiConfig.apiAccount}</td>
+				            <td>${cdiscountApiConfig.email}</td>
 				            <td><@matchValue key="${cdiscountApiConfig.closeStatus}" optionClass="YesNo"/></td>
 				            <td>${cdiscountApiConfig.creator}</td>
 				            <td>${cdiscountApiConfig.lastUpdateTime}</td>
+				            <td>${cdiscountApiConfig.createDate!""}</td>
 				            <td>
 				            	<a href="javascript:void(0)" onclick="showLog(this)"><img src="/design/static/images/common/system-log.png"/></a>
 				            	<div class="log_content">

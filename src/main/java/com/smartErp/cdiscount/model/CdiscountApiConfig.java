@@ -11,6 +11,7 @@ public class CdiscountApiConfig {
 	private Integer creator;
 	private String systemLog;
 	private String lastUpdateTime;
+	private String createDate;
 	
 	public Integer getId() {
 		return id;
@@ -71,5 +72,11 @@ public class CdiscountApiConfig {
 	}
 	public void setCloseStatus(Integer closeStatus) {
 		this.closeStatus = closeStatus;
+	}
+	public String getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
 	}
 }

@@ -31,6 +31,18 @@
     		<if test="params.closeStatus!=null and params.closeStatus !=''">
 				and closeStatus = #{params.closeStatus}  		
     		</if>
+    		<if test="params.createDateFrom !=null and params.createDateFrom!=''">
+    			<![CDATA[ and createDate >= #{params.createDateFrom} ]]>
+    		</if>
+    		<if test="params.createDateTo !=null and params.createDateTo !='' ">
+    			<![CDATA[ and createDate <= #{params.createDateTo} ]]>
+    		</if>
+    		<if test="params.lastUpdateTimeFrom !=null and params.lastUpdateTimeFrom!=''">
+    			<![CDATA[ and lastUpdateTime >= #{params.lastUpdateTimeFrom} ]]>
+    		</if>
+    		<if test="params.lastUpdateTimeTo !=null and params.lastUpdateTimeTo !='' ">
+    			<![CDATA[ and lastUpdateTime <= #{params.lastUpdateTimeTo} ]]>
+    		</if>
     	</where>
     	 order by id desc
     </select>
@@ -50,7 +62,8 @@
     		closeStatus,
     		creator,
     		systemLog,
-    		lastUpdateTime
+    		lastUpdateTime,
+    		createDate
     	) values(
 	    	#{shopName},
 	    	#{email},
@@ -60,7 +73,8 @@
 	    	#{closeStatus},
 	    	#{creator},
 	    	#{systemLog},
-	    	#{lastUpdateTime}
+	    	#{lastUpdateTime},
+	    	#{createDate}
     	)
     </insert>
     

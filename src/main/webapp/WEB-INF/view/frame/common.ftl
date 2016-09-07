@@ -13,6 +13,7 @@
 <!-- jquery ui -->
 <link rel="stylesheet" type="text/css" href="/design/frame/jquery/jqueryui/jquery-ui.min.css"/>
 <script type="text/javascript" src="/design/frame/jquery/jqueryui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/design/frame/jquery/jqueryui/jquery.ui.datepicker-zh-CN.js"></script>
 
 <!-- blockUI -->
 <script type="text/javascript" src="/design/frame/jquery/jquery.blockUI.js"></script>
