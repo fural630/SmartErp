@@ -1,63 +1,22 @@
 ﻿$(function () {
-	$(".select_filter").focus(function() {
-		var value = $.trim($(this).val());
-		if (value == "输入过滤"){
-			$(this).val("");
-			$(this).removeClass("main_input_search");
-			$(this).addClass("input_normal");
-		}
-	}).blur(function(){
-		var value = $.trim($(this).val());
-		if (value == ""){
-			$(this).val("输入过滤");
-			$(this).removeClass("input_normal");
-			$(this).addClass("main_input_search");
-			var option = $(this).parent().parent().find("select option");
-			option.each(function(e){
-				$(this).show();
-			});
-		}
-	}).bind("input propertychange", function() {
-		var value = $.trim($(this).val());
-		var option = $(this).parent().parent().find("select option");
-		if (value != "") {
-			var re = new RegExp(value, "gi");
-			var firstShow = true;
-			var count = 0;
-			option.each(function () {
-				var text = $(this).text();
-				if (re.test(text)) {
-					$(this).show();
-					if (firstShow) {
-						$(this).attr("selected", true);
-						firstShow = false;
-					}
-				} else {
-					count++;
-//					$(this).removeAttr("selected");
-					$(this).hide();
-//					if ($(this).text() == "") {
-//						$(this).attr("selected", true);
-//						$(this).show();
-//					} else {
-//						$(this).hide();
-//					}
+	$.blockUI.defaults.overlayCSS.opacity=0.2;
+	$.ajaxSetup({
+		beforeSend : function (xhr) {
+			$.blockUI({
+				message: '<img src="/design/static/images/common/progressbar10.gif">',
+				timeout: 10000,
+				css:{
+					backgroundColor: "",
+					border:"0"
 				}
 			});
-			if (count == option.size()) {
-				option.each(function () {
-					$(this).removeAttr("selected");
-				});
-			}
-		} else {
-			option.each(function () {
-				if ($(this).text() == "") {
-					$(this).attr("selected", true);
-				} else {
-					$(this).removeAttr("selected");
-				}
-				$(this).show();
-			});
+		},
+		error: function (xhr, status, e) {
+			var param = {
+				status : 0,
+				message : e
+			};
+			$.message.showMessage(param);
 		}
 	});
 });

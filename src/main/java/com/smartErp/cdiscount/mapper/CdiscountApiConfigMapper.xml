@@ -94,5 +94,9 @@
     <delete id="removeAll">
     	delete from cdiscount_api_config
     </delete>
+    
+    <select id="getCdiscountApiConfigByCreator" parameterType="int" resultType="CdiscountApiConfig">
+    	select * from cdiscount_api_config where creator = #{userId}
+    </select>
       
 </mapper>  

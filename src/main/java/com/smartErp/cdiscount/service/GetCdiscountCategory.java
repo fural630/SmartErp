@@ -10,25 +10,15 @@ import org.apache.commons.lang.StringUtils;
 
 import com.cdiscount.ws.stub.MarketplaceAPIServiceStub.CategoryTree;
 import com.google.gson.Gson;
+import com.smartErp.cdiscount.model.CdiscountCategory;
 import com.smartErp.util.code.Dumper;
+import com.smartErp.util.code.MyDate;
 
 public class GetCdiscountCategory {
 	
-	public static void main(String[] args) {
-		GetCdiscountCategory getCdiscountCategory = new GetCdiscountCategory();
-		getCdiscountCategory.getLocalCategory();
-	}
+	private MyDate myDate = new MyDate();
 	
-	public void getLocalCategory() {
-		GetCdiscountCategory getCdiscountCategory = new GetCdiscountCategory();
-		CategoryTree initCategoryTree = getCdiscountCategory.initCdiscountCategoryTree();
-		CategoryTree allCategoryTree[] = initCategoryTree.getChildrenCategoryList().getCategoryTree();
-		Dumper.dump(allCategoryTree);
-//		Integer categoryLevel = 1;
-//		for (CategoryTree categoryTree : allCategoryTree) {
-//			createCdiscountCategory(0, categoryLevel ,categoryTree);
-//		}
-	}
+
 	
 //	public boolean runScript(String argList) { 
 //		String email = argList;
@@ -101,29 +91,7 @@ public class GetCdiscountCategory {
 		return categoryTree;
 	} 
 	
-//	private void createCdiscountCategory(Integer parentId, Integer categoryLevel,
-//			CategoryTree categoryTree) {
-//		CdiscountCategory cdiscountCategory = new CdiscountCategory();
-//		cdiscountCategory.setCategoryCode(categoryTree.getCode());
-//		cdiscountCategory.setName(categoryTree.getName());
-//		cdiscountCategory.setCategoryLevel(categoryLevel);
-//		cdiscountCategory.setAllowOfferIntegration(categoryTree.getAllowOfferIntegration());
-//		cdiscountCategory.setAllowProductIntegration(categoryTree.getAllowProductIntegration());
-//		cdiscountCategory.setParentId(parentId);
-//		cdiscountCategory.setUpdateTime(myDate.getCurrentDateTime());
-//		CategoryTree childCategoryTree[] = categoryTree.getChildrenCategoryList().getCategoryTree();
-//		if (null != childCategoryTree && childCategoryTree.length > 0) {
-//			cdiscountCategory.setIsParent(1);
-//		} else {
-//			cdiscountCategory.setIsParent(0);
-//		}
-//		Integer saveCategoryId = saveCdiscountCategory(cdiscountCategory);
-//		if (null != childCategoryTree && childCategoryTree.length > 0) {
-//			for (CategoryTree childCategoryTreetmp : childCategoryTree) {
-//				createCdiscountCategory(saveCategoryId, categoryLevel + 1, childCategoryTreetmp);
-//			}
-//		}
-//	}
+	
 //
 //	private Integer saveCdiscountCategory(CdiscountCategory cdiscountCategory) {
 //		count++;

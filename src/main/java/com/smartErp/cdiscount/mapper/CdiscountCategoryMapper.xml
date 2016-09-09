@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.smartErp.cdiscount.dao.CdiscountCategoryDao">  
+   
+    
+    <insert id="insert" parameterType="CdiscountCategory" useGeneratedKeys="true" keyProperty="id">
+    	insert into cdiscount_category
+    	(
+    		categoryCode,
+    		name,
+    		parentId,
+    		categoryLevel,
+    		apiId,
+    		isParent,
+    		updateTime
+    	) values(
+	    	#{categoryCode},
+	    	#{name},
+	    	#{parentId},
+	    	#{categoryLevel},
+	    	#{apiId},
+	    	#{isParent},
+	    	#{updateTime}
+    	)
+    </insert>
+    
+    <delete id="removeAll">
+    	delete from cdiscount_category
+    </delete>
+      
+</mapper>  

@@ -13,7 +13,7 @@
   	<input type="hidden" id="moduleAjaxTableUrl" value="/cdiscount/getCdiscountPublishCollection"/>
   	<input type="hidden" id="moduleUrl" value="${requestUrl}"/>
 	<div class="current_nav_name clearfix">${title}
-		<div class="fr small_size"> <a class="btn" onclick="showCreatePublishDialog()"><img src="/design/frame/style/img/add.png"/>新增</a>
+		<div class="fr small_size"> <a class="btn" onclick="createCdiscountPublish()"><img src="/design/frame/style/img/add.png"/>新增</a>
 		</div>
 	</div>  
 	<#include "../frame/page.ftl"/>
@@ -155,11 +155,15 @@
 	</div>
 	
 	
-	<div id="dialog" title="Cdiscount 刊登" style="display:none;">
+	<div id="cdiscountPublishDialog" style="display:none;">
 	 	<table class="popup_tb">
 	 		<tr>
 	 			<td class="title width_100px">店铺名<i class="star">*</i></td>
-	 			<td><input type="text" class="txt width_100px"/></td>
+	 			<td>
+	 				<select class="sel width_100px" id="shopName" name="shopName">
+						<option value="">-- 请选择 --</option>
+					</select>
+	 			</td>
 	 		</tr>
 	 		<tr>
 	 			<td class="title">站点<i class="star">*</i></td>
