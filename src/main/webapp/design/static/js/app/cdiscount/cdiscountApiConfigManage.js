@@ -178,8 +178,7 @@ function editCdiscountApiConfig(id) {
 				fillingData(data, "#cdiscountApiConfigDialog");
 			} else {
 				var param = {
-					status : 0,
-					message : ""
+					status : -1
 				};
 				$.message.showMessage(param);
 			}

@@ -57,12 +57,26 @@ function showCreatePublishDialog (title) {
 }
 
 function getFirstCdiscountCategory() {
-	$("#cdCategoryTable").show();
-	if ($("#categoryLevel_1").length == 0) {
-		var parentId = 0;
-		var categoryLevel = 1;
-		getCdiscountCategory(parentId, categoryLevel);
+	var apiId = $("#cdiscountPublishDialog select[name='shopName']").val();
+	if (apiId == "") {
+		var param = {
+			status : 2,
+			message : "请选择店铺"
+		};
+		$.message.showMessage(param);
+		return;
 	}
+	$.ajax({
+		url : "/cdiscount/getFirstCdiscountCategory",
+		type: 'POST',
+		dataType : "json",
+		data : {
+			apiId : apiId
+		}
+		success : function (data) {
+			$.message.showMessage(data);
+		}
+	});
 }
 
 function getCdiscountCategory (parentId, categoryLevel) {

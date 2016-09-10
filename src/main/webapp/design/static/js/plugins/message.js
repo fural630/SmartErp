@@ -34,11 +34,11 @@ jQuery.message = {
 	},
 	showMessage : function (param) {
 		$.unblockUI();
-		if (param.status == 0) {
+		if (param.status == -1) {
 			this.error(param);
 		} else if (param.status == 1) {
 			this.success(param);
-		} else if (param.status == 2) {
+		} else if (param.status == 0) {
 			this.warring(param);
 		}
 		return param.status;

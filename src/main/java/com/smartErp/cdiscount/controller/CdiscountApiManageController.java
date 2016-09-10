@@ -15,6 +15,7 @@ import com.smartErp.cdiscount.model.CdiscountApiConfig;
 import com.smartErp.cdiscount.service.CdiscountApiConfigService;
 import com.smartErp.code.MainPage;
 import com.smartErp.code.encryption.DESEncrypt;
+import com.smartErp.code.session.UserSingleton;
 import com.smartErp.system.enumerate.ReturnMessageEnum;
 import com.smartErp.system.model.ReturnMessage;
 import com.smartErp.system.model.User;
@@ -49,7 +50,7 @@ public class CdiscountApiManageController extends MainPage{
 		if (null != id) {
 			cdiscountApiConfigService.updateCdiscountApiConfige(cdiscountApiConfig);
 		} else {
-			User user = (User) request.getSession().getAttribute("user");
+			User user = UserSingleton.getInstance().getUser();
 			cdiscountApiConfig.setCreator(user.getId());
 			cdiscountApiConfig.setCreateDate(myDate.getCurrentDateTime());
 			cdiscountApiConfigService.insertCdiscountApiConfig(cdiscountApiConfig);

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.smartErp.code.session.UserSingleton;
 import com.smartErp.system.model.User;
 import com.smartErp.system.service.UserService;
 
@@ -33,7 +34,7 @@ public class MainPageController {
 		username = "2028";
 		User user = userService.getUserByUserName(username);
 		if (null != user) {
-			request.getSession().setAttribute("user", user);
+			UserSingleton.getInstance().setUser(user);
 		}
 		return "redirect:/SmartErp/home"; 
 	}
