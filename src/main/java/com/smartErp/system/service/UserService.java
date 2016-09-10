@@ -24,4 +24,8 @@ public class UserService {
 	public List<Map<String, Object>> getUserPage(Page page) {
 		return userDao.getUserPage(page);
 	}
+	
+	public User getUserByUserName (String username) {
+		return userDao.getUserByUserName(username);
+	}
 }

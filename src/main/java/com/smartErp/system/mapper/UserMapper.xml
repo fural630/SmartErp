@@ -23,6 +23,10 @@
         select * from user  
     </select>  
     
+    <select id="getUserByUserName" resultType="User" parameterType="string">
+    	select * from user where username = #{username}
+    </select>
+    
     <select id="getUserPage" resultType="hashMap" parameterType="Page">
     	select * from user
     	<where>

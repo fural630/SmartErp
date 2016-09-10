@@ -7,6 +7,7 @@ import com.smartErp.system.model.User;
 import com.smartErp.util.frame.Page;
 
 public interface UserDao {
-	List<User> findAll();
-	List<Map<String, Object>> getUserPage(Page page);  
+	public List<User> findAll();
+	public List<Map<String, Object>> getUserPage(Page page);  
+	public User getUserByUserName(String username);
 }

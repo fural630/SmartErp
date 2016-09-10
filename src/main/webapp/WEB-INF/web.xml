@@ -36,6 +36,13 @@
 	        <param-value>true</param-value>  
 	    </init-param>  
 	</filter>  
+	
+	<listener>  
+        <listener-class>  
+            org.springframework.web.context.request.RequestContextListener  
+	    </listener-class>  
+	</listener>
+	
 	<filter-mapping>  
 	    <filter-name>characterEncodingFilter</filter-name>  
 	    <url-pattern>/*</url-pattern>  
