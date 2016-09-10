@@ -29,7 +29,7 @@ public class SecurityInterceptor implements HandlerInterceptor {
 		User user = (User) request.getSession().getAttribute("user");  
         if(user != null) {    
             return true;
-        }else{  
+        } else {  
         	response.sendRedirect("/SmartErp/loginForm"); 
         }  
 		return false;

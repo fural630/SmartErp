@@ -6,16 +6,6 @@ $(function () {
 
 function init() {
 	$("#test").comboSelect();
-	$.blockUI.defaults.overlayCSS.opacity=0.2;
-	$.ajaxSetup({
-		error: function (xhr, status, e) {
-			var param = {
-				status : 0,
-				message : e
-			};
-			$.message.showMessage(param);
-		}
-	});
 }
 
 function initDialog () {
@@ -111,16 +101,6 @@ function testConnectApi () {
 			apiAccount : param.apiAccount,
 			apiPassword : param.apiPassword
 		},
-		beforeSend : function (xhr) {
-			$.blockUI({
-				message: '<img src="/design/static/images/common/progressbar10.gif">',
-				timeout: 10000,
-				css:{
-					backgroundColor: "",
-					border:"0"
-				}
-			});
-		},
 		success : function (data) {
 			$.message.showMessage(data);
 		}
@@ -199,7 +179,7 @@ function editCdiscountApiConfig(id) {
 			} else {
 				var param = {
 					status : 0,
-					message : e
+					message : ""
 				};
 				$.message.showMessage(param);
 			}

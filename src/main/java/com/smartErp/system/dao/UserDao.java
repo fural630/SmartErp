@@ -8,6 +8,6 @@ import com.smartErp.util.frame.Page;
 
 public interface UserDao {
 	public List<User> findAll();
-	public List<Map<String, Object>> getUserPage(Page page);  
-	public User getUserByUserName(String username);
+	public List<Map<String, Object>> getUserPage(Page page);
+	public User getUserByUserName(String username);  
 }

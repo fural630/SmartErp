@@ -20,19 +20,10 @@ public class CdiscountApiConfigService {
 	private CdiscountApiConfigDao cdiscountApiConfigDao;
 	
 	public void insertCdiscountApiConfig(CdiscountApiConfig cdiscountApiConfig) {
-		Integer userId = new Integer(630);
-		String createTime = new MyDate().getCurrentDateTime();
-		cdiscountApiConfig.setCreator(userId);
-		cdiscountApiConfig.setCreateDate(createTime);
-		cdiscountApiConfig.setLastUpdateTime(createTime);
-		cdiscountApiConfig.setApiPassword(DESEncrypt.DataEncrypt(cdiscountApiConfig.getApiPassword()));
 		cdiscountApiConfigDao.insert(cdiscountApiConfig);
 	}
 	
 	public void updateCdiscountApiConfige(CdiscountApiConfig cdiscountApiConfig) {
-		String updateTime = new MyDate().getCurrentDateTime();
-		cdiscountApiConfig.setLastUpdateTime(updateTime);
-		cdiscountApiConfig.setApiPassword(DESEncrypt.DataEncrypt(cdiscountApiConfig.getApiPassword()));
 		cdiscountApiConfigDao.update(cdiscountApiConfig);
 	}
 	
@@ -46,6 +37,10 @@ public class CdiscountApiConfigService {
 	
 	public List<CdiscountApiConfig> getCdiscountApiConfigPage(Page page) {
 		return cdiscountApiConfigDao.getCdiscountApiConfigPage(page);
+	}
+	
+	public List<CdiscountApiConfig> getCdiscountApiConfigByCreator(Integer userId) {
+		return cdiscountApiConfigDao.getCdiscountApiConfigByCreator(userId);
 	}
 	
 	public void removeAll() {

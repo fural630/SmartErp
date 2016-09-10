@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.smartErp.cdiscount.model.CdiscountApiConfig;
 import com.smartErp.cdiscount.service.CdiscountApiConfigService;
 import com.smartErp.code.MainPage;
+import com.smartErp.code.encryption.DESEncrypt;
 import com.smartErp.system.enumerate.ReturnMessageEnum;
 import com.smartErp.system.model.ReturnMessage;
+import com.smartErp.system.model.User;
 import com.smartErp.util.code.Dumper;
 import com.smartErp.util.code.JsonUtil;
+import com.smartErp.util.code.MyDate;
 import com.smartErp.util.code.MyLocale;
 import com.smartErp.util.frame.Page;
 
@@ -38,11 +41,17 @@ public class CdiscountApiManageController extends MainPage{
 	
 	@RequestMapping("saveCdiscountApiConfig")
 	@ResponseBody
-	public String saveCdiscountApiConfig(CdiscountApiConfig cdiscountApiConfig) {
+	public String saveCdiscountApiConfig(CdiscountApiConfig cdiscountApiConfig, HttpServletRequest request) {
 		Integer id = cdiscountApiConfig.getId();
+		MyDate myDate = new MyDate();
+		cdiscountApiConfig.setLastUpdateTime(myDate.getCurrentDateTime());
+		cdiscountApiConfig.setApiPassword(DESEncrypt.DataEncrypt(cdiscountApiConfig.getApiPassword()));
 		if (null != id) {
 			cdiscountApiConfigService.updateCdiscountApiConfige(cdiscountApiConfig);
 		} else {
+			User user = (User) request.getSession().getAttribute("user");
+			cdiscountApiConfig.setCreator(user.getId());
+			cdiscountApiConfig.setCreateDate(myDate.getCurrentDateTime());
 			cdiscountApiConfigService.insertCdiscountApiConfig(cdiscountApiConfig);
 		}
 		ReturnMessage returnMessage = new ReturnMessage();

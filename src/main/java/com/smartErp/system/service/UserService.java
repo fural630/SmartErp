@@ -25,7 +25,7 @@ public class UserService {
 		return userDao.getUserPage(page);
 	}
 	
-	public User getUserByUserName (String username) {
+	public User getUserByUserName(String username) {
 		return userDao.getUserByUserName(username);
 	}
 }
