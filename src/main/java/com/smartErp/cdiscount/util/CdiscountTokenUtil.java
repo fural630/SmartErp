@@ -39,7 +39,6 @@ public class CdiscountTokenUtil {
 			int response = httpClient.executeMethod(method);
 			if (response == HttpStatus.SC_OK) {
 				resultXml = method.getResponseBodyAsString();
-				System.out.println(resultXml);
 				Document document = Jsoup.parse(resultXml);
 				token = document.text();
 				System.out.println("token ===> " + token);
@@ -47,6 +46,7 @@ public class CdiscountTokenUtil {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			return getToken(cdiscountApiConfig);
 		} finally {
 			method.releaseConnection();
 		}

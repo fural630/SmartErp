@@ -60,7 +60,7 @@ function getFirstCdiscountCategory() {
 	var apiId = $("#cdiscountPublishDialog select[name='shopName']").val();
 	if (apiId == "") {
 		var param = {
-			status : 2,
+			status : 0,
 			message : "请选择店铺"
 		};
 		$.message.showMessage(param);
@@ -72,9 +72,9 @@ function getFirstCdiscountCategory() {
 		dataType : "json",
 		data : {
 			apiId : apiId
-		}
+		},
 		success : function (data) {
-			$.message.showMessage(data);
+			alert(data.size());
 		}
 	});
 }

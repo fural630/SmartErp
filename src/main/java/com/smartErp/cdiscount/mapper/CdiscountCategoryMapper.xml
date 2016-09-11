@@ -28,5 +28,13 @@
     <delete id="removeAll">
     	delete from cdiscount_category
     </delete>
+    
+    <select id="getFirstCategoryByApiId" parameterType="int" resultType="CdiscountCategory">
+    	select * from cdiscount_category where apiId = #{apiId} and categoryLevel = 1
+    </select>
+    
+    <delete id="deleteByApiId" parameterType="int">
+    	delete from cdiscount_category where apiId = #{apiId}
+    </delete>
       
 </mapper>  

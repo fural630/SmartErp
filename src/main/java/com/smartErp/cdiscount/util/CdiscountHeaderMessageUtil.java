@@ -31,7 +31,7 @@ public class CdiscountHeaderMessageUtil {
 		headerMessage.setContext(context);
 		headerMessage.setLocalization(localization);
 		headerMessage.setSecurity(security);
-		headerMessage.setVersion("52.0");
+		headerMessage.setVersion("1.0");
 		return headerMessage;
 	}
 }
