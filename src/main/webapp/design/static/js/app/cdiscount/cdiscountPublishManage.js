@@ -29,22 +29,22 @@ function initDialog() {
 }
 
 function createCdiscountPublish () {
-	createShopNameSelect();
+	updateShopNameSelect("");
 	showCreatePublishDialog("Cdiscount 刊登");
 }
 
-function createShopNameSelect() {
+function updateShopNameSelect(value) {
 	$.ajax({
 		url : "/cdiscount/getShopNameByCreator",
 		type: 'POST',
 		dataType : "json",
 		success : function (data) {
 			$.unblockUI();
-			var options = "";
+			var options = "<option value=''>-- 请选择 --</option>";
 			$.each(data, function (key, value) {
 				options += "<option value='" + key + "'>" + value + "</option>";
 			});
-			$("#cdiscountPublishDialog select[name='shopName']").append(options);
+			$("#cdiscountPublishDialog select[name='shopName']").html(options);
 		}
 	});
 }

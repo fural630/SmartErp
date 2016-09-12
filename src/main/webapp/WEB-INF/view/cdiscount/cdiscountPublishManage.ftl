@@ -161,7 +161,6 @@
 	 			<td class="title width_100px">店铺名<i class="star">*</i></td>
 	 			<td>
 	 				<select class="sel width_100px" id="shopName" name="shopName">
-						<option value="">-- 请选择 --</option>
 					</select>
 	 			</td>
 	 		</tr>
