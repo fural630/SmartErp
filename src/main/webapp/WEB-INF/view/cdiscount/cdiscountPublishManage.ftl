@@ -225,7 +225,7 @@
 	 					<a class="btn" onclick="getFirstCdiscountCategory()">类别选择</a>&nbsp;&nbsp;已选类别：<input type="text" name="categoryId" class="txt width_100px"/>
 	 				</div>
 	 				<div class="category_area">
-	 					<table class="category_table" id="cdCategoryTable">
+	 					<table class="category_table" id="cdCategoryTable" style="display:none;">
 	 						<tr>
 	 							<td>
 	 								<div class="category_select_box" id="categoryLevel_1">

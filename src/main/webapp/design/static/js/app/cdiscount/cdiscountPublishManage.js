@@ -74,9 +74,21 @@ function getFirstCdiscountCategory() {
 			apiId : apiId
 		},
 		success : function (data) {
-			alert(data.size());
+			$.unblockUI();
+			if (data.length > 0) {
+				showCdiscountCategory(data);
+			}
 		}
 	});
+}
+
+function showCdiscountCategory (categoryList) {
+	$("#cdCategoryTable").show();
+	
+	
+//	$.each(data, function (i, categoryList) {
+//		
+//	});
 }
 
 function getCdiscountCategory (parentId, categoryLevel) {
