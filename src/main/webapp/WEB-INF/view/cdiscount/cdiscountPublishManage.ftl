@@ -224,51 +224,7 @@
 	 				<div>
 	 					<a class="btn" onclick="getFirstCdiscountCategory()">类别选择</a>&nbsp;&nbsp;已选类别：<input type="text" name="categoryId" class="txt width_100px"/>
 	 				</div>
-	 				<div class="category_area">
-	 					<table class="category_table" id="cdCategoryTable" style="display:none;">
-	 						<tr>
-	 							<td>
-	 								<div class="category_select_box" id="categoryLevel_1">
-				 						<ul>
-				 							<li><a title="test" href="#"><div>塑料袋减肥了圣诞节福利是可敬的福利是可敬的分离式快递劫匪</div></a></li>
-				 							<li><a title="test" href="#"><div>12312312&nbsp;>></div></a></li>
-				 						</ul>
-				 					</div>
-	 							</td>
-	 							<td>
-	 								<div class="category_select_box">
-	 								<ul>
-	 									<li>
-				 							<a href="#"><span>asdfasdfasdfasdfasdfasdfasdfaasdfasdfasdfasdfasdfasdfasdfaasdfasdfasdfasdfasdfasdfasdfaasdfasdfasdfasdfasdfasdfasdfaasdfasdfasdfasdfasdfasdfasdfa</span></a>
-				 						</li>
-				 					</ul>
-				 					</div>
-	 							</td>
-	 							<td>
-	 								<div class="category_select_box">
-				 						<ul>
-				 							<li>
-				 								<a href="#">
-				 									<span>电子产品》》</span>
-				 								</a>
-				 							</li>
-				 						</ul>
-				 					</div>
-	 							</td>
-	 							<td>
-	 								<div class="category_select_box">
-				 						<ul>
-				 							<li>
-				 								<a href="#">
-				 									<span>电子产品》》</span>
-				 								</a>
-				 							</li>
-				 						</ul>
-				 					</div>
-	 							</td>
-	 						</tr>
-	 					</table>
-	 				</div>
+	 				<div class="category_area" id="categoryArea"></div>
 	 			</td>
 	 		</tr>
 	 	</table>

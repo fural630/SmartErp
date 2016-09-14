@@ -25,6 +25,8 @@
     border: 1px solid #ccc;
     background-color: #fff;
     overflow :auto;
+    float : left;
+    margin-right : 10px;
 }
 
 
@@ -48,4 +50,9 @@
 
 .category_select_box a:hover {
 	background-color: #e8e8e8
+}
+
+.category_area {
+	margin : 10px 0px;
+	display : none;
 }

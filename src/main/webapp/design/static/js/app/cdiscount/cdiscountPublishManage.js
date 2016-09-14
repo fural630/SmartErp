@@ -12,7 +12,7 @@ function initDialog() {
 		autoOpen: false,
 		modal: true,
 		width: document.body.scrollWidth * 0.8,
-		height: document.body.scrollHeight * 0.9,
+		height: 600,
 		resizable: false,
 		buttons : [ {
 			text : "保存",
@@ -76,14 +76,26 @@ function getFirstCdiscountCategory() {
 		success : function (data) {
 			$.unblockUI();
 			if (data.length > 0) {
-				showCdiscountCategory(data);
+				showCdiscountCategory(data, 1);
 			}
 		}
 	});
 }
 
-function showCdiscountCategory (categoryList) {
-	$("#cdCategoryTable").show();
+function showCdiscountCategory (categoryList, level) {
+	$("#categoryArea").show();
+	var categoryHtml = "";
+	categoryHtml += "<div class='category_select_box' id='categoryLevel_{level}'>";
+	categoryHtml += 	"<ul>";
+		$.each(categoryList, function (i, category) {
+			categoryHtml +=	"<li>";
+			categoryHtml += 	"<a title='test' href='#'><div>" + category.name + "</div></a>";
+			categoryHtml +=	"</li>";
+		});
+	categoryHtml += 	"</ul>";
+	categoryHtml += "</div>";
+	categoryHtml.replace("{level}", level);
+	$("#categoryArea").append(categoryHtml);
 	
 	
 //	$.each(data, function (i, categoryList) {
