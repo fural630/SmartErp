@@ -89,18 +89,33 @@ function showCdiscountCategory (categoryList, level) {
 	categoryHtml += 	"<ul>";
 		$.each(categoryList, function (i, category) {
 			categoryHtml +=	"<li>";
-			categoryHtml += 	"<a title='test' href='#'><div>" + category.name + "</div></a>";
+			categoryHtml += 	"<a title='{categoryName}' href='javascript:getCdiscountCategoryByParentId({parentId}, {isParent}, {categoryLevel}, {categoryCode});'>";
+			categoryHtml +=			"<div>";
+			categoryHtml +=				"{categoryName}{isParentMark}";
+			categoryHtml +=			"</div>";
+			categoryHtml +=		"</a>";
 			categoryHtml +=	"</li>";
+			
+			var isParentMark = "";
+			if (category.isParent == 1) {
+				isParentMark = "&nbsp;&nbsp;>>";
+			}
+			categoryHtml = categoryHtml.replace(/{parentId}/g, category.id);
+			categoryHtml = categoryHtml.replace(/{isParent}/g, category.isParent);
+			categoryHtml = categoryHtml.replace(/{categoryLevel}/g, category.categoryLevel);
+			categoryHtml = categoryHtml.replace(/{categoryCode}/g, category.categoryCode);
+			categoryHtml = categoryHtml.replace(/{categoryName}/g, category.name);
+			categoryHtml = categoryHtml.replace(/{isParentMark}/g, isParentMark);
 		});
 	categoryHtml += 	"</ul>";
 	categoryHtml += "</div>";
-	categoryHtml.replace("{level}", level);
+	categoryHtml.replace(/{level}/g, level);
 	$("#categoryArea").append(categoryHtml);
 	
-	
-//	$.each(data, function (i, categoryList) {
-//		
-//	});
+}
+
+function getCdiscountCategoryByParentId() {
+	alert(1);
 }
 
 function getCdiscountCategory (parentId, categoryLevel) {
