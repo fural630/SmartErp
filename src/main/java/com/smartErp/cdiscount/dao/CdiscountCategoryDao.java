@@ -10,4 +10,6 @@ public interface CdiscountCategoryDao {
 	public List<CdiscountCategory> getFirstCategoryByApiId(Integer apiId);
 
 	public void deleteByApiId(Integer aipId);
+
+	public List<CdiscountCategory> getCdiscountCategoryByParentId(Integer parentId);
 }

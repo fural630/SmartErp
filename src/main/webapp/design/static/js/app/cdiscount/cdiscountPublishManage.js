@@ -57,6 +57,7 @@ function showCreatePublishDialog (title) {
 }
 
 function getFirstCdiscountCategory() {
+	$("#categoryArea").html("");
 	var apiId = $("#cdiscountPublishDialog select[name='shopName']").val();
 	if (apiId == "") {
 		var param = {
@@ -90,7 +91,7 @@ function showCdiscountCategory (categoryList, level) {
 		$.each(categoryList, function (i, category) {
 			categoryHtml +=	"<li>";
 			categoryHtml += 	"<a title='{categoryName}' href='javascript:getCdiscountCategoryByParentId({parentId}, {isParent}, {categoryLevel}, {categoryCode});'>";
-			categoryHtml +=			"<div>";
+			categoryHtml +=			"<div id='categoryDiv_{parentId}'>";
 			categoryHtml +=				"{categoryName}{isParentMark}";
 			categoryHtml +=			"</div>";
 			categoryHtml +=		"</a>";
@@ -109,17 +110,66 @@ function showCdiscountCategory (categoryList, level) {
 		});
 	categoryHtml += 	"</ul>";
 	categoryHtml += "</div>";
-	categoryHtml.replace(/{level}/g, level);
+	categoryHtml = categoryHtml.replace(/{level}/g, level);
 	$("#categoryArea").append(categoryHtml);
 	
 }
 
-function getCdiscountCategoryByParentId() {
-	alert(1);
+function getCdiscountCategoryByParentId(parentId, isParent, categoryLevel, categoryCode) {
+	var categoryDivList = $("#categoryLevel_" + categoryLevel).find("div[id^='categoryDiv_']");
+	categoryDivList.each(function () {
+		$(this).removeClass("categorySeleted");
+	});
+	$("#categoryLevel_" + categoryLevel).find("div[id=categoryDiv_"+ parentId +"]").addClass("categorySeleted");
+	
+	var categoryLevelDiv = $("div[id^=categoryLevel_]");
+	categoryLevelDiv.each(function () {
+		var categoryLevelIdStr = $(this).attr("id");
+		var categoryLevelId = parseInt(categoryLevelIdStr.split("_")[1]);
+		if (categoryLevelId > categoryLevel) {
+			$("#categoryLevel_" + categoryLevelId).remove();	
+		}
+	});
+	
+	if (isParent == 1) {
+		var nextCategoryLevel = categoryLevel + 1;
+		getCdiscountCategory(parentId, nextCategoryLevel);
+	}
+	
+	if (isParent == 0 ) {
+		var selectCategoryPath = "";
+		$("#categoryArea").hide();
+		categoryLevelDiv.each(function () {
+			var categoryList = $(this).find("div[id^='categoryDiv_']");
+			categoryList.each(function () {
+				if($(this).hasClass("categorySeleted")) {
+					selectCategoryPath += $(this).html(); + "&nbsp;";
+					return false;
+				}
+			});
+		});
+		$("#selectCategoryPath").html(selectCategoryPath);
+		$("#cdiscountPublishDialog input[name=categoryId]").val(categoryCode);
+		$("#cdiscountPublishDialog input[name=categoryName]").val($("#categoryDiv_" + parentId).html());
+	}
 }
 
 function getCdiscountCategory (parentId, categoryLevel) {
-	
+	$.ajax({
+		url : "/cdiscount/getCdiscountCategoryByParentId",
+		type: 'POST',
+		dataType : "json",
+		data : {
+			parentId : parentId
+		},
+		success : function (data) {
+			$.unblockUI();
+			if (data.length > 0) {
+				showCdiscountCategory(data, categoryLevel);
+			}
+		}
+	});
 }
+
 
 

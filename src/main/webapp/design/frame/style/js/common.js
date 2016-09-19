@@ -145,3 +145,7 @@ function refresh(time) {
 		location.replace(location.href);
 	}
 }
+
+function inputNumOnly (e) {
+	e.value = e.value.replace(/[^\d.]/g,'');
+}

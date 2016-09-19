@@ -56,3 +56,11 @@
 	margin : 10px 0px;
 	display : none;
 }
+
+.shippingChargesInfoTable {
+	width : 100%;
+}
+
+.shippingChargesInfoTable td{
+	text-align:center;
+}

@@ -36,5 +36,9 @@
     <delete id="deleteByApiId" parameterType="int">
     	delete from cdiscount_category where apiId = #{apiId}
     </delete>
+    
+    <select id="getCdiscountCategoryByParentId" parameterType="int" resultType="CdiscountCategory">
+    	select * from cdiscount_category where parentId = #{parentId} order by name
+    </select>
       
 </mapper>  

@@ -222,9 +222,76 @@
 	 			<td class="title">商品类别<i class="star">*</i></td>
 	 			<td>
 	 				<div>
-	 					<a class="btn" onclick="getFirstCdiscountCategory()">类别选择</a>&nbsp;&nbsp;已选类别：<input type="text" name="categoryId" class="txt width_100px"/>
-	 				</div>
+	 					<a class="btn" onclick="getFirstCdiscountCategory()">类别选择</a>&nbsp;&nbsp;已选类别 &nbsp;&nbsp;:&nbsp;&nbsp;<span id="selectCategoryPath"></span>
+	 					<input type="text" name="categoryId" class="txt width_100px"/><input type="text" name="categoryName" class="txt width_100px"/>
 	 				<div class="category_area" id="categoryArea"></div>
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title">数量<i class="star">*</i></td>
+	 			<td>
+	 				<input type="text" class="txt width_100px">
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title">价格<i class="star">*</i></td>
+	 			<td>
+	 				<input type="text" class="txt width_100px">
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title">VAT<i class="star">*</i></td>
+	 			<td>
+	 				<input type="text" class="txt width_100px">
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title">DEA<i class="star">*</i></td>
+	 			<td>
+	 				<input type="text" class="txt width_100px">
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title">Eco part<i class="star">*</i></td>
+	 			<td>
+	 				<input type="text" class="txt width_100px">
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title">产品新旧<i class="star">*</i></td>
+	 			<td>
+	 				<input type="text" class="txt width_100px">
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title">运费信息<i class="star">*</i></td>
+	 			<td>
+	 				<table class="shippingChargesInfoTable">
+	 					<tr>
+							<td class="title">物流方式</td>
+							<td class="title">最短送达时间</td>
+							<td class="title">最长送达时间</td>
+							<td class="title">运费</td>
+							<td class="title">额外运费</td>
+						</tr>
+						<tr>
+							<td>At home : Standard</td>
+							<td rowspan="3"><input onkeyup="inputNumOnly(this)" type="text" id="minDeliveryTime" class="txt width_50px" /><i class="star">*</i></td>
+							<td rowspan="3"><input onkeyup="inputNumOnly(this)" type="text" id="maxDeliveryTime" class="txt width_50px" /><i class="star">*</i></td>
+							<td><input type="text" onkeyup="inputNumOnly(this)" id="standardShippingCharges" class="txt width_50px" /><i class="star">*</i></td>
+							<td><input type="text" onkeyup="inputNumOnly(this)" id="standardAdditionalShippingCharges" class="txt width_50px" /></td>
+						</tr>
+						<tr>
+							<td>At home Tracked</td>
+							<td><input type="text" onkeyup="inputNumOnly(this)" id="trackedShippingCharges" class="txt width_50px" /><i class="star">*</i></td>
+							<td><input type="text" onkeyup="inputNumOnly(this)" id="trackedAdditionalShippingCharges" class="txt width_50px" /></td>
+						</tr>
+						<tr>
+							<td>At home Registered</td>
+							<td><input type="text" onkeyup="inputNumOnly(this)" id="registeredShippingCharges" class="txt width_50px" /><i class="star">*</i></td>
+							<td><input type="text" onkeyup="inputNumOnly(this)" id="registeredAdditionalShippingCharges" class="txt width_50px" /></td>
+						</tr>
+	 				</table>
 	 			</td>
 	 		</tr>
 	 	</table>

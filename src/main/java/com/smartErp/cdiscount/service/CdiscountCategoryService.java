@@ -79,4 +79,9 @@ public class CdiscountCategoryService {
 			}
 		}
 	}
+
+	public List<CdiscountCategory> getCdiscountCategoryByParentId(
+			Integer parentId) {
+		return cdiscountCategoryDao.getCdiscountCategoryByParentId(parentId);
+	}
 }
