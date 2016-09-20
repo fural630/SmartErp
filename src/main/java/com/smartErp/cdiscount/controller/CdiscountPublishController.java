@@ -1,12 +1,8 @@
 package com.smartErp.cdiscount.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import com.smartErp.cdiscount.model.CdiscountApiConfig;
 import com.smartErp.cdiscount.model.CdiscountCategory;
 import com.smartErp.cdiscount.service.CdiscountApiConfigService;
 import com.smartErp.cdiscount.service.CdiscountCategoryService;
 import com.smartErp.code.session.UserSingleton;
-import com.smartErp.system.model.ReturnMessage;
 import com.smartErp.system.model.User;
-import com.smartErp.util.code.Dumper;
 import com.smartErp.util.code.JsonUtil;
 
 @Controller
@@ -68,23 +60,7 @@ public class CdiscountPublishController {
 	}
 	
 	public String uploadPublishImage() {
-		Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
-				  "cloud_name", "dw3yzztsq",
-				  "api_key", "484755893899138",
-				  "api_secret", "nVXFeJT836QZqvvtWf_HgZdclA4"));
-		
-		File toUpload = new File("D:\\bkeImg.jpg");
-		try {
-			Map uploadResult = cloudinary.uploader().upload(toUpload, ObjectUtils.emptyMap());
-			Dumper.dump(uploadResult);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}		
 		return null;
 	}
 	
-	public static void main(String[] args) {
-		CdiscountPublishController cdiscountPublishController = new CdiscountPublishController();
-		cdiscountPublishController.uploadPublishImage();
-	}
 }

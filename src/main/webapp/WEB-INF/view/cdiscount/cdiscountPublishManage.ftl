@@ -214,7 +214,19 @@
 	 			<td>
 	 				<div class="image_box">
 	 					<div class="image_title">Cdiscount选择图片</div>
-	 					<div class="image_count_info">已选择图片： 0 张 | 最多 4 张图片</div>
+	 					<div class="image_count_info">
+	 					<table class="image_info_table">
+	 						<tr>
+	 							<td style="text-align:left;width:70%">
+	 								<input type="text" class="txt" style="width:400px;" id="imageUrlAddress"/>
+	 								<a class="btn" onclick="addImageUrlAddress();">添加图片地址</a>
+	 								<!--<a class="btn" onclick="clearImageUrlAddress();">清空</a>-->
+	 							</td>
+	 							<td style="text-align:right;">已选择图片：<span id="selectImageCount">0</span> 张 | 最多 4 张图片</div></td>
+	 						</tr>
+	 					</table>
+	 					<div class="image_area">
+	 					</div>
 	 				</div>
 	 			</td>
 	 		</tr>

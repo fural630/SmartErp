@@ -171,5 +171,105 @@ function getCdiscountCategory (parentId, categoryLevel) {
 	});
 }
 
+function addImageUrlAddress () {
+	var imageUrlAddress = $.trim($("#imageUrlAddress").val());
+	if (imageUrlAddress == "") {
+		var param = {
+			status : 0,
+			message : "请填写图片地址"
+		};
+		$.message.showMessage(param);
+	} else {
+		var imageId = getMaxImageId();
+		createSelectImageHtml(imageId, imageUrlAddress);
+	}
+}
+
+function createSelectImageHtml (imageId, imageUrlAddress) {
+	var imageHtml = "";
+	imageHtml += 	"<div class='iamge_div' id='iamge_{imageId}'>";
+	imageHtml +=		"<div><a onclick='onclickImage({imageId})'><img id='image_id_{imageId}' class='imageSize'  src='{imageUrlAddress}' title='{imageUrlAddress}'/></a></div>";
+	imageHtml +=		"<div>";
+	imageHtml +=			"<table class='image_operating_table'>";
+	imageHtml +=				"<tr>";
+	imageHtml +=					"<td><input type='checkbox' id='image_checkbox_{imageId}' onclick='setImageSelect({imageId})'/></td>";
+	imageHtml +=					"<td><a onclick='deleteImage({imageId})'><img src='/design/frame/style/img/del.png'/></a></td>";
+	imageHtml +=				"<tr>";
+	imageHtml +=			"</table>";
+	imageHtml +=		"</div>";
+	imageHtml +=	"</div>";
+	
+	imageHtml = imageHtml.replace(/{imageUrlAddress}/g, imageUrlAddress);
+	imageHtml = imageHtml.replace(/{imageId}/g, imageId);
+	$(".image_area").append(imageHtml);
+	clearImageUrlAddress();
+}
+
+function getMaxImageId () {
+	var imageboxList = $("div[id^='iamge_']");
+	var maxImageBox = "";
+	var maxImageId = 0;
+	imageboxList.each(function () {
+		if ($(this).attr("id") > maxImageBox) {
+			maxImageBox = $(this).attr("id");
+		}
+	});
+	if (maxImageBox != "") {
+		maxImageId = parseInt(maxImageBox.split("_")[1]);
+	} 
+	return maxImageId + 1;
+}
+
+function clearImageUrlAddress () {
+	$("#imageUrlAddress").val("");
+}
+
+function onclickImage (imageId) {
+	var image = $("#image_id_" + imageId);
+	var imageCheckBox = $("#image_checkbox_" + imageId);
+	if (image.hasClass("sortingSelect")) {
+		image.removeClass("sortingSelect");
+		image.addClass("imageSize");
+		imageCheckBox.attr("checked", false);
+	} else {
+		image.removeClass("imageSize");
+		image.addClass("sortingSelect");
+		imageCheckBox.attr("checked", true);
+	}
+	countSelectImage();
+}
+
+function setImageSelect (imageId) {
+	var image = $("#image_id_" + imageId);
+	var imageCheckBox = $("#image_checkbox_" + imageId);
+	var isChecked = imageCheckBox.is(":checked");
+	if (isChecked) {
+		image.removeClass("imageSize");
+		image.addClass("sortingSelect");
+	} else {
+		image.removeClass("sortingSelect");
+		image.addClass("imageSize");
+	}
+	countSelectImage();
+}
+
+function countSelectImage() {
+	var selectCheckbox = $("input[id^='image_checkbox_']");
+	var count = 0;
+	selectCheckbox.each(function () {
+		if ($(this).is(":checked")) {
+			count ++;
+		}
+	});
+	$("#selectImageCount").html(count);
+}
+
+function deleteImage (imageId) {
+	if(confirm("确定删除？")){
+		$("#iamge_" + imageId).remove();
+	}
+}
+
+
 
 
