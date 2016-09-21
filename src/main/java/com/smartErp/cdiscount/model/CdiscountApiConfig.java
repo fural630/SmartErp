@@ -9,6 +9,7 @@ public class CdiscountApiConfig {
 	private String receivablesEmail;
 	private Integer closeStatus;
 	private Integer creator;
+	private String creatorName;
 	private String systemLog;
 	private String lastUpdateTime;
 	private String createDate;
@@ -78,5 +79,11 @@ public class CdiscountApiConfig {
 	}
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
+	}
+	public String getCreatorName() {
+		return creatorName;
+	}
+	public void setCreatorName(String creatorName) {
+		this.creatorName = creatorName;
 	}
 }

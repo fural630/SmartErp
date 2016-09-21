@@ -163,7 +163,6 @@ function saveCdiscountApiConfig () {
 }
 
 function editCdiscountApiConfig(id) {
-	
 	var url = "/cdiscount/getCdiscountApiConfigById";
 	$.ajax({
 		url : url,
@@ -174,6 +173,7 @@ function editCdiscountApiConfig(id) {
 			id : id
 		},
 		success : function (data) {
+			$.unblockUI();
 			if (null != data) {
 				fillingData(data, "#cdiscountApiConfigDialog");
 			} else {
@@ -201,4 +201,23 @@ function fillingData(obj, selector) {
 	}
 	$("#cdiscountApiConfigDialog input[name=apiPassword]").val("");
 	$("#cdiscountApiConfigDialog input[name=mastRead]").attr("checked", true);
+}
+
+function deleteCdiscountApiConfig (id) {
+	if(confirm("确定删除？")){
+		var url = "/cdiscount/deleteCdiscountApiConfigById";
+		$.ajax({
+			url : url,
+			type: 'POST',
+			dataType : "json",
+			async: false,
+			data : {
+				id : id
+			},
+			success : function (data) {
+				$.message.showMessage(data);
+				refresh(1000);
+			}
+		});
+	}
 }

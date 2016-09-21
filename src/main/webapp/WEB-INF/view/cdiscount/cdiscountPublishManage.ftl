@@ -39,7 +39,7 @@
 	          	<td>
 	          		<ul>
 	          			<li><input type="text" class="txt width_40px" name="id" /></li>
-	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="idLike"></li>
+	          			<li></li>
 	          		</ul>
 	          	</td>
 	          	<td>
@@ -165,49 +165,45 @@
 	 			</td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title">站点<i class="star">*</i></td>
-	 			<td><input type="text" class="txt width_100px"/></td>
-	 		</tr>
-	 		<tr>
 	 			<td class="title">SKU<i class="star">*</i></td>
-	 			<td><input type="text" class="txt width_100px"/></td>
+	 			<td><input type="text" class="txt width_200px" id="sku" name="sku"/></td>
 	 		</tr>
 	 		<tr>
 	 			<td class="title">品牌名<i class="star">*</i></td>
-	 			<td><input type="text" class="txt width_100px"/></td>
+	 			<td><input type="text" class="txt width_200px" id="brandName" name="brandName"/></td>
 	 		</tr>
 	 		<tr>
 	 			<td class="title">Ean<i class="star">*</i></td>
-	 			<td><input type="text" class="txt width_100px"/></td>
+	 			<td><input type="text" class="txt width_200px" id="ean" name="ean"/></td>
 	 		</tr>
 	 		<tr>
 	 			<td class="title">Model<i class="star">*</i></td>
-	 			<td><input type="text" class="txt width_100px"/></td>
+	 			<td><input type="text" class="txt width_200px" id="model" name="model"/></td>
 	 		</tr>
 	 		<tr>
 	 			<td class="title">多属性<i class="star">*</i></td>
 	 			<td>
-	 				<select class="sel">
-						<option id="batchDelete">是</option>
-						<option id="batchUpdateStatus">否</option>
+	 				<select class="sel width_100px" id="productKind" name="productKind">
+						<option value="Standard">否</option>
+						<option value="Variant">是</option>
 					</select>
 	 			</td>
 	 		</tr>
 	 		<tr>
 	 			<td class="title">短标题<i class="star">*</i></td>
-	 			<td><input type="text" class="txt width_100px"/></td>
+	 			<td><input type="text" class="txt width_96" id="shortLabel" name="shortLabel"/></td>
 	 		</tr>
 	 		<tr>
 	 			<td class="title">长标题<i class="star">*</i></td>
-	 			<td><input type="text" class="txt width_100px"/></td>
+	 			<td><input type="text" class="txt width_96" id="longLabel" name="longLabel"/></td>
 	 		</tr>
 	 		<tr>
 	 			<td class="title">商品标题<i class="star">*</i></td>
-	 			<td><textarea class="txt width_96 remark" ></textarea></td>
+	 			<td><textarea class="txt width_96 remark" id="navigation" name="navigation"></textarea></td>
 	 		</tr>
 	 		<tr>
 	 			<td class="title">市场描述<i class="star">*</i></td>
-	 			<td><textarea id="description"></textarea></td>
+	 			<td><textarea id="description" name="description"></textarea></td>
 	 		</tr>
 	 		<tr>
 	 			<td class="title">图片<i class="star">*</i></td>
@@ -226,6 +222,7 @@
 	 						</tr>
 	 					</table>
 	 					<div class="image_area">
+	 						<ul id="sortable"></ul>
 	 					</div>
 	 				</div>
 	 			</td>
@@ -234,45 +231,61 @@
 	 			<td class="title">商品类别<i class="star">*</i></td>
 	 			<td>
 	 				<div>
-	 					<a class="btn" onclick="getFirstCdiscountCategory()">类别选择</a>&nbsp;&nbsp;已选类别 &nbsp;&nbsp;:&nbsp;&nbsp;<span id="selectCategoryPath"></span>
-	 					<input type="text" name="categoryId" class="txt width_100px"/><input type="text" name="categoryName" class="txt width_100px"/>
+	 					<a class="btn" onclick="getFirstCdiscountCategory()">类别选择</a>
+	 					&nbsp;&nbsp;已选类别 &nbsp;&nbsp;:&nbsp;&nbsp;
+	 					<span id="selectCategoryPath"></span>
+	 					<input type="hidden" name="categoryCode" class="txt width_100px"/>
+	 					<input type="hidden" name="categoryName" class="txt width_100px"/>
+	 				</div>
 	 				<div class="category_area" id="categoryArea"></div>
 	 			</td>
 	 		</tr>
 	 		<tr>
 	 			<td class="title">数量<i class="star">*</i></td>
 	 			<td>
-	 				<input type="text" class="txt width_100px">
+	 				<input type="text" class="txt width_100px" id="stockQty" name="stockQty" onkeyup="inputNumOnly(this)"/>
 	 			</td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title">价格<i class="star">*</i></td>
+	 			<td class="title">价格(€)(含税)<i class="star">*</i></td>
 	 			<td>
-	 				<input type="text" class="txt width_100px">
+	 				<input type="text" class="txt width_100px" id="price" name="price" onkeyup="inputNumOnly(this)"/>
 	 			</td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title">VAT<i class="star">*</i></td>
+	 			<td class="title">VAT(%)<i class="star">*</i></td>
 	 			<td>
-	 				<input type="text" class="txt width_100px">
+	 				<input type="text" class="txt width_100px" id="vat"  name="vat" onkeyup="inputNumOnly(this)"/>
 	 			</td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title">DEA<i class="star">*</i></td>
+	 			<td class="title">DEA(€)<i class="star">*</i></td>
 	 			<td>
-	 				<input type="text" class="txt width_100px">
+	 				<input type="text" class="txt width_100px" id="dea"  name="dea" onkeyup="inputNumOnly(this)"/>
 	 			</td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title">Eco part<i class="star">*</i></td>
+	 			<td class="title">Eco part(€)<i class="star">*</i></td>
 	 			<td>
-	 				<input type="text" class="txt width_100px">
+	 				<input type="text" class="txt width_100px" id="ecoPart"  name="ecoPart" onkeyup="inputNumOnly(this)"/>
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title">备货时间（工作日/天为单位）<i class="star">*</i></td>
+	 			<td>
+	 				<input type="text" class="txt width_100px" id="preparationTime"  name="preparationTime" onkeyup="inputNumOnly(this)"/>
 	 			</td>
 	 		</tr>
 	 		<tr>
 	 			<td class="title">产品新旧<i class="star">*</i></td>
 	 			<td>
-	 				<input type="text" class="txt width_100px">
+	 				<select class="sel" id="productCondition" name="productCondition">
+	 					<option value="6">New</option>
+	 					<option value="1">Used - Like new</option>
+	 					<option value="2">Used - Very Good</option>
+	 					<option value="3">Used - Good</option>
+	 					<option value="4">Used - Acceptable</option>
+	 				</select>
 	 			</td>
 	 		</tr>
 	 		<tr>
@@ -281,27 +294,23 @@
 	 				<table class="shippingChargesInfoTable">
 	 					<tr>
 							<td class="title">物流方式</td>
-							<td class="title">最短送达时间</td>
-							<td class="title">最长送达时间</td>
-							<td class="title">运费</td>
-							<td class="title">额外运费</td>
+							<td class="title">运费(€)(含税)</td>
+							<td class="title">额外运费(€)(含税)</td>
 						</tr>
 						<tr>
-							<td>At home : Standard</td>
-							<td rowspan="3"><input onkeyup="inputNumOnly(this)" type="text" id="minDeliveryTime" class="txt width_50px" /><i class="star">*</i></td>
-							<td rowspan="3"><input onkeyup="inputNumOnly(this)" type="text" id="maxDeliveryTime" class="txt width_50px" /><i class="star">*</i></td>
-							<td><input type="text" onkeyup="inputNumOnly(this)" id="standardShippingCharges" class="txt width_50px" /><i class="star">*</i></td>
-							<td><input type="text" onkeyup="inputNumOnly(this)" id="standardAdditionalShippingCharges" class="txt width_50px" /></td>
+							<td>Standard</td>
+							<td><input type="text" onkeyup="inputNumOnly(this)" name="standardShippingCharges" class="txt width_50px" /><i class="star">*</i></td>
+							<td><input type="text" onkeyup="inputNumOnly(this)" name="standardAdditionalShippingCharges" class="txt width_50px" /></td>
 						</tr>
 						<tr>
-							<td>At home Tracked</td>
-							<td><input type="text" onkeyup="inputNumOnly(this)" id="trackedShippingCharges" class="txt width_50px" /><i class="star">*</i></td>
-							<td><input type="text" onkeyup="inputNumOnly(this)" id="trackedAdditionalShippingCharges" class="txt width_50px" /></td>
+							<td>Tracked</td>
+							<td><input type="text" onkeyup="inputNumOnly(this)" name="trackedShippingCharges" class="txt width_50px" /><i class="star">*</i></td>
+							<td><input type="text" onkeyup="inputNumOnly(this)" name="trackedAdditionalShippingCharges" class="txt width_50px" /></td>
 						</tr>
 						<tr>
-							<td>At home Registered</td>
-							<td><input type="text" onkeyup="inputNumOnly(this)" id="registeredShippingCharges" class="txt width_50px" /><i class="star">*</i></td>
-							<td><input type="text" onkeyup="inputNumOnly(this)" id="registeredAdditionalShippingCharges" class="txt width_50px" /></td>
+							<td>Registered</td>
+							<td><input type="text" onkeyup="inputNumOnly(this)" name="registeredShippingCharges" class="txt width_50px" /><i class="star">*</i></td>
+							<td><input type="text" onkeyup="inputNumOnly(this)" name="registeredAdditionalShippingCharges" class="txt width_50px" /></td>
 						</tr>
 	 				</table>
 	 			</td>

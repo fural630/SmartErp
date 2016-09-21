@@ -7,44 +7,52 @@
     </select> 
     
     <select id="getCdiscountApiConfigPage" resultType="CdiscountApiConfig" parameterType="Page">
-    	select * from cdiscount_api_config
+    	select t.*,tt.name as creatorName from cdiscount_api_config t left join user tt on t.creator = tt.id
     	<where>
     		<if test="params.id!=null and params.id !=''">
-    			id = #{params.id}
+    			t.id = #{params.id}
     		</if>
     		<choose>
 				<when test="params.shopNameLike!=null and params.shopNameLike!='' ">
-					and shopName like CONCAT('%','${params.shopName}','%')  
+					and t.shopName like CONCAT('%','${params.shopName}','%')  
 				</when>
 				<when test="params.shopName!=null and params.shopName!=''">
-					and shopName = #{params.shopName}
+					and t.shopName = #{params.shopName}
 				</when> 		
     		</choose>
     		<choose>
 				<when test="params.apiAccountLike!=null and params.apiAccountLike!='' ">
-					and apiAccount like CONCAT('%','${params.apiAccount}','%')  
+					and t.apiAccount like CONCAT('%','${params.apiAccount}','%')  
 				</when>
 				<when test="params.apiAccount!=null and params.apiAccount!=''">
-					and apiAccount = #{params.apiAccount}
+					and t.apiAccount = #{params.apiAccount}
+				</when> 		
+    		</choose>
+    		<choose>
+				<when test="params.emailLike!=null and params.emailLike!='' ">
+					and t.email like CONCAT('%','${params.email}','%')  
+				</when>
+				<when test="params.email!=null and params.email!=''">
+					and t.apiAccount = #{params.apiAccount}
 				</when> 		
     		</choose>
     		<if test="params.closeStatus!=null and params.closeStatus !=''">
-				and closeStatus = #{params.closeStatus}  		
+				and t.closeStatus = #{params.closeStatus}  		
     		</if>
     		<if test="params.createDateFrom !=null and params.createDateFrom!=''">
-    			<![CDATA[ and createDate >= #{params.createDateFrom} ]]>
+    			<![CDATA[ and t.createDate >= #{params.createDateFrom} ]]>
     		</if>
     		<if test="params.createDateTo !=null and params.createDateTo !='' ">
-    			<![CDATA[ and createDate <= #{params.createDateTo} ]]>
+    			<![CDATA[ and t.createDate <= #{params.createDateTo} ]]>
     		</if>
     		<if test="params.lastUpdateTimeFrom !=null and params.lastUpdateTimeFrom!=''">
-    			<![CDATA[ and lastUpdateTime >= #{params.lastUpdateTimeFrom} ]]>
+    			<![CDATA[ and t.lastUpdateTime >= #{params.lastUpdateTimeFrom} ]]>
     		</if>
     		<if test="params.lastUpdateTimeTo !=null and params.lastUpdateTimeTo !='' ">
-    			<![CDATA[ and lastUpdateTime <= #{params.lastUpdateTimeTo} ]]>
+    			<![CDATA[ and t.lastUpdateTime <= #{params.lastUpdateTimeTo} ]]>
     		</if>
     	</where>
-    	 order by id desc
+    	order by t.id desc
     </select>
     
     <select id="getById" resultType="CdiscountApiConfig" parameterType="int">
@@ -98,5 +106,9 @@
     <select id="getCdiscountApiConfigByCreator" parameterType="int" resultType="CdiscountApiConfig">
     	select * from cdiscount_api_config where creator = #{userId}
     </select>
+    
+    <delete id="deleteCdiscountApiConfigById" parameterType="int">
+    	delete from cdiscount_api_config where id = #{id}
+    </delete>
       
 </mapper>  

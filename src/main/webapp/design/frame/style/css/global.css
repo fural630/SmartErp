@@ -171,6 +171,16 @@ button, input, select, textarea {
 .width_120px {
 	width:120px;
 }
+.width_200px {
+	width:200px;
+}
+.width_300px {
+	width:300px;
+}
+.width_400px {
+	width:400px;
+}
+
 .width960px_left {
 	width:960px;
 	margin:0;

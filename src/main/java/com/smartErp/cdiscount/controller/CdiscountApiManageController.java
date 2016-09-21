@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.smartErp.cdiscount.model.CdiscountApiConfig;
 import com.smartErp.cdiscount.service.CdiscountApiConfigService;
 import com.smartErp.code.MainPage;
+import com.smartErp.code.SystemInfo;
 import com.smartErp.code.encryption.DESEncrypt;
 import com.smartErp.code.session.UserSingleton;
 import com.smartErp.system.enumerate.ReturnMessageEnum;
@@ -23,6 +24,7 @@ import com.smartErp.util.code.Dumper;
 import com.smartErp.util.code.JsonUtil;
 import com.smartErp.util.code.MyDate;
 import com.smartErp.util.code.MyLocale;
+import com.smartErp.util.code.SysRemark;
 import com.smartErp.util.frame.Page;
 
 @Controller
@@ -45,11 +47,18 @@ public class CdiscountApiManageController extends MainPage{
 	public String saveCdiscountApiConfig(CdiscountApiConfig cdiscountApiConfig, HttpServletRequest request) {
 		Integer id = cdiscountApiConfig.getId();
 		MyDate myDate = new MyDate();
+		MyLocale myLocale = new MyLocale();
 		cdiscountApiConfig.setLastUpdateTime(myDate.getCurrentDateTime());
 		cdiscountApiConfig.setApiPassword(DESEncrypt.DataEncrypt(cdiscountApiConfig.getApiPassword()));
+		String log = "";
 		if (null != id) {
+			log = myLocale.getText("update.cdiscount.api.config");
+			CdiscountApiConfig cdiscountApiConfigOld = cdiscountApiConfigService.getCdiscountApiConfigById(id);
+			cdiscountApiConfig.setSystemLog(SysRemark.appendMore(cdiscountApiConfigOld.getSystemLog(), log));
 			cdiscountApiConfigService.updateCdiscountApiConfige(cdiscountApiConfig);
 		} else {
+			log = myLocale.getText("create.cdiscount.api.config");
+			cdiscountApiConfig.setSystemLog(SysRemark.appendMore(cdiscountApiConfig.getSystemLog(), log));
 			User user = UserSingleton.getInstance().getUser();
 			cdiscountApiConfig.setCreator(user.getId());
 			cdiscountApiConfig.setCreateDate(myDate.getCurrentDateTime());
@@ -84,5 +93,13 @@ public class CdiscountApiManageController extends MainPage{
 	public String getCdiscountApiConfigById(Integer id) {
 		CdiscountApiConfig cdiscountApiConfig = cdiscountApiConfigService.getCdiscountApiConfigById(id);
 		return JsonUtil.toJsonStr(cdiscountApiConfig);
+	}
+	
+	@RequestMapping("deleteCdiscountApiConfigById")
+	@ResponseBody
+	public String deleteCdiscountApiConfigById (Integer id) {
+		cdiscountApiConfigService.deleteCdiscountApiConfigById(id);
+		ReturnMessage returnMessage = new ReturnMessage();
+		return JsonUtil.toJsonStr(returnMessage);
 	}
 }

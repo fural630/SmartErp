@@ -105,3 +105,7 @@
 .image_info_table td{
 	border : 0px!important;
 }
+
+#sortable li {
+	float : left;
+}

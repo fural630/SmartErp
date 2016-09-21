@@ -1,0 +1,15 @@
+$.trim();
+$.unblockUI();
+$.myformPlugins.cleanForm("#cdiscountApiConfigDialog");
+onkeyup="inputNumOnly(this)";
+$.ajax({
+	url : "/cdiscount/getCdiscountCategoryByParentId",
+	type: 'POST',
+	dataType : "json",
+	data : {
+		parentId : parentId
+	},
+	success : function (data) {
+		$.unblockUI();
+	}
+});

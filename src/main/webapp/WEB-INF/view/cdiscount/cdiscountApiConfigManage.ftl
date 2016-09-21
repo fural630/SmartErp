@@ -15,7 +15,7 @@
 	<div class="current_nav_name clearfix">${title!""}
 		<div class="fr small_size"> 
 			<a class="btn" onclick="showCreateApiConfigDialog('添加授权店铺')">
-				<img src="/design/frame/style/img/add.png"/>新增
+				<img src="/design/frame/style/img/add.png"/>添加授权店铺
 			</a>
 		</div>
 	</div>  
@@ -52,7 +52,7 @@
 	          	<td>
 	          		<ul>
 	          			<li><input type="text" class="txt width_100px" name="params[email]" value="${page.params.email!""}"/></li>
-	          			<li></li>
+	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[emailLike]" <#if page.params.emailLike??> checked </#if> /></li>
 	          		</ul>
 	          	</td>
 	          	<td>
@@ -68,9 +68,8 @@
 	          	</td>
 	          	<td width="200">
 	          		<ul>
-	          			<li><@select name="params[sex]" cssClass="sel width_100px" id="test" selected="2"  optionClass="" optionClass="CdiscountPublishStatus" headerKey="" headerValue=""/></li>
-	          			<li>
-						</li>
+	          			<li></li>
+	          			<li></li>
 					</ul>	
 	          	</td>
 	          	<td>
@@ -108,7 +107,7 @@
 				            <td>${cdiscountApiConfig.apiAccount}</td>
 				            <td>${cdiscountApiConfig.email}</td>
 				            <td><@matchValue key="${cdiscountApiConfig.closeStatus}" optionClass="YesNo"/></td>
-				            <td>${cdiscountApiConfig.creator}</td>
+				            <td>${cdiscountApiConfig.creatorName}</td>
 				            <td>${cdiscountApiConfig.lastUpdateTime}</td>
 				            <td>${cdiscountApiConfig.createDate!""}</td>
 				            <td>
@@ -123,7 +122,7 @@
 							    <li class="option_btn" onmouseover="optionMouserover(this)" onmouseout="optionMouseout(this)"><a class="btn" href="javascript:void(0)">操作</a>
 							      <ul class="menu_ul">
 									<li><a href="javascript:void(0)" onclick="editCdiscountApiConfig(${cdiscountApiConfig.id});" >编辑 </a></li>
-							        <li><a href="javascript:void(0)" onclick="" >删除 </a></li>
+							        <li><a href="javascript:void(0)" onclick="deleteCdiscountApiConfig(${cdiscountApiConfig.id})" >删除 </a></li>
 							      </ul>
 							    </li>
 							  </ul>

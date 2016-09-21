@@ -52,5 +52,9 @@ public class CdiscountApiConfigService {
 		String token = CdiscountTokenUtil.getToken(apiAccount, encryptionPassword);
 		return token;
 	}
+
+	public void deleteCdiscountApiConfigById(Integer id) {
+		cdiscountApiConfigDao.deleteCdiscountApiConfigById(id);
+	}
 	
 }

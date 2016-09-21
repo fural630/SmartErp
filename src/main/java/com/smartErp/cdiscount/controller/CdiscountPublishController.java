@@ -12,10 +12,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.smartErp.cdiscount.model.CdiscountApiConfig;
 import com.smartErp.cdiscount.model.CdiscountCategory;
+import com.smartErp.cdiscount.model.CdiscountPublish;
 import com.smartErp.cdiscount.service.CdiscountApiConfigService;
 import com.smartErp.cdiscount.service.CdiscountCategoryService;
+import com.smartErp.cdiscount.service.CdiscountPublishService;
 import com.smartErp.code.session.UserSingleton;
+import com.smartErp.system.model.ReturnMessage;
 import com.smartErp.system.model.User;
+import com.smartErp.util.code.Dumper;
 import com.smartErp.util.code.JsonUtil;
 
 @Controller
@@ -26,6 +30,8 @@ public class CdiscountPublishController {
 	private CdiscountApiConfigService cdiscountApiConfigService;
 	@Autowired
 	private CdiscountCategoryService cdiscountCategoryService;
+	@Autowired
+	private CdiscountPublishService cdiscountPublishService;
 	
 	@RequestMapping("getShopNameByCreator")
 	@ResponseBody
@@ -59,8 +65,12 @@ public class CdiscountPublishController {
 		return JsonUtil.toJsonStr(cdiscountCategoryList);
 	}
 	
-	public String uploadPublishImage() {
-		return null;
+	@RequestMapping("insertCdiscountPublish")
+	@ResponseBody
+	public String insertCdiscountPublish(CdiscountPublish cdiscountPublish) {
+		
+		ReturnMessage returnMessage = new ReturnMessage();
+		return JsonUtil.toJsonStr(returnMessage);
 	}
 	
 }
