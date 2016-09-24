@@ -68,7 +68,7 @@ public class CdiscountPublishController {
 	@RequestMapping("insertCdiscountPublish")
 	@ResponseBody
 	public String insertCdiscountPublish(CdiscountPublish cdiscountPublish) {
-		
+		Dumper.dump(cdiscountPublish);
 		ReturnMessage returnMessage = new ReturnMessage();
 		return JsonUtil.toJsonStr(returnMessage);
 	}

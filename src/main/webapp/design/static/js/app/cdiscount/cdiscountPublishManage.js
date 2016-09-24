@@ -181,6 +181,15 @@ function getCdiscountCategory (parentId, categoryLevel) {
 }
 
 function addImageUrlAddress () {
+	var sku = $.trim($("#cdiscountPublishDialog input[name='sku']").val());
+	if (sku == "") {
+		var param = {
+			status : 0,
+			message : "请先填写SKU"
+		};
+		$.message.showMessage(param);
+		return;
+	}
 	var imageUrlAddress = $.trim($("#imageUrlAddress").val());
 	if (imageUrlAddress == "") {
 		var param = {
@@ -188,10 +197,10 @@ function addImageUrlAddress () {
 			message : "请填写图片地址"
 		};
 		$.message.showMessage(param);
-	} else {
-		var imageId = getMaxImageId();
-		createSelectImageHtml(imageId, imageUrlAddress);
-	}
+		return;
+	} 
+	var imageId = getMaxImageId();
+	createSelectImageHtml(imageId, imageUrlAddress);
 }
 
 function createSelectImageHtml (imageId, imageUrlAddress) {
@@ -202,7 +211,7 @@ function createSelectImageHtml (imageId, imageUrlAddress) {
 	imageHtml +=		"<div>";
 	imageHtml +=			"<table class='image_operating_table'>";
 	imageHtml +=				"<tr>";
-	imageHtml +=					"<td><input type='checkbox' id='image_checkbox_{imageId}' onclick='setImageSelect({imageId})'/></td>";
+	imageHtml +=					"<td><input type='checkbox' id='image_checkbox_{imageId}' onclick='setImageSelect({imageId})' value='${imageUrlAddress}'/></td>";
 	imageHtml +=					"<td><a onclick='deleteImage({imageId})'><img src='/design/frame/style/img/del.png'/></a></td>";
 	imageHtml +=				"<tr>";
 	imageHtml +=			"</table>";
@@ -307,6 +316,13 @@ function saveCdiscountPublish(){
 	var ecoPart = $.trim($("#cdiscountPublishDialog input[name='ecoPart']").val());
 	var preparationTime = $.trim($("#cdiscountPublishDialog input[name='preparationTime']").val());
 	var productCondition = $("#cdiscountPublishDialog select[name='productCondition']").val();
+	
+	var selectCheckbox = $("input[id^='image_checkbox_']");
+	selectCheckbox.each(function () {
+		if ($(this).is(":checked")) {
+			
+		}
+	});
 	
 	var standardShippingCharges = $.trim($("#cdiscountPublishDialog input[name='standardShippingCharges']").val());
 	var standardAdditionalShippingCharges = $.trim($("#cdiscountPublishDialog input[name='standardAdditionalShippingCharges']").val());
