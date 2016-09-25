@@ -15,8 +15,8 @@ public class CdiscountPublish {
 	private String description;
 	private String categoryCode;
 	private String categoryName;
-	private String selectCategoryPath;
-	private Double stockQty;
+	private String marketingDescription;
+	private Integer stockQty;
 	private Double price;
 	private Double vat;
 	private Double dea;
@@ -116,16 +116,16 @@ public class CdiscountPublish {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	public String getSelectCategoryPath() {
-		return selectCategoryPath;
+	public String getMarketingDescription() {
+		return marketingDescription;
 	}
-	public void setSelectCategoryPath(String selectCategoryPath) {
-		this.selectCategoryPath = selectCategoryPath;
+	public void setMarketingDescription(String marketingDescription) {
+		this.marketingDescription = marketingDescription;
 	}
-	public Double getStockQty() {
+	public Integer getStockQty() {
 		return stockQty;
 	}
-	public void setStockQty(Double stockQty) {
+	public void setStockQty(Integer stockQty) {
 		this.stockQty = stockQty;
 	}
 	public Double getPrice() {

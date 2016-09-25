@@ -50,7 +50,7 @@ public class CdiscountPublishController {
 	@RequestMapping("getFirstCdiscountCategory")
 	@ResponseBody
 	public String getFirstCdiscountCategory(Integer apiId) {
-		List<CdiscountCategory> firstCategoryList = cdiscountCategoryService.getFirstCategoryByApiId(apiId);
+		List<CdiscountCategory> firstCategoryList = cdiscountCategoryService.getFirstCategory();
 		if (CollectionUtils.isEmpty(firstCategoryList)) {
 			cdiscountCategoryService.getCdiscountCategoryFromCdApi(apiId);
 			return getFirstCdiscountCategory(apiId);
@@ -68,7 +68,8 @@ public class CdiscountPublishController {
 	@RequestMapping("insertCdiscountPublish")
 	@ResponseBody
 	public String insertCdiscountPublish(CdiscountPublish cdiscountPublish) {
-		
+		Dumper.dump(cdiscountPublish);
+		System.out.println(cdiscountPublish.getNavigation());
 		ReturnMessage returnMessage = new ReturnMessage();
 		return JsonUtil.toJsonStr(returnMessage);
 	}
