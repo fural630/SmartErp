@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.smartErp.product.dao.ProductDao">  
+   <select id="getProductBySkuAndCreator" resultType="Product">
+   		select * from product where sku = #{sku} and creator = #{creator}
+   </select>
+   
+   <delete id="deleteProductImageByProductId" parameterType="int">
+   		delete from product_image where productId = #{productId}
+   </delete>
+   
+   <select id="getImageListByProductId" parameterType="int" resultType="string">
+   		select imageUrl from product_image where productId = #{productId}
+   </select>
+   
+   <insert id="insertProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
+   		insert into product (
+   			sku,
+   			creator,
+   			createTime,
+   			updateTime
+   		) values (
+   			#{sku},
+   			#{creator},
+   			#{createTime},
+   			#{updateTime}
+   		)
+   </insert>
+   
+   <insert id="insertProductImage">
+   		insert into product_image (
+   			productId,
+   			imageUrl
+   		) values (
+   			#{productId},
+   			#{imageUrl}
+   		)
+   </insert>
+      
+</mapper>  

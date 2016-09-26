@@ -1,10 +1,10 @@
 package com.smartErp.cdiscount.model;
 
+
 public class CdiscountPublish {
 	private Integer id;
 	private Integer apiId;
 	private Integer skuId;
-	private String sku;
 	private String brandName;
 	private String ean;
 	private String model;
@@ -31,6 +31,10 @@ public class CdiscountPublish {
 	private Double registeredShippingCharges;
 	private Double registeredAdditionalShippingCharges;
 	
+	private Integer creator;
+	private String createTime;
+	private String updateTime;
+	private String log;
 	
 	public Integer getId() {
 		return id;
@@ -49,12 +53,6 @@ public class CdiscountPublish {
 	}
 	public void setSkuId(Integer skuId) {
 		this.skuId = skuId;
-	}
-	public String getSku() {
-		return sku;
-	}
-	public void setSku(String sku) {
-		this.sku = sku;
 	}
 	public String getBrandName() {
 		return brandName;
@@ -202,5 +200,29 @@ public class CdiscountPublish {
 	public void setRegisteredAdditionalShippingCharges(
 			Double registeredAdditionalShippingCharges) {
 		this.registeredAdditionalShippingCharges = registeredAdditionalShippingCharges;
+	}
+	public Integer getCreator() {
+		return creator;
+	}
+	public void setCreator(Integer creator) {
+		this.creator = creator;
+	}
+	public String getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+	public String getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
+	public String getLog() {
+		return log;
+	}
+	public void setLog(String log) {
+		this.log = log;
 	}
 }

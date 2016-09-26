@@ -123,6 +123,7 @@
 							      <ul class="menu_ul">
 									<li><a href="javascript:void(0)" onclick="editCdiscountApiConfig(${obj.id});" >编辑 </a></li>
 							        <li><a href="javascript:void(0)" onclick="deleteCdiscountApiConfig(${obj.id})" >删除 </a></li>
+							      	<li><a href="javascript:void(0)" onclick="updateShopConfig(${obj.id})">更新店铺配置 </a></li>
 							      </ul>
 							    </li>
 							  </ul>

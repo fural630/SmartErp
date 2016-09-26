@@ -39,7 +39,7 @@ function cleanCdiscountPublishDialog () {
 function createCdiscountPublish () {
 	updateShopNameSelect("");
 	showCreatePublishDialog("Cdiscount 刊登");
-	CKEDITOR.instances["description"].setData("");
+	CKEDITOR.instances["marketingDescription"].setData("");
 }
 
 function updateShopNameSelect(value) {
@@ -215,7 +215,7 @@ function createSelectImageHtml (imageId, imageUrlAddress) {
 	imageHtml +=		"<div>";
 	imageHtml +=			"<table class='image_operating_table'>";
 	imageHtml +=				"<tr>";
-	imageHtml +=					"<td><input type='checkbox' id='image_checkbox_{imageId}' onclick='setImageSelect({imageId})' value='${imageUrlAddress}'/></td>";
+	imageHtml +=					"<td><input type='checkbox' id='image_checkbox_{imageId}' onclick='setImageSelect({imageId})' value='{imageUrlAddress}'/></td>";
 	imageHtml +=					"<td><a onclick='deleteImage({imageId})'><img src='/design/frame/style/img/del.png'/></a></td>";
 	imageHtml +=				"<tr>";
 	imageHtml +=			"</table>";
@@ -246,6 +246,10 @@ function getMaxImageId () {
 
 function clearImageUrlAddress () {
 	$("#imageUrlAddress").val("");
+}
+
+function clearImageArea() {
+	$("#sortable").html("");
 }
 
 function onclickImage (imageId) {
@@ -299,7 +303,33 @@ function initSortable() {
 	$("#sortable").sortable();
 } 
 
+function onChangeSku () {
+	reloadSkuImage();
+}
+
+function reloadSkuImage() {
+	var sku = $.trim($("#cdiscountPublishDialog input[name='sku']").val());
+	$.ajax({
+		url : "/cdiscount/reloadSkuImage",
+		type: 'POST',
+		dataType : "json",
+		data : {
+			sku : sku,
+		},
+		success : function (data) {
+			$.unblockUI();
+			var allImageList = data;
+			clearImageArea();
+			$.each(allImageList, function (i, value) {
+				var imageId = getMaxImageId();
+				createSelectImageHtml(imageId, value);
+			});
+		}
+	});
+}
+
 function saveCdiscountPublish(){
+	var id = $("#cdiscountPublishDialog input[name='id']").val();
 	var apiId = $("#cdiscountPublishDialog select[name='shopName']").val();
 	var sku = $.trim($("#cdiscountPublishDialog input[name='sku']").val());
 	var brandName = $.trim($("#cdiscountPublishDialog input[name='brandName']").val());
@@ -321,10 +351,12 @@ function saveCdiscountPublish(){
 	var preparationTime = $.trim($("#cdiscountPublishDialog input[name='preparationTime']").val());
 	var productCondition = $("#cdiscountPublishDialog select[name='productCondition']").val();
 	
-	var selectCheckbox = $("input[id^='image_checkbox_']");
-	selectCheckbox.each(function () {
+	var selectedImageList = [];		//选中的刊登图片
+	var allImageList = [];		//SKU的图片
+	$("input[id^='image_checkbox_']").each(function () {
+		allImageList.push($(this).val());
 		if ($(this).is(":checked")) {
-			
+			selectedImageList.push($(this).val());
 		}
 	});
 	
@@ -336,10 +368,11 @@ function saveCdiscountPublish(){
 	var registeredAdditionalShippingCharges = $.trim($("#cdiscountPublishDialog input[name='registeredAdditionalShippingCharges']").val());
 	
 	$.ajax({
-		url : "/cdiscount/insertCdiscountPublish",
+		url : "/cdiscount/saveCdiscountPublish",
 		type: 'POST',
 		dataType : "json",
 		data : {
+			id : id,
 			apiId : apiId,
 			sku : sku,
 			brandName : brandName,
@@ -365,7 +398,9 @@ function saveCdiscountPublish(){
 			trackedShippingCharges : trackedShippingCharges,
 			trackedAdditionalShippingCharges : trackedAdditionalShippingCharges,
 			registeredShippingCharges : registeredShippingCharges,
-			registeredAdditionalShippingCharges : registeredAdditionalShippingCharges
+			registeredAdditionalShippingCharges : registeredAdditionalShippingCharges,
+			selectedImageList : selectedImageList,
+			allImageList : allImageList
 		},
 		success : function (data) {
 			$.unblockUI();

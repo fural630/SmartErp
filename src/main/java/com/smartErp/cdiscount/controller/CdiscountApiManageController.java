@@ -46,7 +46,7 @@ public class CdiscountApiManageController extends MainPage{
 	
 	@RequestMapping("saveCdiscountApiConfig")
 	@ResponseBody
-	public String saveCdiscountApiConfig(CdiscountApiConfig cdiscountApiConfig, HttpServletRequest request) {
+	public String saveCdiscountApiConfig(CdiscountApiConfig cdiscountApiConfig) {
 		Integer id = cdiscountApiConfig.getId();
 		MyDate myDate = new MyDate();
 		MyLocale myLocale = new MyLocale();
@@ -101,6 +101,14 @@ public class CdiscountApiManageController extends MainPage{
 	@ResponseBody
 	public String deleteCdiscountApiConfigById (Integer id) {
 		cdiscountApiConfigService.deleteCdiscountApiConfigById(id);
+		ReturnMessage returnMessage = new ReturnMessage();
+		return JsonUtil.toJsonStr(returnMessage);
+	}
+	
+	@RequestMapping("updateShopConfig")
+	@ResponseBody
+	public String updateShopConfig(Integer id) {
+		cdiscountApiConfigService.getSellerInfomation(id);
 		ReturnMessage returnMessage = new ReturnMessage();
 		return JsonUtil.toJsonStr(returnMessage);
 	}

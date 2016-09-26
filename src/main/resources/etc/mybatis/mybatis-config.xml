@@ -11,6 +11,8 @@
         <typeAlias alias="DictionaryType" type="com.smartErp.system.model.DictionaryType"/>
         <typeAlias alias="CdiscountCategory" type="com.smartErp.cdiscount.model.CdiscountCategory"/>
     	<typeAlias alias="CdiscountPublish" type="com.smartErp.cdiscount.model.CdiscountPublish"/>
+    	
+    	<typeAlias alias="Product" type="com.smartErp.product.model.Product"/>
     </typeAliases> 
     
     <plugins><plugin interceptor="com.smartErp.util.frame.PageInterceptor"/></plugins> 
@@ -20,5 +22,7 @@
         <mapper resource="com/smartErp/system/mapper/DictionaryTypeMapper.xml" />
         <mapper resource="com/smartErp/cdiscount/mapper/CdiscountCategoryMapper.xml"/>
         <mapper resource="com/smartErp/cdiscount/mapper/CdiscountPublishMapper.xml"/>
+        
+        <mapper resource="com/smartErp/product/mapper/ProductMapper.xml"></mapper>
     </mappers>  
 </configuration>    

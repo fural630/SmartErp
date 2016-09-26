@@ -221,3 +221,21 @@ function deleteCdiscountApiConfig (id) {
 		});
 	}
 }
+
+function updateShopConfig (id) {
+	if(confirm("确定重新获取平台配置的店铺信息？")){
+		$.ajax({
+			url : "/cdiscount/updateShopConfig",
+			type: 'POST',
+			dataType : "json",
+			async: false,
+			data : {
+				id : id
+			},
+			success : function (data) {
+				$.message.showMessage(data);
+				refresh(1000);
+			}
+		});
+	}
+}

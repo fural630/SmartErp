@@ -156,6 +156,7 @@
 	
 	
 	<div id="cdiscountPublishDialog" style="display:none;">
+		<input type="text" name="id"  value="" />
 	 	<table class="popup_tb">
 	 		<tr>
 	 			<td class="title width_100px">店铺名<i class="star">*</i></td>
@@ -166,7 +167,7 @@
 	 		</tr>
 	 		<tr>
 	 			<td class="title">SKU<i class="star">*</i></td>
-	 			<td><input type="text" class="txt width_200px" id="sku" name="sku"/></td>
+	 			<td><input type="text" class="txt width_200px" id="sku" name="sku" onchange="onChangeSku()"/></td>
 	 		</tr>
 	 		<tr>
 	 			<td class="title">品牌名<i class="star">*</i></td>
