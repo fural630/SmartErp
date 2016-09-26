@@ -1,6 +1,7 @@
 package com.smartErp.cdiscount.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,8 +38,9 @@ public class CdiscountApiManageController extends MainPage{
 	@RequestMapping("cdiscountApiConfigManage")
 	public String cdiscountApiConfigManage(Model model, HttpServletRequest request, Page page){
 		_execute(page, request, model);
-		List<CdiscountApiConfig> cdiscountApiConfigList = cdiscountApiConfigService.getCdiscountApiConfigPage(page);
-		model.addAttribute("list", cdiscountApiConfigList);
+		List<Map<String, Object>> collection = cdiscountApiConfigService.getCdiscountApiConfigPage(page);
+		Dumper.dump(collection);
+		model.addAttribute("collection", collection);
 		return "cdiscount/cdiscountApiConfigManage";
 	}
 	

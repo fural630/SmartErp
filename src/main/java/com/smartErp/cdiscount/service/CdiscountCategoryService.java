@@ -31,8 +31,8 @@ public class CdiscountCategoryService {
 		cdiscountCategoryDao.insert(cdiscountCategory);
 	}
 	
-	public List<CdiscountCategory> getFirstCategoryByApiId(Integer apiId) {
-		return cdiscountCategoryDao.getFirstCategoryByApiId(apiId);
+	public List<CdiscountCategory> getFirstCategory() {
+		return cdiscountCategoryDao.getFirstCategory();
 	}
 	
 	public void getCdiscountCategoryFromCdApi(Integer apiId) {
@@ -50,7 +50,7 @@ public class CdiscountCategoryService {
 				CategoryTree allCategoryTree[] = initCategoryTree.getChildrenCategoryList().getCategoryTree();
 				Integer categoryLevel = 1;
 				for (CategoryTree categoryTree : allCategoryTree) {
-					createCdiscountCategory(categoryLevel ,categoryTree, 0, apiId);
+					createCdiscountCategory(categoryLevel ,categoryTree, 0);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -58,13 +58,12 @@ public class CdiscountCategoryService {
 		}
 	}
 
-	public void createCdiscountCategory(Integer categoryLevel, CategoryTree categoryTree, Integer parentId, Integer apiId) {
+	public void createCdiscountCategory(Integer categoryLevel, CategoryTree categoryTree, Integer parentId) {
 		CdiscountCategory cdiscountCategory = new CdiscountCategory();
 		cdiscountCategory.setCategoryCode(categoryTree.getCode());
 		cdiscountCategory.setName(categoryTree.getName());
 		cdiscountCategory.setCategoryLevel(categoryLevel);
 		cdiscountCategory.setParentId(parentId);
-		cdiscountCategory.setApiId(apiId);
 		cdiscountCategory.setUpdateTime(new MyDate().getCurrentDateTime());
 		CategoryTree childCategoryTree[] = categoryTree.getChildrenCategoryList().getCategoryTree();
 		if (null != childCategoryTree && childCategoryTree.length > 0) {
@@ -75,7 +74,7 @@ public class CdiscountCategoryService {
 		cdiscountCategoryDao.insert(cdiscountCategory);
 		if (null != childCategoryTree && childCategoryTree.length > 0) {
 			for (CategoryTree childCategoryTreetmp : childCategoryTree) {
-				createCdiscountCategory(categoryLevel + 1, childCategoryTreetmp, cdiscountCategory.getId(), apiId);
+				createCdiscountCategory(categoryLevel + 1, childCategoryTreetmp, cdiscountCategory.getId());
 			}
 		}
 	}

@@ -8,6 +8,8 @@ public interface CdiscountCategoryDao {
 	public void insert(CdiscountCategory cdiscountCategory);
 
 	public List<CdiscountCategory> getFirstCategoryByApiId(Integer apiId);
+	
+	public List<CdiscountCategory> getFirstCategory();
 
 	public void deleteByApiId(Integer aipId);
 

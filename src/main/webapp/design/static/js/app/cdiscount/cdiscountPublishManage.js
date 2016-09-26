@@ -4,7 +4,7 @@ $(function() {
 });
 
 function init () {
-	CKEDITOR.replace('description');
+	CKEDITOR.replace('marketingDescription');
 }
 
 function initDialog() {
@@ -33,7 +33,7 @@ function initDialog() {
 
 function cleanCdiscountPublishDialog () {
 	$.myformPlugins.cleanForm("#cdiscountPublishDialog");
-	$("#selectCategoryPath").html("");
+	$("#navigation").html("");
 }
 
 function createCdiscountPublish () {
@@ -100,7 +100,7 @@ function showCdiscountCategory (categoryList, level) {
 		$.each(categoryList, function (i, category) {
 			categoryHtml +=	"<li>";
 			categoryHtml += 	"<a title='{categoryName}' href='javascript:getCdiscountCategoryByParentId({parentId}, {isParent}, {categoryLevel}, " +'"{categoryCode}"'+ ");'>";
-			categoryHtml +=			"<div id='categoryDiv_{parentId}'>";
+			categoryHtml +=			"<div id='categoryDiv_{parentId}' value='{categoryName}'>";
 			categoryHtml +=				"{categoryName}{isParentMark}";
 			categoryHtml +=			"</div>";
 			categoryHtml +=		"</a>";
@@ -146,18 +146,22 @@ function getCdiscountCategoryByParentId(parentId, isParent, categoryLevel, categ
 	}
 	
 	if (isParent == 0 ) {
-		var selectCategoryPath = "";
+		var navigation = "";
 		$("#categoryArea").hide();
 		categoryLevelDiv.each(function () {
 			var categoryList = $(this).find("div[id^='categoryDiv_']");
-			categoryList.each(function () {
+			var categorySize = categoryList.size();
+			categoryList.each(function (i) {
 				if($(this).hasClass("categorySeleted")) {
-					selectCategoryPath += $(this).html(); + "&nbsp;";
+					navigation += $(this).attr("value");
+					if (i != categorySize -1) {
+						navigation += " > ";
+					}
 					return false;
 				}
 			});
 		});
-		$("#selectCategoryPath").html(selectCategoryPath);
+		$("#navigation").html(navigation);
 		$("#cdiscountPublishDialog input[name=categoryCode]").val(categoryCode);
 		$("#cdiscountPublishDialog input[name=categoryName]").val($("#categoryDiv_" + parentId).html());
 	}
@@ -304,11 +308,11 @@ function saveCdiscountPublish(){
 	var productKind = $("#cdiscountPublishDialog select[name='productKind']").val();
 	var shortLabel = $.trim($("#cdiscountPublishDialog input[name='shortLabel']").val());
 	var longLabel = $.trim($("#cdiscountPublishDialog input[name='longLabel']").val());
-	var navigation = $.trim($("#cdiscountPublishDialog textarea[name='navigation']").val());
-	var description = CKEDITOR.instances["description"].getData();
+	var description = $.trim($("#cdiscountPublishDialog textarea[name='description']").val());
+	var marketingDescription = CKEDITOR.instances["marketingDescription"].getData();
 	var categoryCode = $.trim($("#cdiscountPublishDialog input[name='categoryCode']").val());
 	var categoryName = $.trim($("#cdiscountPublishDialog input[name='categoryName']").val());
-	var selectCategoryPath = $("#selectCategoryPath").html();
+	var navigation = $("#navigation").text();
 	var stockQty = $.trim($("#cdiscountPublishDialog input[name='stockQty']").val());
 	var price = $.trim($("#cdiscountPublishDialog input[name='price']").val());
 	var vat = $.trim($("#cdiscountPublishDialog input[name='vat']").val());
@@ -346,9 +350,9 @@ function saveCdiscountPublish(){
 			longLabel : longLabel,
 			navigation : navigation,
 			description : description,
+			marketingDescription : marketingDescription,
 			categoryCode : categoryCode,
 			categoryName : categoryName,
-			selectCategoryPath : selectCategoryPath,
 			stockQty : stockQty,
 			price : price,
 			vat : vat,

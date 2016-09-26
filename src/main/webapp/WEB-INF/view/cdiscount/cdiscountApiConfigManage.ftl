@@ -100,20 +100,20 @@
 	          	<td></td>
 	          </tr>
 	          </form>
-	          <#if (list?size > 0)>
-		          <#list list as cdiscountApiConfig>
+	          <#if (collection?size > 0)>
+		          <#list collection as obj>
 			          <tr>
-				            <td>${cdiscountApiConfig.shopName}</td>
-				            <td>${cdiscountApiConfig.apiAccount}</td>
-				            <td>${cdiscountApiConfig.email}</td>
-				            <td><@matchValue key="${cdiscountApiConfig.closeStatus}" optionClass="YesNo"/></td>
-				            <td>${cdiscountApiConfig.creatorName}</td>
-				            <td>${cdiscountApiConfig.lastUpdateTime}</td>
-				            <td>${cdiscountApiConfig.createDate!""}</td>
+				            <td>${obj.shopName}</td>
+				            <td>${obj.apiAccount}</td>
+				            <td>${obj.email}</td>
+				            <td><@matchValue key="${obj.closeStatus}" optionClass="YesNo"/></td>
+				            <td>${obj.creatorName}</td>
+				            <td>${obj.lastUpdateTime}</td>
+				            <td>${obj.createDate!""}</td>
 				            <td>
 				            	<a href="javascript:void(0)" onclick="showLog(this)"><img src="/design/static/images/common/system-log.png"/></a>
 				            	<div class="log_content">
-				            		${cdiscountApiConfig.systemLog!""}
+				            		${obj.systemLog!""}
 				            	</div>
 				            </td>
 				            <td style="width:60px; text-align:center;" >
@@ -121,8 +121,8 @@
 							  <ul>
 							    <li class="option_btn" onmouseover="optionMouserover(this)" onmouseout="optionMouseout(this)"><a class="btn" href="javascript:void(0)">操作</a>
 							      <ul class="menu_ul">
-									<li><a href="javascript:void(0)" onclick="editCdiscountApiConfig(${cdiscountApiConfig.id});" >编辑 </a></li>
-							        <li><a href="javascript:void(0)" onclick="deleteCdiscountApiConfig(${cdiscountApiConfig.id})" >删除 </a></li>
+									<li><a href="javascript:void(0)" onclick="editCdiscountApiConfig(${obj.id});" >编辑 </a></li>
+							        <li><a href="javascript:void(0)" onclick="deleteCdiscountApiConfig(${obj.id})" >删除 </a></li>
 							      </ul>
 							    </li>
 							  </ul>

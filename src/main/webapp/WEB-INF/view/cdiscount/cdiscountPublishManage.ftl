@@ -198,12 +198,12 @@
 	 			<td><input type="text" class="txt width_96" id="longLabel" name="longLabel"/></td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title">商品标题<i class="star">*</i></td>
-	 			<td><textarea class="txt width_96 remark" id="navigation" name="navigation"></textarea></td>
+	 			<td class="title">产品简介<i class="star">*</i></td>
+	 			<td><textarea class="txt width_96 remark" id="description" name="description"></textarea></td>
 	 		</tr>
 	 		<tr>
 	 			<td class="title">市场描述<i class="star">*</i></td>
-	 			<td><textarea id="description" name="description"></textarea></td>
+	 			<td><textarea id="marketingDescription" name="marketingDescription"></textarea></td>
 	 		</tr>
 	 		<tr>
 	 			<td class="title">图片<i class="star">*</i></td>
@@ -233,7 +233,7 @@
 	 				<div>
 	 					<a class="btn" onclick="getFirstCdiscountCategory()">类别选择</a>
 	 					&nbsp;&nbsp;已选类别 &nbsp;&nbsp;:&nbsp;&nbsp;
-	 					<span id="selectCategoryPath"></span>
+	 					<span id="navigation"></span>
 	 					<input type="hidden" name="categoryCode" class="txt width_100px"/>
 	 					<input type="hidden" name="categoryName" class="txt width_100px"/>
 	 				</div>

@@ -11,7 +11,6 @@
     		name,
     		parentId,
     		categoryLevel,
-    		apiId,
     		isParent,
     		updateTime
     	) values(
@@ -19,7 +18,6 @@
 	    	#{name},
 	    	#{parentId},
 	    	#{categoryLevel},
-	    	#{apiId},
 	    	#{isParent},
 	    	#{updateTime}
     	)
@@ -28,6 +26,10 @@
     <delete id="removeAll">
     	delete from cdiscount_category
     </delete>
+    
+    <select id="getFirstCategory" parameterType="int" resultType="CdiscountCategory">
+    	select * from cdiscount_category where categoryLevel = 1 order by name
+    </select>
     
     <select id="getFirstCategoryByApiId" parameterType="int" resultType="CdiscountCategory">
     	select * from cdiscount_category where apiId = #{apiId} and categoryLevel = 1 order by name

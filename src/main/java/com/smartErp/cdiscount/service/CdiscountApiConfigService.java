@@ -1,6 +1,7 @@
 package com.smartErp.cdiscount.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -35,7 +36,7 @@ public class CdiscountApiConfigService {
 		return cdiscountApiConfigDao.findAll();
 	}
 	
-	public List<CdiscountApiConfig> getCdiscountApiConfigPage(Page page) {
+	public List<Map<String, Object>> getCdiscountApiConfigPage(Page page) {
 		return cdiscountApiConfigDao.getCdiscountApiConfigPage(page);
 	}
 	

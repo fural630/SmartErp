@@ -6,7 +6,7 @@
         select * from cdiscount_api_config  
     </select> 
     
-    <select id="getCdiscountApiConfigPage" resultType="CdiscountApiConfig" parameterType="Page">
+    <select id="getCdiscountApiConfigPage" resultType="hashMap" parameterType="Page">
     	select t.*,tt.name as creatorName from cdiscount_api_config t left join user tt on t.creator = tt.id
     	<where>
     		<if test="params.id!=null and params.id !=''">

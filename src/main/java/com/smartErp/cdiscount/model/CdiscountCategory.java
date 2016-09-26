@@ -7,7 +7,6 @@ public class CdiscountCategory {
 	private String name;
 	private Integer categoryLevel;
 	private Integer parentId;
-	private Integer apiId;
 	private String updateTime;
 	private Integer isParent;
 	
@@ -40,12 +39,6 @@ public class CdiscountCategory {
 	}
 	public void setParentId(Integer parentId) {
 		this.parentId = parentId;
-	}
-	public Integer getApiId() {
-		return apiId;
-	}
-	public void setApiId(Integer apiId) {
-		this.apiId = apiId;
 	}
 	public String getUpdateTime() {
 		return updateTime;
