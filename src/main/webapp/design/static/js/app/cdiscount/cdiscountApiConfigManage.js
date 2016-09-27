@@ -146,7 +146,6 @@ function saveCdiscountApiConfig () {
 		url : url,
 		type: 'POST',
 		dataType : "json",
-		async: false,
 		data : {
 			id : id,
 			shopName : shopName,
@@ -168,7 +167,6 @@ function editCdiscountApiConfig(id) {
 		url : url,
 		type: 'POST',
 		dataType : "json",
-		async: false,
 		data : {
 			id : id
 		},
@@ -210,7 +208,6 @@ function deleteCdiscountApiConfig (id) {
 			url : url,
 			type: 'POST',
 			dataType : "json",
-			async: false,
 			data : {
 				id : id
 			},
@@ -228,7 +225,6 @@ function updateShopConfig (id) {
 			url : "/cdiscount/updateShopConfig",
 			type: 'POST',
 			dataType : "json",
-			async: false,
 			data : {
 				id : id
 			},

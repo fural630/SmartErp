@@ -6,7 +6,6 @@
 	<#include "../frame/common.ftl"/>
 	<script src="/design/frame/jquery/combo/js/jquery.combo.select.js"></script>
 	<link rel="stylesheet" type="text/css" href="/design/frame/jquery/combo/css/combo.select.css"/>
-	<link rel="stylesheet" type="text/css" href="/design/static/css/cdiscount/cdiscountApiConfigManage.css"/>
 	<script src="/design/static/js/app/cdiscount/cdiscountApiConfigManage.js"></script>
   </head>
   <body>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.smartErp.cdiscount.dao.CdiscountDeliveryModeInfoDao">  
+   
+    <insert id="insertDeliveryModeInfor" parameterType="DeliveryModeInfor">
+    	insert into delivery_mode_infor
+    	(
+    		code,
+    		deliveryModeType,
+    		modeNameFR,
+    		modeNameEN,
+    		apiId,
+    		updateTime
+    	) values(
+	    	#{code},
+	    	#{deliveryModeType},
+	    	#{modeNameFR},
+	    	#{modeNameEN},
+	    	#{apiId},
+	    	#{updateTime}
+    	)
+    </insert>
+    
+    <delete id="deleteDeliveryModeInforByApiId" parameterType="int">
+    	delete from delivery_mode_infor where apiId = #{apiId}
+    </delete>
+    
+    <select id="getDeliveryModeInforListByApiId" parameterType="int" resultType="DeliveryModeInfor">
+    	select * from delivery_mode_infor where apiId = #{apiId}
+    </select>
+      
+</mapper>  

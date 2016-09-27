@@ -12,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cdiscount.ws.stub.MarketplaceAPIServiceStub.SellerMessage;
 import com.smartErp.cdiscount.model.CdiscountApiConfig;
 import com.smartErp.cdiscount.service.CdiscountApiConfigService;
+import com.smartErp.cdiscount.service.CdiscountDeliveryModeInfoService;
 import com.smartErp.code.MainPage;
 import com.smartErp.code.SystemInfo;
 import com.smartErp.code.encryption.DESEncrypt;
@@ -34,6 +36,8 @@ public class CdiscountApiManageController extends MainPage{
 	
 	@Autowired
 	private CdiscountApiConfigService cdiscountApiConfigService;
+	@Autowired
+	private CdiscountDeliveryModeInfoService cdiscountDeliveryModeInfoService;
 	
 	@RequestMapping("cdiscountApiConfigManage")
 	public String cdiscountApiConfigManage(Model model, HttpServletRequest request, Page page){
@@ -108,7 +112,11 @@ public class CdiscountApiManageController extends MainPage{
 	@RequestMapping("updateShopConfig")
 	@ResponseBody
 	public String updateShopConfig(Integer id) {
-		cdiscountApiConfigService.getSellerInfomation(id);
+		SellerMessage sellerMessage = cdiscountApiConfigService.getSellerInfomation(id);
+		if (null != sellerMessage) {
+			cdiscountDeliveryModeInfoService.deleteDeliveryModeInfoByApiId(id);
+			cdiscountDeliveryModeInfoService.saveDeliveryModeInfo(sellerMessage, id);
+		}
 		ReturnMessage returnMessage = new ReturnMessage();
 		return JsonUtil.toJsonStr(returnMessage);
 	}

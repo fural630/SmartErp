@@ -31,6 +31,92 @@ function initDialog() {
 	});
 }
 
+function onChangeShopName() {
+	showDeliveryMode();
+}
+
+function showDeliveryMode () {
+	var apiId = $("#cdiscountPublishDialog select[name='shopName']").val();
+	$.ajax({
+		url : "/cdiscount/getDeliveryModeInfoByApiId",
+		type: 'POST',
+		dataType : "json",
+		data : {
+			apiId : apiId
+		},
+		success : function (data) {
+			$.unblockUI();
+			var deliveryModeInfoList = data;
+			$("#deliveryModeArea").html("");
+			createSmallParcelHtml(deliveryModeInfoList);
+			createBigParcelHtml(deliveryModeInfoList);
+		}
+	});
+}
+
+function createSmallParcelHtml (deliveryModeInfoList) {
+	var haveSmallParcel = false;
+	$.each(deliveryModeInfoList, function (i, obj) {
+		if (obj.deliveryModeType == 5) {
+			haveSmallParcel = true;
+		}
+	});
+	if (!haveSmallParcel) {
+		return;
+	}
+	var smallParcelHtml = "";
+	smallParcelHtml += "<div class='deliveryModeTitle'>Home delivery - Small parcel (Less than 30 kg)</div>";
+	smallParcelHtml += 		"<table class='shippingChargesInfoTable'>";
+	smallParcelHtml += 			"<tr>";
+	smallParcelHtml += 				"<td class='title' style='width:33%'>物流方式</td>";
+	smallParcelHtml += 				"<td class='title'>运费(€)(含税)</td>";
+	smallParcelHtml += 				"<td class='title'>额外运费(€)(含税)</td>";
+	smallParcelHtml += 			"</tr>";
+	$.each(deliveryModeInfoList, function (i, obj) {
+		if (obj.deliveryModeType == 5) {		//com.smartErp.application.libraries.constentEnum.DeliveryModeTypeEnum.java
+			smallParcelHtml += 			"<tr class='deliveryModeTr'>";
+			smallParcelHtml += 				"<td>"+ obj.modeNameEN +"<input type='text' name='deliveryMode' value='" + obj.modeNameEN + "'/></td>";
+			smallParcelHtml += 				"<td><input type='text' onkeyup='inputNumOnly(this)' name='shippingCharges' class='txt width_50px' /></td>";
+			smallParcelHtml += 				"<td><input type='text' onkeyup='inputNumOnly(this)' name='addShippingCharges' class='txt width_50px' /></td>";
+			smallParcelHtml += 			"</tr>";
+		}
+	});
+	smallParcelHtml += "</table>";
+	$("#deliveryModeArea").append(smallParcelHtml);
+}
+
+function createBigParcelHtml (deliveryModeInfoList) {
+	var haveBigParcel = false;
+	$.each(deliveryModeInfoList, function (i, obj) {
+		if (obj.deliveryModeType == 10) {
+			haveBigParcel = true;
+		}
+	});
+	if (!haveBigParcel) {
+		return;
+	}
+	
+	var bigParcelHtml = "";
+	bigParcelHtml += "<div class='deliveryModeTitle'>Home delivery - Big parcel (More than 30 kg)</div>";
+	bigParcelHtml += 		"<table class='shippingChargesInfoTable'>";
+	bigParcelHtml += 			"<tr>";
+	bigParcelHtml += 				"<td class='title' style='width:33%'>物流方式</td>";
+	bigParcelHtml += 				"<td class='title'>运费(€)(含税)</td>";
+	bigParcelHtml += 				"<td class='title'>额外运费(€)(含税)</td>";
+	bigParcelHtml += 			"</tr>";
+	$.each(deliveryModeInfoList, function (i, obj) {
+		if (obj.deliveryModeType == 10) {	//com.smartErp.application.libraries.constentEnum.DeliveryModeTypeEnum.java
+			bigParcelHtml += 			"<tr class='deliveryModeTr'>";
+			bigParcelHtml += 				"<td>"+ obj.modeNameEN +"<input type='text' name='deliveryMode' value='" + obj.modeNameEN + "'/></td>";
+			bigParcelHtml += 				"<td><input type='text' onkeyup='inputNumOnly(this)' name='shippingCharges' class='txt width_50px' /></td>";
+			bigParcelHtml += 				"<td><input type='text' onkeyup='inputNumOnly(this)' name='addShippingCharges' class='txt width_50px' /></td>";
+			bigParcelHtml += 			"</tr>";
+		}
+	});
+	bigParcelHtml += "</table>";
+	$("#deliveryModeArea").append(bigParcelHtml);
+}
+
 function cleanCdiscountPublishDialog () {
 	$.myformPlugins.cleanForm("#cdiscountPublishDialog");
 	$("#navigation").html("");
@@ -66,16 +152,16 @@ function showCreatePublishDialog (title) {
 }
 
 function getFirstCdiscountCategory() {
+//	var apiId = $("#cdiscountPublishDialog select[name='shopName']").val();
+//	if (apiId == "") {
+//		var param = {
+//			status : 0,
+//			message : "请选择店铺"
+//		};
+//		$.message.showMessage(param);
+//		return;
+//	}
 	$("#categoryArea").html("");
-	var apiId = $("#cdiscountPublishDialog select[name='shopName']").val();
-	if (apiId == "") {
-		var param = {
-			status : 0,
-			message : "请选择店铺"
-		};
-		$.message.showMessage(param);
-		return;
-	}
 	$.ajax({
 		url : "/cdiscount/getFirstCdiscountCategory",
 		type: 'POST',
@@ -360,13 +446,26 @@ function saveCdiscountPublish(){
 		}
 	});
 	
-	var standardShippingCharges = $.trim($("#cdiscountPublishDialog input[name='standardShippingCharges']").val());
-	var standardAdditionalShippingCharges = $.trim($("#cdiscountPublishDialog input[name='standardAdditionalShippingCharges']").val());
-	var trackedShippingCharges = $.trim($("#cdiscountPublishDialog input[name='trackedShippingCharges']").val());
-	var trackedAdditionalShippingCharges = $.trim($("#cdiscountPublishDialog input[name='trackedAdditionalShippingCharges']").val());
-	var registeredShippingCharges = $.trim($("#cdiscountPublishDialog input[name='registeredShippingCharges']").val());
-	var registeredAdditionalShippingCharges = $.trim($("#cdiscountPublishDialog input[name='registeredAdditionalShippingCharges']").val());
+	var deliveryModeTr = $(".deliveryModeTr");
+	var publishDeliverModeList = new Array();  
+	deliveryModeTr.each(function () {
+		var deliveryMode = $(this).find("input[name='deliveryMode']").val();
+		var shippingCharges = $(this).find("input[name='shippingCharges']").val();
+		var addShippingCharges = $(this).find("input[name='addShippingCharges']").val();
+		publishDeliverModeList.push({
+			deliveryMode: deliveryMode,
+			shippingCharges: shippingCharges,
+			addShippingCharges : addShippingCharges
+		}); 
+	});
 	
+//	var standardShippingCharges = $.trim($("#cdiscountPublishDialog input[name='standardShippingCharges']").val());
+//	var standardAdditionalShippingCharges = $.trim($("#cdiscountPublishDialog input[name='standardAdditionalShippingCharges']").val());
+//	var trackedShippingCharges = $.trim($("#cdiscountPublishDialog input[name='trackedShippingCharges']").val());
+//	var trackedAdditionalShippingCharges = $.trim($("#cdiscountPublishDialog input[name='trackedAdditionalShippingCharges']").val());
+//	var registeredShippingCharges = $.trim($("#cdiscountPublishDialog input[name='registeredShippingCharges']").val());
+//	var registeredAdditionalShippingCharges = $.trim($("#cdiscountPublishDialog input[name='registeredAdditionalShippingCharges']").val());
+//	
 	$.ajax({
 		url : "/cdiscount/saveCdiscountPublish",
 		type: 'POST',
@@ -393,12 +492,7 @@ function saveCdiscountPublish(){
 			ecoPart : ecoPart,
 			preparationTime : preparationTime,
 			productCondition : productCondition,
-			standardShippingCharges : standardShippingCharges,
-			standardAdditionalShippingCharges : standardAdditionalShippingCharges,
-			trackedShippingCharges : trackedShippingCharges,
-			trackedAdditionalShippingCharges : trackedAdditionalShippingCharges,
-			registeredShippingCharges : registeredShippingCharges,
-			registeredAdditionalShippingCharges : registeredAdditionalShippingCharges,
+			publishDeliverModeList : JSON.stringify(publishDeliverModeList),
 			selectedImageList : selectedImageList,
 			allImageList : allImageList
 		},
@@ -406,7 +500,7 @@ function saveCdiscountPublish(){
 			$.unblockUI();
 		}
 	});
-	
+//	
 	
 }
 

@@ -109,3 +109,10 @@
 #sortable li {
 	float : left;
 }
+
+.deliveryModeTitle {
+	padding : 10px 0px;
+	color: #3c5a80;
+	font-style: italic;
+	font-weight: bolder;
+}

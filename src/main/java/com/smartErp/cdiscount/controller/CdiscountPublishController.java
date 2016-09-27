@@ -5,21 +5,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.smartErp.cdiscount.model.CdiscountApiConfig;
 import com.smartErp.cdiscount.model.CdiscountCategory;
 import com.smartErp.cdiscount.model.CdiscountPublish;
+import com.smartErp.cdiscount.model.DeliveryModeInfor;
+import com.smartErp.cdiscount.model.PublishDeliverMode;
 import com.smartErp.cdiscount.service.CdiscountApiConfigService;
 import com.smartErp.cdiscount.service.CdiscountCategoryService;
+import com.smartErp.cdiscount.service.CdiscountDeliveryModeInfoService;
 import com.smartErp.cdiscount.service.CdiscountPublishService;
 import com.smartErp.code.session.UserSingleton;
 import com.smartErp.product.model.Product;
@@ -42,6 +44,8 @@ public class CdiscountPublishController {
 	private CdiscountPublishService cdiscountPublishService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private CdiscountDeliveryModeInfoService cdiscountDeliveryModeInfoService;
 	
 	@RequestMapping("getShopNameByCreator")
 	@ResponseBody
@@ -80,7 +84,12 @@ public class CdiscountPublishController {
 	public String saveCdiscountPublish(CdiscountPublish cdiscountPublish,
 			@RequestParam(value = "selectedImageList[]", required = false) List<String> selectedImageList,
 			@RequestParam(value = "allImageList[]", required = false) List<String> allImageList,
-			@RequestParam("sku") String sku) {
+			@RequestParam("sku") String sku, @RequestParam("publishDeliverModeList") String publishDeliverModeStr) {
+		Gson gson = new Gson();
+		List<PublishDeliverMode> publishDeliverModeList = gson.fromJson(publishDeliverModeStr, List.class);
+		for (PublishDeliverMode publishDeliverMode : publishDeliverModeList) {
+			System.out.println(publishDeliverMode.getShippingCharges());
+		}
 		
 		User user = UserSingleton.getInstance().getUser();
 		Product product = productService.getProductBySku(sku);
@@ -99,6 +108,7 @@ public class CdiscountPublishController {
 				productService.insertProductImage(productId, imageUrl);
 			}
 		}
+//		Dumper.dump(publishDeliverModeList);
 		ReturnMessage returnMessage = new ReturnMessage();
 		return JsonUtil.toJsonStr(returnMessage);
 	}
@@ -113,5 +123,12 @@ public class CdiscountPublishController {
 			allImageList = productService.getImageListByProductId(productId);
 		}
 		return JsonUtil.toJsonStr(allImageList);
+	}
+	
+	@RequestMapping("getDeliveryModeInfoByApiId")
+	@ResponseBody
+	public String getDeliveryModeInfoByApiId(Integer apiId) {
+		List<DeliveryModeInfor> deliveryModeInforList = cdiscountDeliveryModeInfoService.getDeliveryModeInfoByApiId(apiId);
+		return JsonUtil.toJsonStr(deliveryModeInforList);
 	}
 }

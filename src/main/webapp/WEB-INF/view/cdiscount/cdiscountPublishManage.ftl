@@ -161,7 +161,7 @@
 	 		<tr>
 	 			<td class="title width_100px">店铺名<i class="star">*</i></td>
 	 			<td>
-	 				<select class="sel width_100px" id="shopName" name="shopName">
+	 				<select class="sel width_100px" id="shopName" name="shopName" onchange="onChangeShopName()">
 					</select>
 	 			</td>
 	 		</tr>
@@ -292,28 +292,7 @@
 	 		<tr>
 	 			<td class="title">运费信息<i class="star">*</i></td>
 	 			<td>
-	 				<table class="shippingChargesInfoTable">
-	 					<tr>
-							<td class="title">物流方式</td>
-							<td class="title">运费(€)(含税)</td>
-							<td class="title">额外运费(€)(含税)</td>
-						</tr>
-						<tr>
-							<td>Standard</td>
-							<td><input type="text" onkeyup="inputNumOnly(this)" name="standardShippingCharges" class="txt width_50px" /><i class="star">*</i></td>
-							<td><input type="text" onkeyup="inputNumOnly(this)" name="standardAdditionalShippingCharges" class="txt width_50px" /></td>
-						</tr>
-						<tr>
-							<td>Tracked</td>
-							<td><input type="text" onkeyup="inputNumOnly(this)" name="trackedShippingCharges" class="txt width_50px" /><i class="star">*</i></td>
-							<td><input type="text" onkeyup="inputNumOnly(this)" name="trackedAdditionalShippingCharges" class="txt width_50px" /></td>
-						</tr>
-						<tr>
-							<td>Registered</td>
-							<td><input type="text" onkeyup="inputNumOnly(this)" name="registeredShippingCharges" class="txt width_50px" /><i class="star">*</i></td>
-							<td><input type="text" onkeyup="inputNumOnly(this)" name="registeredAdditionalShippingCharges" class="txt width_50px" /></td>
-						</tr>
-	 				</table>
+	 				<div id="deliveryModeArea"></div>
 	 			</td>
 	 		</tr>
 	 	</table>
