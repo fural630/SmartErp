@@ -12,6 +12,8 @@
         <typeAlias alias="CdiscountCategory" type="com.smartErp.cdiscount.model.CdiscountCategory"/>
     	<typeAlias alias="CdiscountPublish" type="com.smartErp.cdiscount.model.CdiscountPublish"/>
     	<typeAlias alias="DeliveryModeInfor" type="com.smartErp.cdiscount.model.DeliveryModeInfor"/>
+    	<typeAlias alias="PublishDeliveryMode" type="com.smartErp.cdiscount.model.PublishDeliveryMode"/>
+    	
     	
         <typeAlias alias="DictionaryType" type="com.smartErp.system.model.DictionaryType"/>
         
@@ -27,6 +29,7 @@
         <mapper resource="com/smartErp/cdiscount/mapper/CdiscountCategoryMapper.xml"/>
         <mapper resource="com/smartErp/cdiscount/mapper/CdiscountPublishMapper.xml"/>
         <mapper resource="com/smartErp/cdiscount/mapper/DeliveryModeInforMapper.xml"/>
+        <mapper resource="com/smartErp/cdiscount/mapper/PublishDeliveryModeMapper.xml"/>
         
         <mapper resource="com/smartErp/product/mapper/ProductMapper.xml"></mapper>
     </mappers>  

@@ -178,10 +178,6 @@
 	 			<td><input type="text" class="txt width_200px" id="ean" name="ean"/></td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title">Model<i class="star">*</i></td>
-	 			<td><input type="text" class="txt width_200px" id="model" name="model"/></td>
-	 		</tr>
-	 		<tr>
 	 			<td class="title">多属性<i class="star">*</i></td>
 	 			<td>
 	 				<select class="sel width_100px" id="productKind" name="productKind">

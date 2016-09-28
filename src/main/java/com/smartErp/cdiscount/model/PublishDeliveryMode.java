@@ -1,6 +1,6 @@
 package com.smartErp.cdiscount.model;
 
-public class PublishDeliverMode {
+public class PublishDeliveryMode {
 	private Integer id;
 	private String deliveryMode;
 	private Double addShippingCharges;

@@ -4,5 +4,5 @@ import com.smartErp.cdiscount.model.CdiscountPublish;
 
 public interface CdiscountPublishDao {
 	
-	public void inserCdiscountPublish(CdiscountPublish cdiscountPublish);
+	public void insertCdiscountPublish(CdiscountPublish cdiscountPublish);
 }

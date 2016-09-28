@@ -152,15 +152,15 @@ function showCreatePublishDialog (title) {
 }
 
 function getFirstCdiscountCategory() {
-//	var apiId = $("#cdiscountPublishDialog select[name='shopName']").val();
-//	if (apiId == "") {
-//		var param = {
-//			status : 0,
-//			message : "请选择店铺"
-//		};
-//		$.message.showMessage(param);
-//		return;
-//	}
+	var apiId = $("#cdiscountPublishDialog select[name='shopName']").val();
+	if (apiId == "") {
+		var param = {
+			status : 0,
+			message : "请选择店铺"
+		};
+		$.message.showMessage(param);
+		return;
+	}
 	$("#categoryArea").html("");
 	$.ajax({
 		url : "/cdiscount/getFirstCdiscountCategory",
@@ -420,7 +420,8 @@ function saveCdiscountPublish(){
 	var sku = $.trim($("#cdiscountPublishDialog input[name='sku']").val());
 	var brandName = $.trim($("#cdiscountPublishDialog input[name='brandName']").val());
 	var ean = $.trim($("#cdiscountPublishDialog input[name='ean']").val());
-	var model = $.trim($("#cdiscountPublishDialog input[name='model']").val());
+//	var model = $.trim($("#cdiscountPublishDialog input[name='model']").val());
+	var model = "SOUMISSION CREATION PRODUITS_MK";
 	var productKind = $("#cdiscountPublishDialog select[name='productKind']").val();
 	var shortLabel = $.trim($("#cdiscountPublishDialog input[name='shortLabel']").val());
 	var longLabel = $.trim($("#cdiscountPublishDialog input[name='longLabel']").val());
@@ -447,25 +448,20 @@ function saveCdiscountPublish(){
 	});
 	
 	var deliveryModeTr = $(".deliveryModeTr");
-	var publishDeliverModeList = new Array();  
+	var publishDeliveryModeList = new Array();  
 	deliveryModeTr.each(function () {
 		var deliveryMode = $(this).find("input[name='deliveryMode']").val();
-		var shippingCharges = $(this).find("input[name='shippingCharges']").val();
-		var addShippingCharges = $(this).find("input[name='addShippingCharges']").val();
-		publishDeliverModeList.push({
-			deliveryMode: deliveryMode,
-			shippingCharges: shippingCharges,
-			addShippingCharges : addShippingCharges
-		}); 
+		var shippingCharges = $.trim($(this).find("input[name='shippingCharges']").val());
+		var addShippingCharges = $.trim($(this).find("input[name='addShippingCharges']").val());
+		if (shippingCharges != "" && addShippingCharges != "") {
+			publishDeliveryModeList.push({
+				deliveryMode: deliveryMode,
+				shippingCharges: shippingCharges,
+				addShippingCharges : addShippingCharges
+			}); 
+		}
 	});
 	
-//	var standardShippingCharges = $.trim($("#cdiscountPublishDialog input[name='standardShippingCharges']").val());
-//	var standardAdditionalShippingCharges = $.trim($("#cdiscountPublishDialog input[name='standardAdditionalShippingCharges']").val());
-//	var trackedShippingCharges = $.trim($("#cdiscountPublishDialog input[name='trackedShippingCharges']").val());
-//	var trackedAdditionalShippingCharges = $.trim($("#cdiscountPublishDialog input[name='trackedAdditionalShippingCharges']").val());
-//	var registeredShippingCharges = $.trim($("#cdiscountPublishDialog input[name='registeredShippingCharges']").val());
-//	var registeredAdditionalShippingCharges = $.trim($("#cdiscountPublishDialog input[name='registeredAdditionalShippingCharges']").val());
-//	
 	$.ajax({
 		url : "/cdiscount/saveCdiscountPublish",
 		type: 'POST',
@@ -492,7 +488,7 @@ function saveCdiscountPublish(){
 			ecoPart : ecoPart,
 			preparationTime : preparationTime,
 			productCondition : productCondition,
-			publishDeliverModeList : JSON.stringify(publishDeliverModeList),
+			publishDeliveryModeList : JSON.stringify(publishDeliveryModeList),
 			selectedImageList : selectedImageList,
 			allImageList : allImageList
 		},

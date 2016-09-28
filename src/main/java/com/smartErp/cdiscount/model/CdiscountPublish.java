@@ -4,7 +4,7 @@ package com.smartErp.cdiscount.model;
 public class CdiscountPublish {
 	private Integer id;
 	private Integer apiId;
-	private Integer skuId;
+	private Integer productId;
 	private String brandName;
 	private String ean;
 	private String model;
@@ -24,13 +24,6 @@ public class CdiscountPublish {
 	private Integer preparationTime;
 	private String productCondition;
 	
-	private Double standardShippingCharges;
-	private Double standardAdditionalShippingCharges;
-	private Double trackedShippingCharges;
-	private Double trackedAdditionalShippingCharges;
-	private Double registeredShippingCharges;
-	private Double registeredAdditionalShippingCharges;
-	
 	private Integer creator;
 	private String createTime;
 	private String updateTime;
@@ -48,11 +41,11 @@ public class CdiscountPublish {
 	public void setApiId(Integer apiId) {
 		this.apiId = apiId;
 	}
-	public Integer getSkuId() {
-		return skuId;
+	public Integer getProductId() {
+		return productId;
 	}
-	public void setSkuId(Integer skuId) {
-		this.skuId = skuId;
+	public void setProductId(Integer productId) {
+		this.productId = productId;
 	}
 	public String getBrandName() {
 		return brandName;
@@ -161,45 +154,6 @@ public class CdiscountPublish {
 	}
 	public void setProductCondition(String productCondition) {
 		this.productCondition = productCondition;
-	}
-	public Double getStandardShippingCharges() {
-		return standardShippingCharges;
-	}
-	public void setStandardShippingCharges(Double standardShippingCharges) {
-		this.standardShippingCharges = standardShippingCharges;
-	}
-	public Double getStandardAdditionalShippingCharges() {
-		return standardAdditionalShippingCharges;
-	}
-	public void setStandardAdditionalShippingCharges(
-			Double standardAdditionalShippingCharges) {
-		this.standardAdditionalShippingCharges = standardAdditionalShippingCharges;
-	}
-	public Double getTrackedShippingCharges() {
-		return trackedShippingCharges;
-	}
-	public void setTrackedShippingCharges(Double trackedShippingCharges) {
-		this.trackedShippingCharges = trackedShippingCharges;
-	}
-	public Double getTrackedAdditionalShippingCharges() {
-		return trackedAdditionalShippingCharges;
-	}
-	public void setTrackedAdditionalShippingCharges(
-			Double trackedAdditionalShippingCharges) {
-		this.trackedAdditionalShippingCharges = trackedAdditionalShippingCharges;
-	}
-	public Double getRegisteredShippingCharges() {
-		return registeredShippingCharges;
-	}
-	public void setRegisteredShippingCharges(Double registeredShippingCharges) {
-		this.registeredShippingCharges = registeredShippingCharges;
-	}
-	public Double getRegisteredAdditionalShippingCharges() {
-		return registeredAdditionalShippingCharges;
-	}
-	public void setRegisteredAdditionalShippingCharges(
-			Double registeredAdditionalShippingCharges) {
-		this.registeredAdditionalShippingCharges = registeredAdditionalShippingCharges;
 	}
 	public Integer getCreator() {
 		return creator;

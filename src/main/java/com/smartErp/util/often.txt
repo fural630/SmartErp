@@ -13,3 +13,5 @@ $.ajax({
 		$.unblockUI();
 	}
 });
+
+useGeneratedKeys="true" keyProperty="id"

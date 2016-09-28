@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.smartErp.cdiscount.dao.PublishDeliveryModeDao">  
+   
+    <insert id="insertPublishDeliveryMode" parameterType="PublishDeliveryMode">
+    	insert into publish_delivery_mode
+    	(
+    		deliveryMode,
+    		addShippingCharges,
+    		shippingCharges,
+    		publishId
+    	) values(
+	    	#{deliveryMode},
+	    	#{addShippingCharges},
+	    	#{shippingCharges},
+	    	#{publishId}
+    	)
+    </insert>
+    
+    <delete id="deletePublishDeliveryModeByPublishId" parameterType="int">
+    	delete from publish_delivery_mode where publishId = #{publishId}
+    </delete>
+    
+    <select id="getPublishDeliveryModeListByPublishId" parameterType="int" resultType="PublishDeliveryMode">
+    	select * from publish_delivery_mode where publishId = #{publishId}
+    </select>
+      
+</mapper>  
