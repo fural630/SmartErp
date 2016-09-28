@@ -109,5 +109,9 @@
     		#{log}
     	)
     </insert>
+    
+    <select id="getCdiscountPublishById" parameterType="int" resultType="CdiscountPublish">
+    	select * from cdiscount_publish where id = #{id}
+    </select>
       
 </mapper>  

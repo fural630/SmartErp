@@ -120,12 +120,13 @@ function createBigParcelHtml (deliveryModeInfoList) {
 function cleanCdiscountPublishDialog () {
 	$.myformPlugins.cleanForm("#cdiscountPublishDialog");
 	$("#navigation").html("");
+	$("#image_area").html("");
+	CKEDITOR.instances["marketingDescription"].setData("");
 }
 
 function createCdiscountPublish () {
 	updateShopNameSelect("");
-	showCreatePublishDialog("Cdiscount 刊登");
-	CKEDITOR.instances["marketingDescription"].setData("");
+	showCreatePublishDialog("Cdiscount 创建商品刊登");
 }
 
 function updateShopNameSelect(value) {
@@ -497,6 +498,23 @@ function saveCdiscountPublish(){
 		}
 	});
 //	
+	
+}
+
+function editCdiscountPublish (id) {
+	showCreatePublishDialog("Cdiscount 修改商品刊登");
+	$("input[name='publishId']").val(id);
+	$.ajax({
+		url : "/cdiscount/editCdiscountPublish",
+		type: 'POST',
+		dataType : "json",
+		data : {
+			publishId : id
+		},
+		success : function (data) {
+			$.unblockUI();
+		}
+	});
 	
 }
 

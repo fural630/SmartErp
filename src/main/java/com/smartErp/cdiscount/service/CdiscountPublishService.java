@@ -24,5 +24,9 @@ public class CdiscountPublishService {
 		return cdiscountPublishDao.getCdiscountPublishByPage(page);
 	}
 	
+	public CdiscountPublish getCdiscountPublishById(Integer id) {
+		return cdiscountPublishDao.getCdiscountPublishById(id);
+	}
+	
 	
 }

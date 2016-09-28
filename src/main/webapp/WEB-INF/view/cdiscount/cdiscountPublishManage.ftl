@@ -136,8 +136,8 @@
 						  <ul>
 						    <li class="option_btn" onmouseover="optionMouserover(this)" onmouseout="optionMouseout(this)"><a class="btn" href="javascript:void(0)">操作</a>
 						      <ul class="menu_ul">
-								<li><a href="javascript:void(0)" onclick="" >编辑 </a></li>
-						        <li><a href="javascript:void(0)" onclick="" >删除 </a></li>
+								<li><a href="javascript:void(0)" onclick="editCdiscountPublish(${obj.id})" >编辑 </a></li>
+						        <li><a href="javascript:void(0)" onclick="deleteCdiscountPublish(${obj.id})" >删除 </a></li>
 						      </ul>
 						    </li>
 						  </ul>
@@ -175,7 +175,7 @@
 	
 	
 	<div id="cdiscountPublishDialog" style="display:none;">
-		<input type="text" name="id"  value="" />
+		<input type="text" name="publishId"  value="" />
 	 	<table class="popup_tb">
 	 		<tr>
 	 			<td class="title width_100px">店铺名<i class="star">*</i></td>
@@ -237,7 +237,7 @@
 	 							<td style="text-align:right;">已选择图片：<span id="selectImageCount">0</span> 张 | 最多 4 张图片</div></td>
 	 						</tr>
 	 					</table>
-	 					<div class="image_area">
+	 					<div id="image_area">
 	 						<ul id="sortable"></ul>
 	 					</div>
 	 				</div>

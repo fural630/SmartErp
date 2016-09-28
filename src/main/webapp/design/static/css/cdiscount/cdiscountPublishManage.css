@@ -68,7 +68,7 @@
 	text-align:center;
 }
 
-.image_area {
+#image_area {
 	padding: 10px; 
 	float : left;
 }

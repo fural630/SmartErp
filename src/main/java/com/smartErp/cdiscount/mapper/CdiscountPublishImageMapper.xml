@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.smartErp.cdiscount.dao.CdiscountPublishImageDao">  
+   
+    <insert id="insertPublishImage" parameterType="CdiscountPublishImage">
+    	insert into cdiscount_publish_image
+    	(
+    		publishId,
+    		imageUrl
+    	) values(
+	    	#{publishId},
+	    	#{imageUrl}
+    	)
+    </insert>
+    
+    <delete id="deletePublishImageByPublishId" parameterType="int">
+    	delete from cdiscount_publish_image where publishId = #{publishId}
+    </delete>
+    
+    <select id="getPublishImageListByPublishId" parameterType="int" resultType="CdiscountPublishImage">
+    	select * from cdiscount_publish_image where publishId = #{publishId}
+    </select>
+    
+    <select id="getPublishImageList" parameterType="int" resultType="string">
+    	select imageUrl from cdiscount_publish_image where publishId = #{publishId}
+    </select>
+      
+</mapper>  

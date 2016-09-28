@@ -20,11 +20,13 @@ import com.smartErp.application.libraries.constentEnum.CdiscountPublishStatusEnu
 import com.smartErp.cdiscount.model.CdiscountApiConfig;
 import com.smartErp.cdiscount.model.CdiscountCategory;
 import com.smartErp.cdiscount.model.CdiscountPublish;
+import com.smartErp.cdiscount.model.CdiscountPublishImage;
 import com.smartErp.cdiscount.model.DeliveryModeInfor;
 import com.smartErp.cdiscount.model.PublishDeliveryMode;
 import com.smartErp.cdiscount.service.CdiscountApiConfigService;
 import com.smartErp.cdiscount.service.CdiscountCategoryService;
 import com.smartErp.cdiscount.service.CdiscountDeliveryModeInfoService;
+import com.smartErp.cdiscount.service.CdiscountPublishImageService;
 import com.smartErp.cdiscount.service.CdiscountPublishService;
 import com.smartErp.cdiscount.service.PublishDeliveryModeService;
 import com.smartErp.code.MainPage;
@@ -55,6 +57,8 @@ public class CdiscountPublishController extends MainPage{
 	private CdiscountDeliveryModeInfoService cdiscountDeliveryModeInfoService;
 	@Autowired
 	private PublishDeliveryModeService publishDeliveryModeService;
+	@Autowired
+	private CdiscountPublishImageService cdiscountPublishImageService;
 	
 	@RequestMapping("cdiscountPublishManage")
 	public String cdiscountPublishManage(Model model, HttpServletRequest request, Page page){
@@ -135,6 +139,17 @@ public class CdiscountPublishController extends MainPage{
 		}
 		
 		Integer publishId = cdiscountPublish.getId();
+		
+		if (CollectionUtils.isNotEmpty(selectedImageList)) {
+			cdiscountPublishImageService.deletePublishImageByPublishId(publishId);
+			for (String imageUrl : allImageList) {
+				CdiscountPublishImage cdiscountPublishImage = new CdiscountPublishImage();
+				cdiscountPublishImage.setPublishId(publishId);
+				cdiscountPublishImage.setImageUrl(imageUrl);
+				cdiscountPublishImageService.insertPublishImage(cdiscountPublishImage);
+			}
+		}
+		
 		Gson gson = new Gson();
 		List publishDeliveryModeList = gson.fromJson(publishDeliveryModeStr, List.class);
 		if (CollectionUtils.isNotEmpty(publishDeliveryModeList)) {
@@ -167,4 +182,14 @@ public class CdiscountPublishController extends MainPage{
 		List<DeliveryModeInfor> deliveryModeInforList = cdiscountDeliveryModeInfoService.getDeliveryModeInfoByApiId(apiId);
 		return JsonUtil.toJsonStr(deliveryModeInforList);
 	}
+	
+	@RequestMapping("editCdiscountPublish")
+	@ResponseBody
+	public String editCdiscountPublish(Integer publishId) {
+		CdiscountPublish cdiscountPublish = cdiscountPublishService.getCdiscountPublishById(publishId);
+		if (null != cdiscountPublish) {
+			List<String> publishImageList = cdiscountPublishImageService.getPublishImageList(publishId);
+		}
+		return null;
+	} 
 }
