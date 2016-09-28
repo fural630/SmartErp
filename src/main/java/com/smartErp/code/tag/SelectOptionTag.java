@@ -5,6 +5,7 @@ import java.io.Writer;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
 import com.smartErp.util.code.Dumper;
@@ -25,7 +26,10 @@ public class SelectOptionTag implements TemplateDirectiveModel{
 			TemplateDirectiveBody templateDirectiveBody) throws TemplateException, IOException {
 		SelectOption selectOption = initeParam(params);
 		String className = "com.smartErp.application.libraries.select." + selectOption.getOptionClass();
-		String methodName = "getOptions";
+		String methodName = selectOption.getMethod();
+		if (StringUtils.isEmpty(selectOption.getMethod())) {
+			methodName = "getOptions";
+		}
 		Map<String, String> optionMap = null;
 		try {
 			Class customClass = Class.forName(className);
@@ -57,6 +61,7 @@ public class SelectOptionTag implements TemplateDirectiveModel{
 		selectOption.setHeaderValue( (null == params.get("headerValue")) ? null :  params.get("headerValue").toString());
 		selectOption.setSelected( (null == params.get("selected")) ? null :  params.get("selected").toString());
 		selectOption.setOptionClass( (null == params.get("optionClass")) ? null :  params.get("optionClass").toString());
+		selectOption.setMethod( (null == params.get("method"))? null : params.get("method").toString());
 		return selectOption;
 	}
 

@@ -10,7 +10,7 @@
     	select t.*,tt.name as creatorName from cdiscount_api_config t left join user tt on t.creator = tt.id
     	<where>
     		<if test="params.id!=null and params.id !=''">
-    			t.id = #{params.id}
+    			and t.id = #{params.id}
     		</if>
     		<choose>
 				<when test="params.shopNameLike!=null and params.shopNameLike!='' ">
@@ -50,6 +50,10 @@
     		</if>
     		<if test="params.lastUpdateTimeTo !=null and params.lastUpdateTimeTo !='' ">
     			<![CDATA[ and t.lastUpdateTime <= #{params.lastUpdateTimeTo} ]]>
+    		</if>
+    		
+    		<if test="params.userId!=null and params.userId !=''">
+    			and t.creator = #{params.userId}
     		</if>
     	</where>
     	order by t.id desc

@@ -15,3 +15,14 @@ $.ajax({
 });
 
 useGeneratedKeys="true" keyProperty="id"
+
+<ul>
+	<li>
+		<label>从：</label>
+		<input type="text" class="txt width_100px datepicker" name="params[createDateFrom]" value="${page.params.createDateFrom!""}" />
+	</li>
+	<li>
+		<label>到：</label>
+		<input type="text" class="txt width_100px datepicker" name="params[createDateTo]" value="${page.params.createDateTo!""}" />
+	</li>
+</ul>

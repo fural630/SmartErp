@@ -2,6 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="com.smartErp.cdiscount.dao.CdiscountPublishDao">  
+
+	<select id="getCdiscountPublishByPage" parameterType="Page" resultType="hashMap">
+		select t.*,tt.shopName,ttt.sku,tttt.name as creatorName from cdiscount_publish t 
+			left join cdiscount_api_config tt on t.apiId = tt.id 
+				left join product ttt on t.productId = ttt.id 
+					left join user tttt on t.creator = tttt.id
+		<where>
+			<if test="params.id!=null and params.id !=''">
+    			and t.id = #{params.id}
+    		</if>
+    		<if test="params.apiId!=null and params.apiId !=''">
+    			and t.apiId = #{params.apiId}
+    		</if>
+    		<choose>
+				<when test="params.skuLike!=null and params.skuLike!='' ">
+					and ttt.sku like CONCAT('%','${params.sku}','%')  
+				</when>
+				<when test="params.sku!=null and params.sku!=''">
+					and ttt.sku = #{params.sku}
+				</when> 		
+    		</choose>
+    		<if test="params.ean!=null and params.ean !=''">
+    			and t.ean = #{params.ean}
+    		</if>
+    		<if test="params.publishStatus!=null and params.publishStatus !=''">
+    			and t.publishStatus = #{params.publishStatus}
+    		</if>
+    		
+    		<if test="params.timeQuery == 'createTime' and params.timeFrom !=null and params.timeFrom!=''" >
+    			<![CDATA[ and t.createTime >= #{params.timeFrom} ]]>
+    		</if>
+    		
+    		<if test="params.timeQuery == 'createTime' and params.timeTo !=null and params.timeTo!=''" >
+    			<![CDATA[ and t.createTime <= #{params.timeTo} ]]>
+    		</if>
+    		
+		    <if test="params.timeQuery == 'updateTime' and params.timeFrom !=null and params.timeFrom!=''" >
+    			<![CDATA[ and t.updateTime >= #{params.timeFrom} ]]>
+    		</if>
+    		
+    		<if test="params.timeQuery == 'updateTime' and params.timeTo !=null and params.timeTo!=''" >
+    			<![CDATA[ and t.updateTime <= #{params.timeTo} ]]>
+    		</if>
+    		
+			<if test="params.userId!=null and params.userId !=''">
+    			and t.creator = #{params.userId}
+    		</if>
+		</where>
+		order by t.id desc
+	</select>
    
     <insert id="insertCdiscountPublish" parameterType="CdiscountPublish" useGeneratedKeys="true" keyProperty="id">
     	insert into cdiscount_publish
@@ -26,6 +76,7 @@
     		ecoPart,
     		preparationTime,
     		productCondition,
+    		publishStatus,
     		creator,
     		createTime,
     		updateTime,
@@ -51,6 +102,7 @@
     		#{ecoPart},
     		#{preparationTime},
     		#{productCondition},
+    		#{publishStatus},
     		#{creator},
     		#{createTime},
     		#{updateTime},

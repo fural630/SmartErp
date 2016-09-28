@@ -10,8 +10,7 @@
   </head>
   <body>
   	<#include "../frame/header.ftl"/>
-  	<input type="hidden" id="moduleAjaxTableUrl" value="/cdiscount/getCdiscountPublishCollection"/>
-  	<input type="hidden" id="moduleUrl" value="${requestUrl}"/>
+  	<form action="/cdiscount/cdiscountPublishManage" id="mainPageForm" method="post">
 	<div class="current_nav_name clearfix">${title}
 		<div class="fr small_size"> <a class="btn" onclick="createCdiscountPublish()"><img src="/design/frame/style/img/add.png"/>新增</a>
 		</div>
@@ -23,14 +22,17 @@
 	    
 	      <table class="tb_border tb_full stripe" id="cdiscountPublishManageTable">
 	          <tr>
-	          	<th width="50px;"></th>
-	          	<th width="80px;">ID</th>
-	            <th>店铺名称</th>
-	            <th>SKU</th>
-	            <th>类别名称</th>
-	            <th>刊登状态</th>
+	          	<th width="40px;"></th>
+	          	<th width="60px;">ID</th>
+	            <th width="120px;">店铺名称</th>
+	            <th width="120px;">SKU</th>
+	            <th width="120px;">EAN</th>
+	            <th>价格</th>
+	            <th>数量</th>
+	            <th>备货时间</th>
+	            <th width="120px;">刊登状态</th>
 	            <th>创建人</th>
-	            <th>创建时间</th>
+	            <th width="180px;">创建时间</th>
 	            <th>日志</th>
 	            <th>操作</th>
 	          </tr>
@@ -38,95 +40,112 @@
 	          	<td></td>
 	          	<td>
 	          		<ul>
-	          			<li><input type="text" class="txt width_40px" name="id" /></li>
+	          			<li><input type="text" class="txt width_40px" name="params[id]"  value="${page.params.id!''}"/></li>
 	          			<li></li>
 	          		</ul>
 	          	</td>
 	          	<td>
 	          		<ul>
-	          			<li><input type="text" class="txt width_100px" name="shopName" /></li>
-	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="shopNameLike"></li>
+	          			<li>
+							<#if page.params.apiId??> 
+	          					<@select id="apiId" name="params[apiId]" selected="${page.params.apiId}" optionClass="CdiscountShopName"  cssClass="sel width_100px" headerKey="" headerValue=""/>
+	          				<#else>
+	          					<@select id="apiId" name="params[apiId]"  optionClass="CdiscountShopName"  cssClass="sel width_100px" headerKey="" headerValue=""/>
+	          				</#if>
+						</li>
+						<li></li>
 	          		</ul>
 	          	</td>
 	          	<td>
 	          		<ul>
-	          			<li><input type="text" class="txt width_100px" name="sku" /></li>
-	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="skuLike"></li>
+	          			<li><input type="text" class="txt width_100px" name="params[sku]" value="${page.params.sku!''}" /></li>
+	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[skuLike]" <#if page.params.skuLike??> checked </#if>></li>
 	          		</ul>
 	          	</td>
 	          	<td>
 	          		<ul>
-	          			<li><input type="text" class="txt width_100px" name="sku" /></li>
-	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="skuLike"></li>
+	          			<li><input type="text" class="txt width_100px" name="params[ean]" value="${page.params.ean!''}" /></li>
+	          			<li></li>
 	          		</ul>
 	          	</td>
+	          	<td></td>
+	          	<td></td>
+	          	<td></td>
 	          	<td>
 	          		<ul>
 	          			<li>
-		          			<select class="sel width_100px" >
-								<option>请选择</option>
-								<option>男</option>
-								<option>女</option>
-							</select>
+		          			<#if page.params.publishStatus??> 
+	          					<@select id="publishStatus" name="params[publishStatus]" selected="${page.params.publishStatus}" optionClass="CdiscountPublishStatus"  cssClass="sel width_100px" headerKey="" headerValue=""/>
+	          				<#else>
+	          					<@select id="publishStatus" name="params[publishStatus]"  optionClass="CdiscountPublishStatus"  cssClass="sel width_100px" headerKey="" headerValue=""/>
+	          				</#if>
 						</li>
 						<li></li>
 					</ul>	
 	          	</td>
+	          	<td></td>
 	          	<td>
 	          		<ul>
-	          			<li><input type="text" class="width_100px main_input_search select_filter" name="" value="输入过滤" /></li>
 	          			<li>
-		          			<select class="sel width_100px">
-								<option>请选择</option>
-								<option>男</option>
-								<option>女</option>
-							</select>
+	          				<label>类型：</label>
+	          				<#if page.params.timeQuery??> 
+	          					<@select id="timeQuery" name="params[timeQuery]" selected="${page.params.timeQuery}" optionClass="TimeQuery"  cssClass="sel width_100px" headerKey="" headerValue=""/>
+	          				<#else>
+	          					<@select id="timeQuery" name="params[timeQuery]"  optionClass="TimeQuery"  cssClass="sel width_100px" headerKey="" headerValue=""/>
+	          				</#if>
+	          			</li>
+						<li>
+							<label>从：</label>
+							<input type="text" class="txt width_100px datepicker" name="params[timeFrom]" value="${page.params.timeFrom!""}" />
 						</li>
-					</ul>	
-	          	</td>
-	          	<td>
-	          		<ul>
-	          			<li>
-	          				<label>从：</label>
-	          				<input type="text" class="txt width_80px main_data_time" name="birthdayFrom" id="datepicker" />
-	          			</li>
-	          			<li>
-	          				<label>到：</label>
-	          				<input type="text" class="txt width_80px" name="birthdayTo" />
-	          			</li>
-	          		</ul>
+						<li>
+							<label>到：</label>
+							<input type="text" class="txt width_100px datepicker" name="params[timeTo]" value="${page.params.timeTo!""}" />
+						</li>
+					</ul>
 	          	</td>
 	          	<td></td>
 	          	<td></td>
 	          </tr>
-	      		 <tr>
-		            <td style="text-align:center"><input name="main_page_checkbox" type="checkbox" value="" onclick="countCheckbox()" /></td>
-		            <td></td>
-		            <td></td>
-		            <td></td>
-		            <td></td>
-		            <td></td>
-		            <td></td>
-		            <td></td>
-		            <td>
-		            	<a href="javascript:void(0)" onclick="showLog(this)"><img src="/design/static/images/common/system-log.png"/></a>
-		            	<div class="log_content">
-		            		【1、于2016-08-20 00:24 由超级管理员创建信息】<br/>
-		            	</div>
-		            </td>
-		            <td style="width:60px; text-align:center;" >
-					 <div class="menu">
-					  <ul>
-					    <li class="option_btn" onmouseover="optionMouserover(this)" onmouseout="optionMouseout(this)"><a class="btn" href="javascript:void(0)">操作</a>
-					      <ul class="menu_ul">
-							<li><a href="javascript:void(0)" onclick="" >编辑 </a></li>
-					        <li><a href="javascript:void(0)" onclick="" >删除 </a></li>
-					      </ul>
-					    </li>
-					  </ul>
-					</div>
-		            </td>
-		          </tr>
+	          </form>
+	          <#if (collection?size > 0)>
+		          <#list collection as obj>
+					<tr>
+						<td style="text-align:center"><input name="main_page_checkbox" type="checkbox" value="${obj.id}" onclick="countCheckbox()" /></td>
+						<td>${obj.id}</td>
+						<td>${obj.shopName!""}</td>
+						<td>${obj.sku!""}</td>
+						<td>${obj.ean}</td>
+						<td>${obj.price}</td>
+						<td>${obj.stockQty}</td>
+						<td>${obj.preparationTime}</td>
+						<td><@matchValue key="${obj.publishStatus}" optionClass="CdiscountPublishStatus"/></td>
+						<td>${obj.creatorName}</td>
+						<td>
+							创建时间:<br/>${obj.createTime}<br/>
+							修改时间:<br/>${obj.updateTime}
+						</td>
+						<td>
+							<a href="javascript:void(0)" onclick="showLog(this)"><img src="/design/static/images/common/system-log.png"/></a>
+							<div class="log_content">
+								${obj.log!""}
+							</div>
+						</td>
+						<td style="width:60px; text-align:center;" >
+						 <div class="menu">
+						  <ul>
+						    <li class="option_btn" onmouseover="optionMouserover(this)" onmouseout="optionMouseout(this)"><a class="btn" href="javascript:void(0)">操作</a>
+						      <ul class="menu_ul">
+								<li><a href="javascript:void(0)" onclick="" >编辑 </a></li>
+						        <li><a href="javascript:void(0)" onclick="" >删除 </a></li>
+						      </ul>
+						    </li>
+						  </ul>
+						</div>
+						</td>
+					</tr>
+	          	</#list>
+	          </#if>
 	      </table>
 	      
 		      <div class="paging clearfix">

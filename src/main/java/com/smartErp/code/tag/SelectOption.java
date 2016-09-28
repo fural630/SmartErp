@@ -22,6 +22,8 @@ public class SelectOption {
     
     private String optionClass;
     
+    private String method;
+    
     private Map<String, String> optionMap;
     
 	public String parse() {
@@ -140,5 +142,13 @@ public class SelectOption {
 
 	public void setOptionClass(String optionClass) {
 		this.optionClass = optionClass;
+	}
+
+	public String getMethod() {
+		return method;
+	}
+
+	public void setMethod(String method) {
+		this.method = method;
 	}
 }

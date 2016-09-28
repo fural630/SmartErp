@@ -23,6 +23,7 @@ public class CdiscountPublish {
 	private Double ecoPart;
 	private Integer preparationTime;
 	private String productCondition;
+	private Integer publishStatus;
 	
 	private Integer creator;
 	private String createTime;
@@ -178,5 +179,11 @@ public class CdiscountPublish {
 	}
 	public void setLog(String log) {
 		this.log = log;
+	}
+	public Integer getPublishStatus() {
+		return publishStatus;
+	}
+	public void setPublishStatus(Integer publishStatus) {
+		this.publishStatus = publishStatus;
 	}
 }
