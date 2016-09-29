@@ -29,5 +29,12 @@ public class CdiscountPublishImageService {
 	public void deletePublishImageByPublishId(Integer publishId) {
 		cdiscountPublishImageDao.deletePublishImageByPublishId(publishId);
 	}
+
+	public void insertPublishImage(String imageUrl, Integer publishId) {
+		CdiscountPublishImage cdiscountPublishImage = new CdiscountPublishImage();
+		cdiscountPublishImage.setPublishId(publishId);
+		cdiscountPublishImage.setImageUrl(imageUrl);
+		cdiscountPublishImageDao.insertPublishImage(cdiscountPublishImage);
+	}
 	
 }

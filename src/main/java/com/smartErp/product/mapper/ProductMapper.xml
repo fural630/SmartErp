@@ -37,5 +37,13 @@
    			#{imageUrl}
    		)
    </insert>
+   
+   <select id="getProductById" parameterType="int" resultType="Product">
+   		select * from product where id = #{id}
+   </select>
+   
+   <select id="getSkuByProductId" parameterType="int" resultType="string">
+   		select sku from product where id = #{productId}
+   </select>
       
 </mapper>  

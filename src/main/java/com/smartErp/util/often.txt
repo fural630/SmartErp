@@ -11,8 +11,11 @@ $.ajax({
 	},
 	success : function (data) {
 		$.unblockUI();
+		$.message.showMessage(param);
 	}
 });
+
+async: false,
 
 useGeneratedKeys="true" keyProperty="id"
 

@@ -113,5 +113,33 @@
     <select id="getCdiscountPublishById" parameterType="int" resultType="CdiscountPublish">
     	select * from cdiscount_publish where id = #{id}
     </select>
+    
+    <update id="updateCdiscountPublish" parameterType="CdiscountPublish">
+    	update cdiscount_publish set 
+    		apiId = #{apiId},
+    		productId = #{productId},
+    		brandName = #{brandName},
+    		ean = #{ean},
+    		model = #{model},
+    		productKind = #{productKind},
+    		shortLabel = #{shortLabel},
+    		longLabel = #{longLabel},
+    		navigation = #{navigation},
+    		description = #{description},
+    		categoryCode = #{categoryCode},
+    		categoryName = #{categoryName},
+    		marketingDescription = #{marketingDescription},
+    		stockQty = #{stockQty},
+    		price = #{price},
+    		vat = #{vat},
+    		dea = #{dea},
+    		ecoPart = #{ecoPart},
+    		preparationTime = #{preparationTime},
+    		productCondition = #{productCondition},
+    		publishStatus = #{publishStatus},
+    		updateTime = #{updateTime},
+    		log = #{log}
+    	where id = #{id}
+    </update>
       
 </mapper>  

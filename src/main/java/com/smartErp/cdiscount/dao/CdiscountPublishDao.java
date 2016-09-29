@@ -13,4 +13,6 @@ public interface CdiscountPublishDao {
 	public List<Map<String, Object>> getCdiscountPublishByPage(Page page);
 
 	public CdiscountPublish getCdiscountPublishById(Integer id);
+
+	public void updateCdiscountPublish(CdiscountPublish cdiscountPublish);
 }

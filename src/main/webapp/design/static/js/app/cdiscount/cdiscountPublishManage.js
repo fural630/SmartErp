@@ -21,8 +21,6 @@ function initDialog() {
 			},
 			click : function() {
 				saveCdiscountPublish();
-//				cleanCdiscountPublishDialog();
-//				$(this).dialog("close");
 			}
 		} ],
 		close: function( event, ui ) {
@@ -41,6 +39,7 @@ function showDeliveryMode () {
 		url : "/cdiscount/getDeliveryModeInfoByApiId",
 		type: 'POST',
 		dataType : "json",
+		async: false,
 		data : {
 			apiId : apiId
 		},
@@ -75,7 +74,7 @@ function createSmallParcelHtml (deliveryModeInfoList) {
 	$.each(deliveryModeInfoList, function (i, obj) {
 		if (obj.deliveryModeType == 5) {		//com.smartErp.application.libraries.constentEnum.DeliveryModeTypeEnum.java
 			smallParcelHtml += 			"<tr class='deliveryModeTr'>";
-			smallParcelHtml += 				"<td>"+ obj.modeNameEN +"<input type='text' name='deliveryMode' value='" + obj.modeNameEN + "'/></td>";
+			smallParcelHtml += 				"<td>"+ obj.modeNameEN +"<input type='hidden' name='deliveryMode' value='" + obj.modeNameEN + "'/></td>";
 			smallParcelHtml += 				"<td><input type='text' onkeyup='inputNumOnly(this)' name='shippingCharges' class='txt width_50px' /></td>";
 			smallParcelHtml += 				"<td><input type='text' onkeyup='inputNumOnly(this)' name='addShippingCharges' class='txt width_50px' /></td>";
 			smallParcelHtml += 			"</tr>";
@@ -107,7 +106,7 @@ function createBigParcelHtml (deliveryModeInfoList) {
 	$.each(deliveryModeInfoList, function (i, obj) {
 		if (obj.deliveryModeType == 10) {	//com.smartErp.application.libraries.constentEnum.DeliveryModeTypeEnum.java
 			bigParcelHtml += 			"<tr class='deliveryModeTr'>";
-			bigParcelHtml += 				"<td>"+ obj.modeNameEN +"<input type='text' name='deliveryMode' value='" + obj.modeNameEN + "'/></td>";
+			bigParcelHtml += 				"<td>"+ obj.modeNameEN +"<input type='hidden' name='deliveryMode' value='" + obj.modeNameEN + "'/></td>";
 			bigParcelHtml += 				"<td><input type='text' onkeyup='inputNumOnly(this)' name='shippingCharges' class='txt width_50px' /></td>";
 			bigParcelHtml += 				"<td><input type='text' onkeyup='inputNumOnly(this)' name='addShippingCharges' class='txt width_50px' /></td>";
 			bigParcelHtml += 			"</tr>";
@@ -120,7 +119,7 @@ function createBigParcelHtml (deliveryModeInfoList) {
 function cleanCdiscountPublishDialog () {
 	$.myformPlugins.cleanForm("#cdiscountPublishDialog");
 	$("#navigation").html("");
-	$("#image_area").html("");
+	$("#sortable").html("");
 	CKEDITOR.instances["marketingDescription"].setData("");
 }
 
@@ -129,16 +128,21 @@ function createCdiscountPublish () {
 	showCreatePublishDialog("Cdiscount 创建商品刊登");
 }
 
-function updateShopNameSelect(value) {
+function updateShopNameSelect(apiId) {
 	$.ajax({
 		url : "/cdiscount/getShopNameByCreator",
 		type: 'POST',
 		dataType : "json",
+		async: false,
 		success : function (data) {
 			$.unblockUI();
 			var options = "<option value=''>-- 请选择 --</option>";
 			$.each(data, function (key, value) {
-				options += "<option value='" + key + "'>" + value + "</option>";
+				if (apiId != undefined && apiId == key) {
+					options += "<option value='" + key + "' selected >" + value + "</option>";
+				} else {
+					options += "<option value='" + key + "'>" + value + "</option>";
+				}
 			});
 			$("#cdiscountPublishDialog select[name='shopName']").html(options);
 		}
@@ -394,7 +398,7 @@ function onChangeSku () {
 	reloadSkuImage();
 }
 
-function reloadSkuImage() {
+function reloadSkuImage(publishImageList) {
 	var sku = $.trim($("#cdiscountPublishDialog input[name='sku']").val());
 	$.ajax({
 		url : "/cdiscount/reloadSkuImage",
@@ -407,16 +411,48 @@ function reloadSkuImage() {
 			$.unblockUI();
 			var allImageList = data;
 			clearImageArea();
-			$.each(allImageList, function (i, value) {
-				var imageId = getMaxImageId();
-				createSelectImageHtml(imageId, value);
-			});
+			if (publishImageList != undefined && publishImageList.length > 0) {
+				var mergeList = mergeArray(publishImageList, allImageList);
+				$.each(mergeList, function (i, imageUrl) {
+					var imageId = getMaxImageId();
+					createSelectImageHtml(imageId, imageUrl);
+					if (publishImageList.indexOf(imageUrl) > -1) {
+						onclickImage(imageId);
+					} 
+				});
+			} else {
+				$.each(allImageList, function (i, imageUrl) {
+					var imageId = getMaxImageId();
+					createSelectImageHtml(imageId, imageUrl);
+				});
+			}
 		}
 	});
 }
 
+function mergeArray(arr1, arr2) {
+	var arr = [];
+	for ( var i = 0; i < arr1.length; i++) {
+		arr.push(arr1[i]);
+	}
+	var dup;
+	for ( var i = 0; i < arr2.length; i++) {
+		dup = false;
+		for ( var j = 0; j < arr1.length; j++) {
+			if (arr2[i] == arr1[j]) {
+				dup = true;
+				break;
+			}
+		}
+		if (!dup) {
+			arr.push(arr2[i]);
+		}
+	}
+	return arr;
+}  
+
 function saveCdiscountPublish(){
-	var id = $("#cdiscountPublishDialog input[name='id']").val();
+	var id = $("#cdiscountPublishDialog input[name='publishId']").val();
 	var apiId = $("#cdiscountPublishDialog select[name='shopName']").val();
 	var sku = $.trim($("#cdiscountPublishDialog input[name='sku']").val());
 	var brandName = $.trim($("#cdiscountPublishDialog input[name='brandName']").val());
@@ -494,11 +530,12 @@ function saveCdiscountPublish(){
 			allImageList : allImageList
 		},
 		success : function (data) {
-			$.unblockUI();
+			$("#cdiscountPublishDialog").dialog("close");
+			$.message.showMessage(data);
+			cleanCdiscountPublishDialog();
+			refresh(1000);
 		}
 	});
-//	
-	
 }
 
 function editCdiscountPublish (id) {
@@ -513,9 +550,55 @@ function editCdiscountPublish (id) {
 		},
 		success : function (data) {
 			$.unblockUI();
+			var publishImageList = data.publishImageList;
+			var publishDeliveryModeList = data.publishDeliveryModeList;
+			var sku = data.sku;
+			$("#cdiscountPublishDialog input[name='sku']").val(sku);
+			var cdiscountPublish = data.cdiscountPublish;
+			updateShopNameSelect(cdiscountPublish.apiId);
+			showDeliveryMode();
+			fillingDeliveryModeData(publishDeliveryModeList);
+			reloadSkuImage(publishImageList);
+			
+			$("#cdiscountPublishDialog input[name='brandName']").val(cdiscountPublish.brandName);
+			$("#cdiscountPublishDialog input[name='ean']").val(cdiscountPublish.ean);
+			$("#cdiscountPublishDialog select[name='productKind']").val(cdiscountPublish.productKind);
+			$("#cdiscountPublishDialog input[name='shortLabel']").val(cdiscountPublish.shortLabel);
+			$("#cdiscountPublishDialog input[name='longLabel']").val(cdiscountPublish.longLabel);
+			$("#cdiscountPublishDialog textarea[name='description']").val(cdiscountPublish.description);
+			CKEDITOR.instances["marketingDescription"].setData(cdiscountPublish.marketingDescription);
+			$("#cdiscountPublishDialog input[name='categoryCode']").val(cdiscountPublish.categoryCode);
+			$("#cdiscountPublishDialog input[name='categoryName']").val(cdiscountPublish.categoryName);
+			$("#navigation").html(cdiscountPublish.navigation);
+			$("#cdiscountPublishDialog input[name='stockQty']").val(cdiscountPublish.stockQty);
+			$("#cdiscountPublishDialog input[name='price']").val(cdiscountPublish.price);
+			$("#cdiscountPublishDialog input[name='vat']").val(cdiscountPublish.vat);
+			$("#cdiscountPublishDialog input[name='dea']").val(cdiscountPublish.dea);
+			$("#cdiscountPublishDialog input[name='ecoPart']").val(cdiscountPublish.ecoPart);
+			$("#cdiscountPublishDialog input[name='preparationTime']").val(cdiscountPublish.preparationTime);
+			$("#cdiscountPublishDialog select[name='productCondition']").val(cdiscountPublish.productCondition);
+			
+			
+			
 		}
 	});
 	
+}
+
+function fillingDeliveryModeData (publishDeliveryModeList) {
+	var deliveryModeTr = $(".deliveryModeTr");
+	if (publishDeliveryModeList.length > 0 ) {
+		$.each(publishDeliveryModeList, function (i, obj) {
+			deliveryModeTr.each(function () {
+				var deliveryMode = $(this).find("input[name='deliveryMode']").val();
+				if (deliveryMode == obj.deliveryMode) {
+					$(this).find("input[name='shippingCharges']").val(obj.shippingCharges);
+					$(this).find("input[name='addShippingCharges']").val(obj.addShippingCharges);
+					return false;		//break;
+				}
+			});
+		});
+	}
 }
 
 

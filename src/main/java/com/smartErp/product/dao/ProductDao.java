@@ -18,4 +18,8 @@ public interface ProductDao {
 	public List<String> getImageListByProductId(Integer productId);
 
 	public void insertProductImage(@Param("productId") Integer productId, @Param("imageUrl")  String imageUrl);
+
+	public Product getProductById(Integer id);
+	
+	public String getSkuByProductId(Integer productId);
 }

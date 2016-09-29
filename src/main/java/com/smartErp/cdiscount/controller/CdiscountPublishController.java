@@ -108,16 +108,9 @@ public class CdiscountPublishController extends MainPage{
 			@RequestParam(value = "selectedImageList[]", required = false) List<String> selectedImageList,
 			@RequestParam(value = "allImageList[]", required = false) List<String> allImageList,
 			@RequestParam("sku") String sku, @RequestParam("publishDeliveryModeList") String publishDeliveryModeStr) {
-		MyDate myDate = new MyDate();
-		User user = UserSingleton.getInstance().getUser();
 		Product product = productService.getProductBySku(sku);
 		if (product == null) {
-			product = new Product();
-			product.setCreator(user.getId());
-			product.setSku(sku);
-			product.setCreateTime(new MyDate().getCurrentDateTime());
-			product.setUpdateTime(new MyDate().getCurrentDateTime());
-			productService.insertProduct(product);
+			productService.insertProduct(sku);
 		} 
 		Integer productId = product.getId();
 		if (CollectionUtils.isNotEmpty(allImageList)) {
@@ -129,24 +122,16 @@ public class CdiscountPublishController extends MainPage{
 		
 		cdiscountPublish.setProductId(productId);
 		if (cdiscountPublish.getId() == null) {
-			cdiscountPublish.setCreator(user.getId());
-			cdiscountPublish.setCreateTime(myDate.getCurrentDateTime());
-			cdiscountPublish.setUpdateTime(myDate.getCurrentDateTime());
-			cdiscountPublish.setPublishStatus(CdiscountPublishStatusEnum.WAIT_PENDING.getValue());
 			cdiscountPublishService.insertCdiscountPublish(cdiscountPublish);
 		} else {
-//			cdiscountPublishService.updateCdiscountPublish(cdiscountPublish);
+			cdiscountPublishService.updateCdiscountPublish(cdiscountPublish);
 		}
 		
 		Integer publishId = cdiscountPublish.getId();
-		
 		if (CollectionUtils.isNotEmpty(selectedImageList)) {
 			cdiscountPublishImageService.deletePublishImageByPublishId(publishId);
-			for (String imageUrl : allImageList) {
-				CdiscountPublishImage cdiscountPublishImage = new CdiscountPublishImage();
-				cdiscountPublishImage.setPublishId(publishId);
-				cdiscountPublishImage.setImageUrl(imageUrl);
-				cdiscountPublishImageService.insertPublishImage(cdiscountPublishImage);
+			for (String imageUrl : selectedImageList) {
+				cdiscountPublishImageService.insertPublishImage(imageUrl, publishId);
 			}
 		}
 		
@@ -187,9 +172,17 @@ public class CdiscountPublishController extends MainPage{
 	@ResponseBody
 	public String editCdiscountPublish(Integer publishId) {
 		CdiscountPublish cdiscountPublish = cdiscountPublishService.getCdiscountPublishById(publishId);
+		Map<String, Object> resultDataMap = new HashMap<String, Object>();
 		if (null != cdiscountPublish) {
 			List<String> publishImageList = cdiscountPublishImageService.getPublishImageList(publishId);
+			List<PublishDeliveryMode> publishDeliveryModeList = publishDeliveryModeService.getPublishDeliveryModeListByPublishId(publishId);
+			Integer productId = cdiscountPublish.getProductId();
+			String sku = productService.getSkuByProductId(productId);
+			resultDataMap.put("publishImageList", publishImageList);
+			resultDataMap.put("publishDeliveryModeList", publishDeliveryModeList);
+			resultDataMap.put("sku", sku);
+			resultDataMap.put("cdiscountPublish", cdiscountPublish);
 		}
-		return null;
+		return JsonUtil.toJsonStr(resultDataMap);
 	} 
 }
