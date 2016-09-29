@@ -49,6 +49,10 @@ function previousPage () {
 function nextPage () {
 	var pageNo = parseInt($("#pageNo").val());
 	var nextPageNo = pageNo + 1;
+	var totalPage = parseInt($("#totalPage").text());
+	if (nextPageNo > totalPage) {
+		return;
+	}
 	$("#pageNo").val(nextPageNo);
 	submitMainPageForm();
 }

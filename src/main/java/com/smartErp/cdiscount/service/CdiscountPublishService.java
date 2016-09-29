@@ -28,7 +28,7 @@ public class CdiscountPublishService {
 		MyDate myDate = new MyDate();
 		User user = UserSingleton.getInstance().getUser();
 		String log = myLocale.getText("at.time.by.user.create.cdiscount.publish");
-		cdiscountPublishForm.setLog(log);
+		cdiscountPublishForm.setLog(SysRemark.append("", log));
 		cdiscountPublishForm.setCreator(user.getId());
 		cdiscountPublishForm.setCreateTime(myDate.getCurrentDateTime());
 		cdiscountPublishForm.setUpdateTime(myDate.getCurrentDateTime());

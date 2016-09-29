@@ -95,14 +95,15 @@
 }
 
 .log_content {
-	width: 200px;
-	height : 300px;
+	width: 300px;
+	max-height : 300px;
 	text-align: left;
-	border:1px solid #ddd; 
+	border:1px solid #db6a23;
 	box-shadow:1px 2px 4px #ddd;
 	display : none;
 	padding : 5px 10px;
 	background-color: #FCF8E3;
+	overflow-y:scroll;
 }
 
 .padding_10px {
