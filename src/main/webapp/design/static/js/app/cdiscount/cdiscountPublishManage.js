@@ -553,12 +553,12 @@ function editCdiscountPublish (id) {
 			var publishImageList = data.publishImageList;
 			var publishDeliveryModeList = data.publishDeliveryModeList;
 			var sku = data.sku;
-			$("#cdiscountPublishDialog input[name='sku']").val(sku);
+			$("#cdiscountPublishDialog input[name='sku']").val(sku);//填充SKU
 			var cdiscountPublish = data.cdiscountPublish;
-			updateShopNameSelect(cdiscountPublish.apiId);
-			showDeliveryMode();
-			fillingDeliveryModeData(publishDeliveryModeList);
-			reloadSkuImage(publishImageList);
+			updateShopNameSelect(cdiscountPublish.apiId);		//设置店铺选中
+			showDeliveryMode();		//显示运费模板信息
+			fillingDeliveryModeData(publishDeliveryModeList);		//填充运费信息
+			reloadSkuImage(publishImageList);		//重新加载SKU对应的图片，并将刊登图片设置选中状态
 			
 			$("#cdiscountPublishDialog input[name='brandName']").val(cdiscountPublish.brandName);
 			$("#cdiscountPublishDialog input[name='ean']").val(cdiscountPublish.ean);
@@ -577,14 +577,16 @@ function editCdiscountPublish (id) {
 			$("#cdiscountPublishDialog input[name='ecoPart']").val(cdiscountPublish.ecoPart);
 			$("#cdiscountPublishDialog input[name='preparationTime']").val(cdiscountPublish.preparationTime);
 			$("#cdiscountPublishDialog select[name='productCondition']").val(cdiscountPublish.productCondition);
-			
-			
-			
 		}
 	});
 	
 }
 
+
+/**
+ * 填充运费信息
+ * @param publishDeliveryModeList
+ */
 function fillingDeliveryModeData (publishDeliveryModeList) {
 	var deliveryModeTr = $(".deliveryModeTr");
 	if (publishDeliveryModeList.length > 0 ) {
@@ -599,6 +601,57 @@ function fillingDeliveryModeData (publishDeliveryModeList) {
 			});
 		});
 	}
+}
+
+/**
+ * 点击批量操作的提交按钮
+ */
+function batchOptionSubmit () {
+	var batchOption = $("#batchOptionSelect").val();
+	if (batchOption == "") {
+		return;
+	} 
+	
+	var idList = getBatchOptionIds();//获取勾选的数据Id
+	if (idList.length == 0) {
+		var param = {
+			status : 0,
+			message : "请勾选需要操作的数据"
+		};
+		$.message.showMessage(param);
+	}
+	
+	if (batchOption == "batchShelvesProduct") {
+		batchShelvesProduct(idList);
+	} else if (batchOption == "batchUpdateStatus") {
+		batchUpdateStatus(idList);
+	} else if (batchOption == "batchDelete") {
+		batchDelete(idList);
+	}
+}
+
+/**
+ * 批量打包上传商品信息
+ * @param idList
+ */
+function batchShelvesProduct(idList) {
+	
+}
+
+/**
+ * 批量修改刊登信息状态
+ * @param idList
+ */
+function batchUpdateStatus(idList) {
+	
+}
+
+/**
+ * 批量删除刊登信息
+ * @param idList
+ */
+function batchDelete(idList) {
+	
 }
 
 

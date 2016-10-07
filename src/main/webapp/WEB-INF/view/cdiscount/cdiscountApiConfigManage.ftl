@@ -38,8 +38,14 @@
 	          <tr class="conditionTr">
 	          	<td>
 	          		<ul>
-	          			<li><input type="text" class="txt width_100px" name="params[shopName]" value="${page.params.shopName!''}" /></li>
-	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[shopNameLike]"  <#if page.params.shopNameLike??> checked </#if> /></li>
+	          			<li>
+		          			<#if page.params.apiId??> 
+	          					<@select id="apiId" name="params[apiId]" selected="${page.params.apiId}" optionClass="CdiscountShopName"  cssClass="sel width_100px" headerKey="" headerValue=""/>
+	          				<#else>
+	          					<@select id="apiId" name="params[apiId]"  optionClass="CdiscountShopName"  cssClass="sel width_100px" headerKey="" headerValue=""/>
+	          				</#if>
+	          			</li>
+	          			<li></li>
 	          		</ul>
 	          	</td>
 	          	<td>

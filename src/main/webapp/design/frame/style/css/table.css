@@ -1,4 +1,4 @@
-/*鏃犳 start*/
+/*閺冪姵顢�start*/
 .td_center {
 	 text-align:center;
 }
@@ -18,8 +18,8 @@
 .tb_common .td_right {
 	text-align:right;
 }
-/*鏃犳 end*/
-/*鏈夋 start*/
+/*閺冪姵顢�end*/
+/*閺堝顢�start*/
 .tb_border {
 	width: 100%;
 	border-collapse: collapse;
@@ -32,9 +32,9 @@
 	line-height: 18px;
 	font-weight: bold;
 	text-align:center;
-	min-height:18px;/*楂樺害鏈�皬鍊艰缃负锛�00px*/
-	height:auto !important; /*鍏煎FF,IE7涔熸敮鎸�!important鏍囩*/
-	height:18px; /*鍏煎ie6*/
+	min-height:18px;/*妤傛ê瀹抽張锟界毈閸婅壈顔曠純顔昏礋閿涳拷00px*/
+	height:auto !important; /*閸忕厧顔怓F,IE7娑旂喐鏁幐锟�important閺嶅洨顒�/
+	height:18px; /*閸忕厧顔恑e6*/
 	background:#40aaef;
 }
 .tb_border td {
@@ -51,7 +51,7 @@
 .tb_border .td_right {
 	text-align:right;
 }
-/*鏈夋 end*/
+/*閺堝顢�end*/
 /*table full screen start*/
 .tb_full {
 	border:none;
@@ -69,3 +69,8 @@ background-color: #f9f9f9;
 }
 
 /*table full screen end*/
+
+.intro-tab-fix {
+	position: fixed;
+	top: 0;
+}

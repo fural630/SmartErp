@@ -12,15 +12,15 @@
   	<#include "../frame/header.ftl"/>
   	<form action="/cdiscount/cdiscountPublishManage" id="mainPageForm" method="post">
 	<div class="current_nav_name clearfix">${title}
-		<div class="fr small_size"> <a class="btn" onclick="createCdiscountPublish()"><img src="/design/frame/style/img/add.png"/>新增</a>
+		<div class="fr small_size">
+			<a class="btn" onclick="createCdiscountPublish()"><img src="/design/frame/style/img/add.png"/>新增</a>
 		</div>
 	</div>  
 	<#include "../frame/page.ftl"/>
 	<div class="mainbody clearfix"> 
 	  <div class="tableview clearfix">
 	    <div class="content">
-	    
-	      <table class="tb_border tb_full stripe" id="cdiscountPublishManageTable">
+	      <table class="tb_border tb_full stripe" id="cdiscountPublishManageTable" name="pageTable">
 	          <tr>
 	          	<th width="40px;"></th>
 	          	<th width="60px;">ID</th>
@@ -159,9 +159,11 @@
 								已选择&nbsp;<span id="pageCheckCount">0</span>&nbsp;条
 							</td>
 							<td class="td_right">操作&nbsp;&nbsp;
-								<select class="sel">
-										<option id="batchDelete">批量删除</option>
-										<option id="batchUpdateStatus">批量修改状态</option>
+								<select class="sel" id="batchOptionSelect">
+									<option value="" selected></option>
+									<option value="batchShelvesProduct">商品上架</option>
+									<option value="batchUpdateStatus">批量修改状态</option>
+									<option value="batchDelete">批量删除</option>
 								</select>
 								&nbsp; <a class="btn" onclick="batchOptionSubmit()">提交</a>
 							</td>

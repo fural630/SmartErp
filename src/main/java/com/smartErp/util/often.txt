@@ -15,6 +15,12 @@ $.ajax({
 	}
 });
 
+var param = {
+	status : 0,
+	message : "请选择店铺"
+};
+$.message.showMessage(param);
+
 async: false,
 
 useGeneratedKeys="true" keyProperty="id"

@@ -12,14 +12,9 @@
     		<if test="params.id!=null and params.id !=''">
     			and t.id = #{params.id}
     		</if>
-    		<choose>
-				<when test="params.shopNameLike!=null and params.shopNameLike!='' ">
-					and t.shopName like CONCAT('%','${params.shopName}','%')  
-				</when>
-				<when test="params.shopName!=null and params.shopName!=''">
-					and t.shopName = #{params.shopName}
-				</when> 		
-    		</choose>
+    		<if test="params.apiId!=null and params.apiId !=''">
+    			and t.id = #{params.apiId}
+    		</if>
     		<choose>
 				<when test="params.apiAccountLike!=null and params.apiAccountLike!='' ">
 					and t.apiAccount like CONCAT('%','${params.apiAccount}','%')  
