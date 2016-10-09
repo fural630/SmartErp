@@ -41,4 +41,15 @@ public class MainPageController {
 		return "redirect:/SmartErp/home"; 
 	}
 	
+	@RequestMapping("loginOut")
+	public String loginOut() {
+		System.out.println(123);
+		try {
+			UserSingleton.getInstance().unsetUser();
+		} catch (Exception e) {
+			e.printStackTrace();// TODO: handle exception
+		}
+		return "redirect:/SmartErp/loginForm"; 
+	}
+	
 }

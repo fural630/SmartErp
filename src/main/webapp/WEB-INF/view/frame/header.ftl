@@ -52,7 +52,8 @@
 	    	</div>
 	    </li> 
 	    <li class="nav_logout">
-	    	<a href="#"><img src="/design/frame/style/img/exit.png">&nbsp;退出 </a>
+	    	<form id="loginOutForm" action="/SmartErp/loginOut" method="post"></form>
+	    	<a onclick="loginOut();"><img src="/design/frame/style/img/exit.png">&nbsp;退出 </a>
 	    </li>
 	</ul>
 </div>

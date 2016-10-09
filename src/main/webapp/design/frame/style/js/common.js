@@ -199,3 +199,7 @@ $(window).scroll(function () {
 		$("table[name='freezeTable']").hide();
 	}
 });
+
+function loginOut () {
+	$("#loginOutForm").submit();
+}
