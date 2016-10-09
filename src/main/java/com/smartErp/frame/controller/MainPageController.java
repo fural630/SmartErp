@@ -34,7 +34,6 @@ public class MainPageController {
 	public String login(HttpServletRequest request, String username, String password) {
 		username = "2028";
 		User user = userService.getUserByUserName(username);
-		Dumper.dump(user);
 		if (null != user) {
 			UserSingleton.getInstance().setUser(user);
 		}
@@ -43,7 +42,6 @@ public class MainPageController {
 	
 	@RequestMapping("loginOut")
 	public String loginOut() {
-		System.out.println(123);
 		try {
 			UserSingleton.getInstance().unsetUser();
 		} catch (Exception e) {
