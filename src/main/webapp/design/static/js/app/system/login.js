@@ -1,0 +1,4 @@
+function sbumitForm() {
+	$("#loginForm").submit();
+	
+}

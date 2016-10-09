@@ -1,8 +1,7 @@
 .loginbg {
-	background-image: url(../img/534daddbc373c12_02.gif);
-	width: 1280px;
-	height: 600px;
-	margin : 0px auto;
+	background-image: url(../img/login_page_bg_x.gif);
+	width: 100%;
+	height: 614px;
 }
 
 body {
@@ -11,10 +10,56 @@ body {
 }
 
 .loginFormbg {
-	background-image: url(../img/534daddbc373c_03.gif);
-	width : 313px;
-	height : 318px;
-	margin-left : 780px;
-	margin-top : 80px;
+	background-image: url(../img/bg_login_form.gif);
+	width : 311px;
+	height : 321px;
+	margin-left : 690px;
+	margin-top : 146px;
 	float : left;
+}
+
+.bg_image {
+	background-image: url(../img/bg_image.gif);
+	width : 1280px;
+	height : 614px;
+	margin : 0px auto;
+}
+
+.submit_massage {
+	color: red;
+	font-size: 12px;
+	margin-top : 13px;
+	height : 24px;
+}
+
+.form_area {
+    margin-top: 54px;
+    padding-left: 19px;
+}
+
+.form_username {
+	height : 71px;
+	
+}
+
+.form_password {
+	height : 70px;
+}
+
+.submit_btn_area {
+	height : 68px;
+}
+
+.form_input {
+	border: 0px;
+	margin-left:41px;
+	width : 228px;
+	height : 40px;
+	padding-left :10px;
+}
+
+.submit_btn {
+	display: block;
+	width : 266px;
+	height : 40px;
 }

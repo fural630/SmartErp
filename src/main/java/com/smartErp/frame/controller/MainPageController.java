@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.smartErp.code.session.UserSingleton;
 import com.smartErp.system.model.User;
 import com.smartErp.system.service.UserService;
+import com.smartErp.util.code.Dumper;
 
 @Controller
 @RequestMapping("SmartErp")
@@ -33,6 +34,7 @@ public class MainPageController {
 	public String login(HttpServletRequest request, String username, String password) {
 		username = "2028";
 		User user = userService.getUserByUserName(username);
+		Dumper.dump(user);
 		if (null != user) {
 			UserSingleton.getInstance().setUser(user);
 		}
