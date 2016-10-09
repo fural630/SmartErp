@@ -28,18 +28,55 @@
     </select>
     
     <select id="getUserPage" resultType="hashMap" parameterType="Page">
-    	select * from user
+    	select * from user t
     	<where>
-    		<if test="params.usernameEq!=null and params.usernameEq !=''">
-    			username = #{params.usernameEq}
-    		</if>
-    		<if test="params.idTo!=null and params.idTo!=''">
-				<![CDATA[ and id <= #{params.idTo} ]]>
-    		</if>
-    		<if test="params.idFrom!=null and params.idFrom!=''">
-				<![CDATA[ and id >= #{params.idFrom} ]]>
-    		</if>
-    	</where>
+	    	<choose>
+				<when test="params.nameLike!=null and params.nameLike!='' ">
+					and t.name like CONCAT('%','${params.name}','%')  
+				</when>
+				<when test="params.name!=null and params.name!=''">
+					and t.name = #{params.name}
+				</when> 		
+	   		</choose>
+	   		<choose>
+				<when test="params.usernameLike!=null and params.usernameLike!='' ">
+					and t.username like CONCAT('%','${params.username}','%')  
+				</when>
+				<when test="params.username!=null and params.username!=''">
+					and t.username = #{params.username}
+				</when>
+	   		</choose>
+	   		<choose>
+				<when test="params.emailLike!=null and params.emailLike!='' ">
+					and t.email like CONCAT('%','${params.email}','%')  
+				</when>
+				<when test="params.email!=null and params.email!=''">
+					and t.email = #{params.email}
+				</when>
+	   		</choose>
+	   		<if test="params.phone!=null and params.phone !=''">
+	 			and t.phone = #{params.phone}
+	   		</if>
+	   		<if test="params.status!=null and params.status !=''">
+	    		and t.status = #{params.status}
+	   		</if>
+	   		
+	   		<if test="params.timeQuery == 'createTime' and params.timeFrom !=null and params.timeFrom!=''" >
+	   			<![CDATA[ and t.createTime >= #{params.timeFrom} ]]>
+	   		</if>
+	   		
+	   		<if test="params.timeQuery == 'createTime' and params.timeTo !=null and params.timeTo!=''" >
+	   			<![CDATA[ and t.createTime <= #{params.timeTo} ]]>
+	   		</if>
+	   		
+		    <if test="params.timeQuery == 'updateTime' and params.timeFrom !=null and params.timeFrom!=''" >
+	   			<![CDATA[ and t.updateTime >= #{params.timeFrom} ]]>
+	   		</if>
+	   		
+	   		<if test="params.timeQuery == 'updateTime' and params.timeTo !=null and params.timeTo!=''" >
+	   			<![CDATA[ and t.updateTime <= #{params.timeTo} ]]>
+	   		</if>
+   		</where>
     </select>
       
 </mapper>  
