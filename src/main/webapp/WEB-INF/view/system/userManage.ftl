@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>${title}</title>
 	<#include "../frame/common.ftl"/>
-	<script src="/design/static/js/app/system/userManagerList.js"></script>
+	<script src="/design/static/js/app/system/userManage.js"></script>
   </head>
   <body>
   	<#include "../frame/header.ftl"/>
