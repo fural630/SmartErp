@@ -10,7 +10,7 @@
   	<#include "../frame/header.ftl"/>
   	<form action="/system/userManage" id="mainPageForm" method="post">
 	<div class="current_nav_name clearfix">${title}
-		<div class="fr small_size"> <a class="btn"><img src="/design/frame/style/img/add.png"/>新增</a>
+		<div class="fr small_size"> <a class="btn" onclick="showUserDialog('添加用户')"><img src="/design/frame/style/img/add.png"/>新增</a>
 		</div>
 	</div>  
 	<#include "../frame/page.ftl"/>
@@ -117,8 +117,8 @@
 					  <ul>
 					    <li class="option_btn" onmouseover="optionMouserover(this)" onmouseout="optionMouseout(this)"><a class="btn" href="javascript:void(0)">操作</a>
 					      <ul class="menu_ul">
-							<li><a href="javascript:void(0)" onclick="" >编辑 </a></li>
-					        <li><a href="javascript:void(0)" onclick="" >删除 </a></li>
+							<li><a href="javascript:void(0)" onclick="editUserInfo(${obj.id})" >编辑 </a></li>
+					        <li><a href="javascript:void(0)" onclick="deleteUser(${obj.id})" >删除 </a></li>
 					      </ul>
 					    </li>
 					  </ul>
@@ -128,7 +128,7 @@
 	          	</#list>
 	          </#if>
 	      </table>
-	      
+	      <!--
 		      <div class="paging clearfix">
 				<div class="massaction">
 					<table class="tb_common">
@@ -150,8 +150,42 @@
 					</table>
 				</div>
 			</div>
+			-->
 	    </div>
 	  </div>
+	</div>
+	
+	
+	<div id="userDialog" style="display:none;">
+		<input type="text" name="id"/>
+		<form id="userDialogFrom">
+	 	<table class="popup_tb">
+	 		<tr>
+	 			<td class="title width_100px">账号<i class="star">*</i></td>
+	 			<td><input type="text" class="txt width_50" name="username" required/></td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title width_100px">密码<i class="star">*</i></td>
+	 			<td><input type="password" class="txt width_50" name="password" required/></td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title width_100px">昵称<i class="star">*</i></td>
+	 			<td><input type="text" class="txt width_50" name="name" required/></td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title width_100px">邮箱<i class="star">*</i></td>
+	 			<td><input type="email" class="txt width_50" name="email" required email/></td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title width_100px">电话<i class="star">*</i></td>
+	 			<td><input type="text" class="txt width_50" name="phone" required/></td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title width_100px">账号状态<i class="star">*</i></td>
+	 			<td><@select name="status" cssClass="sel width_100px" id="status" selected="1" optionClass="OpenClose"/></td>
+	 		</tr>
+	 	</table>
+	 	</form>
 	</div>
   </body>
 </html>

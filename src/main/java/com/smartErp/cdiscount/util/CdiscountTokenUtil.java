@@ -26,7 +26,8 @@ public class CdiscountTokenUtil {
 	
 	public static String getToken(CdiscountApiConfig cdiscountApiConfig) {
 		String name = cdiscountApiConfig.getApiAccount();
-		String pwd = DESEncrypt.DataDecrypt(cdiscountApiConfig.getApiPassword());
+//		String pwd = DESEncrypt.DataDecrypt(cdiscountApiConfig.getApiPassword());
+		String pwd = cdiscountApiConfig.getApiPassword();
 		String token = "";
 		byte[] byteNamePwd = (name + ":" + pwd).getBytes();
 		String afterBase64 = new String(Base64.encodeBase64(byteNamePwd));

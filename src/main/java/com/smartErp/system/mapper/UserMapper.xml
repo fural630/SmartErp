@@ -2,23 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="com.smartErp.system.dao.UserDao">  
-     <!-- 
-    <insert id="save" parameterType="User">  
-        insert into user(username,user_age) values(#{userName},#{age})  
+     
+    <insert id="insertUser" parameterType="User">  
+        insert into user (
+        	username,
+        	password,
+        	phone,
+        	name,
+        	email,
+        	status,
+        	log,
+        	createTime,
+        	updateTime
+        ) values(
+        	#{username},
+        	#{password},
+        	#{phone},
+        	#{name},
+        	#{email},
+        	#{status},
+        	#{log},
+        	#{createTime},
+        	#{updateTime}
+        )  
     </insert>  
-      
-    <update id="update" parameterType="User">  
-        update user set username=#{userName},user_age=#{age} where user_id=#{id}  
+    
+    <update id="updateUser" parameterType="User">  
+        update user set 
+        	username = #{username},
+        	password = #{password},
+        	phone = #{phone},
+        	name = #{name},
+        	log = #{log},
+        	status = #{status},
+        	email = #{email},
+        	updateTime = #{updateTime}
+        where id = #{id}   
     </update>  
-      
-    <delete id="delete" parameterType="int">  
-        delete from user where user_id=#{id}  
+    
+    <delete id="deleteUserById" parameterType="int">  
+        delete from user where id = #{id}  
     </delete>  
-      
-    <select id="findById" parameterType="int" resultType="User">  
-        select user_id id,username userName,user_age age from user where user_id=#{id}  
+       
+    <select id="getUserById" parameterType="int" resultType="User">  
+        select * from user where id = #{id}  
+    </select>
+    
+    <select id="getUserByIdAndCreator" resultType="User">
+    	select * from user where id = #{id} and id = #{loginUserId}
     </select>  
-     -->   
+       
     <select id="findAll" resultType="User">  
         select * from user  
     </select>  
@@ -77,6 +110,7 @@
 	   			<![CDATA[ and t.updateTime <= #{params.timeTo} ]]>
 	   		</if>
    		</where>
+   		order by t.id desc
     </select>
       
 </mapper>  

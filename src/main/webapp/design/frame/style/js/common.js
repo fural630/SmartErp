@@ -186,6 +186,7 @@ function copyFreezeTable () {
 			var pageTableTh = $(this).clone();
 			pageTableTh.removeAttr("width");
 			pageTableTh.width($(this).width() + 1);
+			console.log($(this).width() + 1);
 			freezeTable.append(pageTableTh);
 		});
 		$(".content").append(freezeTable);
@@ -200,6 +201,3 @@ $(window).scroll(function () {
 	}
 });
 
-function loginOut () {
-	$("#loginOutForm").submit();
-}

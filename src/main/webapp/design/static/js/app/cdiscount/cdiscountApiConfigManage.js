@@ -1,12 +1,6 @@
 $(function () {
-	
-	init();
 	initDialog();
 });
-
-function init() {
-	$("#test").comboSelect();
-}
 
 function initDialog () {
 	$("#cdiscountApiConfigDialog").dialog({
@@ -35,9 +29,6 @@ function initDialog () {
 					} else {
 						if (validate()) {
 							saveCdiscountApiConfig();
-							$.myformPlugins.cleanForm("#cdiscountApiConfigDialog");
-							$(this).dialog("close");
-							refresh(1000);
 						}
 					}
 				}
@@ -157,6 +148,9 @@ function saveCdiscountApiConfig () {
 		},
 		success : function (data) {
 			$.message.showMessage(data);
+			$(this).dialog("close");
+			$.myformPlugins.cleanForm("#cdiscountApiConfigDialog");
+			refresh(1000);
 		}
 	});
 }

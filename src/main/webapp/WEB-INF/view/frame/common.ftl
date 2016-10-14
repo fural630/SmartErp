@@ -29,4 +29,6 @@
 <script src="/design/frame/style/js/common.js"></script>
 <script src="/design/frame/style/js/stripe.js"></script>
 
+<script src="/design/frame/style/js/header.js"></script>
+
 

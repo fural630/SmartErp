@@ -53,7 +53,39 @@
 	    </li> 
 	    <li class="nav_logout">
 	    	<form id="loginOutForm" action="/SmartErp/loginOut" method="post"></form>
+	    	<a onclick="modifyPersonInfo();"><img src="/design/frame/style/img/default.gif">&nbsp;修改个人信息 </a>&nbsp;&nbsp;
 	    	<a onclick="loginOut();"><img src="/design/frame/style/img/exit.png">&nbsp;退出 </a>
 	    </li>
 	</ul>
+</div>
+
+<div id="personDialog" style="display:none;">
+	<form id="personDialogFrom">
+	<table class="popup_tb">
+		<tr>
+			<td class="title width_100px">账号<i class="star">*</i></td>
+			<td><input type="text" class="txt width_50" name="username" required/></td>
+		</tr>
+		<tr>
+			<td class="title width_100px">密码<i class="star">*</i></td>
+			<td><input type="password" class="txt width_50" name="password" required/></td>
+		</tr>
+		<tr>
+			<td class="title width_100px">昵称<i class="star">*</i></td>
+			<td><input type="text" class="txt width_50" name="name" required/></td>
+		</tr>
+		<tr>
+			<td class="title width_100px">邮箱<i class="star">*</i></td>
+			<td><input type="email" class="txt width_50" name="email" required email/></td>
+		</tr>
+		<tr>
+			<td class="title width_100px">电话<i class="star">*</i></td>
+			<td><input type="text" class="txt width_50" name="phone" required/></td>
+		</tr>
+		<tr>
+			<td class="title width_100px">账号状态<i class="star">*</i></td>
+			<td><@select name="status" cssClass="sel width_100px" id="status" selected="1" optionClass="OpenClose"/></td>
+		</tr>
+	</table>
+	</form>
 </div>

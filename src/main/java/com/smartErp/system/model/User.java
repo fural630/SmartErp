@@ -6,6 +6,8 @@ public class User {
 	private String password;
 	private String phone;
 	private String name;
+	private String email;
+	private Integer status;
 	private String log;
 	private String createTime;
 	private String updateTime;
@@ -57,5 +59,17 @@ public class User {
 	}
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 }
