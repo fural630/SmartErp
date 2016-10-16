@@ -13,7 +13,7 @@
 <div class="header">
 	<ul class="header_nav"> 
 	 	<li class="logo_li">
-	    	<a href="/" class="logo">Smart Erp</a>
+	    	<a href="/SmartErp/home" class="logo">Smart Erp</a>
 	    </li> 
 	    <li class="first_level_li">
 	    	<span class="first_level_span"><a href="javaScript:void(0);">系统</a></span>
@@ -23,8 +23,10 @@
 	    				<span class="second_level_span">系统管理</span>
 	    				<ul class="second_ul">
 	    					<li><a href="/system/userManage">用户管理</a></li>
+	    					<!--
 	    					<li><a href="/system/getDemoList">Demo</a></li>
 	    					<li><a href="/system/dictionaryManageList" target="_blank">字典配置</a></li>
+	    					-->
 	    				</ul>
 	    			</li>
 	    		</ul>
@@ -41,6 +43,7 @@
 	    					<li><a href="/cdiscount/cdiscountPublishManage">Cdiscount 商品刊登</a></li>
 	    				</ul>
 	    			</li>
+	    			<!--
 	    			<li class="second_li">
 	    				<span class="second_level_span">Amazon 专区</span>
 	    				<ul class="second_ul">
@@ -48,6 +51,7 @@
 	    					<li><a href="javaScript:void(0);">Cdiscount 商品刊登</a></li>
 	    				</ul>
 	    			</li>
+	    			-->
 	    		</ul>
 	    	</div>
 	    </li> 

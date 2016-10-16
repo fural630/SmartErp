@@ -62,9 +62,9 @@
 	          		<ul>
 	          			<li>
 	          				<#if page.params.status??> 
-	          					<@select id="status" name="params[status]" selected="${page.params.status}" optionClass="YesNo"  cssClass="sel width_100px" headerKey="" headerValue=""/>
+	          					<@select id="status" name="params[status]" selected="${page.params.status}" optionClass="OpenClose"  cssClass="sel width_100px" headerKey="" headerValue=""/>
 	          				<#else>
-	          					<@select id="status" name="params[status]"  optionClass="YesNo"  cssClass="sel width_100px" headerKey="" headerValue=""/>
+	          					<@select id="status" name="params[status]"  optionClass="OpenClose"  cssClass="sel width_100px" headerKey="" headerValue=""/>
 	          				</#if>
 	          			<li></li>
 					</ul>	
@@ -101,7 +101,7 @@
 		            <td>${obj.username!""}</td>
 		            <td>${obj.email!""}</td>
 		            <td>${obj.phone!""}</td>
-		            <td><@matchValue key="${obj.status}" optionClass="YesNo"/></td>
+		            <td><@matchValue key="${obj.status}" optionClass="OpenClose"/></td>
 		            <td>
 		            	创建时间:<br/>${obj.createTime!""}<br/>
 						修改时间:<br/>${obj.updateTime!""}
@@ -128,6 +128,11 @@
 	          	</#list>
 	          </#if>
 	      </table>
+	      
+			<div class="paging clearfix">
+				<div class="massaction"></div>
+			</div>
+	      
 	      <!--
 		      <div class="paging clearfix">
 				<div class="massaction">

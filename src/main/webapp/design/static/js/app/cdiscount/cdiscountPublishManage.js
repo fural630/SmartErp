@@ -11,8 +11,8 @@ function initDialog() {
 	$("#cdiscountPublishDialog").dialog({
 		autoOpen: false,
 		modal: true,
-		width: document.body.scrollWidth * 0.8,
-		height: 600,
+		width: document.body.scrollWidth * 0.9,
+//		height: document.body.scrollHeight * 0.9,
 		resizable: false,
 		buttons : [ {
 			text : "保存",

@@ -1,7 +1,5 @@
 package com.smartErp.frame.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +9,6 @@ import com.smartErp.code.encryption.DESEncrypt;
 import com.smartErp.code.session.UserSingleton;
 import com.smartErp.system.model.User;
 import com.smartErp.system.service.UserService;
-import com.smartErp.util.code.Dumper;
 import com.smartErp.util.code.MyLocale;
 
 @Controller

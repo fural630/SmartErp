@@ -232,7 +232,7 @@
 	 					<table class="image_info_table">
 	 						<tr>
 	 							<td style="text-align:left;width:70%">
-	 								<input type="text" class="txt" style="width:400px;" id="imageUrlAddress"/>
+	 								<input type="text" class="txt" style="width:400px;" id="imageUrlAddress" placeholder="图片地址/Url"/>
 	 								<a class="btn" onclick="addImageUrlAddress();">添加图片地址</a>
 	 								<!--<a class="btn" onclick="clearImageUrlAddress();">清空</a>-->
 	 							</td>
@@ -252,10 +252,15 @@
 	 					<a class="btn" onclick="getFirstCdiscountCategory()">类别选择</a>
 	 					&nbsp;&nbsp;已选类别 &nbsp;&nbsp;:&nbsp;&nbsp;
 	 					<span id="navigation"></span>
-	 					<input type="hidden" name="categoryCode" class="txt width_100px"/>
 	 					<input type="hidden" name="categoryName" class="txt width_100px"/>
 	 				</div>
 	 				<div class="category_area" id="categoryArea"></div>
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title">平台类别编号<i class="star">*</i></td>
+	 			<td>
+	 				<input type="text" class="txt width_100px" id="categoryCode" name="categoryCode"/>
 	 			</td>
 	 		</tr>
 	 		<tr>
