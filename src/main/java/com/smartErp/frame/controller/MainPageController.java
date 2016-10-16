@@ -4,12 +4,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.smartErp.code.encryption.DESEncrypt;
 import com.smartErp.code.session.UserSingleton;
 import com.smartErp.system.model.User;
 import com.smartErp.system.service.UserService;
 import com.smartErp.util.code.Dumper;
+import com.smartErp.util.code.MyLocale;
 
 @Controller
 @RequestMapping("SmartErp")
@@ -31,13 +34,17 @@ public class MainPageController {
 	} 
 	
 	@RequestMapping("login")
-	public String login(HttpServletRequest request, String username, String password) {
-		username = "2028";
+	public String login(Model model, String username, String password) {
 		User user = userService.getUserByUserName(username);
 		if (null != user) {
-			UserSingleton.getInstance().setUser(user);
-		}
-		return "redirect:/SmartErp/home"; 
+			if (user.getPassword().equals(DESEncrypt.DataEncrypt(password))) {
+				UserSingleton.getInstance().setUser(user);
+				return "redirect:/SmartErp/home"; 
+			}
+		} 
+		MyLocale myLocale = new MyLocale();
+		model.addAttribute("message", myLocale.getText("password.wrong.or.account.not.exist"));
+		return "frame/loginForm"; 
 	}
 	
 	@RequestMapping("loginOut")

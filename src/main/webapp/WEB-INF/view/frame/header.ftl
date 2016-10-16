@@ -82,10 +82,10 @@
 			<td class="title width_100px">电话<i class="star">*</i></td>
 			<td><input type="text" class="txt width_50" name="phone" required/></td>
 		</tr>
-		<tr>
-			<td class="title width_100px">账号状态<i class="star">*</i></td>
-			<td><@select name="status" cssClass="sel width_100px" id="status" selected="1" optionClass="OpenClose"/></td>
-		</tr>
 	</table>
 	</form>
+	<div class="modifyNoted">
+		注意：修改个人信息成功后系统将自动退出登录！
+	</div>
+	
 </div>

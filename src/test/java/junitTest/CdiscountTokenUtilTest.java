@@ -22,9 +22,10 @@ public class CdiscountTokenUtilTest {
 	@Test
 	public void test() {
 		try {
-		String name = "SalesNEmma201623-api";
-		String password = "96361";
-		String encryptionPassword = DESEncrypt.DataEncrypt(password);
+		String name = "ElectronicHome-api";
+		String password = "vyIRkN63eeM0nwaK0CWQPQ==";
+		String encryptionPassword = DESEncrypt.DataDecrypt(password);
+//		String encryptionPassword = DESEncrypt.DataEncrypt(password);
 		CdiscountApiConfig cdiscountApiConfig = new CdiscountApiConfig();
 		cdiscountApiConfig.setApiAccount(name);
 		cdiscountApiConfig.setApiPassword(encryptionPassword);

@@ -126,6 +126,12 @@
 	width : 160px;
 }
 
+.modifyNoted{
+	padding : 5px; 
+	text-align: right;
+	color: #f00;
+}
+
 
 /*top end*/
 

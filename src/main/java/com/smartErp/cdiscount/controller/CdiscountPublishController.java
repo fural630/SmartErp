@@ -61,9 +61,9 @@ public class CdiscountPublishController extends MainPage{
 	private CdiscountPublishImageService cdiscountPublishImageService;
 	
 	@RequestMapping("cdiscountPublishManage")
-	public String cdiscountPublishManage(Model model, HttpServletRequest request, Page page){
+	public String cdiscountPublishManage(Model model, Page page){
 		String title = "navigator.cdiscount.publish.manage";
-		_execute(page, request, model, title);
+		_execute(page, model, title);
 		List<Map<String, Object>> collection = cdiscountPublishService.getCdiscountPublishByPage(page);
 		model.addAttribute("collection", collection);
 		return "cdiscount/cdiscountPublishManage";

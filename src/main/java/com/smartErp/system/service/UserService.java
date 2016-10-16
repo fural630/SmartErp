@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.smartErp.application.libraries.constentEnum.OpenCloseEnum;
 import com.smartErp.code.encryption.DESEncrypt;
 import com.smartErp.code.session.UserSingleton;
 import com.smartErp.system.dao.UserDao;
@@ -51,6 +52,9 @@ public class UserService {
 		user.setUpdateTime(myDate.getCurrentDateTime());
 		User oldUser = userDao.getUserById(user.getId());
 		user.setLog(SysRemark.append(oldUser.getLog(), myLocale.getText("at.time.update.user")));
+		if (null == user.getStatus()) {
+			user.setStatus(OpenCloseEnum.OPEN.getValue());
+		} 
 		userDao.updateUser(user);
 	}
 

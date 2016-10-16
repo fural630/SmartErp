@@ -14,19 +14,19 @@
 		<div class="loginFormbg">
 			<div class="form_area">
 				<div class="submit_massage">
-					您输入的账号或密码有误
+					${message!""}
 				</div>
 				<form action="/SmartErp/login" method="post" id="loginForm">
-				<div class="form_username">
-					<input type="text" name="username" class="form_input" placeholder="账号"/>
-				</div>
-				<div class="form_password">
-					<input type="password" name="password" class="form_input" placeholder="密码" />
-				</div>
+					<div class="form_username">
+						<input type="text" name="username" class="form_input" placeholder="账号"/>
+					</div>
+					<div class="form_password">
+						<input type="password" name="password" class="form_input" placeholder="密码" />
+					</div>
+					<div class="submit_btn_area">
+						<a href="javascript:void(0)" onclick="sbumitForm();" class="submit_btn"></a>
+					</div>
 				</form>
-				<div class="submit_btn_area">
-					<a href="javascript:void(0)" onclick="sbumitForm();" class="submit_btn"></a>
-				</div>
 			</div>
 		</div>
 	</div>

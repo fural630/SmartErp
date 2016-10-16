@@ -40,9 +40,9 @@ public class CdiscountApiManageController extends MainPage{
 	private CdiscountDeliveryModeInfoService cdiscountDeliveryModeInfoService;
 	
 	@RequestMapping("cdiscountApiConfigManage")
-	public String cdiscountApiConfigManage(Model model, HttpServletRequest request, Page page){
+	public String cdiscountApiConfigManage(Model model, Page page){
 		String title = "navigator.cdiscount.api.config";
-		_execute(page, request, model, title);
+		_execute(page, model, title);
 		List<Map<String, Object>> collection = cdiscountApiConfigService.getCdiscountApiConfigPage(page);
 		Dumper.dump(collection);
 		model.addAttribute("collection", collection);

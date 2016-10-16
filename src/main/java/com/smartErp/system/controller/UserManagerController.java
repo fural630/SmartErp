@@ -33,9 +33,9 @@ public class UserManagerController extends MainPage{
 	private UserService userService;
 	
 	@RequestMapping("userManage")
-	public String userManage(Model model, HttpServletRequest request, Page page){
+	public String userManage(Model model, Page page){
 		String title = "navigator.user.manage";
-		_execute(page, request, model, title);
+		_execute(page, model, title);
 		List<Map<String, Object>> collection = userService.getUserPage(page);
 		model.addAttribute("collection", collection);
 		return "system/userManage";
@@ -87,4 +87,36 @@ public class UserManagerController extends MainPage{
 		ReturnMessage returnMessage = new ReturnMessage();
 		return JsonUtil.toJsonStr(returnMessage);
 	} 
+	
+	
+	@RequestMapping("getPersonInfo")
+	@ResponseBody
+	public String getPersonInfo() {
+		User user = userService.getUserById(UserSingleton.getInstance().getUser().getId());
+		user.setPassword(DESEncrypt.DataDecrypt(user.getPassword()));
+		return JsonUtil.toJsonStr(user);
+	}
+	
+	@RequestMapping("savePersonInfo")
+	@ResponseBody
+	public String savePersonInfo(User user) {
+		user.setId(UserSingleton.getInstance().getUser().getId());
+		MyLocale myLocale = new MyLocale();
+		ReturnMessage returnMessage = new ReturnMessage();
+		if (null != user) {
+			boolean isExist = userService.checkAccountExist(user.getUsername());
+			if (isExist) {
+				User oldUser = userService.getUserById(user.getId());
+				if (oldUser.getUsername().equals(user.getUsername())) {
+					userService.updateUser(user);
+				} else {
+					returnMessage.setStatus(0);
+					returnMessage.setMessage(myLocale.getText("account.is.exist.try.other.one"));
+				}
+			} else {
+				userService.updateUser(user);
+			}
+		}
+		return JsonUtil.toJsonStr(returnMessage);
+	}
 }
