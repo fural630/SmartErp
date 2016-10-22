@@ -16,4 +16,5 @@ public interface CdiscountApiConfigDao {
 	public CdiscountApiConfig getCdiscountApiConfigById(Integer id);
 	public List<CdiscountApiConfig> getCdiscountApiConfigByCreator(Integer userId);
 	public void deleteCdiscountApiConfigById(Integer id);
+	public CdiscountApiConfig getCdiscountApiConfigNoCloseByEmail(String email);
 }

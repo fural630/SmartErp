@@ -48,4 +48,9 @@ public class DESEncrypt {
         }
         return decrypt;
     }
+    
+    public static void main(String[] args) {
+		String testString = "123456";
+		System.out.println(DESEncrypt.DataEncrypt(testString));
+	}
 }

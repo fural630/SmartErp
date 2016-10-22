@@ -109,5 +109,9 @@
     <delete id="deleteCdiscountApiConfigById" parameterType="int">
     	delete from cdiscount_api_config where id = #{id}
     </delete>
+    
+    <select id="getCdiscountApiConfigNoCloseByEmail" parameterType="string" resultType="CdiscountApiConfig">
+    	select * from cdiscount_api_config where closeStatus = 1 and email = #{email}
+    </select>
       
 </mapper>  
