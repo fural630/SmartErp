@@ -25,6 +25,9 @@ public class CdiscountPublish {
 	private String productCondition;
 	private Integer publishStatus;
 	
+	private Long productPackageId;
+	private Long offersPackageId;
+	
 	private Integer creator;
 	private String createTime;
 	private String updateTime;
@@ -185,5 +188,17 @@ public class CdiscountPublish {
 	}
 	public void setPublishStatus(Integer publishStatus) {
 		this.publishStatus = publishStatus;
+	}
+	public Long getProductPackageId() {
+		return productPackageId;
+	}
+	public void setProductPackageId(Long productPackageId) {
+		this.productPackageId = productPackageId;
+	}
+	public Long getOffersPackageId() {
+		return offersPackageId;
+	}
+	public void setOffersPackageId(Long offersPackageId) {
+		this.offersPackageId = offersPackageId;
 	}
 }

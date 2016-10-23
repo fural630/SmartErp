@@ -15,4 +15,6 @@ public interface CdiscountPublishDao {
 	public CdiscountPublish getCdiscountPublishById(Integer id);
 
 	public void updateCdiscountPublish(CdiscountPublish cdiscountPublish);
+	
+	public List<CdiscountPublish> getCdiscountPublishByApiIdAndStatus(Map<String, Object> map);
 }

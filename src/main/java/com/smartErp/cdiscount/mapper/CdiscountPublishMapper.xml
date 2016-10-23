@@ -141,5 +141,9 @@
     		log = #{log}
     	where id = #{id}
     </update>
+    
+    <select id="getCdiscountPublishByApiIdAndStatus" parameterType="hashMap" resultType="CdiscountPublish">
+    	select * from cdiscount_publish where apiId = #{apiId} and publishStatus = #{publishStatus}
+    </select>
       
 </mapper>  
