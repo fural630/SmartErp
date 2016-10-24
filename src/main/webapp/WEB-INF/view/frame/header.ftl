@@ -40,7 +40,9 @@
 	    				<span class="second_level_span">Cdiscount 专区</span>
 	    				<ul class="second_ul">
 	    					<li><a href="/cdiscount/cdiscountApiConfigManage">Cdiscount API配置</a></li>
-	    					<li><a href="/cdiscount/cdiscountPublishManage">Cdiscount 商品刊登</a></li>
+	    					<li><a href="/cdiscount/cdiscountOnlineProductManage">Cdiscount 线上商品信息管理</a></li>
+	    					<li><a href="/cdiscount/cdiscountPublishManage">Cdiscount 商品刊登信息管理</a></li>
+	    					<li><a href="/cdiscount/cdiscountEanManage">Cdiscount 商品EAN管理</a></li>
 	    				</ul>
 	    			</li>
 	    			<!--
