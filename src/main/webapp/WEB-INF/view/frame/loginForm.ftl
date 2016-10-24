@@ -13,7 +13,7 @@
 	<div class="bg_image">
 		<div class="loginFormbg">
 			<div class="form_area">
-				<div class="submit_massage">
+				<div class="submit_massage" id="submitPrompt">
 					${message!""}
 				</div>
 				<form action="/SmartErp/login" method="post" id="loginForm">

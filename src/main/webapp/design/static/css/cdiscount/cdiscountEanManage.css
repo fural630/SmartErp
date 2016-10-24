@@ -1,0 +1,6 @@
+.importEanResult {
+	text-align: left;
+	margin-top:10px;
+	max-height : 140px;
+	overflow:auto;
+}
