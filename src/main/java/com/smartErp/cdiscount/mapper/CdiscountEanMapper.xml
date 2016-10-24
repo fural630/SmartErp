@@ -4,7 +4,8 @@
 <mapper namespace="com.smartErp.cdiscount.dao.CdiscountEanDao">  
 	
 	<select id="getCdiscountEanManagePage" resultType="hashMap" parameterType="Page">
-		select * from cdiscount_ean t
+		select t.*, tt.shopName from cdiscount_ean t 
+			left join cdiscount_api_config tt on t.apiId = tt.id 
 		<where>
 			<if test="params.userId!=null and params.userId !=''">
     			t.creator = #{params.userId}

@@ -29,4 +29,9 @@ public class CdiscountEanManageController extends MainPage{
 		model.addAttribute("collection", collection);
 		return "cdiscount/cdiscountEanManage";
 	}
+	
+	@RequestMapping("batchSaveCdiscountEan")
+	public String batchSaveCdiscountEan () {
+		return null;
+	}
 }
