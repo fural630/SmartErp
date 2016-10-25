@@ -73,9 +73,8 @@ public class SubmitCdiscountOfferPackage {
 	        	return false;
 	        }
 			
-//			CdiscountUtilDao utilDao = new CdiscountUtilDao();
-//	        String packagePath = utilDao.packageCdiscountOffers(publishListings);
-			String packagePath = "";
+			CdiscountUploadFileUtilDao utilDao = new CdiscountUploadFileUtilDao();
+	        String packagePath = utilDao.packageCdiscountOffers(cdiscountPublishList);
 	        MyLocale myLocale = new MyLocale();
 	        if (StringUtils.isNotEmpty(packagePath)) {
 	        	try {

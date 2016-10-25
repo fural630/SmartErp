@@ -145,5 +145,9 @@
     <select id="getCdiscountPublishByApiIdAndStatus" parameterType="hashMap" resultType="CdiscountPublish">
     	select * from cdiscount_publish where apiId = #{apiId} and publishStatus = #{publishStatus}
     </select>
+    
+    <select id="getByEanAndProductIdAndApiId" parameterType="hashMap" resultType="CdiscountPublish">
+    	select * from cdiscount_publish where apiId = #{apiId} and ean = #{ean} and productId = #{productId}
+    </select>
       
 </mapper>  

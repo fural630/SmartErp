@@ -1,6 +1,5 @@
 package com.smartErp.script.cdiscount;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,14 +73,8 @@ public class SubmitCdiscountProductPackage {
 	        	return false;
 	        }
 	        
-	        List<Integer> idList = new ArrayList<Integer>();
-			for (CdiscountPublish cdiscountPublish : cdiscountPublishList) {
-				idList.add(cdiscountPublish.getId());
-			}
-	        
-//	        CdiscountUtilDao utilDao = new CdiscountUtilDao();
-//	        String packagePath = utilDao.packageCdiscountProduct(listings);
-			String packagePath = "";
+	        CdiscountUploadFileUtilDao utilDao = new CdiscountUploadFileUtilDao();
+	        String packagePath = utilDao.packageCdiscountProduct(cdiscountPublishList);
 	        if (StringUtils.isNotEmpty(packagePath)) {
 	        	MyLocale myLocale = new MyLocale();
 	        	SubmitProductPackage paramSubmitProductPackage = new SubmitProductPackage();

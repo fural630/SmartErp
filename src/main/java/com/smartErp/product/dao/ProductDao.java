@@ -22,4 +22,5 @@ public interface ProductDao {
 	public Product getProductById(Integer id);
 	
 	public String getSkuByProductId(Integer productId);
+	
 }
