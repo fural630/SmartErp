@@ -3,8 +3,6 @@ package com.smartErp.cdiscount.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +15,6 @@ import com.smartErp.cdiscount.model.CdiscountApiConfig;
 import com.smartErp.cdiscount.service.CdiscountApiConfigService;
 import com.smartErp.cdiscount.service.CdiscountDeliveryModeInfoService;
 import com.smartErp.code.MainPage;
-import com.smartErp.code.SystemInfo;
 import com.smartErp.code.encryption.DESEncrypt;
 import com.smartErp.code.session.UserSingleton;
 import com.smartErp.system.enumerate.ReturnMessageEnum;

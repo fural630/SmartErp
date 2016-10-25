@@ -12,7 +12,6 @@ import java.util.List;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.collections.CollectionUtils;
 
-import com.google.gson.Gson;
 import com.smartErp.cdiscount.dao.CdiscountPublishImageDao;
 import com.smartErp.cdiscount.dao.PublishDeliveryModeDao;
 import com.smartErp.cdiscount.model.CdiscountPublish;
