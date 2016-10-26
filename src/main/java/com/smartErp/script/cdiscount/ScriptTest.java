@@ -1,12 +1,26 @@
 package com.smartErp.script.cdiscount;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.smartErp.code.SystemInfo;
 
 public class ScriptTest {
 	
+	public static void main(String[] args) {
+		ScriptTest scriptTest = new ScriptTest();
+		Pattern pattern = Pattern.compile("^[0-9]*$");
+		Matcher matcher = pattern.matcher("");
+		boolean b = matcher.matches();
+		System.out.println(b);
+	}
+	
+	
 	public boolean runScript(String argList) {
 		String scriptPath = SystemInfo.getScriptPath();
 		System.out.println(scriptPath);
+		
+		
 		
 //		String email = "ehome2016@kkmoon.com";
 //		CdiscountApiConfigDao cdiscountApiConfigDao = (CdiscountApiConfigDao) SpringContextUtil.getBean("cdiscountApiConfigDao");

@@ -185,4 +185,19 @@ public class CdiscountPublishController extends MainPage{
 		}
 		return JsonUtil.toJsonStr(resultDataMap);
 	} 
+	
+	@RequestMapping("getCategoryPathByCategoryCode")
+	@ResponseBody
+	public String getCategoryPathByCategoryCode(String categoryCode) {
+		MyLocale myLocale = new MyLocale();
+		Map<String, Object> categoryInfoMap = new HashMap<String, Object>();
+		CdiscountCategory cdiscountCategory = cdiscountCategoryService.getCdiscountCategoryByCode(categoryCode);
+		if (null == cdiscountCategory) {
+			String errorMassage = myLocale.getText("this.category.code.is.not.exist", categoryCode);
+			categoryInfoMap.put("errorMassage", errorMassage);
+		} else {
+			categoryInfoMap = cdiscountCategoryService.getCdiscountPublishCategoryInfo(cdiscountCategory);
+		}
+		return JsonUtil.toJsonStr(categoryInfoMap);
+	}
 }

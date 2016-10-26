@@ -14,4 +14,8 @@ public interface CdiscountCategoryDao {
 	public void deleteByApiId(Integer aipId);
 
 	public List<CdiscountCategory> getCdiscountCategoryByParentId(Integer parentId);
+
+	public CdiscountCategory getCdiscountCategoryByCode(String categoryCode);
+	
+	public CdiscountCategory getCdiscountCategoryById(Integer id);
 }

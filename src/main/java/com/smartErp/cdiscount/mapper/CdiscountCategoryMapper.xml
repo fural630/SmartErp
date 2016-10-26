@@ -42,5 +42,13 @@
     <select id="getCdiscountCategoryByParentId" parameterType="int" resultType="CdiscountCategory">
     	select * from cdiscount_category where parentId = #{parentId} order by name
     </select>
+    
+    <select id="getCdiscountCategoryByCode" parameterType="string" resultType="CdiscountCategory">
+    	select * from cdiscount_category where categoryCode = #{categoryCode}
+    </select>
+    
+    <select id="getCdiscountCategoryById" parameterType="int" resultType="CdiscountCategory">
+    	select * from cdiscount_category where id = #{id}
+    </select>
       
 </mapper>  

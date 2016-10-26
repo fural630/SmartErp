@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.axis2.databinding.types.soapencoding.Array;
 import org.apache.commons.collections.CollectionUtils;
@@ -56,8 +58,17 @@ public class CdiscountEanManageController extends MainPage{
 			String eanExist = myLocale.getText("cdiscount.ean.exist");
 			String eanbadFormat = myLocale.getText("cdiscount.ean.bad.format");
 			MyDate myDate = new MyDate();
+			Pattern pattern = Pattern.compile("^[0-9]*$");
 			for (String ean : eanList) {
-				if (cdiscountEanService.checkEanExist(ean)) {
+				Matcher matcher = pattern.matcher(ean);
+				boolean b = matcher.matches();
+				if (!b || ean.length() > 20) {
+					failCount++;
+					EanImportResult eanImportResult = new EanImportResult();
+					eanImportResult.setEan(ean);
+					eanImportResult.setReason(eanbadFormat);
+					eanImportResultList.add(eanImportResult);
+				} else if (cdiscountEanService.checkEanExist(ean)) {
 					failCount++;
 					EanImportResult eanImportResult = new EanImportResult();
 					eanImportResult.setEan(ean);

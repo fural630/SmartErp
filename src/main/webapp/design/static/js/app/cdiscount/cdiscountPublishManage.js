@@ -244,14 +244,12 @@ function getCdiscountCategoryByParentId(parentId, isParent, categoryLevel, categ
 			var categorySize = categoryList.size();
 			categoryList.each(function (i) {
 				if($(this).hasClass("categorySeleted")) {
-					navigation += $(this).attr("value");
-					if (i != categorySize -1) {
-						navigation += " > ";
-					}
+					navigation += $(this).attr("value") + " > ";
 					return false;
 				}
 			});
 		});
+		navigation = navigation.substring(0, navigation.length - 3);//去掉最后一个 >
 		$("#navigation").html(navigation);
 		$("#cdiscountPublishDialog input[name=categoryCode]").val(categoryCode);
 		$("#cdiscountPublishDialog input[name=categoryName]").val($("#categoryDiv_" + parentId).html());
@@ -307,7 +305,8 @@ function createSelectImageHtml (imageId, imageUrlAddress) {
 	imageHtml +=			"<table class='image_operating_table'>";
 	imageHtml +=				"<tr>";
 	imageHtml +=					"<td><input type='checkbox' id='image_checkbox_{imageId}' onclick='setImageSelect({imageId})' value='{imageUrlAddress}'/></td>";
-	imageHtml +=					"<td><a onclick='deleteImage({imageId})'><img src='/design/frame/style/img/del.png'/></a></td>";
+	imageHtml +=					"<td><a onclick={showBigImage} title='点击放大图片'><img src='/design/frame/style/img/query.png'/></a></td>"
+	imageHtml +=					"<td><a onclick='deleteImage({imageId})' title='点击删除图片'><img src='/design/frame/style/img/del.png'/></a></td>";
 	imageHtml +=				"<tr>";
 	imageHtml +=			"</table>";
 	imageHtml +=		"</div>";
@@ -315,9 +314,46 @@ function createSelectImageHtml (imageId, imageUrlAddress) {
 	imageHtml += "</li>";
 	imageHtml = imageHtml.replace(/{imageUrlAddress}/g, imageUrlAddress);
 	imageHtml = imageHtml.replace(/{imageId}/g, imageId);
+	var showBigImage = "showBigImage('" + imageUrlAddress + "')";
+	imageHtml = imageHtml.replace(/{showBigImage}/g, showBigImage);
 	$("#sortable").append(imageHtml);
 	clearImageUrlAddress();
 	initSortable();
+}
+
+function showBigImage (src) {
+	var width = 106;
+	var height = 110;
+	var largeMultiple = 5;
+	if ($("#bigImageDiv").length  > 0) {
+		$("#bigImageDiv").remove();
+	}
+	var bigImageDivHtml = "<div id='bigImageDiv'></div>";
+	$("body").append(bigImageDivHtml);
+	$("#bigImageDiv").css({
+		position: "absolute",
+		display : "none",
+		top : ($(window).height() - width * largeMultiple)/2 + $(window).scrollTop(),
+		left : ($(window).width() - height * largeMultiple)/2 + $(window).scrollLeft()
+	});
+	
+	var bigImage = $("<img>").css({
+		width: width * largeMultiple,
+		height: height * largeMultiple,
+		border: "7px solid #ddd",
+		padding: 7,
+		backgroundColor: "#fff"
+	});
+	
+	bigImage.attr("src", src);
+	bigImage.attr("onclick", "removeBigImage(this)");
+	bigImage.attr("title", "点击关闭图片");
+	$("#bigImageDiv").append(bigImage);
+	$("#bigImageDiv").show(500);
+}
+
+function removeBigImage (obj) {
+	$(obj).hide(100);
 }
 
 function getMaxImageId () {
@@ -628,6 +664,44 @@ function batchOptionSubmit () {
 	} else if (batchOption == "batchDelete") {
 		batchDelete(idList);
 	}
+}
+
+function changeCategoryCode () {
+	var categoryCode = $.trim($("#categoryCode").val());
+	if (categoryCode == "") {
+		return;
+	}
+	$.ajax({
+		url : "/cdiscount/getCategoryPathByCategoryCode",
+		type: 'POST',
+		dataType : "json",
+		data : {
+			categoryCode : categoryCode
+		},
+		success : function (data) {
+			$.unblockUI();
+			if (data.errorMassage != undefined) {
+				alert(data.errorMassage);
+				$("#categoryCode").val("");
+				$("#navigation").text("");
+				$("#categoryName").val("");
+			} else {
+				var categoryName = data.categoryName;
+				var categoryPathList = data.categoryPathList;
+				var navigation = "";
+				for (var i = categoryPathList.length -1 ; i > -1; i--) {
+					if (i == 0) {
+						navigation += categoryPathList[i];
+					} else {
+						navigation += categoryPathList[i] + " > ";
+					}
+				}
+				$("#navigation").text(navigation);
+				$("#categoryName").val(categoryName);
+			}
+		}
+	});
+	
 }
 
 /**

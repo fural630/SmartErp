@@ -1,6 +1,9 @@
 package com.smartErp.cdiscount.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,7 @@ import com.smartErp.cdiscount.model.CdiscountCategory;
 import com.smartErp.cdiscount.util.CdiscountHeaderMessageUtil;
 import com.smartErp.cdiscount.util.CdiscountTokenUtil;
 import com.smartErp.util.code.MyDate;
+import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
 
 @Service
 public class CdiscountCategoryService {
@@ -82,5 +86,36 @@ public class CdiscountCategoryService {
 	public List<CdiscountCategory> getCdiscountCategoryByParentId(
 			Integer parentId) {
 		return cdiscountCategoryDao.getCdiscountCategoryByParentId(parentId);
+	}
+	
+	public CdiscountCategory getCdiscountCategoryByCode(String categoryCode) {
+		return cdiscountCategoryDao.getCdiscountCategoryByCode(categoryCode);
+	}
+
+	/**
+	 * 递归通过categoryCode反向获取每一级的类别名称
+	 * @param cdiscountCategory
+	 * @return
+	 */
+	public Map<String, Object> getCdiscountPublishCategoryInfo(CdiscountCategory cdiscountCategory) {
+		String categoryName = cdiscountCategory.getName();
+		List<String> categoryPathList = new ArrayList<String>();
+		categoryPathList.add(categoryName);
+		getCdiscountCategoryByParentId(cdiscountCategory.getParentId(), categoryPathList);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("categoryName", categoryName);
+		map.put("categoryPathList", categoryPathList);
+		return map;
+	}
+
+	private void getCdiscountCategoryByParentId(Integer parentId,
+			List<String> categoryPathList) {
+		CdiscountCategory cdiscountCategory = cdiscountCategoryDao.getCdiscountCategoryById(parentId);
+		if (null == cdiscountCategory || cdiscountCategory.getParentId() == 0) {
+			categoryPathList.add(cdiscountCategory.getName());
+			return;
+		}
+		categoryPathList.add(cdiscountCategory.getName());
+		getCdiscountCategoryByParentId(cdiscountCategory.getParentId(), categoryPathList);
 	}
 }

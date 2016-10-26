@@ -260,7 +260,7 @@
 	 		<tr>
 	 			<td class="title">平台类别编号<i class="star">*</i></td>
 	 			<td>
-	 				<input type="text" class="txt width_100px" id="categoryCode" name="categoryCode"/>
+	 				<input type="text" class="txt width_100px" id="categoryCode" name="categoryCode" onchange="changeCategoryCode();"/>
 	 			</td>
 	 		</tr>
 	 		<tr>
