@@ -29,7 +29,7 @@ public class SystemInfo
 /*    */   }
 /*    */   
 /*    */   public static String getScriptPath() {
-/* 46 */     return getAppPath() + "WEB-INF/classes/com/tomtop/script/";
+/* 46 */     return getAppPath() + "WEB-INF/classes/com/smartErp/script/";
 /*    */   }
 /*    */   
 /*    */   public static String getClassesPath() {
@@ -37,6 +37,6 @@ public class SystemInfo
 /*    */   }
 /*    */   
 /*    */   public static String getTomtopPath() {
-/* 54 */     return getAppPath() + "WEB-INF/classes/com/tomtop/";
+/* 54 */     return getAppPath() + "WEB-INF/classes/com/smartErp/";
 /*    */   }
 /*    */ }

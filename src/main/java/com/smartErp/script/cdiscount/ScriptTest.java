@@ -1,16 +1,6 @@
 package com.smartErp.script.cdiscount;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.smartErp.application.libraries.constentEnum.CdiscountPublishStatusEnum;
-import com.smartErp.cdiscount.dao.CdiscountApiConfigDao;
-import com.smartErp.cdiscount.dao.CdiscountPublishDao;
-import com.smartErp.cdiscount.model.CdiscountApiConfig;
-import com.smartErp.cdiscount.model.CdiscountPublish;
 import com.smartErp.code.SystemInfo;
-import com.smartErp.util.frame.SpringContextUtil;
 
 public class ScriptTest {
 	
