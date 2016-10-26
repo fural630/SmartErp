@@ -17,7 +17,7 @@ import com.smartErp.util.code.MyDate;
 @Service
 public class CdiscountDeliveryModeInfoService {
 	
-	@Autowired
+	@Autowired(required=false)
 	CdiscountDeliveryModeInfoDao cdiscountDeliveryModeInfoDao;
 	
 	public List<DeliveryModeInfor> getDeliveryModeInfoByApiId(Integer apiId) {

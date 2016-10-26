@@ -43,6 +43,13 @@
 	    </listener-class>  
 	</listener>
 	
+	         
+    <listener>
+	   <listener-class>
+	     org.springframework.web.context.ContextLoaderListener
+	   </listener-class>
+	</listener>
+	
 	<filter-mapping>  
 	    <filter-name>characterEncodingFilter</filter-name>  
 	    <url-pattern>/*</url-pattern>  

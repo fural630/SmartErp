@@ -14,7 +14,7 @@ import com.smartErp.util.code.MyDate;
 @Service
 public class ProductService {
 	
-	@Autowired
+	@Autowired(required=false)
 	ProductDao productDao;
 	
 	public Product getProductBySku(String sku) {

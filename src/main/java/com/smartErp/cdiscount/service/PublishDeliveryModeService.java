@@ -11,7 +11,7 @@ import com.smartErp.cdiscount.model.PublishDeliveryMode;
 @Service
 public class PublishDeliveryModeService {
 	
-	@Autowired
+	@Autowired(required=false)
 	PublishDeliveryModeDao publishDeliveryModeDao;
 	
 	public void insertPublishDeliveryMode(PublishDeliveryMode publishDeliveryMode) {

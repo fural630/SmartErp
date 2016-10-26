@@ -13,7 +13,7 @@ import com.smartErp.util.frame.Page;
 @Service
 public class CdiscountEanService {
 	
-	@Autowired
+	@Autowired(required=false)
 	private CdiscountEanDao cdiscountEanDao;
 
 	public List<Map<String, Object>> getCdiscountEanManagePage(Page page) {

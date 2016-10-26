@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.smartErp.system.dao.DictionaryTypeDao;
@@ -14,7 +15,7 @@ import com.smartErp.system.model.DictionaryType;
 @Service
 public class DictionaryTypeService {
 	
-	@Resource
+	@Autowired(required=false)
 	private DictionaryTypeDao dictionaryTypeDao;
 	
 	public List<DictionaryType> getDictionaryByParentId(Integer id) {

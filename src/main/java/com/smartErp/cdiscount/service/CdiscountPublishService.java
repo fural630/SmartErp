@@ -20,7 +20,7 @@ import com.smartErp.util.frame.Page;
 @Service
 public class CdiscountPublishService {
 	
-	@Autowired
+	@Autowired(required=false)
 	CdiscountPublishDao cdiscountPublishDao;
 
 	public void insertCdiscountPublish(CdiscountPublish cdiscountPublishForm) {

@@ -21,9 +21,9 @@ import com.smartErp.util.code.MyDate;
 @Service
 public class CdiscountCategoryService {
 	
-	@Autowired
+	@Autowired(required=false)
 	private CdiscountCategoryDao cdiscountCategoryDao;
-	@Autowired
+	@Autowired(required=false)
 	private CdiscountApiConfigDao cdiscountApiConfigDao;
 	
 	

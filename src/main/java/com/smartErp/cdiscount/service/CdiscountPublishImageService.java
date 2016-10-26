@@ -11,7 +11,7 @@ import com.smartErp.cdiscount.model.CdiscountPublishImage;
 @Service
 public class CdiscountPublishImageService {
 	
-	@Autowired
+	@Autowired(required=false)
 	CdiscountPublishImageDao cdiscountPublishImageDao;
 	
 	public List<String> getPublishImageList(Integer publishId) {

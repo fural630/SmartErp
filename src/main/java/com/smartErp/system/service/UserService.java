@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.smartErp.application.libraries.constentEnum.OpenCloseEnum;
@@ -20,7 +21,7 @@ import com.smartErp.util.frame.Page;
 @Service
 public class UserService {
 	
-	@Resource
+	@Autowired(required=false)
 	private UserDao userDao;
 	
 	public List<User> getUserList() {

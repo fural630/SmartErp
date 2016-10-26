@@ -23,7 +23,7 @@ import com.smartErp.util.frame.Page;
 @Service
 public class CdiscountApiConfigService {
 	
-	@Autowired
+	@Autowired(required=false)
 	private CdiscountApiConfigDao cdiscountApiConfigDao;
 	
 	public void insertCdiscountApiConfig(CdiscountApiConfig cdiscountApiConfig) {
