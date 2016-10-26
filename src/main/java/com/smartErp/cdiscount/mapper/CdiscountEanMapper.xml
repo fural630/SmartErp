@@ -41,5 +41,9 @@
 			usedTime = #{usedTime}
 		where id = #{id}
 	</update>
+	
+	<select id="getCdiscountEanByEan" parameterType="string" resultType="CdiscountEan">
+		select * from cdiscount_ean where ean = #{ean}
+	</select>
       
 </mapper>  

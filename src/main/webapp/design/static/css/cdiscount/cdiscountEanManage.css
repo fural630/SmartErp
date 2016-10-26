@@ -1,6 +1,10 @@
 .importEanResult {
 	text-align: left;
 	margin-top:10px;
-	max-height : 140px;
+	max-height : 200px;
 	overflow:auto;
+}
+
+.resultMassage {
+	margin-top:10px;
 }

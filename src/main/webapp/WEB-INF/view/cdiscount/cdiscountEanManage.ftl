@@ -150,13 +150,26 @@
 	 		<tr>
 	 			<td class="title width_100px">EAN<i class="star">*</i></td>
 	 			<td>
-	 				<textarea class="txt width_96 remark" id="eanTextArea" name="eanTextArea"></textarea>
+	 				<textarea class="txt width_96 remark" id="eanTextArea" name="eanTextArea" placeholder="每行为一个EAN" style="height:150px;"></textarea>
+	 				填写格式：<br/>
+	 				45648654713<br/>
+	 				32342342343<br/>
 	 			</td>
 	 		</tr>
 	 	</table>
-	 	<div class="resultMassage">
-		 	<div>导入结果：成功3条，失败2条</div>
+	 	<div class="resultMassage" style="display:none;" id="resultMassage">
+		 	<div class="totalResultInfo">导入结果：成功<sapn id="successCount">0</span>条，失败<span id="failCount">0</span>条</div>
 		 	<div id="importEanResult" class="importEanResult">
+		 		<div>2123123---添加成功</div>
+		 		<div>1231233---添加失败，EAN重复</div>
+		 		<div>2123123---添加成功</div>
+		 		<div>1231233---添加失败，EAN重复</div>
+		 		<div>2123123---添加成功</div>
+		 		<div>1231233---添加失败，EAN重复</div>
+		 		<div>2123123---添加成功</div>
+		 		<div>1231233---添加失败，EAN重复</div>
+		 		<div>2123123---添加成功</div>
+		 		<div>1231233---添加失败，EAN重复</div>
 		 		<div>2123123---添加成功</div>
 		 		<div>1231233---添加失败，EAN重复</div>
 		 		<div>2123123---添加成功</div>

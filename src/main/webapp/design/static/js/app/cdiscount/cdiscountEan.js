@@ -6,7 +6,7 @@ function initDialog () {
 		autoOpen: false,
 		modal: true,
 		width: 600,
-		height: 400,
+		height: 600,
 		resizable: false,
 		buttons : [{
 				text : "保存",
@@ -21,6 +21,8 @@ function initDialog () {
 			}
 		],
 		close: function( event, ui ) {
+			$("#resultMassage").hide();
+			$("#importEanResult").text("");
 			$.myformPlugins.cleanForm("#cdiscountEanDialog");
 		}
 	});
@@ -56,7 +58,8 @@ function batchSaveCdiscountEan () {
 			},
 			success : function (data) {
 				$.unblockUI();
-				alert(data);
+				$("#resultMassage").show();
+				
 //				$.message.showMessage(param);
 			}
 		});
