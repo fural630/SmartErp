@@ -149,5 +149,24 @@
     <select id="getByEanAndProductIdAndApiId" parameterType="hashMap" resultType="CdiscountPublish">
     	select * from cdiscount_publish where apiId = #{apiId} and ean = #{ean} and productId = #{productId}
     </select>
+    
+    <select id="getCdiscountPublishListByIdList" resultType="CdiscountPublish" parameterType="java.util.List">
+    	select * from cdiscount_publish where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+			#{item}  
+		</foreach> 
+    </select>
+    
+    <update id="batchUpdatePublishStatus" parameterType="hashMap">
+    	update cdiscount_publish set publishStatus = #{publishStatus}
+    		where id in 
+   		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">  
+			#{item}  
+		</foreach> 
+    </update>
+    
+    <delete id="deleteCdiscountPublishById" parameterType="int">
+    	delete from cdiscount_publish where id = #{id}
+    </delete>
       
 </mapper>  

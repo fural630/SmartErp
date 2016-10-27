@@ -144,10 +144,20 @@ function optionMouseout(obj) {
 function refresh(time) {
 	if (time != undefined) {
 		setTimeout(function () {
-			location.replace(location.href);
+			queryMainPage();
 		}, time);
 	} else {
-		location.replace(location.href);
+		queryMainPage();
+	}
+}
+
+function refreshSearch(time) {
+	if (time != undefined) {
+		setTimeout(function () {
+			queryMainPage();
+		}, time);
+	} else {
+		queryMainPage();
 	}
 }
 

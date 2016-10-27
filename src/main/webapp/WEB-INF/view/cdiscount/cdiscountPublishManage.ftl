@@ -161,8 +161,9 @@
 							<td class="td_right">操作&nbsp;&nbsp;
 								<select class="sel" id="batchOptionSelect">
 									<option value="" selected></option>
-									<option value="batchShelvesProduct">商品上架</option>
-									<option value="batchUpdateStatus">批量修改状态</option>
+									<option value="batchShelvesProduct">上传商品基本信息</option>
+									<option value="batchUploadOffers">上传offers</option>
+									<option value="batchUpdateToWaitPendding">修改为待处理</option>
 									<option value="batchDelete">批量删除</option>
 								</select>
 								&nbsp; <a class="btn" onclick="batchOptionSubmit()">提交</a>

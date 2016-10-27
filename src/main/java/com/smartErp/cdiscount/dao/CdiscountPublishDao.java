@@ -19,4 +19,10 @@ public interface CdiscountPublishDao {
 	public List<CdiscountPublish> getCdiscountPublishByApiIdAndStatus(Map<String, Object> map);
 	
 	public CdiscountPublish getByEanAndProductIdAndApiId(Map<String, Object> map);
+
+	public List<CdiscountPublish> getCdiscountPublishListByIdList(List<Integer> idList);
+
+	public void batchUpdatePublishStatus(Map<String, Object> updateMap);
+
+	public void deleteCdiscountPublishById(Integer id);
 }

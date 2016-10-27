@@ -1,5 +1,6 @@
 package com.smartErp.cdiscount.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,6 +55,21 @@ public class CdiscountPublishService {
 		cdiscountPublishForm.setUpdateTime(myDate.getCurrentDateTime());
 		cdiscountPublishForm.setPublishStatus(CdiscountPublishStatusEnum.WAIT_PENDING.getValue());
 		cdiscountPublishDao.updateCdiscountPublish(cdiscountPublishForm);
+	}
+
+	public List<CdiscountPublish> getCdiscountPublishListByIdList(List<Integer> idList) {
+		return cdiscountPublishDao.getCdiscountPublishListByIdList(idList);
+	}
+
+	public void batchUpdatePublishStatus(Integer publishStatus, List<Integer> idList) {
+		Map<String, Object> updateMap = new HashMap<String, Object>();
+		updateMap.put("publishStatus", publishStatus);
+		updateMap.put("idList", idList);
+		cdiscountPublishDao.batchUpdatePublishStatus(updateMap);
+	}
+
+	public void deleteCdiscountPublishById(Integer id) {
+		cdiscountPublishDao.deleteCdiscountPublishById(id);
 	}
 	
 	

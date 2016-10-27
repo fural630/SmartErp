@@ -2,8 +2,10 @@ package com.smartErp.cdiscount.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -200,4 +202,147 @@ public class CdiscountPublishController extends MainPage{
 		}
 		return JsonUtil.toJsonStr(categoryInfoMap);
 	}
+	
+	
+	@RequestMapping("batchShelvesProduct")
+	@ResponseBody
+	public String batchShelvesProduct(@RequestParam(value = "idList[]", required = false) List<Integer> idList) {
+		ReturnMessage returnMessage = new ReturnMessage();
+		if (CollectionUtils.isNotEmpty(idList)) {
+			MyLocale myLocale = new MyLocale();
+			String message = "";
+			List<CdiscountPublish> cdiscountPublishList = cdiscountPublishService.getCdiscountPublishListByIdList(idList);
+			if (CollectionUtils.isNotEmpty(cdiscountPublishList)) {
+				Set<Integer> apiSet = new HashSet<Integer>();
+				for (CdiscountPublish cdiscountPublish : cdiscountPublishList) {
+					Integer publishStatus = cdiscountPublish.getPublishStatus();
+					if (!publishStatus.equals(CdiscountPublishStatusEnum.WAIT_PENDING.getValue())) {
+						message = myLocale.getText("publish.status.mast.be.the.id.is.not", String.valueOf(cdiscountPublish.getId()), myLocale.getText(CdiscountPublishStatusEnum.WAIT_PENDING.toString()));
+						returnMessage.setMessage(message);
+						returnMessage.setStatus(0);
+						return JsonUtil.toJsonStr(returnMessage);
+					}
+					Integer apiId = cdiscountPublish.getApiId();
+					apiSet.add(apiId);
+				}
+				if (apiSet.size() > 1) {
+					message = myLocale.getText("upload.cdiscount.package.can.not.repeat.store");
+					returnMessage.setMessage(message);
+					returnMessage.setStatus(0);
+					return JsonUtil.toJsonStr(returnMessage);
+				}
+				cdiscountPublishService.batchUpdatePublishStatus(CdiscountPublishStatusEnum.WAIT_SYSTEM_UPLOAD_BASIC_INFO.getValue(), idList);
+			}
+		}
+		return JsonUtil.toJsonStr(returnMessage);
+	}
+	
+	@RequestMapping("batchUploadOffers")
+	@ResponseBody
+	public String batchUploadOffers(@RequestParam(value = "idList[]", required = false) List<Integer> idList) {
+		ReturnMessage returnMessage = new ReturnMessage();
+		if (CollectionUtils.isNotEmpty(idList)) {
+			MyLocale myLocale = new MyLocale();
+			String message = "";
+			List<CdiscountPublish> cdiscountPublishList = cdiscountPublishService.getCdiscountPublishListByIdList(idList);
+			if (CollectionUtils.isNotEmpty(cdiscountPublishList)) {
+				Set<Integer> apiSet = new HashSet<Integer>();
+				for (CdiscountPublish cdiscountPublish : cdiscountPublishList) {
+					Integer publishStatus = cdiscountPublish.getPublishStatus();
+					if (!publishStatus.equals(CdiscountPublishStatusEnum.PLATFORM_MANUAL_VALIDATE_ING.getValue())) {
+						message = myLocale.getText("publish.status.mast.be.the.id.is.not", String.valueOf(cdiscountPublish.getId()), myLocale.getText(CdiscountPublishStatusEnum.PLATFORM_MANUAL_VALIDATE_ING.toString()));
+						returnMessage.setMessage(message);
+						returnMessage.setStatus(0);
+						return JsonUtil.toJsonStr(returnMessage);
+					}
+					Integer apiId = cdiscountPublish.getApiId();
+					apiSet.add(apiId);
+				}
+				if (apiSet.size() > 1) {
+					message = myLocale.getText("upload.cdiscount.package.can.not.repeat.store");
+					returnMessage.setMessage(message);
+					returnMessage.setStatus(0);
+					return JsonUtil.toJsonStr(returnMessage);
+				}
+				cdiscountPublishService.batchUpdatePublishStatus(CdiscountPublishStatusEnum.WAIT_SYSTEM_UPLOAD_OFFERS.getValue(), idList);
+			}
+		}
+		return JsonUtil.toJsonStr(returnMessage);
+	}
+	
+	@RequestMapping("batchUpdateToWaitPendding")
+	@ResponseBody
+	public String batchUpdateToWaitPendding (@RequestParam(value = "idList[]", required = false) List<Integer> idList) {
+		ReturnMessage returnMessage = new ReturnMessage();
+		if (CollectionUtils.isNotEmpty(idList)) {
+			MyLocale myLocale = new MyLocale();
+			String message = "";
+			List<CdiscountPublish> cdiscountPublishList = cdiscountPublishService.getCdiscountPublishListByIdList(idList);
+			if (CollectionUtils.isNotEmpty(cdiscountPublishList)) {
+				Set<Integer> apiSet = new HashSet<Integer>();
+				for (CdiscountPublish cdiscountPublish : cdiscountPublishList) {
+					Integer publishStatus = cdiscountPublish.getPublishStatus();
+					if (!publishStatus.equals(CdiscountPublishStatusEnum.PUBLISHED_FAIL.getValue())) {
+						message = myLocale.getText("publish.status.mast.be.the.id.is.not", String.valueOf(cdiscountPublish.getId()), myLocale.getText(CdiscountPublishStatusEnum.PUBLISHED_FAIL.toString()));
+						returnMessage.setMessage(message);
+						returnMessage.setStatus(0);
+						return JsonUtil.toJsonStr(returnMessage);
+					}
+					Integer apiId = cdiscountPublish.getApiId();
+					apiSet.add(apiId);
+				}
+				if (apiSet.size() > 1) {
+					message = myLocale.getText("upload.cdiscount.package.can.not.repeat.store");
+					returnMessage.setMessage(message);
+					returnMessage.setStatus(0);
+					return JsonUtil.toJsonStr(returnMessage);
+				}
+				cdiscountPublishService.batchUpdatePublishStatus(CdiscountPublishStatusEnum.WAIT_PENDING.getValue(), idList);
+			}
+		}
+		return JsonUtil.toJsonStr(returnMessage);
+	}
+	
+	
+	@RequestMapping("deleteCdiscountPublishById")
+	@ResponseBody
+	public String deleteCdiscountPublishById (Integer id) {
+		cdiscountPublishService.deleteCdiscountPublishById(id);
+		ReturnMessage returnMessage = new ReturnMessage();
+		return JsonUtil.toJsonStr(returnMessage);
+	}
+	
+	
+//	@RequestMapping("batchUpdateToWaitPendding")
+//	@ResponseBody
+//	public String batchDeleteCdiscountPublish (@RequestParam(value = "idList[]", required = false) List<Integer> idList) {
+//		ReturnMessage returnMessage = new ReturnMessage();
+//		if (CollectionUtils.isNotEmpty(idList)) {
+//			MyLocale myLocale = new MyLocale();
+//			String message = "";
+//			List<CdiscountPublish> cdiscountPublishList = cdiscountPublishService.getCdiscountPublishListByIdList(idList);
+//			if (CollectionUtils.isNotEmpty(cdiscountPublishList)) {
+//				Set<Integer> apiSet = new HashSet<Integer>();
+//				for (CdiscountPublish cdiscountPublish : cdiscountPublishList) {
+//					Integer publishStatus = cdiscountPublish.getPublishStatus();
+//					if (!publishStatus.equals(CdiscountPublishStatusEnum.PUBLISHED_FAIL.getValue())) {
+//						message = myLocale.getText("publish.status.mast.be.the.id.is.not", String.valueOf(cdiscountPublish.getId()), myLocale.getText(CdiscountPublishStatusEnum.PUBLISHED_FAIL.toString()));
+//						returnMessage.setMessage(message);
+//						returnMessage.setStatus(0);
+//						return JsonUtil.toJsonStr(returnMessage);
+//					}
+//					Integer apiId = cdiscountPublish.getApiId();
+//					apiSet.add(apiId);
+//				}
+//				if (apiSet.size() > 1) {
+//					message = myLocale.getText("upload.cdiscount.package.can.not.repeat.store");
+//					returnMessage.setMessage(message);
+//					returnMessage.setStatus(0);
+//					return JsonUtil.toJsonStr(returnMessage);
+//				}
+//				cdiscountPublishService.batchUpdatePublishStatus(CdiscountPublishStatusEnum.WAIT_PENDING.getValue(), idList);
+//			}
+//		}
+//		return JsonUtil.toJsonStr(returnMessage);
+//	}
 }

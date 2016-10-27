@@ -659,10 +659,12 @@ function batchOptionSubmit () {
 	
 	if (batchOption == "batchShelvesProduct") {
 		batchShelvesProduct(idList);
-	} else if (batchOption == "batchUpdateStatus") {
-		batchUpdateStatus(idList);
+	} else if (batchOption == "batchUploadOffers") {
+		batchUploadOffers(idList);
 	} else if (batchOption == "batchDelete") {
 		batchDelete(idList);
+	} else if (batchOption == "batchUpdateToWaitPendding") {
+		batchUpdateToWaitPendding(idList);
 	}
 }
 
@@ -705,28 +707,106 @@ function changeCategoryCode () {
 }
 
 /**
- * 批量打包上传商品信息
+ * 批量上传商品基本信息
  * @param idList
  */
 function batchShelvesProduct(idList) {
-	
+	if(confirm("确定执行该操作？")){
+		$.ajax({
+			url : "/cdiscount/batchShelvesProduct",
+			type: 'POST',
+			dataType : "json",
+			data : {
+				idList : idList
+			},
+			success : function (data) {
+				$.unblockUI();
+				$.message.showMessage(data);
+				refresh(1000);
+			}
+		});
+	}
 }
 
 /**
- * 批量修改刊登信息状态
+ * 批量上传Offers
  * @param idList
  */
-function batchUpdateStatus(idList) {
-	
+function batchUploadOffers(idList) {
+	if(confirm("确定执行该操作？")){
+		$.ajax({
+			url : "/cdiscount/batchUploadOffers",
+			type: 'POST',
+			dataType : "json",
+			data : {
+				idList : idList
+			},
+			success : function (data) {
+				$.unblockUI();
+				$.message.showMessage(data);
+				refresh(1000);
+			}
+		});
+	}
 }
 
-/**
- * 批量删除刊登信息
- * @param idList
- */
-function batchDelete(idList) {
-	
+function batchUpdateToWaitPendding (idList) {
+	if(confirm("确定执行该操作？")){
+		$.ajax({
+			url : "/cdiscount/batchUpdateToWaitPendding",
+			type: 'POST',
+			dataType : "json",
+			data : {
+				idList : idList
+			},
+			success : function (data) {
+				$.unblockUI();
+				$.message.showMessage(data);
+				refresh(1000);
+			}
+		});
+	}
 }
+
+function deleteCdiscountPublish (id) {
+	if(confirm("确定删除？")){
+		$.ajax({
+			url : "/cdiscount/deleteCdiscountPublishById",
+			type: 'POST',
+			dataType : "json",
+			data : {
+				id : id
+			},
+			success : function (data) {
+				$.unblockUI();
+				$.message.showMessage(data);
+				refresh(1000);
+			}
+		});
+	}
+}
+
+///**
+// * 批量删除刊登信息
+// * @param idList
+// */
+//function batchDelete(idList) {
+//	if(confirm("确定删除？")){
+//		$.ajax({
+//			url : "/cdiscount/batchDeleteCdiscountPublish",
+//			type: 'POST',
+//			dataType : "json",
+//			data : {
+//				idList : idList
+//			},
+//			success : function (data) {
+//				$.unblockUI();
+//				$.message.showMessage(data);
+//				refresh(1000);
+//			}
+//		});
+//	}
+//}
 
 
 
