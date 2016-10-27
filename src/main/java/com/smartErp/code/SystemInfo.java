@@ -22,7 +22,7 @@ public class SystemInfo
 /* 30 */         appPath = appPath + "/";
 /*    */       }
 /*    */     } catch (Exception e) {
-/* 33 */       appPath = "/project/jtomtoperp/web/";
+/* 33 */       appPath = "/project/SmartErp/web/";
 /*    */     }
 /*    */     
 /* 36 */     return appPath;
@@ -36,7 +36,7 @@ public class SystemInfo
 /* 50 */     return getAppPath() + "WEB-INF/classes/";
 /*    */   }
 /*    */   
-/*    */   public static String getTomtopPath() {
+/*    */   public static String getSmartErpPath() {
 /* 54 */     return getAppPath() + "WEB-INF/classes/com/smartErp/";
 /*    */   }
 /*    */ }

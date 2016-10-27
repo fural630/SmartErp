@@ -17,16 +17,15 @@ import com.smartErp.cdiscount.dao.PublishDeliveryModeDao;
 import com.smartErp.cdiscount.model.CdiscountPublish;
 import com.smartErp.cdiscount.model.PublishDeliveryMode;
 import com.smartErp.cdiscount.service.CdiscountUploadPackageService;
+import com.smartErp.code.SystemInfo;
 import com.smartErp.product.dao.ProductDao;
 import com.smartErp.product.model.Product;
 import com.smartErp.util.code.MyDate;
 import com.smartErp.util.frame.SpringContextUtil;
 
 public class CdiscountUploadFileUtilDao {
-//	private String scriptPath = SystemInfo.getScriptPath();
-	private String scriptPath = "/home/tomtop2028/workspace/tomtoperp/src/main/resources/com/tomtop/script/";
-//	private String productTmplatePath = scriptPath + "cdiscount/publishProduct/cdiscount-product-template.xml";
-//	private String offersTmplatePath = scriptPath + "cdiscount/publishProduct/cdiscount-offer-template.xml";
+	private String scriptPath = SystemInfo.getScriptPath();
+//	private String scriptPath = "/home/tomtop2028/workspace/tomtoperp/src/main/resources/com/tomtop/script/";
 	private String packageZipPath = "/tmp/cdiscount/packageZipPath/";		//
 	
 	MyDate myDate = new MyDate();
@@ -50,8 +49,8 @@ public class CdiscountUploadFileUtilDao {
 		String packagePath = packageZipPath + currentDigitDateTime + "/";
 		String relsPah = packagePath + "_rels/.rels";
 		String contentTypePath = packagePath + "[Content_Types].xml";
-		copyFile(scriptPath + "cdiscount/publishProduct/submitProductPackageNecessaryFile/_rels/.rels", relsPah);
-		copyFile(scriptPath + "cdiscount/publishProduct/submitProductPackageNecessaryFile/[Content_Types].xml", contentTypePath);
+		copyFile(scriptPath + "cdiscount/submitProductPackageNecessaryFile/_rels/.rels", relsPah);
+		copyFile(scriptPath + "cdiscount/submitProductPackageNecessaryFile/[Content_Types].xml", contentTypePath);
 		try {
 			String packageName = "product" + currentDigitDateTime + ".zip";
 			CdiscountZipUtil.compress(packagePath, packagePath + packageName);
@@ -156,8 +155,8 @@ public class CdiscountUploadFileUtilDao {
 		String packagePath = packageZipPath + currentDigitDateTime + "/";
 		String relsPah = packagePath + "_rels/.rels";
 		String contentTypePath = packagePath + "[Content_Types].xml";
-		copyFile(scriptPath + "cdiscount/publishProduct/submitOfferPackageNecessaryFile/_rels/.rels", relsPah);
-		copyFile(scriptPath + "cdiscount/publishProduct/submitOfferPackageNecessaryFile/[Content_Types].xml", contentTypePath);
+		copyFile(scriptPath + "cdiscount/submitOfferPackageNecessaryFile/_rels/.rels", relsPah);
+		copyFile(scriptPath + "cdiscount/submitOfferPackageNecessaryFile/[Content_Types].xml", contentTypePath);
 		try {
 			String packageName = "offers" + currentDigitDateTime + ".zip";
 			CdiscountZipUtil.compress(packagePath, packagePath + packageName);

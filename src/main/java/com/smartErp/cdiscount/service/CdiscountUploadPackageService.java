@@ -14,11 +14,11 @@ import org.apache.commons.lang.StringUtils;
 
 public class CdiscountUploadPackageService {
 	
-	private static final String UPLOAD_PROCUT_PACKAGE = "http://198.11.207.246:8110/cdiscountUploadPackage/uploadProductPackage";
-	private static final String UPLOAD_OFFERS_PACKAGE = "http://198.11.207.246:8110/cdiscountUploadPackage/uploadOfferPackage";
-	
-//	private static final String UPLOAD_PROCUT_PACKAGE = "http://192.168.220.45:8228/cdiscountUploadPackage/uploadProductPackage";
-//	private static final String UPLOAD_OFFERS_PACKAGE = "http://192.168.220.45:8228/cdiscountUploadPackage/uploadOfferPackage";
+//	private static final String UPLOAD_PROCUT_PACKAGE = "http://198.11.207.246:8110/cdiscountUploadPackage/uploadProductPackage";
+//	private static final String UPLOAD_OFFERS_PACKAGE = "http://198.11.207.246:8110/cdiscountUploadPackage/uploadOfferPackage";
+	private String UPLOAD_FILE_IP = "http://127.0.0.1:8080/";
+	private String UPLOAD_PROCUT_PACKAGE = UPLOAD_FILE_IP + "cdiscountUploadPackage/uploadProductPackage";
+	private String UPLOAD_OFFERS_PACKAGE = UPLOAD_FILE_IP + "cdiscountUploadPackage/uploadOfferPackage";
 	
 	public String uploadProductPackage(File uploadFile) {
 		HttpClient httpClient = new HttpClient();

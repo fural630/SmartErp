@@ -34,7 +34,7 @@ public class SubmitCdiscountProductPackage {
 	}
 	
 	public boolean runScript(String argList) {
-		String email = argList;
+		String email = "ehome2016@kkmoon.com";
 		if (StringUtils.isEmpty(email)) {
 			System.out.println("email is empty!");
 			return false;
@@ -75,45 +75,45 @@ public class SubmitCdiscountProductPackage {
 	        
 	        CdiscountUploadFileUtilDao utilDao = new CdiscountUploadFileUtilDao();
 	        String packagePath = utilDao.packageCdiscountProduct(cdiscountPublishList);
-	        if (StringUtils.isNotEmpty(packagePath)) {
-	        	MyLocale myLocale = new MyLocale();
-	        	SubmitProductPackage paramSubmitProductPackage = new SubmitProductPackage();
-	        	String token = CdiscountTokenUtil.getToken(cdiscountApiConfig);
-	        	HeaderMessage headerMessage = CdiscountHeaderMessageUtil.getHeaderMessage(cdiscountApiConfig, token);
-	        	paramSubmitProductPackage.setHeaderMessage(headerMessage);
-	        	ProductPackageRequest productPackageRequest = new ProductPackageRequest();
-	        	productPackageRequest.setZipFileFullPath(packagePath);
-	        	paramSubmitProductPackage.setProductPackageRequest(productPackageRequest);
-	        	
-        		MarketplaceAPIServiceStub marketplaceAPIServiceStub = new MarketplaceAPIServiceStub();
-        		SubmitProductPackageResponse response = marketplaceAPIServiceStub.submitProductPackage(paramSubmitProductPackage);
-        		ProductIntegrationReportMessage message = response.getSubmitProductPackageResult();
-        		Dumper.dump(message);
-        		if (message.getOperationSuccess()) {
-        			Long packageId = message.getPackageId();
-        			String log = myLocale.getText("upload.product.package.success.the.package.id.is", String.valueOf(packageId), packagePath);
-        			for (CdiscountPublish cdiscountPublish : cdiscountPublishList) {
-        				cdiscountPublish.setLog(SysRemark.append(cdiscountPublish.getLog(), log));
-        				cdiscountPublish.setPublishStatus(CdiscountPublishStatusEnum.PLATFORM_SYSTEM_VALIDATE_ING.getValue());
-        				cdiscountPublish.setProductPackageId(packageId);
-        				cdiscountPublishDao.updateCdiscountPublish(cdiscountPublish);
-    				}
-        		} else {
-        			String errorMessage = message.getErrorMessage();
-        			if (StringUtils.isNotEmpty(errorMessage)) {
-        				String log = myLocale.getText("upload.product.package.fail.reason.is", errorMessage, packagePath);
-        				for (CdiscountPublish cdiscountPublish : cdiscountPublishList) {
-        					cdiscountPublish.setPublishStatus(CdiscountPublishStatusEnum.PUBLISHED_FAIL.getValue());
-        					cdiscountPublish.setLog(SysRemark.append(cdiscountPublish.getLog(), log));
-        					cdiscountPublishDao.updateCdiscountPublish(cdiscountPublish);
-        				}
-        			}
-        		}
-        		return true;
-	        } else {
-	        	System.out.println("fail ! packagePath = " + packagePath);
-	        	return false;
-	        }
+//	        if (StringUtils.isNotEmpty(packagePath)) {
+//	        	MyLocale myLocale = new MyLocale();
+//	        	SubmitProductPackage paramSubmitProductPackage = new SubmitProductPackage();
+//	        	String token = CdiscountTokenUtil.getToken(cdiscountApiConfig);
+//	        	HeaderMessage headerMessage = CdiscountHeaderMessageUtil.getHeaderMessage(cdiscountApiConfig, token);
+//	        	paramSubmitProductPackage.setHeaderMessage(headerMessage);
+//	        	ProductPackageRequest productPackageRequest = new ProductPackageRequest();
+//	        	productPackageRequest.setZipFileFullPath(packagePath);
+//	        	paramSubmitProductPackage.setProductPackageRequest(productPackageRequest);
+//	        	
+//        		MarketplaceAPIServiceStub marketplaceAPIServiceStub = new MarketplaceAPIServiceStub();
+//        		SubmitProductPackageResponse response = marketplaceAPIServiceStub.submitProductPackage(paramSubmitProductPackage);
+//        		ProductIntegrationReportMessage message = response.getSubmitProductPackageResult();
+//        		Dumper.dump(message);
+//        		if (message.getOperationSuccess()) {
+//        			Long packageId = message.getPackageId();
+//        			String log = myLocale.getText("upload.product.package.success.the.package.id.is", String.valueOf(packageId), packagePath);
+//        			for (CdiscountPublish cdiscountPublish : cdiscountPublishList) {
+//        				cdiscountPublish.setLog(SysRemark.append(cdiscountPublish.getLog(), log));
+//        				cdiscountPublish.setPublishStatus(CdiscountPublishStatusEnum.PLATFORM_SYSTEM_VALIDATE_ING.getValue());
+//        				cdiscountPublish.setProductPackageId(packageId);
+//        				cdiscountPublishDao.updateCdiscountPublish(cdiscountPublish);
+//    				}
+//        		} else {
+//        			String errorMessage = message.getErrorMessage();
+//        			if (StringUtils.isNotEmpty(errorMessage)) {
+//        				String log = myLocale.getText("upload.product.package.fail.reason.is", errorMessage, packagePath);
+//        				for (CdiscountPublish cdiscountPublish : cdiscountPublishList) {
+//        					cdiscountPublish.setPublishStatus(CdiscountPublishStatusEnum.PUBLISHED_FAIL.getValue());
+//        					cdiscountPublish.setLog(SysRemark.append(cdiscountPublish.getLog(), log));
+//        					cdiscountPublishDao.updateCdiscountPublish(cdiscountPublish);
+//        				}
+//        			}
+//        		}
+//        		return true;
+//	        } else {
+//	        	System.out.println("fail ! packagePath = " + packagePath);
+//	        	return false;
+//	        }
         } catch (Exception e) {
 			e.printStackTrace();
 		} finally {
