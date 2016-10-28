@@ -148,9 +148,35 @@ function saveCdiscountApiConfig () {
 		},
 		success : function (data) {
 			$.message.showMessage(data);
-			$(this).dialog("close");
-			$.myformPlugins.cleanForm("#cdiscountApiConfigDialog");
-			refresh(1000);
+			if (data.status == "1") {
+				$("#cdiscountApiConfigDialog").dialog("close");
+				$.myformPlugins.cleanForm("#cdiscountApiConfigDialog");
+				refresh(1000);
+			}
+		},
+		beforeSend : function (xhr) {
+			if (id == "") {
+				$.blockUI({
+					message: "<div style='height:30px;line-height:30px;'>初次授权店铺需要初始化相关配置，请耐心等待...</div>",
+					timeout: 30000
+				});
+			} else {
+				$.blockUI({
+					message: '<img src="/design/static/images/common/progressbar10.gif">',
+					timeout: 10000,
+					css:{
+						backgroundColor: "",
+						border:"0"
+					}
+				});
+			}
+		},
+		error: function (xhr, status, e) {
+			var param = {
+				status : 0,
+				message : e
+			};
+			$.message.showMessage(param);
 		}
 	});
 }
@@ -177,6 +203,7 @@ function editCdiscountApiConfig(id) {
 			
 		}
 	});
+	
 }
 
 function fillingData(obj, selector) {
@@ -191,7 +218,6 @@ function fillingData(obj, selector) {
 			select.val(obj[name]);
 		}
 	}
-	$("#cdiscountApiConfigDialog input[name=apiPassword]").val("");
 	$("#cdiscountApiConfigDialog input[name=mastRead]").attr("checked", true);
 }
 

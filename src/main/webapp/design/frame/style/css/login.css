@@ -1,5 +1,5 @@
 .loginbg {
-	background-image: url(../img/login_page_bg_x.gif);
+	background-image: url(../img/login_page_bg_x1.gif);
 	width: 100%;
 	height: 614px;
 }
@@ -10,7 +10,7 @@ body {
 }
 
 .loginFormbg {
-	background-image: url(../img/bg_login_form.gif);
+	background-image: url(../img/bg_login_form1.gif);
 	width : 311px;
 	height : 321px;
 	margin-left : 690px;
@@ -19,7 +19,7 @@ body {
 }
 
 .bg_image {
-	background-image: url(../img/bg_image.gif);
+	background-image: url(../img/bg_image1.gif);
 	width : 1280px;
 	height : 614px;
 	margin : 0px auto;

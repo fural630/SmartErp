@@ -25,7 +25,6 @@ import com.smartErp.util.frame.SpringContextUtil;
 
 public class CdiscountUploadFileUtilDao {
 	private String scriptPath = SystemInfo.getScriptPath();
-//	private String scriptPath = "/home/tomtop2028/workspace/tomtoperp/src/main/resources/com/tomtop/script/";
 	private String packageZipPath = "/tmp/cdiscount/packageZipPath/";		//
 	
 	MyDate myDate = new MyDate();
@@ -161,7 +160,7 @@ public class CdiscountUploadFileUtilDao {
 			String packageName = "offers" + currentDigitDateTime + ".zip";
 			CdiscountZipUtil.compress(packagePath, packagePath + packageName);
 			File offersPackageFile = new File(packagePath + packageName);
-//			return service.uploadOffersPackage(offersPackageFile);
+			return service.uploadOffersPackage(offersPackageFile);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

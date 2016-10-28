@@ -13,6 +13,8 @@ public class CdiscountApiConfig {
 	private String systemLog;
 	private String lastUpdateTime;
 	private String createDate;
+	private String token;
+	private String tokenTimeOut;
 	
 	public Integer getId() {
 		return id;
@@ -85,5 +87,17 @@ public class CdiscountApiConfig {
 	}
 	public void setCreatorName(String creatorName) {
 		this.creatorName = creatorName;
+	}
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
+	}
+	public String getTokenTimeOut() {
+		return tokenTimeOut;
+	}
+	public void setTokenTimeOut(String tokenTimeOut) {
+		this.tokenTimeOut = tokenTimeOut;
 	}
 }

@@ -162,7 +162,7 @@
 	
 	
 	<div id="userDialog" style="display:none;">
-		<input type="text" name="id"/>
+		<input type="hidden" name="id"/>
 		<form id="userDialogFrom">
 	 	<table class="popup_tb">
 	 		<tr>

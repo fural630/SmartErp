@@ -69,6 +69,10 @@ function queryMainPage () {
 function submitMainPageForm() {
 	var condition = $(".conditionTr");
 	var inputLike = condition.find("input[name$='Like]']");
+	var inputText = condition.find("input[type='text']");
+	inputText.each(function () {
+		$(this).val($.trim($(this).val()));		//去除空格
+	});
 	inputLike.each(function () {
 		if ($(this).is(":checked")) {
 			var name = $(this).attr("name");
@@ -196,7 +200,6 @@ function copyFreezeTable () {
 			var pageTableTh = $(this).clone();
 			pageTableTh.removeAttr("width");
 			pageTableTh.width($(this).width() + 1);
-			console.log($(this).width() + 1);
 			freezeTable.append(pageTableTh);
 		});
 		$(".content").append(freezeTable);

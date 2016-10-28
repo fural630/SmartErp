@@ -23,6 +23,7 @@
 	    				<span class="second_level_span">系统管理</span>
 	    				<ul class="second_ul">
 	    					<li><a href="/system/userManage">用户管理</a></li>
+	    					<li><a href="/system/scriptManage">脚本管理</a></li>
 	    					<!--
 	    					<li><a href="/system/getDemoList">Demo</a></li>
 	    					<li><a href="/system/dictionaryManageList" target="_blank">字典配置</a></li>
@@ -39,10 +40,10 @@
 	    			<li class="second_li">
 	    				<span class="second_level_span">Cdiscount 专区</span>
 	    				<ul class="second_ul">
+	    					<li><a href="/cdiscount/cdiscountPublishManage">Cdiscount 商品刊登管理</a></li>
+	    					<li><a href="/cdiscount/cdiscountOnlineProductManage">Cdiscount 已上架商品管理</a></li>
+	    					<li><a href="/cdiscount/cdiscountEanManage">Cdiscount EAN管理</a></li>
 	    					<li><a href="/cdiscount/cdiscountApiConfigManage">Cdiscount API配置</a></li>
-	    					<li><a href="/cdiscount/cdiscountOnlineProductManage">Cdiscount 线上商品信息管理</a></li>
-	    					<li><a href="/cdiscount/cdiscountPublishManage">Cdiscount 商品刊登信息管理</a></li>
-	    					<li><a href="/cdiscount/cdiscountEanManage">Cdiscount 商品EAN管理</a></li>
 	    				</ul>
 	    			</li>
 	    			<!--
@@ -59,7 +60,7 @@
 	    </li> 
 	    <li class="nav_logout">
 	    	<form id="loginOutForm" action="/SmartErp/loginOut" method="post"></form>
-	    	<a onclick="modifyPersonInfo();"><img src="/design/frame/style/img/default.gif">&nbsp;修改个人信息 </a>&nbsp;&nbsp;
+	    	<a onclick="modifyPersonInfo();" title="点击修改个人信息"><img src="/design/frame/style/img/default.gif">&nbsp;${loginUserName!""} </a>&nbsp;&nbsp;
 	    	<a onclick="loginOut();"><img src="/design/frame/style/img/exit.png">&nbsp;退出 </a>
 	    </li>
 	</ul>

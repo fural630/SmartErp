@@ -35,12 +35,14 @@ import com.smartErp.code.MainPage;
 import com.smartErp.code.session.UserSingleton;
 import com.smartErp.product.model.Product;
 import com.smartErp.product.service.ProductService;
+import com.smartErp.system.enumerate.ReturnMessageEnum;
 import com.smartErp.system.model.ReturnMessage;
 import com.smartErp.system.model.User;
 import com.smartErp.util.code.Dumper;
 import com.smartErp.util.code.JsonUtil;
 import com.smartErp.util.code.MyDate;
 import com.smartErp.util.code.MyLocale;
+import com.smartErp.util.code.SysRemark;
 import com.smartErp.util.frame.Page;
 
 @Controller
@@ -110,6 +112,18 @@ public class CdiscountPublishController extends MainPage{
 			@RequestParam(value = "selectedImageList[]", required = false) List<String> selectedImageList,
 			@RequestParam(value = "allImageList[]", required = false) List<String> allImageList,
 			@RequestParam("sku") String sku, @RequestParam("publishDeliveryModeList") String publishDeliveryModeStr) {
+		ReturnMessage returnMessage = new ReturnMessage();
+		MyLocale myLocale = new MyLocale();
+		if (null != cdiscountPublish.getId()) {
+			CdiscountPublish cdiscountPublishOld = cdiscountPublishService.getCdiscountPublishById(cdiscountPublish.getId());
+			Integer publishStatus = cdiscountPublishOld.getPublishStatus();
+			if (!publishStatus.equals(CdiscountPublishStatusEnum.PUBLISHED_FAIL.getValue())
+					&& !publishStatus.equals(CdiscountPublishStatusEnum.WAIT_PENDING.getValue())) {
+				returnMessage.setStatus(ReturnMessageEnum.WARRING.getValue());
+				returnMessage.setMessage(myLocale.getText("publish.ing.can.not.modify.data"));
+				return JsonUtil.toJsonStr(returnMessage);
+			}
+		}
 		Product product = productService.getProductBySku(sku);
 		if (product == null) {
 			productService.insertProduct(sku);
@@ -126,7 +140,7 @@ public class CdiscountPublishController extends MainPage{
 		if (cdiscountPublish.getId() == null) {
 			cdiscountPublishService.insertCdiscountPublish(cdiscountPublish);
 		} else {
-			cdiscountPublishService.updateCdiscountPublish(cdiscountPublish);
+			cdiscountPublishService.updateCdiscountPublishForm(cdiscountPublish);
 		}
 		
 		Integer publishId = cdiscountPublish.getId();
@@ -147,7 +161,6 @@ public class CdiscountPublishController extends MainPage{
 				publishDeliveryModeService.insertPublishDeliveryMode(publishDeliveryMode);
 			}
 		}
-		ReturnMessage returnMessage = new ReturnMessage();
 		return JsonUtil.toJsonStr(returnMessage);
 	}
 	
@@ -231,7 +244,13 @@ public class CdiscountPublishController extends MainPage{
 					returnMessage.setStatus(0);
 					return JsonUtil.toJsonStr(returnMessage);
 				}
-				cdiscountPublishService.batchUpdatePublishStatus(CdiscountPublishStatusEnum.WAIT_SYSTEM_UPLOAD_BASIC_INFO.getValue(), idList);
+				String newLog = myLocale.getText("at.time.by.user.batch.update.publish.status", myLocale.getText(CdiscountPublishStatusEnum.WAIT_SYSTEM_UPLOAD_BASIC_INFO.toString()));
+				for (CdiscountPublish cdiscountPublish : cdiscountPublishList) {
+					cdiscountPublish.setPublishStatus(CdiscountPublishStatusEnum.WAIT_SYSTEM_UPLOAD_BASIC_INFO.getValue());
+					cdiscountPublish.setLog(SysRemark.append(cdiscountPublish.getLog(), newLog));
+					cdiscountPublish.setProductPackageId(null);
+					cdiscountPublishService.updateCdiscountPublish(cdiscountPublish);
+				}
 			}
 		}
 		return JsonUtil.toJsonStr(returnMessage);
@@ -264,7 +283,12 @@ public class CdiscountPublishController extends MainPage{
 					returnMessage.setStatus(0);
 					return JsonUtil.toJsonStr(returnMessage);
 				}
-				cdiscountPublishService.batchUpdatePublishStatus(CdiscountPublishStatusEnum.WAIT_SYSTEM_UPLOAD_OFFERS.getValue(), idList);
+				String newLog = myLocale.getText("at.time.by.user.batch.update.publish.status", myLocale.getText(CdiscountPublishStatusEnum.WAIT_SYSTEM_UPLOAD_OFFERS.toString()));
+				for (CdiscountPublish cdiscountPublish : cdiscountPublishList) {
+					cdiscountPublish.setPublishStatus(CdiscountPublishStatusEnum.WAIT_SYSTEM_UPLOAD_OFFERS.getValue());
+					cdiscountPublish.setLog(SysRemark.append(cdiscountPublish.getLog(), newLog));
+					cdiscountPublishService.updateCdiscountPublish(cdiscountPublish);
+				}
 			}
 		}
 		return JsonUtil.toJsonStr(returnMessage);
@@ -297,7 +321,12 @@ public class CdiscountPublishController extends MainPage{
 					returnMessage.setStatus(0);
 					return JsonUtil.toJsonStr(returnMessage);
 				}
-				cdiscountPublishService.batchUpdatePublishStatus(CdiscountPublishStatusEnum.WAIT_PENDING.getValue(), idList);
+				String newLog = myLocale.getText("at.time.by.user.batch.update.publish.status", myLocale.getText(CdiscountPublishStatusEnum.WAIT_PENDING.toString()));
+				for (CdiscountPublish cdiscountPublish : cdiscountPublishList) {
+					cdiscountPublish.setPublishStatus(CdiscountPublishStatusEnum.WAIT_PENDING.getValue());
+					cdiscountPublish.setLog(SysRemark.append(cdiscountPublish.getLog(), newLog));
+					cdiscountPublishService.updateCdiscountPublish(cdiscountPublish);
+				}
 			}
 		}
 		return JsonUtil.toJsonStr(returnMessage);

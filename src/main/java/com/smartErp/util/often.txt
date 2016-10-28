@@ -11,7 +11,7 @@ $.ajax({
 	},
 	success : function (data) {
 		$.unblockUI();
-		$.message.showMessage(param);
+		$.message.showMessage(data);
 	}
 });
 

@@ -4,7 +4,7 @@ $(function() {
 });
 
 function init () {
-	CKEDITOR.replace('marketingDescription');
+	CKEDITOR.replace('marketingDescription',  { height: '360px' });
 }
 
 function initDialog() {
@@ -513,10 +513,14 @@ function saveCdiscountPublish(){
 	
 	var selectedImageList = [];		//选中的刊登图片
 	var allImageList = [];		//SKU的图片
+	var mainImage = "";
 	$("input[id^='image_checkbox_']").each(function () {
 		allImageList.push($(this).val());
 		if ($(this).is(":checked")) {
 			selectedImageList.push($(this).val());
+			if (mainImage == "") {
+				mainImage = $(this).val();
+			}
 		}
 	});
 	
@@ -563,13 +567,16 @@ function saveCdiscountPublish(){
 			productCondition : productCondition,
 			publishDeliveryModeList : JSON.stringify(publishDeliveryModeList),
 			selectedImageList : selectedImageList,
-			allImageList : allImageList
+			allImageList : allImageList,
+			mainImage : mainImage
 		},
 		success : function (data) {
-			$("#cdiscountPublishDialog").dialog("close");
 			$.message.showMessage(data);
-			cleanCdiscountPublishDialog();
-			refresh(1000);
+			if (data.status == 1) {
+				$("#cdiscountPublishDialog").dialog("close");
+				cleanCdiscountPublishDialog();
+				refresh(1000);
+			}
 		}
 	});
 }
@@ -603,6 +610,7 @@ function editCdiscountPublish (id) {
 			$("#cdiscountPublishDialog input[name='longLabel']").val(cdiscountPublish.longLabel);
 			$("#cdiscountPublishDialog textarea[name='description']").val(cdiscountPublish.description);
 			CKEDITOR.instances["marketingDescription"].setData(cdiscountPublish.marketingDescription);
+//			CKEDITOR.instances['marketingDescription'].document.$.body.innerHTML = cdiscountPublish.marketingDescription;
 			$("#cdiscountPublishDialog input[name='categoryCode']").val(cdiscountPublish.categoryCode);
 			$("#cdiscountPublishDialog input[name='categoryName']").val(cdiscountPublish.categoryName);
 			$("#navigation").html(cdiscountPublish.navigation);
@@ -655,6 +663,7 @@ function batchOptionSubmit () {
 			message : "请勾选需要操作的数据"
 		};
 		$.message.showMessage(param);
+		return;
 	}
 	
 	if (batchOption == "batchShelvesProduct") {
@@ -681,9 +690,12 @@ function changeCategoryCode () {
 			categoryCode : categoryCode
 		},
 		success : function (data) {
-			$.unblockUI();
 			if (data.errorMassage != undefined) {
-				alert(data.errorMassage);
+				var param = {
+					status : 0,
+					message : data.errorMassage
+				};
+				$.message.showMessage(param);
 				$("#categoryCode").val("");
 				$("#navigation").text("");
 				$("#categoryName").val("");
@@ -720,9 +732,10 @@ function batchShelvesProduct(idList) {
 				idList : idList
 			},
 			success : function (data) {
-				$.unblockUI();
 				$.message.showMessage(data);
-				refresh(1000);
+				if (data.status == 1){
+					refresh(1000);
+				}
 			}
 		});
 	}
@@ -742,9 +755,10 @@ function batchUploadOffers(idList) {
 				idList : idList
 			},
 			success : function (data) {
-				$.unblockUI();
 				$.message.showMessage(data);
-				refresh(1000);
+				if (data.status == 1){
+					refresh(1000);
+				}
 			}
 		});
 	}
@@ -760,9 +774,10 @@ function batchUpdateToWaitPendding (idList) {
 				idList : idList
 			},
 			success : function (data) {
-				$.unblockUI();
 				$.message.showMessage(data);
-				refresh(1000);
+				if (data.status == 1){
+					refresh(1000);
+				}
 			}
 		});
 	}
@@ -778,9 +793,10 @@ function deleteCdiscountPublish (id) {
 				id : id
 			},
 			success : function (data) {
-				$.unblockUI();
 				$.message.showMessage(data);
-				refresh(1000);
+				if (data.status == 1){
+					refresh(1000);
+				}
 			}
 		});
 	}
@@ -800,7 +816,6 @@ function deleteCdiscountPublish (id) {
 //				idList : idList
 //			},
 //			success : function (data) {
-//				$.unblockUI();
 //				$.message.showMessage(data);
 //				refresh(1000);
 //			}

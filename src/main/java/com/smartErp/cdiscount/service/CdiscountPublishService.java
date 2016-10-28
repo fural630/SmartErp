@@ -44,8 +44,12 @@ public class CdiscountPublishService {
 	public CdiscountPublish getCdiscountPublishById(Integer id) {
 		return cdiscountPublishDao.getCdiscountPublishById(id);
 	}
+	
+	public void updateCdiscountPublish(CdiscountPublish cdiscountPublish) {
+		cdiscountPublishDao.updateCdiscountPublish(cdiscountPublish);
+	}
 
-	public void updateCdiscountPublish(CdiscountPublish cdiscountPublishForm) {
+	public void updateCdiscountPublishForm(CdiscountPublish cdiscountPublishForm) {
 		MyLocale myLocale = new MyLocale();
 		MyDate myDate = new MyDate();
 		String log = myLocale.getText("at.time.by.user.update.cdiscount.publish");
@@ -71,6 +75,8 @@ public class CdiscountPublishService {
 	public void deleteCdiscountPublishById(Integer id) {
 		cdiscountPublishDao.deleteCdiscountPublishById(id);
 	}
+	
+	
 	
 	
 }

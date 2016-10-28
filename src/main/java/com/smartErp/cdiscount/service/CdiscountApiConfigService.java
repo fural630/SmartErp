@@ -64,16 +64,11 @@ public class CdiscountApiConfigService {
 		cdiscountApiConfigDao.deleteCdiscountApiConfigById(id);
 	}
 
-	public SellerMessage getSellerInfomation(Integer id) {
-		CdiscountApiConfig cdiscountApiConfig = cdiscountApiConfigDao.getById(id);
-		return getSellerInfomation(cdiscountApiConfig);
-	}
-	
 	public SellerMessage getSellerInfomation(CdiscountApiConfig cdiscountApiConfig) {
 		if (null != cdiscountApiConfig) {
 			try {
 				GetSellerInformation paramGetSellerInformation = new GetSellerInformation();
-				String token = CdiscountTokenUtil.getToken(cdiscountApiConfig);
+				String token = CdiscountTokenUtil.getCashToken(cdiscountApiConfig);
 				HeaderMessage headerMessage = CdiscountHeaderMessageUtil.getHeaderMessage(cdiscountApiConfig, token);
 				paramGetSellerInformation.setHeaderMessage(headerMessage);
 				MarketplaceAPIServiceStub marketplaceAPIServiceStub = new MarketplaceAPIServiceStub();

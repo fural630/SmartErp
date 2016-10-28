@@ -58,7 +58,7 @@
     	select * from cdiscount_api_config where id = #{id}
     </select>
     
-    <insert id="insert" parameterType="CdiscountApiConfig">
+    <insert id="insert" parameterType="CdiscountApiConfig" useGeneratedKeys="true" keyProperty="id">
     	insert into cdiscount_api_config
     	(
     		shopName,
@@ -113,5 +113,12 @@
     <select id="getCdiscountApiConfigNoCloseByEmail" parameterType="string" resultType="CdiscountApiConfig">
     	select * from cdiscount_api_config where closeStatus = 1 and email = #{email}
     </select>
+    
+    <update id="updateToken">
+    	update cdiscount_api_config set 
+    		token = #{token},
+    		tokenTimeOut = #{tokenTimeOut}
+    	where id = #{id}
+    </update>
       
 </mapper>  

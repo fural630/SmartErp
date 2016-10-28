@@ -24,6 +24,7 @@ public class CdiscountPublish {
 	private Integer preparationTime;
 	private String productCondition;
 	private Integer publishStatus;
+	private String mainImage;
 	
 	private Long productPackageId;
 	private Long offersPackageId;
@@ -200,5 +201,11 @@ public class CdiscountPublish {
 	}
 	public void setOffersPackageId(Long offersPackageId) {
 		this.offersPackageId = offersPackageId;
+	}
+	public String getMainImage() {
+		return mainImage;
+	}
+	public void setMainImage(String mainImage) {
+		this.mainImage = mainImage;
 	}
 }

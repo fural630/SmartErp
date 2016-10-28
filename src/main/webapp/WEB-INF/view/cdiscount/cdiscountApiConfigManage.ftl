@@ -128,7 +128,7 @@
 							      <ul class="menu_ul">
 									<li><a href="javascript:void(0)" onclick="editCdiscountApiConfig(${obj.id});" >编辑 </a></li>
 							        <li><a href="javascript:void(0)" onclick="deleteCdiscountApiConfig(${obj.id})" >删除 </a></li>
-							      	<li><a href="javascript:void(0)" onclick="updateShopConfig(${obj.id})">更新店铺配置 </a></li>
+							      	<li><a href="javascript:void(0)" onclick="updateShopConfig(${obj.id})">更新店铺运费模板</a></li>
 							      </ul>
 							    </li>
 							  </ul>
@@ -146,10 +146,9 @@
 	  </div>
 	</div>
 	
-	
 	<div id="cdiscountApiConfigDialog" style="display:none;">
 	<form id="cdiscountApiConfigDialogForm">
-		<input type="text" name="id"/>
+		<input type="hidden" name="id"/>
 	 	<table class="popup_tb">
 	 		<tr>
 	 			<td class="title width_100px">店铺名<i class="star">*</i></td>

@@ -40,7 +40,7 @@ public class UserService {
 		MyDate myDate = new MyDate();
 		MyLocale myLocale = new MyLocale();
 		user.setCreateTime(myDate.getCurrentDateTime());
-		user.setLog(myLocale.getText("at.time.create.user"));
+		user.setLog(SysRemark.append("", myLocale.getText("at.time.create.user")));
 		user.setUpdateTime(myDate.getCurrentDateTime());
 		user.setPassword(DESEncrypt.DataEncrypt(user.getPassword()));
 		userDao.insertUser(user);

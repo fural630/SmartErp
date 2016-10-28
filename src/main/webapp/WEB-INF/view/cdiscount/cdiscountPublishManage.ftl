@@ -13,7 +13,7 @@
   	<form action="/cdiscount/cdiscountPublishManage" id="mainPageForm" method="post">
 	<div class="current_nav_name clearfix">${title}
 		<div class="fr small_size">
-			<a class="btn" onclick="createCdiscountPublish()"><img src="/design/frame/style/img/add.png"/>新增</a>
+			<a class="btn" onclick="createCdiscountPublish()"><img src="/design/frame/style/img/add.png"/>创建商品刊登</a>
 		</div>
 	</div>  
 	<#include "../frame/page.ftl"/>
@@ -25,13 +25,14 @@
 	          	<th width="40px;"></th>
 	          	<th width="60px;">ID</th>
 	            <th width="120px;">店铺名称</th>
+	            <th>主图</th>
 	            <th width="120px;">SKU</th>
 	            <th width="120px;">EAN</th>
 	            <th>价格</th>
 	            <th>数量</th>
 	            <th>备货时间</th>
 	            <th width="120px;">刊登状态</th>
-	            <th>创建人</th>
+	            <th>上传打包批次号</th>
 	            <th width="180px;">创建时间</th>
 	            <th>日志</th>
 	            <th>操作</th>
@@ -56,6 +57,7 @@
 						<li></li>
 	          		</ul>
 	          	</td>
+	          	<td></td>
 	          	<td>
 	          		<ul>
 	          			<li><input type="text" class="txt width_100px" name="params[sku]" value="${page.params.sku!''}" /></li>
@@ -83,7 +85,12 @@
 						<li></li>
 					</ul>	
 	          	</td>
-	          	<td></td>
+	          	<td>
+	          		<ul>
+	          			<li><input type="text" class="txt width_100px" name="params[productPackageId]" value="${page.params.productPackageId!''}" /></li>
+	          			<li></li>
+	          		</ul>
+	          	</td>
 	          	<td>
 	          		<ul>
 	          			<li>
@@ -114,13 +121,14 @@
 						<td style="text-align:center"><input name="main_page_checkbox" type="checkbox" value="${obj.id}" onclick="countCheckbox()" /></td>
 						<td>${obj.id}</td>
 						<td>${obj.shopName!""}</td>
+						<td><img width="100" height="100" src="${obj.mainImage!''}"/></td>
 						<td>${obj.sku!""}</td>
 						<td>${obj.ean}</td>
 						<td>${obj.price}</td>
 						<td>${obj.stockQty}</td>
 						<td>${obj.preparationTime}</td>
 						<td><@matchValue key="${obj.publishStatus}" optionClass="CdiscountPublishStatus"/></td>
-						<td>${obj.creatorName}</td>
+						<td>${obj.productPackageId!""}</td>
 						<td>
 							创建时间:<br/>${obj.createTime}<br/>
 							修改时间:<br/>${obj.updateTime}
@@ -164,7 +172,7 @@
 									<option value="batchShelvesProduct">上传商品基本信息</option>
 									<option value="batchUploadOffers">上传offers</option>
 									<option value="batchUpdateToWaitPendding">修改为待处理</option>
-									<option value="batchDelete">批量删除</option>
+									<!--<option value="batchDelete">批量删除</option>-->
 								</select>
 								&nbsp; <a class="btn" onclick="batchOptionSubmit()">提交</a>
 							</td>
@@ -178,7 +186,7 @@
 	
 	
 	<div id="cdiscountPublishDialog" style="display:none;">
-		<input type="text" name="publishId"  value="" />
+		<input type="hidden" name="publishId" value="" />
 	 	<table class="popup_tb">
 	 		<tr>
 	 			<td class="title width_100px">店铺名<i class="star">*</i></td>
