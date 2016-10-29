@@ -22,16 +22,33 @@
 	      <table class="tb_border tb_full stripe" id="cdiscountEanManageTable" name="pageTable">
 	          <tr>
 	          	<th></th>
+	          	<th width="180px;">EAN</th>
+	            <th>是否已使用</th>
 	            <th width="140px;">店铺名称</th>
 	            <th width="180px;">SKU</th>
-	            <th width="180px;">EAN</th>
-	            <th>是否已使用</th>
 	            <th>使用时间</th>
 	            <th>创建时间</th>
 	            <th>操作</th>
 	          </tr>
 	          <tr class="conditionTr">
 	          	<td></td>
+	          	<td>
+	          		<ul>
+	          			<li><input type="text" class="txt width_100px" name="params[ean]" value="${page.params.ean!''}" /></li>
+	          			<li></li>
+	          		</ul>
+	          	</td>
+	          	<td>
+	          		<ul>
+	          			<li>
+	          				<#if page.params.closeStatus??> 
+	          					<@select id="isUsed" name="params[isUsed]" selected="${page.params.isUsed}" optionClass="YesNo"  cssClass="sel width_100px" headerKey="" headerValue=""/>
+	          				<#else>
+	          					<@select id="isUsed" name="params[isUsed]"  optionClass="YesNo"  cssClass="sel width_100px" headerKey="" headerValue=""/>
+	          				</#if>
+	          			<li></li>
+					</ul>	
+	          	</td>
 	          	<td>
 	          		<ul>
 	          			<li>
@@ -49,23 +66,6 @@
 	          			<li><input type="text" class="txt width_100px" name="params[sku]" value="${page.params.sku!''}" /></li>
 	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[skuLike]" <#if page.params.skuLike??> checked </#if>></li>
 	          		</ul>
-	          	</td>
-	          	<td>
-	          		<ul>
-	          			<li><input type="text" class="txt width_100px" name="params[ean]" value="${page.params.ean!''}" /></li>
-	          			<li></li>
-	          		</ul>
-	          	</td>
-	          	<td>
-	          		<ul>
-	          			<li>
-	          				<#if page.params.closeStatus??> 
-	          					<@select id="isUsed" name="params[isUsed]" selected="${page.params.isUsed}" optionClass="YesNo"  cssClass="sel width_100px" headerKey="" headerValue=""/>
-	          				<#else>
-	          					<@select id="isUsed" name="params[isUsed]"  optionClass="YesNo"  cssClass="sel width_100px" headerKey="" headerValue=""/>
-	          				</#if>
-	          			<li></li>
-					</ul>	
 	          	</td>
 	          	<td>
 	          		<ul>
@@ -98,12 +98,12 @@
 		          <#list collection as obj>
 					<tr>
 						<td style="text-align:center"><input name="main_page_checkbox" type="checkbox" value="${obj.id}" onclick="countCheckbox()" /></td>
-						<td>${obj.shopName!""}</td>
-						<td>${obj.sku!""}</td>
 						<td>${obj.ean}</td>
 						<td><@matchValue key="${obj.isUsed}" optionClass="YesNo"/></td>
-						<td>${obj.usedTime}</td>
-						<td>${obj.createTime}</td>
+						<td>${obj.shopName!""}</td>
+						<td>${obj.sku!""}</td>
+						<td>${obj.usedTime!""}</td>
+						<td>${obj.createTime!""}</td>
 						<td style="width:60px; text-align:center;" >
 						 <div class="menu">
 						  <ul>
@@ -158,28 +158,8 @@
 	 		</tr>
 	 	</table>
 	 	<div class="resultMassage" style="display:none;" id="resultMassage">
-		 	<div class="totalResultInfo">导入结果：成功<sapn id="successCount">0</span>条，失败<span id="failCount">0</span>条</div>
+		 	<div class="totalResultInfo">导入结果：成功<span id="successCount">0</span>条，失败<span id="failCount">0</span>条</div>
 		 	<div id="importEanResult" class="importEanResult">
-		 		<div>2123123---添加成功</div>
-		 		<div>1231233---添加失败，EAN重复</div>
-		 		<div>2123123---添加成功</div>
-		 		<div>1231233---添加失败，EAN重复</div>
-		 		<div>2123123---添加成功</div>
-		 		<div>1231233---添加失败，EAN重复</div>
-		 		<div>2123123---添加成功</div>
-		 		<div>1231233---添加失败，EAN重复</div>
-		 		<div>2123123---添加成功</div>
-		 		<div>1231233---添加失败，EAN重复</div>
-		 		<div>2123123---添加成功</div>
-		 		<div>1231233---添加失败，EAN重复</div>
-		 		<div>2123123---添加成功</div>
-		 		<div>1231233---添加失败，EAN重复</div>
-		 		<div>2123123---添加成功</div>
-		 		<div>1231233---添加失败，EAN重复</div>
-		 		<div>2123123---添加成功</div>
-		 		<div>1231233---添加失败，EAN重复</div>
-		 		<div>2123123---添加成功</div>
-		 		<div>1231233---添加失败，EAN重复</div>
 		 	</div>
 	 	</div>
 	</div>

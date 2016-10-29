@@ -25,7 +25,7 @@
 	          	<th width="40px;"></th>
 	          	<th width="60px;">ID</th>
 	            <th width="120px;">店铺名称</th>
-	            <th>主图</th>
+	            <th width="110px;">主图</th>
 	            <th width="120px;">SKU</th>
 	            <th width="120px;">EAN</th>
 	            <th>价格</th>

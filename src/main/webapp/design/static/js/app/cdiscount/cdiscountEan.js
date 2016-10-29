@@ -24,6 +24,7 @@ function initDialog () {
 			$("#resultMassage").hide();
 			$("#importEanResult").text("");
 			$.myformPlugins.cleanForm("#cdiscountEanDialog");
+			refresh();
 		}
 	});
 }
@@ -58,9 +59,16 @@ function batchSaveCdiscountEan () {
 			},
 			success : function (data) {
 				$.unblockUI();
+				$("#failCount").text(data.failCount);
+				$("#successCount").text(data.successCount);
 				$("#resultMassage").show();
-				
-//				$.message.showMessage(param);
+				var resultHtml = "";
+				if(data.eanImportResultList.length > 0) {
+					for(var i = 0; i < data.eanImportResultList.length; i++) {
+						resultHtml += "<div>" + data.eanImportResultList[i].ean + " --- " + data.eanImportResultList[i].reason + "</div>";
+					}
+				}
+				$("#importEanResult").html(resultHtml);
 			}
 		});
 	}
