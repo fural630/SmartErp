@@ -94,7 +94,7 @@ public class GetCdiscountSubmitProductStatus {
 				for (Long packageId : packageIdSet) {
 					MarketplaceAPIServiceStub marketplaceAPIServiceStub = new MarketplaceAPIServiceStub();
 					MarketplaceAPIServiceStub.GetProductPackageSubmissionResult paramGetProductPackageSubmissionResult = new MarketplaceAPIServiceStub.GetProductPackageSubmissionResult();
-					String token = CdiscountTokenUtil.getToken(cdiscountApiConfig);
+					String token = CdiscountTokenUtil.getCashToken(cdiscountApiConfig);
 					HeaderMessage headerMessage = CdiscountHeaderMessageUtil.getHeaderMessage(cdiscountApiConfig, token);
 					paramGetProductPackageSubmissionResult.setHeaderMessage(headerMessage);
 					PackageFilter paramPackageFilter = new PackageFilter();

@@ -94,7 +94,7 @@ public class GetCdiscountSubmitOfferStatus {
 				for (Long packageId : packageIdSet) {
 					MarketplaceAPIServiceStub marketplaceAPIServiceStub = new MarketplaceAPIServiceStub();
 					GetOfferPackageSubmissionResult paramGetOfferPackageSubmissionResult = new GetOfferPackageSubmissionResult();
-					String token = CdiscountTokenUtil.getToken(cdiscountApiConfig);
+					String token = CdiscountTokenUtil.getCashToken(cdiscountApiConfig);
 					HeaderMessage headerMessage = CdiscountHeaderMessageUtil.getHeaderMessage(cdiscountApiConfig, token);
 					paramGetOfferPackageSubmissionResult.setHeaderMessage(headerMessage);
 					PackageFilter paramPackageFilter = new PackageFilter();
@@ -122,7 +122,7 @@ public class GetCdiscountSubmitOfferStatus {
 							CdiscountPublish cdiscountPublish = cdiscountPublishDao.getByEanAndProductIdAndApiId(query);
 							if (null != cdiscountPublish) {
 								if ("OK".equals(status)) {
-									String log = myLocale.getText("at.time.cdiscount.platform.validate.offers.success");
+									String log = myLocale.getText("at.time.offers.validate.success.publish.success");
 									String newLog = SysRemark.append(cdiscountPublish.getLog(), log);
 									cdiscountPublish.setLog(newLog);
 									cdiscountPublish.setPublishStatus(CdiscountPublishStatusEnum.PUBLISHED_SUCCESS.getValue());

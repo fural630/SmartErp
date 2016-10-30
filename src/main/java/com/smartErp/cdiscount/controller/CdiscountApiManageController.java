@@ -129,12 +129,13 @@ public class CdiscountApiManageController extends MainPage{
 		if (null != sellerMessage) {
 			cdiscountDeliveryModeInfoService.deleteDeliveryModeInfoByApiId(id);
 			cdiscountDeliveryModeInfoService.saveDeliveryModeInfo(sellerMessage, id);
-			cdiscountApiConfig.setSystemLog(SysRemark.append(cdiscountApiConfig.getSystemLog(), myLocale.getText("at.time.update.shop.config")));
-			cdiscountApiConfigService.updateCdiscountApiConfige(cdiscountApiConfig);
+			cdiscountApiConfig.setSystemLog(SysRemark.append(cdiscountApiConfig.getSystemLog(), myLocale.getText("at.time.update.shop.config.success")));
 		} else {
 			returnMessage.setStatus(ReturnMessageEnum.FAIL.getValue());
 			returnMessage.setMessage(myLocale.getText("update.shop.config.fail"));
+			cdiscountApiConfig.setSystemLog(SysRemark.append(cdiscountApiConfig.getSystemLog(), myLocale.getText("at.time.update.shop.config.fail.request.api.fail")));
 		}
+		cdiscountApiConfigService.updateCdiscountApiConfige(cdiscountApiConfig);
 		return JsonUtil.toJsonStr(returnMessage);
 	}
 }

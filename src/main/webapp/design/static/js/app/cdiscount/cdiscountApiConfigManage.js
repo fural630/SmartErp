@@ -250,7 +250,7 @@ function updateShopConfig (id) {
 			},
 			success : function (data) {
 				$.message.showMessage(data);
-				refresh(1000);
+				refresh(1000); 
 			}
 		});
 	}

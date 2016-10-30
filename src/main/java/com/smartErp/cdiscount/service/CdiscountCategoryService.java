@@ -20,7 +20,6 @@ import com.smartErp.cdiscount.model.CdiscountCategory;
 import com.smartErp.cdiscount.util.CdiscountHeaderMessageUtil;
 import com.smartErp.cdiscount.util.CdiscountTokenUtil;
 import com.smartErp.util.code.MyDate;
-import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
 
 @Service
 public class CdiscountCategoryService {
