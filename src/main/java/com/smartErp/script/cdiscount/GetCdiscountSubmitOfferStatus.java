@@ -87,6 +87,13 @@ public class GetCdiscountSubmitOfferStatus {
 					}
 				}
 			}
+			
+			String token = CdiscountTokenUtil.getCashToken(cdiscountApiConfig);
+	        if (StringUtils.isEmpty(token)) {
+	        	System.out.println("token = " + token);
+	        	return false;
+	        }
+			
 			System.out.println("packageId : ");
 			Dumper.dump(packageIdSet);
 			MyLocale myLocale = new MyLocale();
@@ -94,7 +101,6 @@ public class GetCdiscountSubmitOfferStatus {
 				for (Long packageId : packageIdSet) {
 					MarketplaceAPIServiceStub marketplaceAPIServiceStub = new MarketplaceAPIServiceStub();
 					GetOfferPackageSubmissionResult paramGetOfferPackageSubmissionResult = new GetOfferPackageSubmissionResult();
-					String token = CdiscountTokenUtil.getCashToken(cdiscountApiConfig);
 					HeaderMessage headerMessage = CdiscountHeaderMessageUtil.getHeaderMessage(cdiscountApiConfig, token);
 					paramGetOfferPackageSubmissionResult.setHeaderMessage(headerMessage);
 					PackageFilter paramPackageFilter = new PackageFilter();

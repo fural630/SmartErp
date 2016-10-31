@@ -73,6 +73,13 @@ public class SubmitCdiscountOfferPackage {
 	        	return false;
 	        }
 			
+			
+			String token = CdiscountTokenUtil.getCashToken(cdiscountApiConfig);
+	        if (StringUtils.isEmpty(token)) {
+	        	System.out.println("token = " + token);
+	        	return false;
+	        }
+			
 			CdiscountUploadFileUtilDao utilDao = new CdiscountUploadFileUtilDao();
 	        String packagePath = utilDao.packageCdiscountOffers(cdiscountPublishList);
 	        System.out.println(packagePath);
@@ -80,7 +87,6 @@ public class SubmitCdiscountOfferPackage {
 	        if (StringUtils.isNotEmpty(packagePath)) {
 	        	MarketplaceAPIServiceStub marketplaceAPIServiceStub = new MarketplaceAPIServiceStub();
 	        	SubmitOfferPackage paramSubmitCdiscountOfferPackage = new SubmitOfferPackage();
-	        	String token = CdiscountTokenUtil.getCashToken(cdiscountApiConfig);
 	        	HeaderMessage headerMessage = CdiscountHeaderMessageUtil.getHeaderMessage(cdiscountApiConfig, token);
 	        	paramSubmitCdiscountOfferPackage.setHeaderMessage(headerMessage);
 	        	OfferPackageRequest offerPackageRequest = new OfferPackageRequest();

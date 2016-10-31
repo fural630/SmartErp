@@ -88,13 +88,19 @@ public class GetCdiscountSubmitProductStatus {
 					}
 				}
 			}
+			
+			String token = CdiscountTokenUtil.getCashToken(cdiscountApiConfig);
+	        if (StringUtils.isEmpty(token)) {
+	        	System.out.println("token = " + token);
+	        	return false;
+	        }
+			
 			System.out.println("packageId : ");
 			Dumper.dump(packageIdSet);
 			if (CollectionUtils.isNotEmpty(packageIdSet)) {
 				for (Long packageId : packageIdSet) {
 					MarketplaceAPIServiceStub marketplaceAPIServiceStub = new MarketplaceAPIServiceStub();
 					MarketplaceAPIServiceStub.GetProductPackageSubmissionResult paramGetProductPackageSubmissionResult = new MarketplaceAPIServiceStub.GetProductPackageSubmissionResult();
-					String token = CdiscountTokenUtil.getCashToken(cdiscountApiConfig);
 					HeaderMessage headerMessage = CdiscountHeaderMessageUtil.getHeaderMessage(cdiscountApiConfig, token);
 					paramGetProductPackageSubmissionResult.setHeaderMessage(headerMessage);
 					PackageFilter paramPackageFilter = new PackageFilter();

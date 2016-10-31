@@ -73,12 +73,17 @@ public class SubmitCdiscountProductPackage {
 	        	return false;
 	        }
 	        
+	        String token = CdiscountTokenUtil.getCashToken(cdiscountApiConfig);
+	        if (StringUtils.isEmpty(token)) {
+	        	System.out.println("token = " + token);
+	        	return false;
+	        }
+	        
 	        CdiscountUploadFileUtilDao utilDao = new CdiscountUploadFileUtilDao();
 	        String packagePath = utilDao.packageCdiscountProduct(cdiscountPublishList);
 	        if (StringUtils.isNotEmpty(packagePath)) {
 	        	MyLocale myLocale = new MyLocale();
 	        	SubmitProductPackage paramSubmitProductPackage = new SubmitProductPackage();
-	        	String token = CdiscountTokenUtil.getCashToken(cdiscountApiConfig);
 	        	HeaderMessage headerMessage = CdiscountHeaderMessageUtil.getHeaderMessage(cdiscountApiConfig, token);
 	        	paramSubmitProductPackage.setHeaderMessage(headerMessage);
 	        	ProductPackageRequest productPackageRequest = new ProductPackageRequest();
