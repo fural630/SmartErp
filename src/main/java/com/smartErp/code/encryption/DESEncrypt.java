@@ -50,7 +50,7 @@ public class DESEncrypt {
     }
     
     public static void main(String[] args) {
-		String testString = "123456";
+		String testString = "123";
 		System.out.println(DESEncrypt.DataEncrypt(testString));
 	}
 }
