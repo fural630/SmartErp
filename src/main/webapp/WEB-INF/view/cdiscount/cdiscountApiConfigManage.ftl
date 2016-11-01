@@ -4,8 +4,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>${title!""}</title>
 	<#include "../frame/common.ftl"/>
-	<script src="/design/frame/jquery/combo/js/jquery.combo.select.js"></script>
-	<link rel="stylesheet" type="text/css" href="/design/frame/jquery/combo/css/combo.select.css"/>
 	<script src="/design/static/js/app/cdiscount/cdiscountApiConfigManage.js"></script>
   </head>
   <body>

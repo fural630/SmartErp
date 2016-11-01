@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.smartErp.system.dao.ScriptConfigDao">  
+ 
+ <select id="getScriptConfigPage" resultType="hashMap" parameterType="Page">
+    	select t.*,tt.name as createName from script_config t 
+    		left join user tt on t.creatorId = tt.id
+    	<where>
+	    	<choose>
+				<when test="params.scriptUrl!=null and params.scriptUrl!='' ">
+					and t.scriptUrllike CONCAT('%','${params.scriptUrl}','%')  
+				</when>
+				<when test="params.scriptUrl!=null and params.scriptUrl!=''">
+					and t.scriptUrl = #{params.scriptUrl}
+				</when> 		
+	   		</choose>
+	   		<choose>
+				<when test="params.remark!=null and params.remark!='' ">
+					and t.remark like CONCAT('%','${params.remark}','%')  
+				</when>
+				<when test="params.remark!=null and params.remark!=''">
+					and t.remark = #{params.remark}
+				</when>
+	   		</choose>
+	   		<if test="params.scriptType!=null and params.scriptType !=''">
+	 			and t.scriptType = #{params.scriptType}
+	   		</if>
+	   		<if test="params.randomRange!=null and params.randomRange !=''">
+	    		and t.randomRange = #{params.randomRange}
+	   		</if>
+	   		<if test="params.isOpened!=null and params.isOpened !=''">
+	    		and t.isOpened = #{params.isOpened}
+	   		</if>
+	   		<if test="params.timeQuery == 'createTime' and params.timeFrom !=null and params.timeFrom!=''" >
+	   			<![CDATA[ and t.createTime >= #{params.timeFrom} ]]>
+	   		</if>
+	   		
+	   		<if test="params.timeQuery == 'createTime' and params.timeTo !=null and params.timeTo!=''" >
+	   			<![CDATA[ and t.createTime <= #{params.timeTo} ]]>
+	   		</if>
+	   		
+		    <if test="params.timeQuery == 'updateTime' and params.timeFrom !=null and params.timeFrom!=''" >
+	   			<![CDATA[ and t.updateTime >= #{params.timeFrom} ]]>
+	   		</if>
+	   		
+	   		<if test="params.timeQuery == 'updateTime' and params.timeTo !=null and params.timeTo!=''" >
+	   			<![CDATA[ and t.updateTime <= #{params.timeTo} ]]>
+	   		</if>
+   		</where>
+   		order by t.id desc
+    </select>
+    
+</mapper>
