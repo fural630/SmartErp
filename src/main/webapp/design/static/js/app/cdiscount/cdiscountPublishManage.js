@@ -20,7 +20,9 @@ function initDialog() {
 				primary : "ui-icon-heart"
 			},
 			click : function() {
-				saveCdiscountPublish();
+				if (validate()) {
+					saveCdiscountPublish();
+				}
 			}
 		} ],
 		close: function( event, ui ) {
@@ -121,6 +123,8 @@ function cleanCdiscountPublishDialog () {
 	$("#navigation").html("");
 	$("#sortable").html("");
 	CKEDITOR.instances["marketingDescription"].setData("");
+	$(".validateTip").html("");
+	$(".validateTip").hide();
 }
 
 function createCdiscountPublish () {
@@ -486,6 +490,100 @@ function mergeArray(arr1, arr2) {
 	}
 	return arr;
 }  
+
+function validate () {
+	var errorMassage = "";
+	var apiId = $("#cdiscountPublishDialog select[name='shopName']").val();
+	if (apiId == "") {
+		errorMassage += "&nbsp;*&nbsp;请选择刊登店铺";
+	}
+	var sku = $.trim($("#cdiscountPublishDialog input[name='sku']").val());
+	if (sku == "") {
+		errorMassage += "&nbsp;*&nbsp;请填写SKU";
+	}
+	var brandName = $.trim($("#cdiscountPublishDialog input[name='brandName']").val());
+	if (brandName == "") {
+		errorMassage += "&nbsp;*&nbsp;请填写品牌名";
+	}
+	var ean = $.trim($("#cdiscountPublishDialog input[name='ean']").val());
+	if (ean == "") {
+		errorMassage += "&nbsp;*&nbsp;请填写EAN";
+	}
+	var shortLabel = $.trim($("#cdiscountPublishDialog input[name='shortLabel']").val());
+	if (shortLabel == "") {
+		errorMassage += "&nbsp;*&nbsp;请填写短描述";
+	}
+	var longLabel = $.trim($("#cdiscountPublishDialog input[name='longLabel']").val());
+	if (longLabel == "") {
+		errorMassage += "&nbsp;*&nbsp;请填写长描述";
+	}
+	var description = $.trim($("#cdiscountPublishDialog textarea[name='description']").val());
+	if (description == "") {
+		errorMassage += "&nbsp;*&nbsp;请填写简要描述";
+	}
+	var marketingDescription = CKEDITOR.instances["marketingDescription"].getData();
+	if (marketingDescription == "") {
+		errorMassage += "&nbsp;*&nbsp;请填写市场描述";
+	}
+	var categoryCode = $.trim($("#cdiscountPublishDialog input[name='categoryCode']").val());
+	if (categoryCode == "") {
+		errorMassage += "&nbsp;*&nbsp;请选择产品类别或填写平台类别编号";
+	}
+	var stockQty = $.trim($("#cdiscountPublishDialog input[name='stockQty']").val());
+	if (stockQty == "") {
+		errorMassage += "&nbsp;*&nbsp;请填写数量";
+	}
+	var price = $.trim($("#cdiscountPublishDialog input[name='price']").val());
+	if (price == "") {
+		errorMassage += "&nbsp;*&nbsp;请填写价格";
+	}
+	var vat = $.trim($("#cdiscountPublishDialog input[name='vat']").val());
+	if (vat == "") {
+		errorMassage += "&nbsp;*&nbsp;请填写VAT";
+	}
+	var dea = $.trim($("#cdiscountPublishDialog input[name='dea']").val());
+	if (dea == "") {
+		errorMassage += "&nbsp;*&nbsp;请填写DEA";
+	}
+	var ecoPart = $.trim($("#cdiscountPublishDialog input[name='ecoPart']").val());
+	if (ecoPart == "") {
+		errorMassage += "&nbsp;*&nbsp;请填写Eco Part";
+	}
+	var preparationTime = $.trim($("#cdiscountPublishDialog input[name='preparationTime']").val());
+	if (preparationTime == "") {
+		errorMassage += "&nbsp;*&nbsp;请填写备货时间";
+	}
+	
+	var imageCount = 0;
+	$("input[id^='image_checkbox_']").each(function () {
+		if ($(this).is(":checked")) {
+			imageCount++;
+		}
+	});
+	
+	if (imageCount == 0 || imageCount > 4) {
+		errorMassage += "&nbsp;*&nbsp;刊登图片至少选择一张且小于等于四张";
+	}
+	
+	var deliveryModeTr = $(".deliveryModeTr");
+	deliveryModeTr.each(function () {
+		var deliveryMode = $(this).find("input[name='deliveryMode']").val();
+		var shippingCharges = $.trim($(this).find("input[name='shippingCharges']").val());
+		var addShippingCharges = $.trim($(this).find("input[name='addShippingCharges']").val());
+		if ((shippingCharges == "" && addShippingCharges != "") || (shippingCharges != "" && addShippingCharges == "")) {
+			errorMassage += "&nbsp;*&nbsp;" + deliveryMode + "物流方式的运费与额外运费要么都填，要么都不填 ";
+		}
+	});
+	
+	if (errorMassage != "") {
+		$(".validateTip").html(errorMassage);
+		$(".validateTip").show();
+		return false;
+	} else {
+		$(".validateTip").hide();
+	}
+	return true; 
+}
 
 function saveCdiscountPublish(){
 	var id = $("#cdiscountPublishDialog input[name='publishId']").val();

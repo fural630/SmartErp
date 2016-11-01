@@ -258,7 +258,7 @@
 	 			<td class="title">商品类别<i class="star">*</i></td>
 	 			<td>
 	 				<div>
-	 					<a class="btn" onclick="getFirstCdiscountCategory()">类别选择</a>
+	 					<a class="btn" onclick="getFirstCdiscountCategory()">展开类别列表</a>
 	 					&nbsp;&nbsp;已选类别 &nbsp;&nbsp;:&nbsp;&nbsp;
 	 					<span id="navigation"></span>
 	 					<input type="hidden" name="categoryName" class="txt width_100px"/>
@@ -327,6 +327,9 @@
 	 			</td>
 	 		</tr>
 	 	</table>
+	 	<div class="validateTip"></div>
 	</div>
+	
+	
   </body>
 </html>
