@@ -24,6 +24,7 @@
 	    				<ul class="second_ul">
 	    					<li><a href="/system/userManage">用户管理</a></li>
 	    					<li><a href="/system/scriptConfigManage">脚本管理</a></li>
+	    					<li><a href="/system/authorityManage">权限管理</a></li>
 	    					<!--
 	    					<li><a href="/system/getDemoList">Demo</a></li>
 	    					<li><a href="/system/dictionaryManageList" target="_blank">字典配置</a></li>

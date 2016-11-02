@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2016-10-07 21:03:10
+Date: 2016-11-02 17:34:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,14 +31,16 @@ CREATE TABLE `cdiscount_api_config` (
   `createDate` varchar(255) DEFAULT NULL,
   `lastUpdateTime` varchar(255) DEFAULT NULL,
   `closeStatus` int(11) DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `tokenTimeOut` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cdiscount_api_config
 -- ----------------------------
-INSERT INTO `cdiscount_api_config` VALUES ('42', 'Dealpark', 'cds@tomtop.com', 'SalesNEmma201623-api', 'B/04RnY2bpI=', 'cds@tomtop.com', '630', null, '2016-09-12 16:34:46', '2016-09-12 16:34:46', '1');
-INSERT INTO `cdiscount_api_config` VALUES ('43', 'E-Home', 'ehome2016@kkmoon.com', 'ElectronicHome-api', 'vyIRkN63eeM0nwaK0CWQPQ==', 'ehome2016@kkmoon.com', '630', '1: 【于 2016-09-27 17:31:02 由 超级管理员 操作, 创建了新的店铺授权】', '2016-09-27 17:31:02', '2016-09-27 17:31:02', '1');
+INSERT INTO `cdiscount_api_config` VALUES ('44', 'E-Home', 'ehome2016@kkmoon.com', 'ElectronicHome-api', 'vyIRkN63eeOvmL3GE9xGgxGeirXGifhO', 'ehome2016@kkmoon.com', '1', '1: 【于 2016-10-28 11:18:48 由 超级管理员 操作, 创建了新的店铺授权】<br/>2: 【于 2016-10-28 13:05:57 由 超级管理员 操作, 修改了店铺信息】<br/>3: 【于 2016-10-28 13:08:27 由 超级管理员 操作, 修改了店铺信息】<br/>4: 【于 2016-10-28 13:08:43 由 超级管理员 操作, 修改了店铺信息】', '2016-10-28 11:18:48', '2016-10-28 13:08:43', '1', '', '');
+INSERT INTO `cdiscount_api_config` VALUES ('45', 'Dealpark', 'cds@tomtop.com', 'SalesNEmma201623-api', 'B/04RnY2bpI=', 'cds@tomtop.com', '1', '1: 【于 2016-10-28 13:12:58 由 超级管理员 操作, 创建了新的店铺授权】<br/>2: 【于 2016-10-28 14:10:01 由 超级管理员 操作, 修改了店铺信息】<br/>3: 【于 2016-10-28 15:49:23 由 超级管理员，更新了店铺运费模板】', '2016-10-28 13:12:58', '2016-10-28 14:10:01', '1', '581e256b483b4a6591691d5dcb757796', '2016-10-29 14:22:20');
 
 -- ----------------------------
 -- Table structure for cdiscount_category
@@ -16131,6 +16133,26 @@ INSERT INTO `cdiscount_category` VALUES ('16647', '16594', null, '1', 'CARTE PRE
 INSERT INTO `cdiscount_category` VALUES ('16648', '16647', '34801', '0', 'CARTE PREPAYEE MULTIMEDIA', '3', '2016-09-12 16:55:35', '42');
 
 -- ----------------------------
+-- Table structure for cdiscount_ean
+-- ----------------------------
+DROP TABLE IF EXISTS `cdiscount_ean`;
+CREATE TABLE `cdiscount_ean` (
+  `id` int(11) NOT NULL,
+  `ean` varchar(255) DEFAULT NULL,
+  `apiId` int(11) DEFAULT NULL,
+  `isUsed` int(11) DEFAULT NULL,
+  `creator` int(11) DEFAULT NULL,
+  `usedTime` varchar(255) DEFAULT NULL,
+  `createTime` varchar(255) DEFAULT NULL,
+  `sku` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cdiscount_ean
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for cdiscount_publish
 -- ----------------------------
 DROP TABLE IF EXISTS `cdiscount_publish`;
@@ -16148,7 +16170,7 @@ CREATE TABLE `cdiscount_publish` (
   `description` varchar(255) DEFAULT NULL,
   `categoryCode` varchar(255) DEFAULT NULL,
   `categoryName` varchar(255) DEFAULT NULL,
-  `marketingDescription` varchar(255) DEFAULT NULL,
+  `marketingDescription` text,
   `stockQty` double DEFAULT NULL,
   `price` double DEFAULT NULL,
   `vat` double DEFAULT NULL,
@@ -16161,23 +16183,14 @@ CREATE TABLE `cdiscount_publish` (
   `createTime` varchar(255) DEFAULT NULL,
   `updateTime` varchar(255) DEFAULT NULL,
   `log` text,
+  `mainImage` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`,`creator`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cdiscount_publish
 -- ----------------------------
-INSERT INTO `cdiscount_publish` VALUES ('1', '42', '2', 'brand', 'ean', 'SOUMISSION CREATION PRODUITS_MK', 'Standard', 'short', 'long', 'ABONNEMENT / SERVICES > ABONNEMENT > ABONNEMENT LIVRAISON', 'descriotpon', '3400701', 'ABONNEMENT LIVRAISON', 'mar<br />\n&nbsp;', '1', '2.2', '3', '4', '5', '6', '6', '1', '630', '2016-09-28 11:27:49', '2016-09-10 11:27:49', null);
-INSERT INTO `cdiscount_publish` VALUES ('2', '42', '1', 'bran', 'ean', 'SOUMISSION CREATION PRODUITS_MK', 'Standard', 'short', 'long', 'AMENAGEMENT URBAIN - VOIRIE > SIGNALETIQUE > FLAMME DE SIGNALISATION > FLAMME DE SIGNALISATION', 'de', '17040301', 'FLAMME DE SIGNALISATION', 'mar1<br />\n&nbsp;', '11', '22.8', '33', '44', '55', '3', '6', '1', '630', '2016-09-15 12:02:18', '2016-09-02 12:02:18', null);
-INSERT INTO `cdiscount_publish` VALUES ('3', '42', '1', 'bran', 'ean', 'SOUMISSION CREATION PRODUITS_MK', 'Standard', 'short', 'long', 'AMENAGEMENT URBAIN - VOIRIE > SIGNALETIQUE > FLAMME DE SIGNALISATION > FLAMME DE SIGNALISATION', 'de', '17040301', 'FLAMME DE SIGNALISATION', 'mar1<br />\n&nbsp;', '11', '22.9', '33', '44', '55', '3', '6', '1', '630', '2016-09-28 12:03:58', '2016-09-29 18:15:56', '1: 【于 2016-09-29 18:14:39 由 超级管理员，修改了Cdiscount刊登信息】<br/>2: 【于 2016-09-29 18:15:56 由 超级管理员，修改了Cdiscount刊登信息】');
-INSERT INTO `cdiscount_publish` VALUES ('4', '42', '1', 'bran', 'ean', 'SOUMISSION CREATION PRODUITS_MK', 'Standard', 'short', 'long', 'AMENAGEMENT URBAIN - VOIRIE > SIGNALETIQUE > FLAMME DE SIGNALISATION > FLAMME DE SIGNALISATION', 'de', '17040301', 'FLAMME DE SIGNALISATION', 'mar1<br />\n&nbsp;', '11', '16.5', '33', '44', '55', '3', '6', '5', '630', '2016-09-07 12:04:44', '2016-09-28 12:04:44', null);
-INSERT INTO `cdiscount_publish` VALUES ('5', '43', '3', 'brand', '1233333', 'SOUMISSION CREATION PRODUITS_MK', 'Standard', 'show', 'long', 'ARTICLES POUR FUMEUR > CIGARETTE > BOITE A TABAC - BLAGUE A TABAC > BOITE A TABAC - BLAGUE A TABAC', 'introduct', '0R010A01', 'BOITE A TABAC - BLAGUE A TABAC', 'markedescr', '3', '4', '5', '6', '7', '8', '6', '1', '630', '2016-09-28 20:51:36', '2016-09-28 20:51:36', null);
-INSERT INTO `cdiscount_publish` VALUES ('6', '43', '3', 'brand111', '1233333', 'SOUMISSION CREATION PRODUITS_MK', 'Standard', 'show', 'long', 'ARTICLES POUR FUMEUR > CIGARETTE > BOITE A TABAC - BLAGUE A TABAC > BOITE A TABAC - BLAGUE A TABAC', 'introduct', '0R010A01', 'BOITE A TABAC - BLAGUE A TABAC', 'markedescr', '3', '4', '5', '6', '7', '8', '6', '1', '630', '2016-09-29 17:23:41', '2016-09-29 17:23:41', '于 2016-09-29 17:23:41 由 超级管理员，创建了Cdiscount刊登信息');
-INSERT INTO `cdiscount_publish` VALUES ('7', '43', '3', 'brand11112', '1233333', 'SOUMISSION CREATION PRODUITS_MK', 'Standard', 'show', 'long', 'ARTICLES POUR FUMEUR > CIGARETTE > BOITE A TABAC - BLAGUE A TABAC > BOITE A TABAC - BLAGUE A TABAC', 'introduct', '0R010A01', 'BOITE A TABAC - BLAGUE A TABAC', 'markedescr', '3', '4', '5', '6', '7', '8', '6', '1', '630', '2016-09-29 17:25:53', '2016-09-29 17:25:53', '于 2016-09-29 17:25:53 由 超级管理员，创建了Cdiscount刊登信息');
-INSERT INTO `cdiscount_publish` VALUES ('8', '43', '3', 'tomtop', 'ea123', 'SOUMISSION CREATION PRODUITS_MK', 'Variant', 'show123', 'long222', 'AMENAGEMENT URBAIN - VOIRIE > AMENAGEMENT URBAIN > ABRI FUMEUR > ABRI FUMEUR', 'introduct33333', '17050201', 'ABRI FUMEUR', 'markedesdfsdfscrsdfsdf123123', '11', '23', '55', '63', '754', '845', '2', '1', '630', '2016-09-29 17:26:22', '2016-09-29 18:02:43', '于 2016-09-29 17:26:22 由 超级管理员，创建了Cdiscount刊登信息<br/>1: 【at.time.by.user.update.cdiscount.publish】<br/>2: 【at.time.by.user.update.cdiscount.publish】<br/>3: 【at.time.by.user.update.cdiscount.publish】<br/>4: 【at.time.by.user.update.cdiscount.publish】<br/>5: 【at.time.by.user.update.cdiscount.publish】<br/>6: 【于 2016-09-29 17:43:05 由 超级管理员，修改了Cdiscount刊登信息】<br/>7: 【于 2016-09-29 17:47:46 由 超级管理员，修改了Cdiscount刊登信息】<br/>8: 【于 2016-09-29 17:49:07 由 超级管理员，修改了Cdiscount刊登信息】<br/>9: 【于 2016-09-29 17:51:35 由 超级管理员，修改了Cdiscount刊登信息】<br/>10: 【于 2016-09-29 17:53:01 由 超级管理员，修改了Cdiscount刊登信息】<br/>11: 【于 2016-09-29 17:53:10 由 超级管理员，修改了Cdiscount刊登信息】<br/>12: 【于 2016-09-29 17:53:17 由 超级管理员，修改了Cdiscount刊登信息】<br/>13: 【于 2016-09-29 17:53:23 由 超级管理员，修改了Cdiscount刊登信息】<br/>14: 【于 2016-09-29 17:53:30 由 超级管理员，修改了Cdiscount刊登信息】<br/>15: 【于 2016-09-29 17:55:39 由 超级管理员，修改了Cdiscount刊登信息】<br/>16: 【于 2016-09-29 17:55:48 由 超级管理员，修改了Cdiscount刊登信息】<br/>17: 【于 2016-09-29 17:55:56 由 超级管理员，修改了Cdiscount刊登信息】<br/>18: 【于 2016-09-29 17:56:59 由 超级管理员，修改了Cdiscount刊登信息】<br/>19: 【于 2016-09-29 17:58:07 由 超级管理员，修改了Cdiscount刊登信息】<br/>20: 【于 2016-09-29 17:58:14 由 超级管理员，修改了Cdiscount刊登信息】<br/>21: 【于 2016-09-29 17:58:22 由 超级管理员，修改了Cdiscount刊登信息】<br/>22: 【于 2016-09-29 17:58:29 由 超级管理员，修改了Cdiscount刊登信息】<br/>23: 【于 2016-09-29 17:58:37 由 超级管理员，修改了Cdiscount刊登信息】<br/>24: 【于 2016-09-29 17:58:44 由 超级管理员，修改了Cdiscount刊登信息】<br/>25: 【于 2016-09-29 17:59:12 由 超级管理员，修改了Cdiscount刊登信息】<br/>26: 【于 2016-09-29 18:01:37 由 超级管理员，修改了Cdiscount刊登信息】<br/>27: 【于 2016-09-29 18:01:56 由 超级管理员，修改了Cdiscount刊登信息】<br/>28: 【于 2016-09-29 18:02:33 由 超级管理员，修改了Cdiscount刊登信息】<br/>29: 【于 2016-09-29 18:02:43 由 超级管理员，修改了Cdiscount刊登信息】');
-INSERT INTO `cdiscount_publish` VALUES ('9', '43', '3', 'brand11112', '1233333', 'SOUMISSION CREATION PRODUITS_MK', 'Standard', 'show', 'long', 'ARTICLES POUR FUMEUR > CIGARETTE > BOITE A TABAC - BLAGUE A TABAC > BOITE A TABAC - BLAGUE A TABAC', 'introduct', '0R010A01', 'BOITE A TABAC - BLAGUE A TABAC', 'markedescr', '3', '4', '5', '6', '7', '8', '6', '1', '630', '2016-09-29 18:11:26', '2016-09-29 18:11:26', '1: 【于 2016-09-29 18:11:26 由 超级管理员，创建了Cdiscount刊登信息】');
-INSERT INTO `cdiscount_publish` VALUES ('10', '42', '2', 'brand', 'ean', 'SOUMISSION CREATION PRODUITS_MK', 'Standard', 'short', 'long', 'ABONNEMENT / SERVICES > ABONNEMENT > ABONNEMENT LIVRAISON', 'descriotpon', '3400701', 'ABONNEMENT LIVRAISON', 'mar<br />\n&nbsp;', '1', '2.2', '3', '4', '5', '6', '6', '1', '630', '2016-09-29 18:16:20', '2016-09-29 18:16:20', '1: 【于 2016-09-29 18:16:20 由 超级管理员，创建了Cdiscount刊登信息】');
-INSERT INTO `cdiscount_publish` VALUES ('11', '42', '2', 'brand', 'ean', 'SOUMISSION CREATION PRODUITS_MK', 'Standard', 'short', 'long', 'ABONNEMENT / SERVICES > ABONNEMENT > ABONNEMENT LIVRAISON', 'descriotpon', '3400701', 'ABONNEMENT LIVRAISON', 'mar<br />\n&nbsp;', '1', '2.2', '3', '4', '5', '6', '6', '1', '630', '2016-09-29 18:16:29', '2016-09-29 18:16:29', '1: 【于 2016-09-29 18:16:29 由 超级管理员，创建了Cdiscount刊登信息】');
+INSERT INTO `cdiscount_publish` VALUES ('12', '45', '4', 'TOMTOP', '4854006183573', 'SOUMISSION CREATION PRODUITS_MK', 'Standard', '40 inch HD Écran de projection Manuel de pliage Ratio d\'aspect 4 par 3 Portable pour DLP Projecteur de poche', '40 inch HD Écran de projection Manuel de pliage Ratio d\'aspect 4 par 3 Portable pour DLP Projecteur de poche', 'PHOTO - OPTIQUE > VISIONNAGE PHOTO > PROJECTEUR - VISIONNEUSE DE DIAPOSITIVE - NEGATIF > PROJECTEUR - VISIONNEUSE DE DIAPOSITIVE - NEGATIF', 'Cet écran unique projecteur vous permet de configurer rapidement et facilement sur toute table.', '120C0301', '', 'Cet &eacute;cran de projection de table 40 &quot;Portable est l&#39;option la plus compacte et Voyage-friendly pour les petites r&eacute;unions et des pr&eacute;sentations mobiles. Cet &eacute;cran unique projecteur vous permet de configurer rapidement et facilement sur toute table. Il est largement utilis&eacute; dans Pr&eacute;sentation d&#39;affaires, Education Formation, Home Entertainment, etc.<br />\n<br />\n<strong>Caract&eacute;ristiques:</strong><br />\n[super Companion]<br />\nIl est le compagnon indispensable lorsque vous voulez profiter des films HD ou jouer &agrave; des jeux sur les appareils grand &eacute;cran L&#39;&eacute;cran de projection HD de 40 pouces vous apportera. merveilleux Hollywood Blockbuster Experience et super Game Experience. Offrant un grand cin&eacute;ma maison tout en d&eacute;pensant moins d&#39;argent.<br />\n[performance]<br />\nNon Glare, Contrairement &agrave; la norme whiteboards, tableaux blancs standard sont souvent tr&egrave;s r&eacute;fl&eacute;chissant, ce qui les rend moins-que-id&eacute;ales surfaces . pour la projection L&#39;&eacute;cran de projection de 40 pouces HD am&eacute;liore le contraste ainsi que la nettet&eacute; - jusqu&#39;&agrave; une r&eacute;solution Full HD -. pour le texte et les images Cette exp&eacute;rience visuelle am&eacute;lior&eacute;e est &eacute;galement moins fatigant pour les yeux, qui entre en jeu pendant de longues le&ccedil;ons ou pr&eacute;sentations.<br />\n[Design unique]<br />\n* L&#39;&eacute;cran protecteur utilise un mat&eacute;riau de support noir standard pour &eacute;liminer la p&eacute;n&eacute;tration de la lumi&egrave;re; 4 c&ocirc;t&eacute; Edging noir am&eacute;liore l&#39;image rapport de contraste et d&#39;absorber la lumi&egrave;re de d&eacute;passement, assurant la meilleure vid&eacute;o de qualit&eacute; d&#39;image.<br />\n[Portable Design &amp; Facile &agrave; utiliser]<br />\nL&#39;&eacute;cran de projection HD de 40 pouces utilise Pull Up Design Manual (Quick &#39;Setup &amp; Projection&#39; en quelques secondes, simple manuel Pull-Up Fonctionnement avec Quick-Lock M&eacute;canisme), portable et offrant une surface de projection sup&eacute;rieure en un instant, compagnon et vous aider nulle part.<br />\n[Applications]<br />\nCr&eacute;ez le parfait Home Cin&eacute;ma, Film &amp; Live Sports, r&eacute;unions d&#39;affaires, expositions, conventions, &eacute;cran de pr&eacute;sentation dans un instant. Il est une aide de super quand vous faites une pr&eacute;sentation Business &amp; faire un discours, et l&#39;&eacute;cran de projection HD de 40 pouces montrera clairement le contenu que vous avez dit, en laissant votre parole a un meilleur effet.<br />\n<br />\n<strong>Caract&eacute;ristiques:</strong><br />\nOp&eacute;ration: Manuel Pull Up<br />\nVue Zone (W * H): 32 &quot;* 24&quot;<br />\nDiagonal: 40 &quot;<br />\nAspect Ratio: 4: 3', '100', '52', '20', '0', '0', '5', '6', '10', '1', '2016-10-28 16:26:25', '2016-10-28 18:03:15', '1: 【于 2016-10-28 16:26:25 由 超级管理员，创建了Cdiscount刊登信息】<br/>2: 【于 2016-10-28 16:38:31 由 超级管理员，修改了Cdiscount刊登信息】<br/>3: 【于 2016-10-28 16:56:43 由 超级管理员，修改了Cdiscount刊登信息】<br/>4: 【于 2016-10-28 16:58:36 由 超级管理员，修改了Cdiscount刊登信息】<br/>5: 【于 2016-10-28 17:23:24 由 超级管理员，修改了Cdiscount刊登信息】<br/>6: 【于 2016-10-28 17:25:05 由 超级管理员，修改了Cdiscount刊登信息】<br/>7: 【于 2016-10-28 17:31:21 由 超级管理员，将刊登状态修改为 “待处理”】<br/>8: 【于 2016-10-28 17:33:42 由 超级管理员，将刊登状态修改为 “待上传基本信息”】<br/>9: 【于 2016-10-28 17:39:57 由 超级管理员，将刊登状态修改为 “待上传基本信息”】<br/>10: 【于 2016-10-28 17:48:52 由 超级管理员，将刊登状态修改为 “待处理”】<br/>11: 【于 2016-10-28 17:58:59 由 超级管理员，修改了Cdiscount刊登信息】<br/>12: 【于 2016-10-28 17:59:07 由 超级管理员，将刊登状态修改为 “待上传基本信息”】<br/>13: 【于 2016-10-28 18:03:15 由 超级管理员，修改了Cdiscount刊登信息】<br/>14: 【于 2016-10-28 18:03:24 由 超级管理员，将刊登状态修改为 “待上传基本信息”】', 'http://www.guphotos.com/images/V/5/V2225/V2225-1-53ce-wMuE.jpg');
 
 -- ----------------------------
 -- Table structure for cdiscount_publish_image
@@ -16188,28 +16201,14 @@ CREATE TABLE `cdiscount_publish_image` (
   `publishId` int(11) DEFAULT NULL,
   `imageUrl` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cdiscount_publish_image
 -- ----------------------------
-INSERT INTO `cdiscount_publish_image` VALUES ('1', '5', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-t0XT.jpg');
-INSERT INTO `cdiscount_publish_image` VALUES ('2', '5', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-bigg.jpg');
-INSERT INTO `cdiscount_publish_image` VALUES ('3', '5', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-uYuU.jpg');
-INSERT INTO `cdiscount_publish_image` VALUES ('5', '6', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-t0XT.jpg');
-INSERT INTO `cdiscount_publish_image` VALUES ('6', '6', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-bigg.jpg');
-INSERT INTO `cdiscount_publish_image` VALUES ('7', '6', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-uYuU.jpg');
-INSERT INTO `cdiscount_publish_image` VALUES ('8', '6', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-Mijz.jpg');
-INSERT INTO `cdiscount_publish_image` VALUES ('9', '7', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-t0XT.jpg');
-INSERT INTO `cdiscount_publish_image` VALUES ('10', '7', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-bigg.jpg');
-INSERT INTO `cdiscount_publish_image` VALUES ('11', '7', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-uYuU.jpg');
-INSERT INTO `cdiscount_publish_image` VALUES ('12', '7', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-Mijz.jpg');
-INSERT INTO `cdiscount_publish_image` VALUES ('104', '8', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-t0XT.jpg');
-INSERT INTO `cdiscount_publish_image` VALUES ('105', '8', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-bigg.jpg');
-INSERT INTO `cdiscount_publish_image` VALUES ('106', '9', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-t0XT.jpg');
-INSERT INTO `cdiscount_publish_image` VALUES ('107', '9', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-bigg.jpg');
-INSERT INTO `cdiscount_publish_image` VALUES ('110', '3', 'http://www.guphotos.com/images/L/L0742/L0742-1-84c2-wm3f.jpg');
-INSERT INTO `cdiscount_publish_image` VALUES ('111', '3', 'http://www.guphotos.com/images/L/L0742/L0742-1-84c2-sWri.jpg');
+INSERT INTO `cdiscount_publish_image` VALUES ('127', '12', 'http://www.guphotos.com/images/V/5/V2225/V2225-1-53ce-wMuE.jpg');
+INSERT INTO `cdiscount_publish_image` VALUES ('128', '12', 'http://www.guphotos.com/images/V/5/V2225/V2225-1-53ce-xCR4.jpg');
+INSERT INTO `cdiscount_publish_image` VALUES ('129', '12', 'http://www.guphotos.com/images/V/5/V2225/V2225-1-53ce-NTrq.jpg');
 
 -- ----------------------------
 -- Table structure for delivery_mode_infor
@@ -16224,21 +16223,17 @@ CREATE TABLE `delivery_mode_infor` (
   `apiId` int(11) DEFAULT NULL,
   `updateTime` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of delivery_mode_infor
 -- ----------------------------
-INSERT INTO `delivery_mode_infor` VALUES ('34', 'STD', '5', 'Normal', 'Standard', '43', '2016-09-27 17:43:23');
-INSERT INTO `delivery_mode_infor` VALUES ('35', 'TRK', '5', 'Suivi', 'Tracked', '43', '2016-09-27 17:43:24');
-INSERT INTO `delivery_mode_infor` VALUES ('36', 'REG', '5', 'Recommandé', 'Registered', '43', '2016-09-27 17:43:24');
-INSERT INTO `delivery_mode_infor` VALUES ('37', 'LV1', '10', 'Eco', 'BigParcelEco', '43', '2016-09-27 17:43:24');
-INSERT INTO `delivery_mode_infor` VALUES ('38', 'LV2', '10', 'Standard', 'BigParcelStandard', '43', '2016-09-27 17:43:24');
-INSERT INTO `delivery_mode_infor` VALUES ('39', 'LV3', '10', 'Confort', 'BigParcelComfort', '43', '2016-09-27 17:43:24');
-INSERT INTO `delivery_mode_infor` VALUES ('40', 'EXP', '5', 'Express', 'Express', '43', '2016-09-27 17:43:24');
-INSERT INTO `delivery_mode_infor` VALUES ('41', 'STD', '5', 'Normal', 'Standard', '42', '2016-09-27 17:43:32');
-INSERT INTO `delivery_mode_infor` VALUES ('42', 'TRK', '5', 'Suivi', 'Tracked', '42', '2016-09-27 17:43:32');
-INSERT INTO `delivery_mode_infor` VALUES ('43', 'REG', '5', 'Recommandé', 'Registered', '42', '2016-09-27 17:43:32');
+INSERT INTO `delivery_mode_infor` VALUES ('68', 'STD', '5', 'Normal', 'Standard', '50', '2016-10-28 15:48:48');
+INSERT INTO `delivery_mode_infor` VALUES ('69', 'TRK', '5', 'Suivi', 'Tracked', '50', '2016-10-28 15:48:48');
+INSERT INTO `delivery_mode_infor` VALUES ('70', 'REG', '5', 'Recommandé', 'Registered', '50', '2016-10-28 15:48:48');
+INSERT INTO `delivery_mode_infor` VALUES ('71', 'STD', '5', 'Normal', 'Standard', '45', '2016-10-28 15:49:23');
+INSERT INTO `delivery_mode_infor` VALUES ('72', 'TRK', '5', 'Suivi', 'Tracked', '45', '2016-10-28 15:49:23');
+INSERT INTO `delivery_mode_infor` VALUES ('73', 'REG', '5', 'Recommandé', 'Registered', '45', '2016-10-28 15:49:23');
 
 -- ----------------------------
 -- Table structure for dictionary_type
@@ -16271,14 +16266,12 @@ CREATE TABLE `product` (
   `createTime` varchar(255) DEFAULT NULL,
   `updateTime` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of product
 -- ----------------------------
-INSERT INTO `product` VALUES ('1', 'test', '630', '2016-09-26 15:51:44', '2016-09-26 15:51:44');
-INSERT INTO `product` VALUES ('2', 'CD2', '630', '2016-09-27 18:28:21', '2016-09-27 18:28:21');
-INSERT INTO `product` VALUES ('3', 'we3', '630', '2016-09-28 20:51:35', '2016-09-28 20:51:35');
+INSERT INTO `product` VALUES ('4', 'V2225', '1', '2016-10-28 16:23:50', '2016-10-28 16:23:50');
 
 -- ----------------------------
 -- Table structure for product_image
@@ -16289,18 +16282,14 @@ CREATE TABLE `product_image` (
   `productId` int(11) DEFAULT NULL,
   `imageUrl` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=193 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=214 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of product_image
 -- ----------------------------
-INSERT INTO `product_image` VALUES ('183', '3', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-t0XT.jpg');
-INSERT INTO `product_image` VALUES ('184', '3', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-bigg.jpg');
-INSERT INTO `product_image` VALUES ('185', '3', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-uYuU.jpg');
-INSERT INTO `product_image` VALUES ('186', '3', 'http://www.guphotos.com/images/V/K/V2565UK/V2565UK-1-6001-Mijz.jpg');
-INSERT INTO `product_image` VALUES ('190', '1', 'http://www.guphotos.com/images/L/L0742/L0742-1-84c2-wm3f.jpg');
-INSERT INTO `product_image` VALUES ('191', '1', 'http://www.guphotos.com/images/L/L0742/L0742-1-84c2-sWri.jpg');
-INSERT INTO `product_image` VALUES ('192', '1', 'http://www.guphotos.com/images/L/L0742/L0742-1-84c2-TOmT.jpg');
+INSERT INTO `product_image` VALUES ('211', '4', 'http://www.guphotos.com/images/V/5/V2225/V2225-1-53ce-wMuE.jpg');
+INSERT INTO `product_image` VALUES ('212', '4', 'http://www.guphotos.com/images/V/5/V2225/V2225-1-53ce-xCR4.jpg');
+INSERT INTO `product_image` VALUES ('213', '4', 'http://www.guphotos.com/images/V/5/V2225/V2225-1-53ce-NTrq.jpg');
 
 -- ----------------------------
 -- Table structure for publish_delivery_mode
@@ -16313,29 +16302,39 @@ CREATE TABLE `publish_delivery_mode` (
   `shippingCharges` double DEFAULT NULL,
   `publishId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of publish_delivery_mode
 -- ----------------------------
-INSERT INTO `publish_delivery_mode` VALUES ('1', 'Standard', '6', '5', '2');
-INSERT INTO `publish_delivery_mode` VALUES ('2', 'Tracked', '8', '7', '2');
-INSERT INTO `publish_delivery_mode` VALUES ('4', 'Standard', '6', '5', '4');
-INSERT INTO `publish_delivery_mode` VALUES ('5', 'Standard', '2', '1', '5');
-INSERT INTO `publish_delivery_mode` VALUES ('6', 'Tracked', '4', '3', '5');
-INSERT INTO `publish_delivery_mode` VALUES ('7', 'BigParcelEco', '7', '6', '5');
-INSERT INTO `publish_delivery_mode` VALUES ('8', 'Standard', '2', '1', '6');
-INSERT INTO `publish_delivery_mode` VALUES ('9', 'Tracked', '4', '3', '6');
-INSERT INTO `publish_delivery_mode` VALUES ('10', 'BigParcelEco', '7', '6', '6');
-INSERT INTO `publish_delivery_mode` VALUES ('11', 'Standard', '2', '1', '7');
-INSERT INTO `publish_delivery_mode` VALUES ('12', 'Tracked', '4', '3', '7');
-INSERT INTO `publish_delivery_mode` VALUES ('13', 'BigParcelEco', '7', '6', '7');
-INSERT INTO `publish_delivery_mode` VALUES ('100', 'Standard', '2', '1', '8');
-INSERT INTO `publish_delivery_mode` VALUES ('101', 'BigParcelEco', '7', '6', '8');
-INSERT INTO `publish_delivery_mode` VALUES ('102', 'Standard', '2', '1', '9');
-INSERT INTO `publish_delivery_mode` VALUES ('103', 'Tracked', '4', '3', '9');
-INSERT INTO `publish_delivery_mode` VALUES ('104', 'BigParcelEco', '7', '6', '9');
-INSERT INTO `publish_delivery_mode` VALUES ('105', 'Standard', '6', '5', '3');
+INSERT INTO `publish_delivery_mode` VALUES ('121', 'Standard', '0', '0', '12');
+INSERT INTO `publish_delivery_mode` VALUES ('122', 'Tracked', '0', '0', '12');
+INSERT INTO `publish_delivery_mode` VALUES ('123', 'Registered', '0', '0', '12');
+
+-- ----------------------------
+-- Table structure for script_config
+-- ----------------------------
+DROP TABLE IF EXISTS `script_config`;
+CREATE TABLE `script_config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `crontab` varchar(255) DEFAULT NULL,
+  `scriptUrl` varchar(255) DEFAULT NULL,
+  `scriptType` int(11) DEFAULT NULL,
+  `randomRange` int(11) DEFAULT NULL,
+  `isOpened` int(11) DEFAULT NULL,
+  `creatorId` int(11) DEFAULT NULL,
+  `scriptName` varchar(255) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  `createTime` varchar(255) DEFAULT NULL,
+  `updateTime` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of script_config
+-- ----------------------------
+INSERT INTO `script_config` VALUES ('1', '* * * *', 'http://{host}:9094/authenticate/runScript?type=cdiscount/publishProduct/SubmitCdiscountOfferPackage&args={apiId}', '15', '45', '1', '1', 'SubmitCdiscountOfferPackage', '上传offers', '2016', '2016-11-02 15:16:24');
+INSERT INTO `script_config` VALUES ('3', '* */5 * * *', 'http://{host}:9094/authenticate/runScript?type=cdiscount/publishProduct/GetCdiscountSubmitProductStatus&args={apiId}', '5', null, '1', '1', 'GetCdiscountSubmitProductStatus', '获取上传商品状态', '2016-11-02 14:39:08', '2016-11-02 15:17:14');
 
 -- ----------------------------
 -- Table structure for user
@@ -16343,37 +16342,20 @@ INSERT INTO `publish_delivery_mode` VALUES ('105', 'Standard', '6', '5', '3');
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(200) DEFAULT NULL,
-  `name` varchar(200) DEFAULT NULL,
-  `password` varchar(200) DEFAULT NULL,
-  `sex` int(11) DEFAULT '1',
-  `phone` char(20) DEFAULT NULL,
-  `level` int(11) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `phone` char(40) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `log` varchar(255) DEFAULT NULL,
+  `createTime` varchar(255) DEFAULT NULL,
+  `updateTime` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=631 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=635 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('3', '201', '王云鹏', 'root', '1', '187777772', '2');
-INSERT INTO `user` VALUES ('4', '202', '王明旭', 'root', '1', '1877772377', '2');
-INSERT INTO `user` VALUES ('5', '203', '王程菲', 'root', '0', '18777123777', '2');
-INSERT INTO `user` VALUES ('6', '204', '王筱希', 'root', '0', '1873777277', '2');
-INSERT INTO `user` VALUES ('7', '205', '杨梦滢', 'root', '0', '187777277', '2');
-INSERT INTO `user` VALUES ('8', '206', '杨程菲', 'root', '0', '18777777', '2');
-INSERT INTO `user` VALUES ('9', '207', '杨亚娟', 'root', '0', '1877227777', '2');
-INSERT INTO `user` VALUES ('10', '208', '杨玉伦', 'root', '1', '18777777', '2');
-INSERT INTO `user` VALUES ('11', '209', '杨志杰', 'root', '1', '187177577', '2');
-INSERT INTO `user` VALUES ('12', '301', '罗美佳', 'root', '0', '18777777', '2');
-INSERT INTO `user` VALUES ('13', '302', '罗明轩', 'root', '1', '187775777', '2');
-INSERT INTO `user` VALUES ('14', '303', '罗楠', 'root', '1', '18777777', '2');
-INSERT INTO `user` VALUES ('15', '304', '罗辰阳', 'root', '1', '181777777', '2');
-INSERT INTO `user` VALUES ('16', '305', '左怡雪', 'root', '0', '187775777', '2');
-INSERT INTO `user` VALUES ('17', '211', '左宇琪', 'root', '0', '18777777', '2');
-INSERT INTO `user` VALUES ('18', '221', '左天毓', 'root', '0', '1877177477', '2');
-INSERT INTO `user` VALUES ('19', '231', '左永军', 'root', '0', '18777777', '2');
-INSERT INTO `user` VALUES ('20', '241', '张小刚', 'root', '0', '187773777', '2');
-INSERT INTO `user` VALUES ('21', '251', '张恩阅', 'root', '0', '18777777', '2');
-INSERT INTO `user` VALUES ('22', '261', '张宏雷', 'root', '0', '187727777', '2');
-INSERT INTO `user` VALUES ('23', '271', '张文敏', 'root', '0', '18777777', '2');
-INSERT INTO `user` VALUES ('630', '2028', '超级管理员', '123456', '1', '18677112630', '1');
+INSERT INTO `user` VALUES ('1', '2028', '超级管理员', '2jwecGD86G4=', '18677112630', '1', '312651213@qq.com', '1: 【于 2016-10-24 16:09:34 由 超级管理员，修改了账号信息】<br/>2: 【于 2016-10-28 10:53:21 由 超级管理员，修改了账号信息】', '2016-10-24 16:09:34', '2016-10-28 10:53:21');
+INSERT INTO `user` VALUES ('634', '201', '张三1', 'igfzL8OzIQo=', '18677112630', '1', '2853226007@qq.com', '于 2016-10-28 10:31:54 由 超级管理员，创建了该账号<br/>1: 【于 2016-10-28 10:34:54 由 超级管理员，修改了账号信息】<br/>2: 【于 2016-10-28 12:54:42 由 超级管理员，修改了账号信息】', '2016-10-28 10:31:54', '2016-10-28 12:54:42');
