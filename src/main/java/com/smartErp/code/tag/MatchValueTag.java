@@ -5,6 +5,7 @@ import java.io.Writer;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
 import com.smartErp.util.code.Dumper;
@@ -40,6 +41,9 @@ public class MatchValueTag implements TemplateDirectiveModel{
 		String valueHtml = "";
 		if (!optionMap.isEmpty()) {
 			valueHtml = optionMap.get(String.valueOf(key));
+		}
+		if (StringUtils.isEmpty(valueHtml)) {
+			valueHtml = "";
 		}
 		Writer out = environment.getOut();
 		out.write(valueHtml);

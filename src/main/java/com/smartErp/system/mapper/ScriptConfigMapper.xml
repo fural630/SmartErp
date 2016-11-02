@@ -8,15 +8,15 @@
     		left join user tt on t.creatorId = tt.id
     	<where>
 	    	<choose>
-				<when test="params.scriptUrl!=null and params.scriptUrl!='' ">
-					and t.scriptUrllike CONCAT('%','${params.scriptUrl}','%')  
+				<when test="params.scriptNameLike!=null and params.scriptNameLike!='' ">
+					and t.scriptName like CONCAT('%','${params.scriptName}','%')  
 				</when>
-				<when test="params.scriptUrl!=null and params.scriptUrl!=''">
-					and t.scriptUrl = #{params.scriptUrl}
+				<when test="params.scriptName!=null and params.scriptName!=''">
+					and t.scriptName = #{params.scriptName}
 				</when> 		
 	   		</choose>
 	   		<choose>
-				<when test="params.remark!=null and params.remark!='' ">
+				<when test="params.remarkLike!=null and params.remarkLike!='' ">
 					and t.remark like CONCAT('%','${params.remark}','%')  
 				</when>
 				<when test="params.remark!=null and params.remark!=''">
@@ -49,6 +49,57 @@
 	   		</if>
    		</where>
    		order by t.id desc
+    </select>
+    
+    <insert id="createScriptConfig" parameterType="ScriptConfig">
+    	insert into script_config (
+    		crontab,
+    		scriptUrl,
+    		scriptType,
+    		randomRange,
+    		isOpened,
+    		creatorId,
+    		scriptName,
+    		remark,
+    		createTime,
+   			updateTime
+    	) values (
+    		#{crontab},
+    		#{scriptUrl},
+    		#{scriptType},
+    		#{randomRange},
+    		#{isOpened},
+    		#{creatorId},
+    		#{scriptName},
+    		#{remark},
+    		#{createTime},
+   			#{updateTime}
+    	)
+    </insert>
+    
+    <update id="updateScriptConfig" parameterType="ScriptConfig">
+    	update script_config set
+    		crontab = #{crontab},
+    		scriptUrl = #{scriptUrl},
+    		scriptType = #{scriptType},
+    		randomRange = #{randomRange},
+    		isOpened = #{isOpened},
+    		scriptName = #{scriptName},
+    		remark = #{remark},
+   			updateTime = #{updateTime}
+   		where id = #{id}
+    </update>
+    
+    <select id="getScriptConfigById" resultType="ScriptConfig">
+    	select * from script_config where id = #{id}
+    </select>
+    
+    <delete id="deleteScriptConfig" parameterType="int">
+    	delete from script_config where id = #{id}
+    </delete>
+    
+    <select id="getScriptConfigByOpenStatus" parameterType="int" resultType="ScriptConfig">
+    	select * from script_config where isOpened = #{status}
     </select>
     
 </mapper>

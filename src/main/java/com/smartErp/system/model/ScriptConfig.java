@@ -9,6 +9,7 @@ public class ScriptConfig {
 	private Integer randomRange;
 	private Integer isOpened;
 	private Integer creatorId;
+	private String scriptName;
 	private String remark;
 	private String createTime;
 	private String updateTime;
@@ -72,5 +73,11 @@ public class ScriptConfig {
 	}
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
+	}
+	public String getScriptName() {
+		return scriptName;
+	}
+	public void setScriptName(String scriptName) {
+		this.scriptName = scriptName;
 	}
 }

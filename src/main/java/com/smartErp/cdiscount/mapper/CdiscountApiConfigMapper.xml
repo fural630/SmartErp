@@ -120,5 +120,9 @@
     		tokenTimeOut = #{tokenTimeOut}
     	where id = #{id}
     </update>
+    
+    <select id="getApiConfigByCloseStatus" parameterType="int" resultType="CdiscountApiConfig">
+    	select * from cdiscount_api_config where closeStatus = #{status}
+    </select>
       
 </mapper>  

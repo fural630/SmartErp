@@ -1,64 +1,39 @@
-package com.smartErp.system.service;
+package junitTest;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.smartErp.application.libraries.constentEnum.OpenCloseEnum;
 import com.smartErp.application.libraries.constentEnum.RandomRangeEnum;
 import com.smartErp.application.libraries.constentEnum.ScriptTypeEnum;
-import com.smartErp.cdiscount.dao.CdiscountApiConfigDao;
 import com.smartErp.cdiscount.model.CdiscountApiConfig;
+import com.smartErp.cdiscount.service.CdiscountApiConfigService;
 import com.smartErp.code.SystemInfo;
-import com.smartErp.system.dao.ScriptConfigDao;
 import com.smartErp.system.model.ScriptConfig;
-import com.smartErp.util.frame.Page;
+import com.smartErp.system.service.ScriptConfigService;
 
-@Service
-public class ScriptConfigService {
+public class CreateCrontabTest {
 	
-	@Autowired(required = false)
-	private ScriptConfigDao scriptConfigDao;
-	@Autowired(required = false)
-	private CdiscountApiConfigDao cdiscountApiConfigDao;
+	private ScriptConfigService scriptConfigService;
+	private CdiscountApiConfigService cdiscountApiConfigService;
 	
-	public List<Map<String, Object>> getScriptConfigPage(Page page) {
-		return scriptConfigDao.getScriptConfigPage(page);
+	@Before
+	public void before(){                                                                    
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext(new String[]{"etc/spring/mysql.xml","etc/spring/applicationContext.xml"});
+		scriptConfigService = (ScriptConfigService) applicationContext.getBean("scriptConfigService");
+		cdiscountApiConfigService = (CdiscountApiConfigService) applicationContext.getBean("cdiscountApiConfigService");
 	}
-
-	public void createScriptConfig(ScriptConfig scriptConfig) {
-		scriptConfigDao.createScriptConfig(scriptConfig);
-	}
-
-	public void updateScriptConfig(ScriptConfig scriptConfig) {
-		scriptConfigDao.updateScriptConfig(scriptConfig);
-	}
-
-	public ScriptConfig getScriptConfigById(Integer id) {
-		return scriptConfigDao.getScriptConfigById(id);
-	}
-
-	public void deleteScriptConfig(Integer id) {
-		scriptConfigDao.deleteScriptConfig(id);
-	}
-
-	public List<ScriptConfig> getScriptConfigNoClose() {
-		return scriptConfigDao.getScriptConfigByOpenStatus(OpenCloseEnum.OPEN.getValue());
-	}
-
-	public boolean createCrontab(String host) {
+	
+	@Test
+	public void test() {
+		String host  = "192.168.0.233";
 		String allCrontabStr = "";
-		String targetCrondFile = "/var/spool/cron/root";
-		System.out.println(targetCrondFile);
-		List<ScriptConfig> scriptConfigList = this.getScriptConfigNoClose();
+		List<ScriptConfig> scriptConfigList = scriptConfigService.getScriptConfigNoClose();
 		if (CollectionUtils.isNotEmpty(scriptConfigList)) {
 			for (ScriptConfig scriptConfig : scriptConfigList) {
 				String crontabStr = "";
@@ -72,7 +47,7 @@ public class ScriptConfigService {
 				String crontab = scriptConfig.getCrontab();
 				
 				if (scriptUrl.contains("{apiId}")) {
-					List<CdiscountApiConfig> cdiscountApiConfigList = cdiscountApiConfigDao.getApiConfigByCloseStatus(OpenCloseEnum.OPEN.getValue());
+					List<CdiscountApiConfig> cdiscountApiConfigList = cdiscountApiConfigService.getApiConfigByCloseStatus(OpenCloseEnum.OPEN.getValue());
 					if (CollectionUtils.isNotEmpty(cdiscountApiConfigList)) {
 						for (CdiscountApiConfig cdiscountApiConfig : cdiscountApiConfigList) {
 							String cronPrefix = spliceCronPrefix(scriptType, randomRange, crontab);
@@ -85,38 +60,7 @@ public class ScriptConfigService {
 				allCrontabStr += crontabStr + "\n";
 			}
 			System.out.println(allCrontabStr);
-			if (StringUtils.isNotEmpty(allCrontabStr)) {
-				return writeToCrontab(allCrontabStr, targetCrondFile);
-			}
 		}
-		return false;
-	}
-
-	private boolean writeToCrontab(String allCrontabStr, String targetCrondFile) {
-		File file = new File(targetCrondFile);
-		if (!file.exists()) {
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		BufferedWriter writer = null;
-		try {
-			writer = new BufferedWriter(new FileWriter(file));
-			writer.write(allCrontabStr);
-			return true;
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				writer.flush();
-				writer.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return false;
 	}
 
 	private String spliceCronPrefix(Integer scriptType, Integer randomRange, String crontab) {
@@ -156,5 +100,4 @@ public class ScriptConfigService {
 	private String getRandomNum(int max, int min) {
 		return String.valueOf(Math.round(Math.random() * (max - min) + min));
 	}
-	
 }

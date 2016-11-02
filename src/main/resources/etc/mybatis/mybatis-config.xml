@@ -6,7 +6,7 @@
 
     <typeAliases>  
         <typeAlias alias="User" type="com.smartErp.system.model.User" />
-        <typeAlias alias="ScriptConfg" type="com.smartErp.system.model.ScriptConfig" />
+        <typeAlias alias="ScriptConfig" type="com.smartErp.system.model.ScriptConfig" />
         <typeAlias alias="Page" type="com.smartErp.util.frame.Page" />
         
         <typeAlias alias="CdiscountApiConfig" type="com.smartErp.cdiscount.model.CdiscountApiConfig"/>

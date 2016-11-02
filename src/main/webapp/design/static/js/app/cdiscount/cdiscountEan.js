@@ -39,7 +39,7 @@ function validate () {
 }
 
 function batchSaveCdiscountEan () {
-	var eanTextarea = $("#cdiscountEanDialog textarea[name='eanTextArea']").val().trim();
+	var eanTextarea = $.trim($("#cdiscountEanDialog textarea[name='eanTextArea']").val());
 	var eanArray = eanTextarea.split("\n");
 	var eanList = [];
 	for (var i = 0; i < eanArray.length; i++) {

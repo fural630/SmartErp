@@ -19,5 +19,6 @@ public interface CdiscountApiConfigDao {
 	public List<CdiscountApiConfig> getCdiscountApiConfigByCreator(Integer userId);
 	public void deleteCdiscountApiConfigById(Integer id);
 	public CdiscountApiConfig getCdiscountApiConfigNoCloseByEmail(String email);
-	public void updateToken(@Param("token") String token, @Param("tokenTimeOut") String tokenTimeOut,@Param("id") Integer id);
+	public void updateToken(@Param("token") String token, @Param("tokenTimeOut") String tokenTimeOut, @Param("id") Integer id);
+	public List<CdiscountApiConfig> getApiConfigByCloseStatus(Integer status);
 }

@@ -82,4 +82,8 @@ public class CdiscountApiConfigService {
 		return null;
 	}
 	
+	public List<CdiscountApiConfig> getApiConfigByCloseStatus(Integer status) {
+		return cdiscountApiConfigDao.getApiConfigByCloseStatus(status);
+	}
+	
 }
