@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2016-11-02 17:34:39
+Date: 2016-11-02 17:42:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,7 +27,7 @@ CREATE TABLE `cdiscount_api_config` (
   `apiPassword` varchar(255) DEFAULT NULL,
   `receivablesEmail` varchar(255) DEFAULT NULL,
   `creator` int(11) DEFAULT NULL,
-  `systemLog` varchar(255) DEFAULT NULL,
+  `systemLog` text,
   `createDate` varchar(255) DEFAULT NULL,
   `lastUpdateTime` varchar(255) DEFAULT NULL,
   `closeStatus` int(11) DEFAULT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `cdiscount_api_config` (
 -- ----------------------------
 -- Records of cdiscount_api_config
 -- ----------------------------
-INSERT INTO `cdiscount_api_config` VALUES ('44', 'E-Home', 'ehome2016@kkmoon.com', 'ElectronicHome-api', 'vyIRkN63eeOvmL3GE9xGgxGeirXGifhO', 'ehome2016@kkmoon.com', '1', '1: 【于 2016-10-28 11:18:48 由 超级管理员 操作, 创建了新的店铺授权】<br/>2: 【于 2016-10-28 13:05:57 由 超级管理员 操作, 修改了店铺信息】<br/>3: 【于 2016-10-28 13:08:27 由 超级管理员 操作, 修改了店铺信息】<br/>4: 【于 2016-10-28 13:08:43 由 超级管理员 操作, 修改了店铺信息】', '2016-10-28 11:18:48', '2016-10-28 13:08:43', '1', '', '');
+INSERT INTO `cdiscount_api_config` VALUES ('44', 'E-Home', 'ehome2016@kkmoon.com', 'ehomestore-api', 'wV6q85r8ybB1r4nOJz4cTg==', 'ehome2016@kkmoon.com', '1', '1: 【于 2016-10-28 11:18:48 由 超级管理员 操作, 创建了新的店铺授权】<br/>2: 【于 2016-10-28 13:05:57 由 超级管理员 操作, 修改了店铺信息】<br/>3: 【于 2016-10-28 13:08:27 由 超级管理员 操作, 修改了店铺信息】<br/>4: 【于 2016-10-28 13:08:43 由 超级管理员 操作, 修改了店铺信息】<br/>5: 【于 2016-11-02 17:38:07 由 超级管理员 操作, 修改了店铺信息】<br/>6: 【于 2016-11-02 17:40:29 更新店铺运费失败，API请求不通】<br/>7: 【于 2016-11-02 17:40:43 由 超级管理员，更新了店铺运费模板】', '2016-10-28 11:18:48', '2016-11-02 17:38:06', '1', 'faf9fda419d64a859f5e090464371382', '2016-11-03 17:38:16');
 INSERT INTO `cdiscount_api_config` VALUES ('45', 'Dealpark', 'cds@tomtop.com', 'SalesNEmma201623-api', 'B/04RnY2bpI=', 'cds@tomtop.com', '1', '1: 【于 2016-10-28 13:12:58 由 超级管理员 操作, 创建了新的店铺授权】<br/>2: 【于 2016-10-28 14:10:01 由 超级管理员 操作, 修改了店铺信息】<br/>3: 【于 2016-10-28 15:49:23 由 超级管理员，更新了店铺运费模板】', '2016-10-28 13:12:58', '2016-10-28 14:10:01', '1', '581e256b483b4a6591691d5dcb757796', '2016-10-29 14:22:20');
 
 -- ----------------------------
@@ -16223,7 +16223,7 @@ CREATE TABLE `delivery_mode_infor` (
   `apiId` int(11) DEFAULT NULL,
   `updateTime` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of delivery_mode_infor
@@ -16234,6 +16234,8 @@ INSERT INTO `delivery_mode_infor` VALUES ('70', 'REG', '5', 'Recommandé', 'Regi
 INSERT INTO `delivery_mode_infor` VALUES ('71', 'STD', '5', 'Normal', 'Standard', '45', '2016-10-28 15:49:23');
 INSERT INTO `delivery_mode_infor` VALUES ('72', 'TRK', '5', 'Suivi', 'Tracked', '45', '2016-10-28 15:49:23');
 INSERT INTO `delivery_mode_infor` VALUES ('73', 'REG', '5', 'Recommandé', 'Registered', '45', '2016-10-28 15:49:23');
+INSERT INTO `delivery_mode_infor` VALUES ('76', 'TRK', '5', 'Suivi', 'Tracked', '44', '2016-11-02 17:40:43');
+INSERT INTO `delivery_mode_infor` VALUES ('77', 'REG', '5', 'Recommandé', 'Registered', '44', '2016-11-02 17:40:43');
 
 -- ----------------------------
 -- Table structure for dictionary_type
@@ -16348,7 +16350,7 @@ CREATE TABLE `user` (
   `phone` char(40) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `log` varchar(255) DEFAULT NULL,
+  `log` text,
   `createTime` varchar(255) DEFAULT NULL,
   `updateTime` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
