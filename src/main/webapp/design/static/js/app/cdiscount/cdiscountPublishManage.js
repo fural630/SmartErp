@@ -798,6 +798,7 @@ function changeCategoryCode () {
 				$("#navigation").text("");
 				$("#categoryName").val("");
 			} else {
+				$.unblockUI();
 				var categoryName = data.categoryName;
 				var categoryPathList = data.categoryPathList;
 				var navigation = "";

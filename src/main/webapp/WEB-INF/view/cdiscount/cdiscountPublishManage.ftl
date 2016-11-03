@@ -217,11 +217,11 @@
 	 			</td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title">短标题<i class="star">*</i></td>
+	 			<td class="title">短描述<i class="star">*</i></td>
 	 			<td><input type="text" class="txt width_96" id="shortLabel" name="shortLabel"/></td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title">长标题<i class="star">*</i></td>
+	 			<td class="title">长描述<i class="star">*</i></td>
 	 			<td><input type="text" class="txt width_96" id="longLabel" name="longLabel"/></td>
 	 		</tr>
 	 		<tr>
@@ -229,7 +229,7 @@
 	 			<td><textarea class="txt width_96 remark" id="description" name="description"></textarea></td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title">市场描述<i class="star">*</i></td>
+	 			<td class="title">简要描述<i class="star">*</i></td>
 	 			<td><textarea id="marketingDescription" name="marketingDescription"></textarea></td>
 	 		</tr>
 	 		<tr>

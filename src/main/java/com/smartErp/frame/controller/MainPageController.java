@@ -24,6 +24,7 @@ public class MainPageController {
 	public String goToMainPage(Model model) {
 		User user = UserSingleton.getInstance().getUser();
 		model.addAttribute("loginUserName", user.getName());
+		model.addAttribute("loginUserId", user.getId());
 		return "frame/main";
 	} 
 	

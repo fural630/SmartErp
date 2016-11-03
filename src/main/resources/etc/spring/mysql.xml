@@ -23,7 +23,7 @@
 			<value>root</value>
 		</property>
 		<property name="password">
-			<value>root</value>
+			<value>cdsmarterp</value>
 		</property>
 	</bean>
 	

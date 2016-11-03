@@ -22,9 +22,11 @@
 	    			<li class="second_li">
 	    				<span class="second_level_span">系统管理</span>
 	    				<ul class="second_ul">
-	    					<li><a href="/system/userManage">用户管理</a></li>
+	    					<#if loginUserId == 1>
+    							<li><a href="/system/userManage">用户管理</a></li>
+    						</#if>
 	    					<li><a href="/system/scriptConfigManage">脚本管理</a></li>
-	    					<li><a href="/system/authorityManage">权限管理</a></li>
+	    					<!--<li><a href="/system/authorityManage">权限管理</a></li>-->
 	    					<!--
 	    					<li><a href="/system/getDemoList">Demo</a></li>
 	    					<li><a href="/system/dictionaryManageList" target="_blank">字典配置</a></li>
@@ -42,8 +44,8 @@
 	    				<span class="second_level_span">Cdiscount 专区</span>
 	    				<ul class="second_ul">
 	    					<li><a href="/cdiscount/cdiscountPublishManage">Cdiscount 商品刊登管理</a></li>
-	    					<li><a href="/cdiscount/cdiscountOnlineProductManage">Cdiscount 已上架商品管理</a></li>
-	    					<li><a href="/cdiscount/cdiscountEanManage">Cdiscount EAN管理</a></li>
+	    					<!--<li><a href="/cdiscount/cdiscountOnlineProductManage">Cdiscount 已上架商品管理</a></li>-->
+	    					<!--<li><a href="/cdiscount/cdiscountEanManage">Cdiscount EAN管理</a></li>-->
 	    					<li><a href="/cdiscount/cdiscountApiConfigManage">Cdiscount API配置</a></li>
 	    				</ul>
 	    			</li>
