@@ -170,11 +170,12 @@
 	 				<@select name="closeStatus" cssClass="sel width_100px" id="closeStatus" selected="1"  optionClass="YesNo"/>
 	 			</td>
 	 		</tr>
-	 		
+	 		<!--
 	 		<tr>
 	 			<td class="title width_100px">收款邮箱</td>
 	 			<td><input type="text" class="txt width_70"  name="receivablesEmail" /></td>
 	 		</tr>
+	 		-->
 	 	</table>
 	 	<div style="padding : 5px; text-align:right;">
 	 		<input type="checkbox" name="mastRead"/>&nbsp;勾选确认已阅读<a href="javascript:void(0);" style="color:blue;"  onclick="openMastReadDialog()">《授权须知》</a>，并同意授权。

@@ -178,12 +178,12 @@
 	 			<td><input type="text" class="txt width_50" name="name" required/></td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title width_100px">邮箱<i class="star">*</i></td>
-	 			<td><input type="email" class="txt width_50" name="email" required email/></td>
+	 			<td class="title width_100px">邮箱</td>
+	 			<td><input type="email" class="txt width_50" name="email" email/></td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title width_100px">电话<i class="star">*</i></td>
-	 			<td><input type="text" class="txt width_50" name="phone" required/></td>
+	 			<td class="title width_100px">电话</td>
+	 			<td><input type="text" class="txt width_50" name="phone" /></td>
 	 		</tr>
 	 		<tr>
 	 			<td class="title width_100px">账号状态<i class="star">*</i></td>

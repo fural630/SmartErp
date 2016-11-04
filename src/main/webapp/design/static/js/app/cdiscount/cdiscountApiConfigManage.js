@@ -15,7 +15,9 @@ function initDialog () {
 					primary : "ui-icon-heart"
 				},
 				click : function() {
-					testConnectApi();
+					if (validate()) {
+						testConnectApi();
+					}
 				}
 			}, {
 				text : "保存",
@@ -128,7 +130,8 @@ function saveCdiscountApiConfig () {
 	var email = $.trim(dialog.find("input[name='email']").val());
 	var apiAccount = $.trim(dialog.find("input[name='apiAccount']").val());
 	var apiPassword = $.trim(dialog.find("input[name='apiPassword']").val());
-	var receivablesEmail = $.trim(dialog.find("input[name='receivablesEmail']").val());
+//	var receivablesEmail = $.trim(dialog.find("input[name='receivablesEmail']").val());
+	var receivablesEmail = "";
 	var closeStatus = dialog.find("select[name='closeStatus']").val();
 	
 	var url = "/cdiscount/saveCdiscountApiConfig";
