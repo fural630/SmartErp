@@ -1,62 +1,33 @@
 package com.smartErp.script.cdiscount;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
+
+import org.apache.tools.ant.Project;
+import org.apache.tools.ant.taskdefs.Zip;
+import org.apache.tools.ant.types.FileSet;
 
 public class CdiscountZipUtil {
 	
-	public static void compress(String source,String destinct) throws IOException { 
-        List fileList = loadFilename(new File(source));
-        ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(new File(destinct))); 
-        
-        byte[] buffere = new byte[8192]; 
-        int length; 
-        BufferedInputStream bis; 
-        
-        for(int i = 0; i < fileList.size(); i++) { 
-            File file = (File) fileList.get(i); 
-            zos.putNextEntry(new ZipEntry(getEntryName(source, file))); 
-            bis = new BufferedInputStream(new FileInputStream(file)); 
-            
-            while (true) { 
-                length = bis.read(buffere); 
-                if (length == -1) break; 
-                zos.write(buffere,0,length); 
-            } 
-            bis.close(); 
-            zos.closeEntry(); 
-        } 
-        zos.close(); 
-    } 
-	
-	public static String getEntryName(String base, File file) {
-		File baseFile = new File(base);
-		String filename = file.getPath();
-		if (baseFile.getParentFile().getParentFile() == null) {
-			return filename.substring(baseFile.getParent().length());
-		}
-		String resultEntryName = filename.substring(baseFile.getPath().length() + 1);
-		System.out.println(resultEntryName);
-		return resultEntryName;
-	}
-	
-	public static List loadFilename(File file) {
-		List filenameList = new ArrayList();
-		if (file.isFile()) {
-			filenameList.add(file);
-		}
-		if (file.isDirectory()) {
-			for (File f : file.listFiles()) {
-				filenameList.addAll(loadFilename(f));
-			}
-		}
-		return filenameList;
+	/**
+	 * @param zipSrc		//需要解压到的位置		/xxx/xx
+	 * @param source	//要解压的文件路径		/xxx/xx.zip
+	 * @throws IOException
+	 */
+	public static void compress(String source, String zipSrc) throws IOException { 
+		File zipFile = new File(zipSrc);   
+		File srcdir = new File(source);   
+        if (!srcdir.exists()) {
+            throw new RuntimeException(source + "不存在！");  
+        }
+        Project project = new Project();
+        Zip zip = new Zip();
+        zip.setProject(project);
+        zip.setDestFile(zipFile);   
+        FileSet fileSet = new FileSet();   
+        fileSet.setProject(project);   
+        fileSet.setDir(srcdir);   
+        zip.addFileset(fileSet);   
+        zip.execute();   
 	}
 }
