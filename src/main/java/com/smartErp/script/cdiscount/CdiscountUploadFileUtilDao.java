@@ -54,7 +54,9 @@ public class CdiscountUploadFileUtilDao {
 			String packageName = "product" + currentDigitDateTime + ".zip";
 			CdiscountZipUtil.compress(packagePath, packagePath + packageName);
 			File productPackageFile = new File(packagePath + packageName);
-			return service.uploadProductPackage(productPackageFile);
+			String uploadPath = service.uploadProductPackage(productPackageFile);
+			productPackageFile.delete();
+			return uploadPath;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -160,7 +162,9 @@ public class CdiscountUploadFileUtilDao {
 			String packageName = "offers" + currentDigitDateTime + ".zip";
 			CdiscountZipUtil.compress(packagePath, packagePath + packageName);
 			File offersPackageFile = new File(packagePath + packageName);
-			return service.uploadOffersPackage(offersPackageFile);
+			String uploadPath = service.uploadOffersPackage(offersPackageFile);
+			offersPackageFile.delete();
+			return uploadPath;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
