@@ -47,6 +47,7 @@
 	    					<!--<li><a href="/cdiscount/cdiscountOnlineProductManage">Cdiscount 已上架商品管理</a></li>-->
 	    					<!--<li><a href="/cdiscount/cdiscountEanManage">Cdiscount EAN管理</a></li>-->
 	    					<li><a href="/cdiscount/cdiscountApiConfigManage">Cdiscount API配置</a></li>
+	    					<li><a href="/cdiscount/cdiscountDefaultsValue">Cdiscount 刊登默认值配置</a></li>
 	    				</ul>
 	    			</li>
 	    			<!--

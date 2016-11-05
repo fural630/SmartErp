@@ -8,11 +8,11 @@
   </head>
   <body>
   	<#include "../frame/header.ftl"/>
-  	<form action="/cdiscount/cdiscountApiConfigManage" id="mainPageForm" method="post">
+  	<form action="/cdiscount/cdiscountDefaultsValue" id="mainPageForm" method="post">
 	<div class="current_nav_name clearfix">${title!""}
 		<div class="fr small_size"> 
-			<a class="btn" onclick="showCreateApiConfigDialog('添加授权店铺')">
-				<img src="/design/frame/style/img/add.png"/>添加授权店铺
+			<a class="btn" onclick="showCreateApiConfigDialog('添加默认值模板')">
+				<img src="/design/frame/style/img/add.png"/>添加默认值模板
 			</a>
 		</div>
 	</div>  
@@ -23,80 +23,29 @@
 	    
 	      <table class="tb_border tb_full stripe" id="cdiscountApiConfigTable" name="pageTable">
 	          <tr>
-	            <th>店铺名称</th>
-	            <th>API账号</th>
-	            <th>邮箱</th>
-	            <th>是否开启</th>
-	            <th>创建人</th>
-	            <th>最近修改时间</th>
-	            <th>创建时间</th>
-	            <th>日志</th>
+	            <th>模板名称</th>
+	            <th>是否默认</th>
+	            <th>品牌名</th>
+	            <th>数量</th>
+	            <th>VAT</th>
+	            <th>DEA</th>
+	            <th>Eco Part</th>
+	            <th>备货时间</th>
+	            <th>运费模板</th>
 	            <th>操作</th>
 	          </tr>
 	          <tr class="conditionTr">
+	          	<td></td>
+	          	<td></td>
+	          	<td></td>
+	          	<td></td>
+	          	<td></td>
+	          	<td></td>
+	          	<td></td>
 	          	<td>
-	          		<ul>
-	          			<li>
-		          			<#if page.params.apiId??> 
-	          					<@select id="apiId" name="params[apiId]" selected="${page.params.apiId}" optionClass="CdiscountShopName"  cssClass="sel width_100px" headerKey="" headerValue=""/>
-	          				<#else>
-	          					<@select id="apiId" name="params[apiId]"  optionClass="CdiscountShopName"  cssClass="sel width_100px" headerKey="" headerValue=""/>
-	          				</#if>
-	          			</li>
-	          			<li></li>
-	          		</ul>
-	          	</td>
-	          	<td>
-	          		<ul>
-	          			<li><input type="text" class="txt width_100px" name="params[apiAccount]" value="${page.params.apiAccount!''}"/></li>
-	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[apiAccountLike]" <#if page.params.apiAccountLike??> checked </#if> /></li>
-	          		</ul>
-	          	</td>
-	          	<td>
-	          		<ul>
-	          			<li><input type="text" class="txt width_100px" name="params[email]" value="${page.params.email!""}"/></li>
-	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[emailLike]" <#if page.params.emailLike??> checked </#if> /></li>
-	          		</ul>
-	          	</td>
-	          	<td>
-	          		<ul>
-	          			<li>
-	          				<#if page.params.closeStatus??> 
-	          					<@select id="closeStatus" name="params[closeStatus]" selected="${page.params.closeStatus}" optionClass="YesNo"  cssClass="sel width_100px" headerKey="" headerValue=""/>
-	          				<#else>
-	          					<@select id="closeStatus" name="params[closeStatus]"  optionClass="YesNo"  cssClass="sel width_100px" headerKey="" headerValue=""/>
-	          				</#if>
-	          			<li></li>
-					</ul>	
-	          	</td>
-	          	<td width="200">
 	          		<ul>
 	          			<li></li>
 	          			<li></li>
-					</ul>	
-	          	</td>
-	          	<td>
-	          		<ul>
-	          			<li>
-	          				<label>从：</label>
-	          				<input type="text" class="txt width_100px datepicker" name="params[lastUpdateTimeFrom]" value="${page.params.lastUpdateTimeFrom!""}" />
-	          			</li>
-	          			<li>
-	          				<label>到：</label>
-	          				<input type="text" class="txt width_100px datepicker" name="params[lastUpdateTimeTo]" value="${page.params.lastUpdateTimeTo!""}" />
-	          			</li>
-	          		</ul>
-	          	</td>
-	          	<td>
-	          		<ul>
-	          			<li>
-	          				<label>从：</label>
-	          				<input type="text" class="txt width_100px datepicker" name="params[createDateFrom]" value="${page.params.createDateFrom!""}" />
-	          			</li>
-	          			<li>
-	          				<label>到：</label>
-	          				<input type="text" class="txt width_100px datepicker" name="params[createDateTo]" value="${page.params.createDateTo!""}" />
-	          			</li>
 	          		</ul>
 	          	</td>
 	          	<td></td>
@@ -107,6 +56,7 @@
 		          <#list collection as obj>
 			          <tr>
 				            <td>${obj.shopName}</td>
+				            <td></td>
 				            <td>${obj.apiAccount}</td>
 				            <td>${obj.email}</td>
 				            <td><@matchValue key="${obj.closeStatus}" optionClass="YesNo"/></td>
@@ -114,10 +64,28 @@
 				            <td>${obj.lastUpdateTime}</td>
 				            <td>${obj.createDate!""}</td>
 				            <td>
-				            	<a href="javascript:void(0)" onclick="showLog(this)"><img src="/design/static/images/common/system-log.png"/></a>
-				            	<div class="log_content">
-				            		${obj.systemLog!""}
-				            	</div>
+				            	<table>
+				            		<tr>
+				            			<td class="title" style="width:33%">物流方式</td>
+				            			<td class="title">运费(€)(含税)</td>
+				            			<td class="title">额外运费(€)(含税)</td>
+				            		</tr>
+				            		<tr>
+				            			<td>Standard</td>
+				            			<td>0</td>
+				            			<td>5</td>
+				            		</tr>
+				            		<tr>
+				            			<td>Tracked</td>
+				            			<td>0</td>
+				            			<td>8</td>
+				            		</tr>
+				            		<tr>
+				            			<td>Registered</td>
+				            			<td>0</td>
+				            			<td>10</td>
+				            		</tr>
+				            	</table>
 				            </td>
 				            <td style="width:60px; text-align:center;" >
 							 <div class="menu">
