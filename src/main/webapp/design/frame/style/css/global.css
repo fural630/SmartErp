@@ -231,4 +231,8 @@ button, input, select, textarea {
     text-align : left;
     display: none;
 }
+
+.normal {
+	background-color: #fff;
+}
 /*align end*/

@@ -4,14 +4,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>${title!""}</title>
 	<#include "../frame/common.ftl"/>
-	<script src="/design/static/js/app/cdiscount/cdiscountApiConfigManage.js"></script>
+	<script src="/design/static/js/app/cdiscount/cdiscountDefaultsValue.js"></script>
+	<link rel="stylesheet" type="text/css" href="/design/static/css/cdiscount/cdiscountDefaultsValue.css"/>
   </head>
   <body>
   	<#include "../frame/header.ftl"/>
   	<form action="/cdiscount/cdiscountDefaultsValue" id="mainPageForm" method="post">
 	<div class="current_nav_name clearfix">${title!""}
 		<div class="fr small_size"> 
-			<a class="btn" onclick="showCreateApiConfigDialog('添加默认值模板')">
+			<a class="btn" onclick="showDefaultsValueDialog('添加默认值模板')">
 				<img src="/design/frame/style/img/add.png"/>添加默认值模板
 			</a>
 		</div>
@@ -64,23 +65,23 @@
 				            <td>${obj.lastUpdateTime}</td>
 				            <td>${obj.createDate!""}</td>
 				            <td>
-				            	<table>
-				            		<tr>
+				            	<table class="width_100">
+				            		<tr class="normal">
 				            			<td class="title" style="width:33%">物流方式</td>
-				            			<td class="title">运费(€)(含税)</td>
-				            			<td class="title">额外运费(€)(含税)</td>
+				            			<td class="title">运费(€)</td>
+				            			<td class="title">额外运费(€)</td>
 				            		</tr>
-				            		<tr>
+				            		<tr class="normal">
 				            			<td>Standard</td>
 				            			<td>0</td>
 				            			<td>5</td>
 				            		</tr>
-				            		<tr>
+				            		<tr class="normal">
 				            			<td>Tracked</td>
 				            			<td>0</td>
 				            			<td>8</td>
 				            		</tr>
-				            		<tr>
+				            		<tr class="normal">
 				            			<td>Registered</td>
 				            			<td>0</td>
 				            			<td>10</td>
@@ -112,47 +113,89 @@
 	  </div>
 	</div>
 	
-	<div id="cdiscountApiConfigDialog" style="display:none;">
-	<form id="cdiscountApiConfigDialogForm">
+	<div id="cdiscountDefaultsValueDialog" style="display:none;">
+	<form id="cdiscountDefaultsValueDialogForm">
 		<input type="hidden" name="id"/>
 	 	<table class="popup_tb">
 	 		<tr>
-	 			<td class="title width_100px">店铺名<i class="star">*</i></td>
-	 			<td><input type="text" class="txt width_50" name="shopName" required minlength="2"/></td>
+	 			<td class="title width_100px">模板名称<i class="star">*</i></td>
+	 			<td><input type="text" class="txt width_50" name="templateName" required/></td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title width_100px">邮箱<i class="star">*</i></td>
-	 			<td><input type="email" class="txt width_50" name="email" email required/></td>
+	 			<td class="title">品牌名</td>
+	 			<td><input type="text" class="txt width_50" id="brandName"/></td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title width_100px">API账号<i class="star">*</i></td>
-	 			<td><input type="text" class="txt width_70" name="apiAccount" required/></td>
-	 		</tr>
-	 		<tr>
-	 			<td class="title width_100px">API密码<i class="star">*</i></td>
-	 			<td><input type="password" class="txt width_70" name="apiPassword" required/></td>
-	 		</tr>
-	 		<tr>
-	 			<td class="title width_100px">是否开启<i class="star">*</i></td>
+	 			<td class="title">数量</td>
 	 			<td>
-	 				<@select name="closeStatus" cssClass="sel width_100px" id="closeStatus" selected="1"  optionClass="YesNo"/>
+	 				<input type="text" class="txt width_100px" id="stockQty" name="stockQty" onkeyup="inputNumOnly(this)"/>
 	 			</td>
 	 		</tr>
-	 		<!--
 	 		<tr>
-	 			<td class="title width_100px">收款邮箱</td>
-	 			<td><input type="text" class="txt width_70"  name="receivablesEmail" /></td>
+	 			<td class="title">VAT(%)</td>
+	 			<td>
+	 				<input type="text" class="txt width_100px" id="vat"  name="vat" onkeyup="inputNumOnly(this)"/>
+	 			</td>
 	 		</tr>
-	 		-->
+	 		<tr>
+	 			<td class="title">DEA(€)</td>
+	 			<td>
+	 				<input type="text" class="txt width_100px" id="dea" name="dea" onkeyup="inputNumOnly(this)"/>
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title">Eco part(€)</td>
+	 			<td>
+	 				<input type="text" class="txt width_100px" id="ecoPart"  name="ecoPart" onkeyup="inputNumOnly(this)"/>
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title">运费信息</td>
+	 			<td>
+	 				<table class="width_100 devaultsShippingCharges">
+	            		<tr>
+	            			<td class="title" style="width:33%">物流方式</td>
+	            			<td class="title">运费(€)</td>
+	            			<td class="title">额外运费(€)</td>
+	            		</tr>
+	            		<tr>
+	            			<td>Standard</td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="shippingCharges" class="txt width_50px"></td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="addShippingCharges" class="txt width_50px"></td>
+	            		</tr>
+	            		<tr>
+	            			<td>Tracked</td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="shippingCharges" class="txt width_50px"></td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="addShippingCharges" class="txt width_50px"></td>
+	            		</tr>
+	            		<tr>
+	            			<td>Registered</td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="shippingCharges" class="txt width_50px"></td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="addShippingCharges" class="txt width_50px"></td>
+	            		</tr>
+	            		
+	            		<tr>
+	            			<td>BigParcelEco</td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="shippingCharges" class="txt width_50px"></td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="addShippingCharges" class="txt width_50px"></td>
+	            		</tr>
+	            		
+	            		<tr>
+	            			<td>BigParcelStandard</td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="shippingCharges" class="txt width_50px"></td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="addShippingCharges" class="txt width_50px"></td>
+	            		</tr>
+	            		<tr>
+	            			<td>BigParcelComfort</td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="shippingCharges" class="txt width_50px"></td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="addShippingCharges" class="txt width_50px"></td>
+	            		</tr>
+            		</table>
+	 			</td>
+	 		</tr>
 	 	</table>
-	 	<div style="padding : 5px; text-align:right;">
-	 		<input type="checkbox" name="mastRead"/>&nbsp;勾选确认已阅读<a href="javascript:void(0);" style="color:blue;"  onclick="openMastReadDialog()">《授权须知》</a>，并同意授权。
-	 	</div>
 	 </form>
 	</div>
 	
-	<div id="mastReadDialog" class="hide" title="授权须知">
-		<h2>授权须知</h2>
-	</div>
   </body>
 </html>

@@ -279,12 +279,6 @@
 	 			</td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title">价格(€)(含税)<i class="star">*</i></td>
-	 			<td>
-	 				<input type="text" class="txt width_100px" id="price" name="price" onkeyup="inputNumOnly(this)"/>
-	 			</td>
-	 		</tr>
-	 		<tr>
 	 			<td class="title">VAT(%)<i class="star">*</i></td>
 	 			<td>
 	 				<input type="text" class="txt width_100px" id="vat"  name="vat" onkeyup="inputNumOnly(this)"/>
@@ -324,6 +318,12 @@
 	 			<td class="title">运费信息<i class="star">*</i></td>
 	 			<td>
 	 				<div id="deliveryModeArea"></div>
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title">价格(€)<i class="star">*</i></td>
+	 			<td>
+	 				<input type="text" class="txt width_100px" id="price" name="price" onkeyup="inputNumOnly(this)"/>
 	 			</td>
 	 		</tr>
 	 	</table>
