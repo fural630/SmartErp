@@ -26,6 +26,9 @@
     							<li><a href="/system/userManage">用户管理</a></li>
     						</#if>
 	    					<li><a href="/system/scriptConfigManage">脚本管理</a></li>
+	    					<#if loginUserId == 1>
+	    						<li><a href="/system/systemPromptManage">提示管理</a></li>
+	    					</#if>
 	    					<!--<li><a href="/system/authorityManage">权限管理</a></li>-->
 	    					<!--
 	    					<li><a href="/system/getDemoList">Demo</a></li>
@@ -99,4 +102,8 @@
 		注意：修改个人信息成功后系统将自动退出登录！
 	</div>
 	
+</div>
+
+<div id="systemPromptDialog" style="display:none;" class="ta_l">
+	<div id="_systemPrompt"></div>
 </div>

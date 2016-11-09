@@ -1,6 +1,31 @@
 $(function () {
 	initPersonDialog();
+	initSystemPromptDialog();
 });
+
+function initSystemPromptDialog () {
+	$("#systemPromptDialog").dialog({
+		autoOpen: false,
+		title : "提示",
+		modal: true,
+		width: 430,
+		height: 310,
+		resizable: false,
+		buttons : [ {
+				text : "关闭",
+				icons : {
+					primary : "ui-icon-heart"
+				},
+				click : function() {
+					$(this).dialog("close");
+				}
+			}
+		],
+		close: function( event, ui ) {
+		}
+	});
+	
+}
 
 function initPersonDialog () {
 	$("#personDialog").dialog({
@@ -107,4 +132,8 @@ function fillingPersonData (obj, selector) {
 			select.val(obj[name]);
 		}
 	}
+}
+
+function showSystemPromptDialog (id) {
+	$("#systemPromptDialog").dialog("open");
 }

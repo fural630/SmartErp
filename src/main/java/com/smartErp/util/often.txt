@@ -1,3 +1,4 @@
+<@spring.message ""/>
 $.trim();
 $.unblockUI();
 $.myformPlugins.cleanForm("#cdiscountApiConfigDialog");

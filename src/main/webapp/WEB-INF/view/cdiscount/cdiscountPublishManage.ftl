@@ -187,6 +187,13 @@
 	
 	<div id="cdiscountPublishDialog" style="display:none;">
 		<input type="hidden" name="publishId" value="" />
+		<div class="ta_l publish_template_area">
+			引用刊登模板：
+			<select class="sel width_100px" id="shopName" name="shopName" onchange="onChangeShopName()"></select>
+			<a class="btn" onclick="createCdiscountPublish()">配置与查看模板</a>
+			<a class="btn" onclick="createCdiscountPublish()">设置该模板为默认模板</a>
+			<a onclick="showSystemPromptDialog()"><img src="/design/frame/style/img/question_mark.png"/></a>
+		</div>
 	 	<table class="popup_tb">
 	 		<tr>
 	 			<td class="title width_100px">店铺名<i class="star">*</i></td>

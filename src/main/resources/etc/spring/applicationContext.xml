@@ -25,10 +25,10 @@
 		<property name="freemarkerSettings">
 			<props>
 				<prop key="template_update_delay">10</prop>
-				<prop key="locale">zh_CN</prop>
 				<prop key="datetime_format">yyyy-MM-dd</prop>
 				<prop key="date_format">yyyy-MM-dd</prop>
 				<prop key="number_format">#.##</prop>
+				<prop key="auto_import">/common/spring.ftl as spring</prop>  
 			</props>
 		</property>
 		<property name="freemarkerVariables">
@@ -38,6 +38,14 @@
             </map>
         </property>
 	</bean>
+	
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">  
+	    <property name="basenames">  
+	        <list>  
+	            <value>com/package</value>  
+	        </list>  
+	    </property>  
+	</bean>  
 	
 	<!--
 	View resolvers can also be configured with ResourceBundles or XML files. If you need

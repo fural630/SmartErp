@@ -12,7 +12,7 @@ public class MyLocale {
 	private String propertyName = "com/package";
 		
 	public MyLocale() {
-		setLocale(new Locale("cn"));
+		setLocale(new Locale("zh", "CN"));
 		setResourceBundle(ResourceBundle.getBundle(this.propertyName, this.locale));
 	}
 	
