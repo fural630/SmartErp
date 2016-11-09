@@ -2,20 +2,18 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>${title!""}</title>
+	<title><@s.message "navigator.system.prompt.manage"/></title>
 	<#include "../frame/common.ftl"/>
-	<script src="/design/static/js/app/system/scriptConfigManage.js"></script>
+	<script src="/design/frame/ckeditor/ckeditor.js"></script>
+	<script src="/design/static/js/app/system/systemPromptManage.js"></script>
   </head>
   <body>
   	<#include "../frame/header.ftl"/>
   	<form action="/system/scriptConfigManage" id="mainPageForm" method="post">
-	<div class="current_nav_name clearfix">${title!""}
+	<div class="current_nav_name clearfix"><@s.message "navigator.system.prompt.manage"/>
 		<div class="fr small_size"> 
-			<a class="btn" onclick="showScriptConfigDialog('添加脚本配置')">
-				<img src="/design/frame/style/img/add.png"/>添加脚本配置
-			</a>
-			<a class="btn" onclick="createCrontab()">
-				脚本生成
+			<a class="btn" onclick="showSystemPromptConfigDialog('<@s.message "create.system.prompt"/>')">
+				<img src="/design/frame/style/img/add.png"/><@s.message "create.system.prompt"/>
 			</a>
 		</div>
 	</div>  
@@ -23,86 +21,52 @@
 	<div class="mainbody clearfix"> 
 	  <div class="tableview clearfix">
 	    <div class="content">
-	    
 	      <table class="tb_border tb_full stripe" id="scriptConfigTable" name="pageTable">
 	          <tr>
-	            <th width="120px;">crontab表达式</th>
-	            <th width="180px;">脚本名称</th>
-	            <th>作用简介</th>
-	            <th>脚本类型</th>
-	            <th>随机数范围</th>
-	            <th>是否开启</th>
-	            <th>创建人</th>
-	            <th width="180px;">时间</th>
+	            <th>ID</th>
+	            <th><@s.message "title"/></th>
+	            <th><@s.message "belong.module"/></th>
+	            <th><@s.message "create.time"/></th>
+	            <th><@s.message "update.time"/></th>
 	            <th>操作</th>
 	          </tr>
 	          <tr class="conditionTr">
 	          	<td></td>
 	          	<td>
 	          		<ul>
-	          			<li><input type="text" class="txt width_100px" name="params[scriptName]" value="${page.params.scriptName!''}"/></li>
-	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[scriptNameLike]" <#if page.params.scriptNameLike??> checked </#if> /></li>
+	          			<li><input type="text" class="txt width_100px" name="params[title]" value="${page.params.title!''}"/></li>
+	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[titleNameLike]" <#if page.params.titleLike??> checked </#if> /></li>
 	          		</ul>
 	          	</td>
 	          	<td>
 	          		<ul>
-	          			<li><input type="text" class="txt width_100px" name="params[remark]" value="${page.params.remark!''}"/></li>
-	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[remarkLike]" <#if page.params.remarkLike??> checked </#if> /></li>
+	          			<li><input type="text" class="txt width_100px" name="params[belongModule]" value="${page.params.belongModule!''}"/></li>
+	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[belongModuleLike]" <#if page.params.belongModuleLike??> checked </#if> /></li>
 	          		</ul>
 	          	</td>
-	          	<td>
+	            <td>
 	          		<ul>
 	          			<li>
-	          				<#if page.params.scriptType??> 
-	          					<@select id="scriptType" name="params[scriptType]" selected="${page.params.scriptType}" optionClass="ScriptType"  cssClass="sel width_100px" headerKey="" headerValue=""/>
-	          				<#else>
-	          					<@select id="scriptType" name="params[scriptType]"  optionClass="ScriptType"  cssClass="sel width_80px" headerKey="" headerValue=""/>
-	          				</#if>
-	          			<li></li>
-					</ul>	
-	          	</td>
-	          	<td>
-	          		<ul>
-	          			<li>
-	          				<#if page.params.randomRange??> 
-	          					<@select id="randomRange" name="params[randomRange]" selected="${page.params.randomRange}" optionClass="RandomRange"  cssClass="sel width_100px" headerKey="" headerValue=""/>
-	          				<#else>
-	          					<@select id="randomRange" name="params[randomRange]"  optionClass="RandomRange"  cssClass="sel width_80px" headerKey="" headerValue=""/>
-	          				</#if>
-	          			<li></li>
-					</ul>	
-	          	</td>
-	          	<td>
-	          		<ul>
-	          			<li>
-	          				<#if page.params.isOpened??> 
-	          					<@select id="isOpened" name="params[isOpened]" selected="${page.params.isOpened}" optionClass="OpenClose"  cssClass="sel width_100px" headerKey="" headerValue=""/>
-	          				<#else>
-	          					<@select id="isOpened" name="params[isOpened]"  optionClass="OpenClose"  cssClass="sel width_50px" headerKey="" headerValue=""/>
-	          				</#if>
-	          			<li></li>
-					</ul>	
-	          	</td>
-	          	<td></td>
-	          	<td>
-	          		<ul>
-	          			<li>
-	          				<label>类型：</label>
-	          				<#if page.params.timeQuery??> 
-	          					<@select id="timeQuery" name="params[timeQuery]" selected="${page.params.timeQuery}" optionClass="TimeQuery"  cssClass="sel width_100px" headerKey="" headerValue=""/>
-	          				<#else>
-	          					<@select id="timeQuery" name="params[timeQuery]"  optionClass="TimeQuery"  cssClass="sel width_100px" headerKey="" headerValue=""/>
-	          				</#if>
+	          				<label>从：</label>
+	          				<input type="text" class="txt width_100px datepicker" name="params[createTimeFrom]" value="${page.params.createTimeFrom!""}" />
 	          			</li>
-						<li>
-							<label>从：</label>
-							<input type="text" class="txt width_100px datepicker" name="params[timeFrom]" value="${page.params.timeFrom!""}" />
-						</li>
-						<li>
-							<label>到：</label>
-							<input type="text" class="txt width_100px datepicker" name="params[timeTo]" value="${page.params.timeTo!""}" />
-						</li>
-					</ul>
+	          			<li>
+	          				<label>到：</label>
+	          				<input type="text" class="txt width_100px datepicker" name="params[createTimeTo]" value="${page.params.createTimeTo!""}" />
+	          			</li>
+	          		</ul>
+	          	</td>
+	          	<td>
+	          		<ul>
+	          			<li>
+	          				<label>从：</label>
+	          				<input type="text" class="txt width_100px datepicker" name="params[createTimeFrom]" value="${page.params.createTimeFrom!""}" />
+	          			</li>
+	          			<li>
+	          				<label>到：</label>
+	          				<input type="text" class="txt width_100px datepicker" name="params[createTimeTo]" value="${page.params.createTimeTo!""}" />
+	          			</li>
+	          		</ul>
 	          	</td>
 	          	<td></td>
 	          </tr>
@@ -145,43 +109,26 @@
 	  </div>
 	</div>
 	
-	<div id="scriptConfigDialog" style="display:none;">
-	<form id="scriptConfigDialogForm">
+	<div id="systemPromptConfigDialog" style="display:none;">
 		<input type="hidden" name="id"/>
 	 	<table class="popup_tb">
 	 		<tr>
-	 			<td class="title width_100px">crontab表达式<i class="star">*</i></td>
-	 			<td><input type="text" class="txt width_50" name="crontab" required/></td>
+	 			<td class="title width_100px"><@s.message "title"/><i class="star">*</i></td>
+	 			<td><input type="text" class="txt width_50" name="title"/></td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title width_100px">脚本名称<i class="star">*</i></td>
-	 			<td><input type="text" class="txt width_50" name="scriptName" required/></td>
-	 		</tr>
-	 		<tr>
-	 			<td class="title width_100px">脚本类型<i class="star">*</i></td>
-	 			<td><@select name="scriptType" cssClass="sel width_100px" id="scriptType" selected="5"  optionClass="ScriptType"/></td>
-	 		</tr>
-	 		<tr>
-	 			<td class="title width_100px">随机数范围<i class="star">*</i></td>
-	 			<td><@select name="randomRange" cssClass="sel width_100px" id="randomRange" selected="5"  optionClass="RandomRange"/></td>
-	 		</tr>
-	 		<tr>
-	 			<td class="title width_100px">是否开启<i class="star">*</i></td>
-	 			<td><@select name="isOpened" cssClass="sel width_100px" id="isOpened" selected="1"  optionClass="OpenClose"/></td>
-	 		</tr>
-	 		<tr>
-	 			<td class="title width_100px">脚本地址<i class="star">*</i></td>
+	 			<td class="title width_100px"><@s.message "prompt.address"/></td>
 	 			<td>
-	 				例如：http://{host}:8080/authenticate/runScript?type=cdiscount/ScriptTest&args=xx
-	 				<textarea class="txt width_96 remark" id="scriptUrl" name="scriptUrl" required></textarea>
+	 				<textarea class="txt width_96 remark" name="address"></textarea>
 	 			</td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title width_100px">脚本备注</td>
-	 			<td><textarea class="txt width_96 remark" id="remark" name="remark"></textarea></td>
+	 			<td class="title width_100px"><@s.message "prompt.content"/><i class="star">*</i></td>
+	 			<td>
+	 				<textarea class="txt width_96 remark" id="content" name="content"></textarea>
+	 			</td>
 	 		</tr>
 	 	</table>
-	 </form>
 	</div>
 	
   </body>
