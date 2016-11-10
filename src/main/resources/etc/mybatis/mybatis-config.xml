@@ -14,8 +14,10 @@
     	<typeAlias alias="CdiscountPublish" type="com.smartErp.cdiscount.model.CdiscountPublish"/>
     	<typeAlias alias="DeliveryModeInfor" type="com.smartErp.cdiscount.model.DeliveryModeInfor"/>
     	<typeAlias alias="PublishDeliveryMode" type="com.smartErp.cdiscount.model.PublishDeliveryMode"/>
+    	<typeAlias alias="DefaultsDeliveryMode" type="com.smartErp.cdiscount.model.DefaultsDeliveryMode"/>
     	<typeAlias alias="CdiscountPublishImage" type="com.smartErp.cdiscount.model.CdiscountPublishImage"/>
     	<typeAlias alias="CdiscountEan" type="com.smartErp.cdiscount.model.CdiscountEan"/>
+    	<typeAlias alias="CdiscountDefaultsValue" type="com.smartErp.cdiscount.model.CdiscountDefaultsValue"/>
     	
         <typeAlias alias="DictionaryType" type="com.smartErp.system.model.DictionaryType"/>
         
@@ -33,8 +35,10 @@
         <mapper resource="com/smartErp/cdiscount/mapper/CdiscountPublishMapper.xml"/>
         <mapper resource="com/smartErp/cdiscount/mapper/DeliveryModeInforMapper.xml"/>
         <mapper resource="com/smartErp/cdiscount/mapper/PublishDeliveryModeMapper.xml"/>
+        <mapper resource="com/smartErp/cdiscount/mapper/DefaultsDeliveryModeMapper.xml"/>
         <mapper resource="com/smartErp/cdiscount/mapper/CdiscountPublishImageMapper.xml"/>
         <mapper resource="com/smartErp/cdiscount/mapper/CdiscountEanMapper.xml"/>
+        <mapper resource="com/smartErp/cdiscount/mapper/CdiscountDefaultsValueMapper.xml"/>
         
         <mapper resource="com/smartErp/product/mapper/ProductMapper.xml"></mapper>
     </mappers>  

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.smartErp.cdiscount.dao.CdiscountDefaultsValueDao">  
+
+	<select id="getCdiscountDefaultsValueByPage" parameterType="Page" resultType="hashMap">
+		select t.* from cdiscount_defaults_value t 
+		<where>
+			<if test="params.id!=null and params.id !=''">
+    			and t.id = #{params.id}
+    		</if>
+    		<if test="params.apiId!=null and params.apiId !=''">
+    			and t.apiId = #{params.apiId}
+    		</if>
+    		<choose>
+				<when test="params.skuLike!=null and params.skuLike!='' ">
+					and ttt.sku like CONCAT('%','${params.sku}','%')  
+				</when>
+				<when test="params.sku!=null and params.sku!=''">
+					and ttt.sku = #{params.sku}
+				</when> 		
+    		</choose>
+    		<if test="params.ean!=null and params.ean !=''">
+    			and t.ean = #{params.ean}
+    		</if>
+    		<if test="params.publishStatus!=null and params.publishStatus !=''">
+    			and t.publishStatus = #{params.publishStatus}
+    		</if>
+    		
+    		<if test="params.timeQuery == 'createTime' and params.timeFrom !=null and params.timeFrom!=''" >
+    			<![CDATA[ and t.createTime >= #{params.timeFrom} ]]>
+    		</if>
+    		
+    		<if test="params.timeQuery == 'createTime' and params.timeTo !=null and params.timeTo!=''" >
+    			<![CDATA[ and t.createTime <= #{params.timeTo} ]]>
+    		</if>
+    		
+		    <if test="params.timeQuery == 'updateTime' and params.timeFrom !=null and params.timeFrom!=''" >
+    			<![CDATA[ and t.updateTime >= #{params.timeFrom} ]]>
+    		</if>
+    		
+    		<if test="params.timeQuery == 'updateTime' and params.timeTo !=null and params.timeTo!=''" >
+    			<![CDATA[ and t.updateTime <= #{params.timeTo} ]]>
+    		</if>
+    		
+			<if test="params.userId!=null and params.userId !=''">
+    			and t.creator = #{params.userId}
+    		</if>
+		</where>
+		order by t.id desc
+	</select>
+   
+    <insert id="insertCdiscountDefaultsValue" parameterType="CdiscountDefaultsValue" useGeneratedKeys="true" keyProperty="id">
+    	insert into cdiscount_defaults_value
+    	(
+    		id,
+    		templateName,
+    		brandName,
+    		quantity,
+    		dea,
+    		vat,
+    		ecoPart,
+    		stockingTime,
+    		isDefaults,
+    		creator
+    	) values(
+	    	#{id},
+    		#{templateName},
+    		#{brandName},
+    		#{quantity},
+    		#{dea},
+    		#{vat},
+    		#{ecoPart},
+    		#{stockingTime},
+    		#{isDefaults},
+    		#{creator}
+    	)
+    </insert>
+    
+    <select id="getDefaultsTemplate" resultType="CdiscountDefaultsValue">
+    	select * from cdiscount_defaults_value where creator = #{userId} and isDefaults = #{isDefaults}
+    </select>
+    
+    <delete id="deleteById" parameterType="int">
+    	delete from cdiscount_defaults_value where id = #{id}
+    </delete>
+    
+    <select id="getCdiscountDefaultsValueById" parameterType="int" resultType="CdiscountDefaultsValue">
+    	select * from cdiscount_defaults_value where id = #{id}
+    </select>
+    
+    <update id="udpateCdiscountDefaultsValue" parameterType="CdiscountDefaultsValue">
+    	update cdiscount_defaults_value set
+    		templateName = #{templateName},
+    		brandName = #{brandName},
+    		quantity = #{quantity},
+    		dea = #{dea},
+    		vat = #{vat},
+    		ecoPart = #{ecoPart},
+    		stockingTime = #{stockingTime}
+    	where id = #{id}
+    </update>
+    
+    <update id="updateIsDefaultsTemplate">
+    	update cdiscount_defaults_value set 
+    		isDefaults = #{isDefaults}
+    	where creator = #{userId}
+    </update>
+    
+    <update id="setAsDefaultsTemplate">
+    	update cdiscount_defaults_value set
+    		isDefaults = #{isDefaults}
+    	where id = #{id}
+    </update>
+      
+</mapper>  

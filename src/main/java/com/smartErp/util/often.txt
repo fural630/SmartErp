@@ -11,7 +11,6 @@ $.ajax({
 		parentId : parentId
 	},
 	success : function (data) {
-		$.unblockUI();
 		$.message.showMessage(data);
 	}
 });
