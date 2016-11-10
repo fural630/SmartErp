@@ -195,6 +195,16 @@
 					</select>
 	 			</td>
 	 		</tr>
+	 		<tr id="publish_template_area" style="display:none;">
+				<td class="title width_100px">引用刊登模板</td>
+	 			<td>
+	 				<select class="sel width_100px" id="defaultValuteTemplate" name="defaultValuteTemplate" onchange="onChangeShopName()"></select>
+					<a class="btn" onclick="referenceTemplate()">确认引用</a>
+					<a class="btn" onclick="viewTemplate()">查看该模板</a>
+					<a class="btn" onclick="setAsDefaultsTemplate()">设置该模板为默认模板</a>
+					<a onclick="showSystemPromptDialog()"><img src="/design/frame/style/img/question_mark.png"/></a>
+	 			</td> 		
+	 		</tr>
 	 		<tr>
 	 			<td class="title">SKU<i class="star">*</i></td>
 	 			<td><input type="text" class="txt width_200px" id="sku" name="sku" onchange="onChangeSku()"/></td>
@@ -330,6 +340,91 @@
 	 	<div class="validateTip"></div>
 	</div>
 	
+	<div id="templateDialog" style="display:none;">
+	 	<table class="popup_tb">
+	 		<tr>
+	 			<td class="title width_100px"><@s.message "template.name"/><i class="star">*</i></td>
+	 			<td><input type="text" class="txt width_50" name="templateName" id="templateName" required/></td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title"><@s.message "brand.name"/></td>
+	 			<td><input type="text" class="txt width_50" name="brandName" id="brandName"/></td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title"><@s.message "quantity"/></td>
+	 			<td>
+	 				<input type="text" class="txt width_100px" name="quantity" id="quantity" onkeyup="inputNumOnly(this)"/>
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title">VAT(%)</td>
+	 			<td>
+	 				<input type="text" class="txt width_100px" id="vat"  name="vat" onkeyup="inputNumOnly(this)"/>
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title">DEA(€)</td>
+	 			<td>
+	 				<input type="text" class="txt width_100px" id="dea" name="dea" onkeyup="inputNumOnly(this)"/>
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title">Eco part(€)</td>
+	 			<td>
+	 				<input type="text" class="txt width_100px" id="ecoPart"  name="ecoPart" onkeyup="inputNumOnly(this)"/>
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title"><@s.message "stocking.time"/></td>
+	 			<td>
+	 				<input type="text" class="txt width_100px" id="stockingTime"  name="stockingTime" onkeyup="inputNumOnly(this)"/>
+	 			</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title"><@s.message "freight.message"/></td>
+	 			<td>
+	 				<table class="width_100 devaultsShippingCharges">
+	            		<tr>
+	            			<td class="title" style="width:33%"><@s.message "shipping.methods"/></td>
+	            			<td class="title"><@s.message "freight.eur"/></td>
+	            			<td class="title"><@s.message "additional.freight"/></td>
+	            		</tr>
+	            		<tr class="deliveryModeTr">
+	            			<td>Standard<input type="hidden" name="deliveryMode" value="Standard"/></td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="shippingCharges" class="txt width_50px"></td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="addShippingCharges" class="txt width_50px"></td>
+	            		</tr>
+	            		<tr class="deliveryModeTr">
+	            			<td>Tracked<input type="hidden" name="deliveryMode" value="Tracked"/></td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="shippingCharges" class="txt width_50px"></td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="addShippingCharges" class="txt width_50px"></td>
+	            		</tr>
+	            		<tr class="deliveryModeTr">
+	            			<td>Registered<input type="hidden" name="deliveryMode" value="Registered"/></td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="shippingCharges" class="txt width_50px"></td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="addShippingCharges" class="txt width_50px"></td>
+	            		</tr>
+	            		<tr class="deliveryModeTr">
+	            			<td>BigParcelEco<input type="hidden" name="deliveryMode" value="BigParcelEco"/></td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="shippingCharges" class="txt width_50px"></td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="addShippingCharges" class="txt width_50px"></td>
+	            		</tr>
+	            		
+	            		<tr class="deliveryModeTr">
+	            			<td>BigParcelStandard<input type="hidden" name="deliveryMode" value="BigParcelStandard"/></td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="shippingCharges" class="txt width_50px"></td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="addShippingCharges" class="txt width_50px"></td>
+	            		</tr>
+	            		<tr class="deliveryModeTr">
+	            			<td>BigParcelComfort<input type="hidden" name="deliveryMode" value="BigParcelComfort"/></td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="shippingCharges" class="txt width_50px"></td>
+	            			<td><input type="text" onkeyup="inputNumOnly(this)" name="addShippingCharges" class="txt width_50px"></td>
+	            		</tr>
+            		</table>
+	 			</td>
+	 		</tr>
+	 	</table>
+	</div>
 	
   </body>
 </html>

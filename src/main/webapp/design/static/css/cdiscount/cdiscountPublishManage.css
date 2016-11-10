@@ -116,3 +116,9 @@
 	font-style: italic;
 	font-weight: bolder;
 }
+
+.publish_template_area {
+	font-size: 12px;
+    line-height: 18px;
+    padding: 5px;
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.smartErp.cdiscount.dao.DefaultsDeliveryModeDao">  
+   
+    <insert id="insertDefaultsValueDeliveryMode" parameterType="DefaultsDeliveryMode">
+    	insert into defaults_delivery_mode
+    	(
+    		deliveryMode,
+    		addShippingCharges,
+    		shippingCharges,
+    		defaultsId
+    	) values(
+	    	#{deliveryMode},
+	    	#{addShippingCharges},
+	    	#{shippingCharges},
+	    	#{defaultsId}
+    	)
+    </insert>
+    
+    <delete id="deleteDefaultsValueDeliveryModeByDefaultsId" parameterType="int">
+    	delete from defaults_delivery_mode where defaultsId = #{defaultsId}
+    </delete>
+    
+    <select id="getDefaultsValueDeliveryModeListByDefaultsId" parameterType="int" resultType="DefaultsDeliveryMode">
+    	select * from defaults_delivery_mode where defaultsId = #{defaultsId}
+    </select>
+      
+</mapper>  
