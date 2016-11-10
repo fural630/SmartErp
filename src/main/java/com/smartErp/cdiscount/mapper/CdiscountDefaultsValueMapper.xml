@@ -112,5 +112,13 @@
     		isDefaults = #{isDefaults}
     	where id = #{id}
     </update>
+    
+    <select id="getCdiscountDefaultsValueByCreator" parameterType="int" resultType="CdiscountDefaultsValue">
+    	select * from cdiscount_defaults_value where creator = #{userId}
+    </select>
       
+      
+    <select id="getDefaultsTemplateValue" resultType="CdiscountDefaultsValue">
+    	select * from cdiscount_defaults_value where creator = #{userId} and isDefaults = #{isDefaults}
+    </select>
 </mapper>  

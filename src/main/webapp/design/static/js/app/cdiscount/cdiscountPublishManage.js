@@ -29,30 +29,109 @@ function initDialog() {
 			cleanCdiscountPublishDialog();
 		}
 	});
+	
+	$("#templateDialog").dialog({
+		autoOpen: false,
+		modal: true,
+		width: 800,
+		height: 600,
+		resizable: false,
+		buttons : [{
+				text : "关闭",
+				icons : {
+					primary : "ui-icon-heart"
+				},
+				click : function() {
+					$(this).dialog("close");
+				}
+			}
+		],
+		close: function( event, ui ) {
+		}
+	});
 }
 
 function onChangeShopName() {
 	showDeliveryMode();
 }
 
-function showDeliveryMode () {
+function referenceTemplate () {
+	var templateId = $("#cdiscountPublishDialog select[name='defaultValuteTemplate']").val();
 	var apiId = $("#cdiscountPublishDialog select[name='shopName']").val();
+	if (apiId == "") {
+		var param = {
+				status : 0,
+				message : "请先选择店铺"
+			};
+		$.message.showMessage(param);
+		return;
+	}
+	
+	if (templateId == "") {
+		var param = {
+				status : 0,
+				message : "请选择需要引入的模板"
+			};
+		$.message.showMessage(param);
+		return;
+	}
+	fillingTemplateById(templateId);
+}
+
+function fillingTemplateById (templateId) {
 	$.ajax({
-		url : "/cdiscount/getDeliveryModeInfoByApiId",
+		url : "/cdiscount/getCdiscountDefaultsValueById",
 		type: 'POST',
 		dataType : "json",
-		async: false,
 		data : {
-			apiId : apiId
+			id : templateId
 		},
 		success : function (data) {
 			$.unblockUI();
-			var deliveryModeInfoList = data;
-			$("#deliveryModeArea").html("");
-			createSmallParcelHtml(deliveryModeInfoList);
-			createBigParcelHtml(deliveryModeInfoList);
+			if (null != data && undefined != data) {
+				if (null != data.cdiscountDefaultsValue) {
+					var cdiscountDefaultsValue = data.cdiscountDefaultsValue;
+					$("#cdiscountPublishDialog input[name='brandName']").val(cdiscountDefaultsValue.brandName);
+					$("#cdiscountPublishDialog input[name='stockQty']").val(cdiscountDefaultsValue.quantity);
+					$("#cdiscountPublishDialog input[name='vat']").val(cdiscountDefaultsValue.vat);
+					$("#cdiscountPublishDialog input[name='dea']").val(cdiscountDefaultsValue.dea);
+					$("#cdiscountPublishDialog input[name='ecoPart']").val(cdiscountDefaultsValue.ecoPart);
+					$("#cdiscountPublishDialog input[name='preparationTime']").val(cdiscountDefaultsValue.stockingTime);
+				}
+				if (null != data.defaultsDeliveryModeList && data.defaultsDeliveryModeList.length > 0) {
+					var defaultsDeliveryModeList = data.defaultsDeliveryModeList;
+					fillingDeliveryModeData(defaultsDeliveryModeList);
+				}
+				var param = {
+					status : 1,
+					message : "引用成功"
+				};
+				$.message.showMessage(param);
+			}
 		}
 	});
+}
+
+function showDeliveryMode () {
+	var apiId = $("#cdiscountPublishDialog select[name='shopName']").val();
+	if (apiId != "") {
+		$.ajax({
+			url : "/cdiscount/getDeliveryModeInfoByApiId",
+			type: 'POST',
+			dataType : "json",
+			async: false,
+			data : {
+				apiId : apiId
+			},
+			success : function (data) {
+				$.unblockUI();
+				var deliveryModeInfoList = data;
+				$("#deliveryModeArea").html("");
+				createSmallParcelHtml(deliveryModeInfoList);
+				createBigParcelHtml(deliveryModeInfoList);
+			}
+		});
+	}
 }
 
 function createSmallParcelHtml (deliveryModeInfoList) {
@@ -129,6 +208,9 @@ function cleanCdiscountPublishDialog () {
 
 function createCdiscountPublish () {
 	updateShopNameSelect("");
+	updateTemplateSelect("");
+	getDefaultsTemplateValue();
+	$("#publish_template_area").show();
 	showCreatePublishDialog("Cdiscount 创建商品刊登");
 }
 
@@ -680,6 +762,7 @@ function saveCdiscountPublish(){
 }
 
 function editCdiscountPublish (id) {
+	$("#publish_template_area").hide();
 	showCreatePublishDialog("Cdiscount 修改商品刊登");
 	$("input[name='publishId']").val(id);
 	$.ajax({
@@ -730,7 +813,7 @@ function editCdiscountPublish (id) {
  * @param publishDeliveryModeList
  */
 function fillingDeliveryModeData (publishDeliveryModeList) {
-	var deliveryModeTr = $(".deliveryModeTr");
+	var deliveryModeTr = $("#cdiscountPublishDialog").find(".deliveryModeTr");
 	if (publishDeliveryModeList.length > 0 ) {
 		$.each(publishDeliveryModeList, function (i, obj) {
 			deliveryModeTr.each(function () {
@@ -896,6 +979,114 @@ function deleteCdiscountPublish (id) {
 				if (data.status == 1){
 					refresh(1000);
 				}
+			}
+		});
+	}
+}
+
+function updateTemplateSelect(templateId) { 
+	$.ajax({
+		url : "/cdiscount/getTemplateByCreator",
+		type: 'POST',
+		dataType : "json",
+		success : function (data) {
+			$.unblockUI();
+			var options = "<option value=''>-- 请选择 --</option>";
+			$.each(data, function (key, value) {
+				if (templateId != undefined && templateId == key) {
+					options += "<option value='" + key + "' selected >" + value + "</option>";
+				} else {
+					options += "<option value='" + key + "'>" + value + "</option>";
+				}
+			});
+			$("#cdiscountPublishDialog select[name='defaultValuteTemplate']").html(options);
+		}
+	});
+}
+
+function getDefaultsTemplateValue() {
+	$.ajax({
+		url : "/cdiscount/getDefaultsTemplateValue",
+		type: 'POST',
+		dataType : "json",
+		success : function (data) {
+			$.unblockUI();
+			if (null != data && undefined != data) {
+				var cdiscountDefaultsValue = data;
+				updateTemplateSelect(cdiscountDefaultsValue.id);
+			}
+		}
+	});
+}
+
+function viewTemplate () {
+	var templateId = $("#cdiscountPublishDialog select[name='defaultValuteTemplate']").val();
+	if (templateId == "") {
+		var param = {
+				status : 0,
+				message : "请先选择模板"
+			};
+		$.message.showMessage(param);
+		return;
+	}
+	
+	$.ajax({
+		url : "/cdiscount/getCdiscountDefaultsValueById",
+		type: 'POST',
+		dataType : "json",
+		data : {
+			id : templateId
+		},
+		success : function (data) {
+			$.unblockUI();
+			if (null != data) {
+				var e = data.cdiscountDefaultsValue;
+				var dialog = $("#templateDialog");
+				dialog.find("input[name='templateName']").val(e.templateName);
+				dialog.find("input[name='brandName']").val(e.brandName);
+				dialog.find("input[name='quantity']").val(e.quantity);
+				dialog.find("input[name='dea']").val(e.dea);
+				dialog.find("input[name='vat']").val(e.vat);
+				dialog.find("input[name='ecoPart']").val(e.ecoPart);
+				dialog.find("input[name='stockingTime']").val(e.stockingTime);
+				var defaultsDeliveryModeList = data.defaultsDeliveryModeList;
+				fillingDeliveryModeData(defaultsDeliveryModeList);
+				showTemplateDialog("查看模板信息");
+			} else {
+				var param = {
+					status : -1
+				};
+				$.message.showMessage(param);
+			}
+		}
+	});
+}
+
+function showTemplateDialog (title) {
+	$("#templateDialog").dialog("option", "title", title);
+	$("#templateDialog").dialog("open");
+}
+
+function setAsDefaultsTemplate () {
+	var templateId = $("#cdiscountPublishDialog select[name='defaultValuteTemplate']").val();
+	if (templateId == "") {
+		var param = {
+				status : 0,
+				message : "请先选择模板"
+			};
+		$.message.showMessage(param);
+		return;
+	}
+	if(confirm("确定将此模板设置为默认模板吗，其他模板将被设置成非默认模板？")){
+		$.ajax({
+			url : "/cdiscount/setAsDefaultsTemplate",
+			type: 'POST',
+			dataType : "json",
+			data : {
+				id : templateId
+			},
+			success : function (data) {
+				$.message.showMessage(data);
 			}
 		});
 	}

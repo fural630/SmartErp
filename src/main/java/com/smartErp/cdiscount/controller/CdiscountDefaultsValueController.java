@@ -123,4 +123,26 @@ public class CdiscountDefaultsValueController extends MainPage{
 		cdiscountDefaultsValueService.setAsDefaultsTemplate(id);
 		return JsonUtil.toJsonStr(returnMessage);
 	}
+	
+	@RequestMapping("getTemplateByCreator")
+	@ResponseBody
+	public String getTemplateByCreator () {
+		User user = UserSingleton.getInstance().getUser();
+		Map<String, String> resultMap = new HashMap<String, String>();
+		List<CdiscountDefaultsValue> cdiscountDefaultsValueList = cdiscountDefaultsValueService.getCdiscountDefaultsValueByCreator(user.getId());
+		if (CollectionUtils.isNotEmpty(cdiscountDefaultsValueList)) {
+			for (CdiscountDefaultsValue cdiscountDefaultsValue : cdiscountDefaultsValueList) {
+				resultMap.put(String.valueOf(cdiscountDefaultsValue.getId()), cdiscountDefaultsValue.getTemplateName());
+			}
+		}
+		return JsonUtil.toJsonStr(resultMap);
+	}
+	
+	@RequestMapping("getDefaultsTemplateValue")
+	@ResponseBody
+	public String getDefaultsTemplateValue() {
+		User user = UserSingleton.getInstance().getUser();
+		CdiscountDefaultsValue cdiscountDefaultsValue = cdiscountDefaultsValueService.getDefaultsTemplateValue(user.getId(), YesNoEnum.YES.getValue());
+		return JsonUtil.toJsonStr(cdiscountDefaultsValue);
+	}
 }

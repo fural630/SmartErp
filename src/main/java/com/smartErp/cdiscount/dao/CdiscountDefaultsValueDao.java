@@ -25,5 +25,9 @@ public interface CdiscountDefaultsValueDao {
 	public void updateIsDefaultsTemplate(@Param("isDefaults")Integer isDefaults,@Param("userId") Integer userId);
 
 	public void setAsDefaultsTemplate(@Param("id")Integer id, @Param("isDefaults")Integer isDefaults);
+
+	public List<CdiscountDefaultsValue> getCdiscountDefaultsValueByCreator(Integer userId);
+
+	public CdiscountDefaultsValue getDefaultsTemplateValue(@Param("userId")Integer userId, @Param("isDefaults")Integer isDefaults);
 	
 }

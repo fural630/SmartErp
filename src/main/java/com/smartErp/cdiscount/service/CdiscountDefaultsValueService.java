@@ -56,6 +56,15 @@ public class CdiscountDefaultsValueService {
 	public void setAsDefaultsTemplate(Integer id) {
 		cdiscountDefaultsValueDao.setAsDefaultsTemplate(id, YesNoEnum.YES.getValue());
 	}
+
+	public List<CdiscountDefaultsValue> getCdiscountDefaultsValueByCreator(
+			Integer userId) {
+		return cdiscountDefaultsValueDao.getCdiscountDefaultsValueByCreator(userId);
+	}
+
+	public CdiscountDefaultsValue getDefaultsTemplateValue(Integer userId, Integer isDefaults) {
+		return cdiscountDefaultsValueDao.getDefaultsTemplateValue(userId, isDefaults);
+	}
 	
 	
 }
