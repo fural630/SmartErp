@@ -261,3 +261,35 @@ CREATE TABLE `system_prompt` (
   `updateTime` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- ----------------------------
+-- Table structure for defaults_delivery_mode
+-- ----------------------------
+DROP TABLE IF EXISTS `defaults_delivery_mode`;
+CREATE TABLE `defaults_delivery_mode` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `deliveryMode` varchar(255) DEFAULT NULL,
+  `addShippingCharges` double DEFAULT NULL,
+  `shippingCharges` double DEFAULT NULL,
+  `defaultsId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=142 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for cdiscount_defaults_value
+-- ----------------------------
+DROP TABLE IF EXISTS `cdiscount_defaults_value`;
+CREATE TABLE `cdiscount_defaults_value` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `templateName` varchar(255) DEFAULT NULL,
+  `brandName` varchar(255) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `dea` double DEFAULT NULL,
+  `vat` double DEFAULT NULL,
+  `ecoPart` double DEFAULT NULL,
+  `stockingTime` int(11) DEFAULT NULL,
+  `isDefaults` int(11) DEFAULT NULL,
+  `creator` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
