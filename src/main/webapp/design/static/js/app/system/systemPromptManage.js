@@ -15,9 +15,7 @@ function initDialog () {
 					primary : "ui-icon-heart"
 				},
 				click : function() {
-					if (validate()) {
-						saveSystemPromptConfig();
-					}
+					
 				}
 			},{
 				text : "保存",
@@ -25,7 +23,9 @@ function initDialog () {
 					primary : "ui-icon-heart"
 				},
 				click : function() {
-					
+					if (validate()) {
+						saveSystemPromptConfig();
+					}
 				}
 			}
 		],
@@ -38,4 +38,19 @@ function initDialog () {
 function showSystemPromptConfigDialog (title) {
 	$("#systemPromptConfigDialog").dialog("option", "title", title);
 	$("#systemPromptConfigDialog").dialog("open");
+}
+
+function validate () {
+	return $("#systemPromptConfigDialogForm").valid();
+}
+
+function saveSystemPromptConfig () {
+	var dialog = $("#systemPromptConfigDialog");
+	var id = $.trim(dialog.find("input[name='id']").val());
+	var title = $.trim(dialog.find("input[name='title']").val());
+	var address = dialog.find("textarea[name='address']").val();
+	var content = CKEDITOR.instances["content"].getData();
+	
+	
+	
 }

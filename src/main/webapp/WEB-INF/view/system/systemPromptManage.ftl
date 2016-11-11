@@ -116,15 +116,24 @@
 	
 	<div id="systemPromptConfigDialog" style="display:none;">
 		<input type="hidden" name="id"/>
+		<form id="systemPromptConfigDialogForm">
 	 	<table class="popup_tb">
 	 		<tr>
 	 			<td class="title width_100px"><@s.message "title"/><i class="star">*</i></td>
-	 			<td><input type="text" class="txt width_50" name="title"/></td>
+	 			<td><input type="text" class="txt width_50" name="title" required/></td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title width_100px"><@s.message "height"/><i class="star">*</i></td>
+	 			<td><input type="text" class="txt width_100px" value="310" name="height" required/>&nbsp;px</td>
+	 		</tr>
+	 		<tr>
+	 			<td class="title width_100px"><@s.message "width"/><i class="star">*</i></td>
+	 			<td><input type="text" class="txt width_100px" value="430" name="width" required/>&nbsp;px</td>
 	 		</tr>
 	 		<tr>
 	 			<td class="title width_100px"><@s.message "prompt.address"/></td>
 	 			<td>
-	 				<textarea class="txt width_96 remark" name="address"></textarea>
+	 				<textarea class="txt width_96 remark" name="address" style="height:50px;"></textarea>
 	 			</td>
 	 		</tr>
 	 		<tr>
@@ -134,6 +143,7 @@
 	 			</td>
 	 		</tr>
 	 	</table>
+	 	</form>
 	</div>
 	
   </body>

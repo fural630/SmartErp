@@ -245,3 +245,19 @@ CREATE TABLE `user` (
   `updateTime` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for system_prompt
+-- ----------------------------
+DROP TABLE IF EXISTS `system_prompt`;
+CREATE TABLE `system_prompt` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `height` char(10) DEFAULT NULL,
+  `width` char(10) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `content` text,
+  `createTime` varchar(255) DEFAULT NULL,
+  `updateTime` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
