@@ -9,7 +9,7 @@
   </head>
   <body>
   	<#include "../frame/header.ftl"/>
-  	<form action="/system/scriptConfigManage" id="mainPageForm" method="post">
+  	<form action="/system/systemPromptManage" id="mainPageForm" method="post">
 	<div class="current_nav_name clearfix"><@s.message "navigator.system.prompt.manage"/>
 		<div class="fr small_size"> 
 			<a class="btn" onclick="showSystemPromptConfigDialog('<@s.message "create.system.prompt"/>')">
@@ -21,37 +21,42 @@
 	<div class="mainbody clearfix"> 
 	  <div class="tableview clearfix">
 	    <div class="content">
-	      <table class="tb_border tb_full stripe" id="scriptConfigTable" name="pageTable">
+	      <table class="tb_border tb_full stripe" id="systemPromptTable" name="pageTable">
 	          <tr>
 	            <th>ID</th>
 	            <th><@s.message "title"/></th>
 	            <th><@s.message "belong.module"/></th>
 	            <th><@s.message "create.time"/></th>
 	            <th><@s.message "update.time"/></th>
-	            <th>操作</th>
+	            <th><@s.message "operating"/></th>
 	          </tr>
 	          <tr class="conditionTr">
-	          	<td></td>
+	          	<td>
+	          		<ul>
+	          			<li><input type="text" class="txt width_100px" name="params[id]" value="${page.params.id!''}"/></li>
+	          			<li></li>
+	          		</ul>
+	          	</td>
 	          	<td>
 	          		<ul>
 	          			<li><input type="text" class="txt width_100px" name="params[title]" value="${page.params.title!''}"/></li>
-	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[titleNameLike]" <#if page.params.titleLike??> checked </#if> /></li>
+	          			<li>*&nbsp;<input type="checkbox" title="<@s.message 'check.to.enable.blur.search'/>" name="params[titleNameLike]" <#if page.params.titleLike??> checked </#if> /></li>
 	          		</ul>
 	          	</td>
 	          	<td>
 	          		<ul>
 	          			<li><input type="text" class="txt width_100px" name="params[belongModule]" value="${page.params.belongModule!''}"/></li>
-	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[belongModuleLike]" <#if page.params.belongModuleLike??> checked </#if> /></li>
+	          			<li>*&nbsp;<input type="checkbox" title="<@s.message 'check.to.enable.blur.search'/>" name="params[belongModuleLike]" <#if page.params.belongModuleLike??> checked </#if> /></li>
 	          		</ul>
 	          	</td>
 	            <td>
 	          		<ul>
 	          			<li>
-	          				<label>从：</label>
+	          				<label><@s.message "from"/>：</label>
 	          				<input type="text" class="txt width_100px datepicker" name="params[createTimeFrom]" value="${page.params.createTimeFrom!""}" />
 	          			</li>
 	          			<li>
-	          				<label>到：</label>
+	          				<label><@s.message "to"/>：</label>
 	          				<input type="text" class="txt width_100px datepicker" name="params[createTimeTo]" value="${page.params.createTimeTo!""}" />
 	          			</li>
 	          		</ul>
@@ -59,11 +64,11 @@
 	          	<td>
 	          		<ul>
 	          			<li>
-	          				<label>从：</label>
+	          				<label><@s.message "from"/>：</label>
 	          				<input type="text" class="txt width_100px datepicker" name="params[createTimeFrom]" value="${page.params.createTimeFrom!""}" />
 	          			</li>
 	          			<li>
-	          				<label>到：</label>
+	          				<label><@s.message "to"/>：</label>
 	          				<input type="text" class="txt width_100px datepicker" name="params[createTimeTo]" value="${page.params.createTimeTo!""}" />
 	          			</li>
 	          		</ul>
@@ -82,16 +87,16 @@
 				            <td><@matchValue key="${obj.isOpened}" optionClass="OpenClose"/></td>
 				            <td>${obj.createName!""}</td>
 				            <td>
-				            	创建时间:<br/>${obj.createTime}<br/>
-								修改时间:<br/>${obj.updateTime}
+				            	<@s.message "create.time"/>:<br/>${obj.createTime}<br/>
+								<@s.message "update.time"/>:<br/>${obj.updateTime}
 							</td>
 				            <td style="width:60px; text-align:center;" >
 							 <div class="menu">
 							  <ul>
-							    <li class="option_btn" onmouseover="optionMouserover(this)" onmouseout="optionMouseout(this)"><a class="btn" href="javascript:void(0)">操作</a>
+							    <li class="option_btn" onmouseover="optionMouserover(this)" onmouseout="optionMouseout(this)"><a class="btn" href="javascript:void(0)"><@s.message "operating"/></a>
 							      <ul class="menu_ul">
-									<li><a href="javascript:void(0)" onclick="editScriptConfig(${obj.id});" >编辑 </a></li>
-							        <li><a href="javascript:void(0)" onclick="deleteScriptConfig(${obj.id})" >删除 </a></li>
+									<li><a href="javascript:void(0)" onclick="editScriptConfig(${obj.id});" ><@s.message "edit"/></a></li>
+							        <li><a href="javascript:void(0)" onclick="deleteScriptConfig(${obj.id})" ><@s.message "delete"/></a></li>
 							      </ul>
 							    </li>
 							  </ul>

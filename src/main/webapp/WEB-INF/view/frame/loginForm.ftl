@@ -4,6 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Smart Erp</title>
 	<link rel="stylesheet" type="text/css" href="/design/frame/style/css/login.css"/>
+	<link type="image/x-icon" href="/design/static/images/common/favicon.ico" rel="shortcut icon">
 	<script type="text/javascript" src="/design/frame/style/js/jquery-1.7.1.min.js"></script>
 	<script src="/design/static/js/app/system/login.js"></script>
 </head>

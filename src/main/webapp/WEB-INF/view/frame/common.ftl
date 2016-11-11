@@ -7,6 +7,8 @@
 <link rel="stylesheet" type="text/css" href="/design/frame/style/css/mainbody.css"/>
 <link rel="stylesheet" type="text/css" href="/design/frame/style/css/popup.css"/>
 
+<link type="image/x-icon" href="/design/static/images/common/favicon.ico" rel="shortcut icon">
+
 <!-- jquery -->
 <script type="text/javascript" src="/design/frame/style/js/jquery-1.7.1.min.js"></script>
 

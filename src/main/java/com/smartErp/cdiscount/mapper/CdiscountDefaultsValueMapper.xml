@@ -6,43 +6,17 @@
 	<select id="getCdiscountDefaultsValueByPage" parameterType="Page" resultType="hashMap">
 		select t.* from cdiscount_defaults_value t 
 		<where>
-			<if test="params.id!=null and params.id !=''">
-    			and t.id = #{params.id}
-    		</if>
-    		<if test="params.apiId!=null and params.apiId !=''">
-    			and t.apiId = #{params.apiId}
-    		</if>
     		<choose>
-				<when test="params.skuLike!=null and params.skuLike!='' ">
-					and ttt.sku like CONCAT('%','${params.sku}','%')  
+				<when test="params.templateNameLike!=null and params.templateNameLike!='' ">
+					and t.templateName like CONCAT('%','${params.templateName}','%')  
 				</when>
-				<when test="params.sku!=null and params.sku!=''">
-					and ttt.sku = #{params.sku}
+				<when test="params.templateName!=null and params.templateName!=''">
+					and t.templateName = #{params.templateName}
 				</when> 		
     		</choose>
-    		<if test="params.ean!=null and params.ean !=''">
-    			and t.ean = #{params.ean}
+    		<if test="params.isDefaults!=null and params.isDefaults !=''">
+    			and t.isDefaults = #{params.isDefaults}
     		</if>
-    		<if test="params.publishStatus!=null and params.publishStatus !=''">
-    			and t.publishStatus = #{params.publishStatus}
-    		</if>
-    		
-    		<if test="params.timeQuery == 'createTime' and params.timeFrom !=null and params.timeFrom!=''" >
-    			<![CDATA[ and t.createTime >= #{params.timeFrom} ]]>
-    		</if>
-    		
-    		<if test="params.timeQuery == 'createTime' and params.timeTo !=null and params.timeTo!=''" >
-    			<![CDATA[ and t.createTime <= #{params.timeTo} ]]>
-    		</if>
-    		
-		    <if test="params.timeQuery == 'updateTime' and params.timeFrom !=null and params.timeFrom!=''" >
-    			<![CDATA[ and t.updateTime >= #{params.timeFrom} ]]>
-    		</if>
-    		
-    		<if test="params.timeQuery == 'updateTime' and params.timeTo !=null and params.timeTo!=''" >
-    			<![CDATA[ and t.updateTime <= #{params.timeTo} ]]>
-    		</if>
-    		
 			<if test="params.userId!=null and params.userId !=''">
     			and t.creator = #{params.userId}
     		</if>
