@@ -5,15 +5,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.smartErp.application.libraries.constentEnum.OpenCloseEnum;
-import com.smartErp.cdiscount.model.CdiscountApiConfig;
 import com.smartErp.cdiscount.service.CdiscountApiConfigService;
 import com.smartErp.code.MainPage;
 import com.smartErp.code.session.UserSingleton;
@@ -22,7 +19,6 @@ import com.smartErp.system.model.ReturnMessage;
 import com.smartErp.system.model.ScriptConfig;
 import com.smartErp.system.model.User;
 import com.smartErp.system.service.ScriptConfigService;
-import com.smartErp.util.code.Dumper;
 import com.smartErp.util.code.JsonUtil;
 import com.smartErp.util.code.MyDate;
 import com.smartErp.util.frame.Page;
@@ -38,8 +34,7 @@ public class ScriptConfigManageController extends MainPage {
 	
 	@RequestMapping("scriptConfigManage")
 	public String scriptManage (Model model, Page page){
-		String title = "navigator.script.config.manage";
-		_execute(page, model, title);
+		_execute(page, model);
 		List<Map<String, Object>> collection = scriptConfigService.getScriptConfigPage(page);
 		model.addAttribute("collection", collection);
 		return "system/scriptConfigManage";

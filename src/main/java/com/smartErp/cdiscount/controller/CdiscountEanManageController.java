@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.axis2.databinding.types.soapencoding.Array;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +21,6 @@ import com.smartErp.cdiscount.service.CdiscountEanService;
 import com.smartErp.code.MainPage;
 import com.smartErp.code.session.UserSingleton;
 import com.smartErp.system.model.User;
-import com.smartErp.util.code.Dumper;
 import com.smartErp.util.code.JsonUtil;
 import com.smartErp.util.code.MyDate;
 import com.smartErp.util.code.MyLocale;
@@ -37,10 +35,8 @@ public class CdiscountEanManageController extends MainPage{
 	
 	@RequestMapping("cdiscountEanManage")
 	public String cdiscountEanManage(Model model, Page page){
-		String title = "navigator.cdiscount.ean.manage";
-		_execute(page, model, title);
+		_execute(page, model);
 		List<Map<String, Object>> collection = cdiscountEanService.getCdiscountEanManagePage(page);
-		Dumper.dump(collection);
 		model.addAttribute("collection", collection);
 		return "cdiscount/cdiscountEanManage";
 	}

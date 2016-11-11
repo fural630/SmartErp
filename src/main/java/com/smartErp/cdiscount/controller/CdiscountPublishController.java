@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +20,6 @@ import com.smartErp.application.libraries.constentEnum.CdiscountPublishStatusEnu
 import com.smartErp.cdiscount.model.CdiscountApiConfig;
 import com.smartErp.cdiscount.model.CdiscountCategory;
 import com.smartErp.cdiscount.model.CdiscountPublish;
-import com.smartErp.cdiscount.model.CdiscountPublishImage;
 import com.smartErp.cdiscount.model.DeliveryModeInfor;
 import com.smartErp.cdiscount.model.PublishDeliveryMode;
 import com.smartErp.cdiscount.service.CdiscountApiConfigService;
@@ -38,9 +35,7 @@ import com.smartErp.product.service.ProductService;
 import com.smartErp.system.enumerate.ReturnMessageEnum;
 import com.smartErp.system.model.ReturnMessage;
 import com.smartErp.system.model.User;
-import com.smartErp.util.code.Dumper;
 import com.smartErp.util.code.JsonUtil;
-import com.smartErp.util.code.MyDate;
 import com.smartErp.util.code.MyLocale;
 import com.smartErp.util.code.SysRemark;
 import com.smartErp.util.frame.Page;
@@ -66,8 +61,7 @@ public class CdiscountPublishController extends MainPage{
 	
 	@RequestMapping("cdiscountPublishManage")
 	public String cdiscountPublishManage(Model model, Page page){
-		String title = "navigator.cdiscount.publish.manage";
-		_execute(page, model, title);
+		_execute(page, model);
 		List<Map<String, Object>> collection = cdiscountPublishService.getCdiscountPublishByPage(page);
 		model.addAttribute("collection", collection);
 		return "cdiscount/cdiscountPublishManage";

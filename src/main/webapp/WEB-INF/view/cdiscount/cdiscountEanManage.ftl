@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>${title}</title>
+	<title><@s.message "navigator.cdiscount.ean.manage"/></title>
 	<#include "../frame/common.ftl"/>
 	<script src="/design/static/js/app/cdiscount/cdiscountEan.js"></script>
 	<link rel="stylesheet" type="text/css" href="/design/static/css/cdiscount/cdiscountEanManage.css"/>
@@ -10,7 +10,7 @@
   <body>
   	<#include "../frame/header.ftl"/>
   	<form action="/cdiscount/cdiscountEanManage" id="mainPageForm" method="post">
-	<div class="current_nav_name clearfix">${title}
+	<div class="current_nav_name clearfix"><@s.message "navigator.cdiscount.ean.manage"/>
 		<div class="fr small_size">
 			<a class="btn" onclick="showCdiscountEanDialog('批量导入EAN')"><img src="/design/frame/style/img/add.png"/>添加EAN</a>
 		</div>

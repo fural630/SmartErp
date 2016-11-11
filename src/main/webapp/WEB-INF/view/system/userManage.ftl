@@ -2,14 +2,14 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>${title}</title>
+	<title><@s.message "navigator.user.manage"/></title>
 	<#include "../frame/common.ftl"/>
 	<script src="/design/static/js/app/system/userManage.js"></script>
   </head>
   <body>
   	<#include "../frame/header.ftl"/>
   	<form action="/system/userManage" id="mainPageForm" method="post">
-	<div class="current_nav_name clearfix">${title}
+	<div class="current_nav_name clearfix"><@s.message "navigator.user.manage"/>
 		<div class="fr small_size"> <a class="btn" onclick="showUserDialog('添加用户')"><img src="/design/frame/style/img/add.png"/>新增</a>
 		</div>
 	</div>  

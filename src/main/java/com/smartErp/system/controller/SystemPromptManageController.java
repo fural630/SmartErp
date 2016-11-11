@@ -17,8 +17,7 @@ public class SystemPromptManageController extends MainPage{
 	
 	@RequestMapping("systemPromptManage")
 	public String systemPromptManage (Model model, Page page){
-		String title = "navigator.system.prompt.manage";
-		_execute(page, model, title);
+		_execute(page, model);
 		List<Map<String, Object>> collection = new ArrayList<Map<String, Object>>();
 		model.addAttribute("collection", collection);
 		return "system/systemPromptManage";

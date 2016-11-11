@@ -2,14 +2,14 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>${title!""}</title>
+	<title><@s.message "navigator.script.config.manage"/></title>
 	<#include "../frame/common.ftl"/>
 	<script src="/design/static/js/app/system/scriptConfigManage.js"></script>
   </head>
   <body>
   	<#include "../frame/header.ftl"/>
   	<form action="/system/scriptConfigManage" id="mainPageForm" method="post">
-	<div class="current_nav_name clearfix">${title!""}
+	<div class="current_nav_name clearfix"><@s.message "navigator.script.config.manage"/>
 		<div class="fr small_size"> 
 			<a class="btn" onclick="showScriptConfigDialog('添加脚本配置')">
 				<img src="/design/frame/style/img/add.png"/>添加脚本配置

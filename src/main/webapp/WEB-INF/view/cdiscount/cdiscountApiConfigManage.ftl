@@ -2,14 +2,14 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>${title!""}</title>
+	<title><@s.message "navigator.cdiscount.api.config"/></title>
 	<#include "../frame/common.ftl"/>
 	<script src="/design/static/js/app/cdiscount/cdiscountApiConfigManage.js"></script>
   </head>
   <body>
   	<#include "../frame/header.ftl"/>
   	<form action="/cdiscount/cdiscountApiConfigManage" id="mainPageForm" method="post">
-	<div class="current_nav_name clearfix">${title!""}
+	<div class="current_nav_name clearfix"><@s.message "navigator.cdiscount.api.config"/>
 		<div class="fr small_size"> 
 			<a class="btn" onclick="showCreateApiConfigDialog('添加授权店铺')">
 				<img src="/design/frame/style/img/add.png"/>添加授权店铺

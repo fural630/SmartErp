@@ -16,18 +16,18 @@
 	    	<a href="/SmartErp/home" class="logo">Smart Erp</a>
 	    </li> 
 	    <li class="first_level_li">
-	    	<span class="first_level_span"><a href="javaScript:void(0);">系统</a></span>
+	    	<span class="first_level_span"><a href="javaScript:void(0);"><@s.message "navigator.system"/></a></span>
 	    	<div class="nav_content">
 	    		<ul>
 	    			<li class="second_li">
-	    				<span class="second_level_span">系统管理</span>
+	    				<span class="second_level_span"><@s.message "navigator.system.manage"/></span>
 	    				<ul class="second_ul">
 	    					<#if loginUserId == 1>
-    							<li><a href="/system/userManage">用户管理</a></li>
+    							<li><a href="/system/userManage"><@s.message "navigator.user.manage"/></a></li>
     						</#if>
-	    					<li><a href="/system/scriptConfigManage">脚本管理</a></li>
+	    						<li><a href="/system/scriptConfigManage"><@s.message "navigator.script.config.manage"/></a></li>
 	    					<#if loginUserId == 1>
-	    						<li><a href="/system/systemPromptManage">提示管理</a></li>
+	    						<li><a href="/system/systemPromptManage"><@s.message "navigator.system.prompt.manage"/></a></li>
 	    					</#if>
 	    					<!--<li><a href="/system/authorityManage">权限管理</a></li>-->
 	    					<!--
@@ -40,17 +40,17 @@
 	    	</div>
 	    </li>
 	    <li class="first_level_li">
-	    	<span class="first_level_span"><a href="javaScript:void(0);">销售</a></span>
+	    	<span class="first_level_span"><a href="javaScript:void(0);"><@s.message "navigator.sale"/></a></span>
 	    	<div class="nav_content">
 	    		<ul>
 	    			<li class="second_li">
-	    				<span class="second_level_span">Cdiscount 专区</span>
+	    				<span class="second_level_span"><@s.message "navigator.cdiscount.area"/></span>
 	    				<ul class="second_ul">
-	    					<li><a href="/cdiscount/cdiscountPublishManage">Cdiscount 商品刊登管理</a></li>
+	    					<li><a href="/cdiscount/cdiscountPublishManage"><@s.message "navigator.cdiscount.publish.manage"/></a></li>
 	    					<!--<li><a href="/cdiscount/cdiscountOnlineProductManage">Cdiscount 已上架商品管理</a></li>-->
 	    					<!--<li><a href="/cdiscount/cdiscountEanManage">Cdiscount EAN管理</a></li>-->
-	    					<li><a href="/cdiscount/cdiscountApiConfigManage">Cdiscount API配置</a></li>
-	    					<li><a href="/cdiscount/cdiscountDefaultsValue">Cdiscount 刊登默认值配置</a></li>
+	    					<li><a href="/cdiscount/cdiscountApiConfigManage"><@s.message "navigator.cdiscount.api.config"/></a></li>
+	    					<li><a href="/cdiscount/cdiscountDefaultsValue"><@s.message "navigator.cdiscount.defaults.value"/></a></li>
 	    				</ul>
 	    			</li>
 	    			<!--
@@ -67,8 +67,8 @@
 	    </li> 
 	    <li class="nav_logout">
 	    	<form id="loginOutForm" action="/SmartErp/loginOut" method="post"></form>
-	    	<a onclick="modifyPersonInfo();" title="点击修改个人信息"><img src="/design/frame/style/img/default.gif">&nbsp;${loginUserName!""} </a>&nbsp;&nbsp;
-	    	<a onclick="loginOut();"><img src="/design/frame/style/img/exit.png">&nbsp;退出 </a>
+	    	<a onclick="modifyPersonInfo();" title="<@s.message 'check.to.modify.person.info'/>"><img src="/design/frame/style/img/default.gif">&nbsp;${loginUserName!""} </a>&nbsp;&nbsp;
+	    	<a onclick="loginOut();"><img src="/design/frame/style/img/exit.png">&nbsp;<@s.message "logout"/> </a>
 	    </li>
 	</ul>
 </div>

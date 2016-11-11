@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,21 +14,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.smartErp.application.libraries.constentEnum.YesNoEnum;
-import com.smartErp.application.libraries.select.YesNo;
 import com.smartErp.cdiscount.model.CdiscountDefaultsValue;
 import com.smartErp.cdiscount.model.DefaultsDeliveryMode;
-import com.smartErp.cdiscount.model.PublishDeliveryMode;
-import com.smartErp.cdiscount.service.CdiscountApiConfigService;
 import com.smartErp.cdiscount.service.CdiscountDefaultsValueService;
 import com.smartErp.cdiscount.service.DefaultsDeliveryModeService;
 import com.smartErp.code.MainPage;
 import com.smartErp.code.session.UserSingleton;
-import com.smartErp.system.enumerate.ReturnMessageEnum;
 import com.smartErp.system.model.ReturnMessage;
 import com.smartErp.system.model.User;
-import com.smartErp.util.code.Dumper;
 import com.smartErp.util.code.JsonUtil;
-import com.smartErp.util.code.MyLocale;
 import com.smartErp.util.frame.Page;
 
 @Controller
@@ -44,8 +37,7 @@ public class CdiscountDefaultsValueController extends MainPage{
 	
 	@RequestMapping("cdiscountDefaultsValue")
 	public String cdiscountDefaultsValue (Model model, Page page){
-		String title = "navigator.cdiscount.defaults.value";
-		_execute(page, model, title);
+		_execute(page, model);
 		List<Map<String, Object>> collection = cdiscountDefaultsValueService.getCdiscountDefaultsValueByPage(page);
 		for (Map<String, Object> map : collection) {
 			Integer id = Integer.parseInt(map.get("id").toString());

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>${title}</title>
+	<title><@s.message "navigator.cdiscount.publish.manage"/></title>
 	<#include "../frame/common.ftl"/>
 	<script src="/design/static/js/app/cdiscount/cdiscountPublishManage.js"></script>
 	<script src="/design/frame/ckeditor/ckeditor.js"></script>
@@ -11,7 +11,7 @@
   <body>
   	<#include "../frame/header.ftl"/>
   	<form action="/cdiscount/cdiscountPublishManage" id="mainPageForm" method="post">
-	<div class="current_nav_name clearfix">${title}
+	<div class="current_nav_name clearfix"><@s.message "navigator.cdiscount.publish.manage"/>
 		<div class="fr small_size">
 			<a class="btn" onclick="createCdiscountPublish()"><img src="/design/frame/style/img/add.png"/>创建商品刊登</a>
 		</div>
