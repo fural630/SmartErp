@@ -7,6 +7,7 @@
     <typeAliases>  
         <typeAlias alias="User" type="com.smartErp.system.model.User" />
         <typeAlias alias="ScriptConfig" type="com.smartErp.system.model.ScriptConfig" />
+        <typeAlias alias="SystemPrompt" type="com.smartErp.system.model.SystemPrompt" />
         <typeAlias alias="Page" type="com.smartErp.util.frame.Page" />
         
         <typeAlias alias="CdiscountApiConfig" type="com.smartErp.cdiscount.model.CdiscountApiConfig"/>
@@ -26,7 +27,8 @@
     
     <plugins><plugin interceptor="com.smartErp.util.frame.PageInterceptor"/></plugins> 
     <mappers>  
-        <mapper resource="com/smartErp/system/mapper/UserMapper.xml" />  
+        <mapper resource="com/smartErp/system/mapper/UserMapper.xml" />
+        <mapper resource="com/smartErp/system/mapper/SystemPromptMapper.xml" />
         <mapper resource="com/smartErp/system/mapper/ScriptConfigMapper.xml" /> 
         <mapper resource="com/smartErp/system/mapper/DictionaryTypeMapper.xml" />
 

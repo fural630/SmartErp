@@ -202,7 +202,7 @@
 					<a class="btn" onclick="referenceTemplate()">确认引用</a>
 					<a class="btn" onclick="viewTemplate()">查看该模板</a>
 					<a class="btn" onclick="setAsDefaultsTemplate()">设置该模板为默认模板</a>
-					<a onclick="showSystemPromptDialog()"><img src="/design/frame/style/img/question_mark.png"/></a>
+					<a onclick="showSystemPromptDialog(1)"><img src="/design/frame/style/img/question_mark.png"/></a>
 	 			</td> 		
 	 		</tr>
 	 		<tr>

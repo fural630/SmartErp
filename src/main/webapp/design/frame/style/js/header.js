@@ -135,5 +135,34 @@ function fillingPersonData (obj, selector) {
 }
 
 function showSystemPromptDialog (id) {
-	$("#systemPromptDialog").dialog("open");
+	var url = "/system/showSystemPromptDialog";
+	$.ajax({
+		url : url,
+		type: 'POST',
+		dataType : "json",
+		data : {
+			id : id
+		},
+		success : function (data) {
+			$.unblockUI();
+			if (null != data) {
+				var systemPrompt = data;
+				var height = systemPrompt.height;
+				var width = systemPrompt.width;
+				var content = systemPrompt.content;
+				var title = systemPrompt.title;
+				$("#systemPromptDialog").find("#_systemPrompt").html(content);
+				$("#systemPromptDialog").dialog("option", "title", title);
+				$("#systemPromptDialog").dialog("option", "height", height);
+				$("#systemPromptDialog").dialog("option", "width", width);
+				$("#systemPromptDialog").dialog("open");
+			} else {
+				var param = {
+					status : -1
+				};
+				$.message.showMessage(param);
+			}
+			
+		}
+	});
 }

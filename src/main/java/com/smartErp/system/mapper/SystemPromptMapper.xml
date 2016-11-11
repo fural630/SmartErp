@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.smartErp.system.dao.SystemPromptDao">  
+     
+    <insert id="insertSystemPrompt" parameterType="SystemPrompt">  
+        insert into system_prompt (
+        	title,
+        	height,
+        	width,
+        	address,
+        	content,
+        	createTime,
+        	updateTime
+        ) values(
+        	#{title},
+        	#{height},
+        	#{width},
+        	#{address},
+        	#{content},
+        	#{createTime},
+        	#{updateTime}
+        )  
+    </insert>  
+    
+    <update id="updateSystemPrompt" parameterType="SystemPrompt">  
+        update system_prompt set 
+        	title = #{title},
+        	height = #{height},
+        	width = #{width},
+        	address = #{address},
+        	content = #{content},
+        	createTime = #{createTime},
+        	updateTime = #{updateTime}
+        where id = #{id}   
+    </update>  
+    
+    <delete id="deleteById" parameterType="int">  
+        delete from system_prompt where id = #{id}  
+    </delete>  
+       
+    <select id="getSystemPromptById" parameterType="int" resultType="SystemPrompt">  
+        select * from system_prompt where id = #{id}  
+    </select>
+    
+    <select id="getSystemPromptPage" resultType="hashMap" parameterType="Page">
+    	select * from system_prompt t
+    	<where>
+	    	<choose>
+				<when test="params.titleLike!=null and params.titleLike!='' ">
+					and t.title like CONCAT('%','${params.title}','%')  
+				</when>
+				<when test="params.title!=null and params.title!=''">
+					and t.title = #{params.title}
+				</when> 		
+	   		</choose>
+	   		<choose>
+				<when test="params.addressLike!=null and params.addressLike!='' ">
+					and t.address like CONCAT('%','${params.address}','%')  
+				</when>
+				<when test="params.address!=null and params.address!=''">
+					and t.address = #{params.address}
+				</when>
+	   		</choose>
+	   		<if test="params.id!=null and params.id !=''">
+	 			and t.id = #{params.id}
+	   		</if>
+	   		<if test="params.createTimeFrom !=null and params.createTimeFrom!=''">
+    			<![CDATA[ and t.createTime >= #{params.createTimeFrom} ]]>
+    		</if>
+    		<if test="params.createTimeTo !=null and params.createTimeTo !='' ">
+    			<![CDATA[ and t.createTime <= #{params.createTimeTo} ]]>
+    		</if>
+    		<if test="params.updateTimeFrom !=null and params.updateTimeFrom!=''">
+    			<![CDATA[ and t.updateTime >= #{params.updateTimeFrom} ]]>
+    		</if>
+    		<if test="params.updateTimeTo !=null and params.updateTimeTo !='' ">
+    			<![CDATA[ and t.updateTime <= #{params.updateTimeTo} ]]>
+    		</if>
+   		</where>
+   		order by t.id desc
+    </select>
+      
+</mapper>  
