@@ -48,7 +48,7 @@
 	    				<ul class="second_ul">
 	    					<li><a href="/cdiscount/cdiscountPublishManage"><@s.message "navigator.cdiscount.publish.manage"/></a></li>
 	    					<!--<li><a href="/cdiscount/cdiscountOnlineProductManage">Cdiscount 已上架商品管理</a></li>-->
-	    					<!--<li><a href="/cdiscount/cdiscountEanManage">Cdiscount EAN管理</a></li>-->
+	    					<li><a href="/cdiscount/cdiscountEanManage"><@s.message "navigator.cdiscount.ean.manage"/></a></li>
 	    					<li><a href="/cdiscount/cdiscountApiConfigManage"><@s.message "navigator.cdiscount.api.config"/></a></li>
 	    					<li><a href="/cdiscount/cdiscountDefaultsValue"><@s.message "navigator.cdiscount.defaults.value"/></a></li>
 	    				</ul>

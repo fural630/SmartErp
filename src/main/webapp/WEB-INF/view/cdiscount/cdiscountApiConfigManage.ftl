@@ -11,8 +11,8 @@
   	<form action="/cdiscount/cdiscountApiConfigManage" id="mainPageForm" method="post">
 	<div class="current_nav_name clearfix"><@s.message "navigator.cdiscount.api.config"/>
 		<div class="fr small_size"> 
-			<a class="btn" onclick="showCreateApiConfigDialog('添加授权店铺')">
-				<img src="/design/frame/style/img/add.png"/>添加授权店铺
+			<a class="btn" onclick="showCreateApiConfigDialog('<@s.message "add.authorization.shop"/>')">
+				<img src="/design/frame/style/img/add.png"/><@s.message "add.authorization.shop"/>
 			</a>
 		</div>
 	</div>  
@@ -23,15 +23,15 @@
 	    
 	      <table class="tb_border tb_full stripe" id="cdiscountApiConfigTable" name="pageTable">
 	          <tr>
-	            <th>店铺名称</th>
-	            <th>API账号</th>
-	            <th>邮箱</th>
-	            <th>是否开启</th>
-	            <th>创建人</th>
-	            <th>最近修改时间</th>
-	            <th>创建时间</th>
-	            <th>日志</th>
-	            <th>操作</th>
+	            <th><@s.message "shop.name"/></th>
+	            <th><@s.message "api.account"/></th>
+	            <th><@s.message "email"/></th>
+	            <th><@s.message "is.open"/></th>
+	            <th><@s.message "creator"/></th>
+	            <th><@s.message "last.update.time"/></th>
+	            <th><@s.message "create.time"/></th>
+	            <th><@s.message "log"/>日志</th>
+	            <th><@s.message "operating"/>操作</th>
 	          </tr>
 	          <tr class="conditionTr">
 	          	<td>
@@ -78,11 +78,11 @@
 	          	<td>
 	          		<ul>
 	          			<li>
-	          				<label>从：</label>
+	          				<label><@s.message "from"/>：</label>
 	          				<input type="text" class="txt width_100px datepicker" name="params[lastUpdateTimeFrom]" value="${page.params.lastUpdateTimeFrom!""}" />
 	          			</li>
 	          			<li>
-	          				<label>到：</label>
+	          				<label><@s.message "to"/>：</label>
 	          				<input type="text" class="txt width_100px datepicker" name="params[lastUpdateTimeTo]" value="${page.params.lastUpdateTimeTo!""}" />
 	          			</li>
 	          		</ul>
@@ -90,11 +90,11 @@
 	          	<td>
 	          		<ul>
 	          			<li>
-	          				<label>从：</label>
+	          				<label><@s.message "from"/>：</label>
 	          				<input type="text" class="txt width_100px datepicker" name="params[createDateFrom]" value="${page.params.createDateFrom!""}" />
 	          			</li>
 	          			<li>
-	          				<label>到：</label>
+	          				<label><@s.message "to"/>：</label>
 	          				<input type="text" class="txt width_100px datepicker" name="params[createDateTo]" value="${page.params.createDateTo!""}" />
 	          			</li>
 	          		</ul>
@@ -124,9 +124,9 @@
 							  <ul>
 							    <li class="option_btn" onmouseover="optionMouserover(this)" onmouseout="optionMouseout(this)"><a class="btn" href="javascript:void(0)">操作</a>
 							      <ul class="menu_ul">
-									<li><a href="javascript:void(0)" onclick="editCdiscountApiConfig(${obj.id});" >编辑 </a></li>
-							        <li><a href="javascript:void(0)" onclick="deleteCdiscountApiConfig(${obj.id})" >删除 </a></li>
-							      	<li><a href="javascript:void(0)" onclick="updateShopConfig(${obj.id})">更新店铺运费模板</a></li>
+									<li><a href="javascript:void(0)" onclick="editCdiscountApiConfig(${obj.id});" ><@s.message "edit"/> </a></li>
+							        <li><a href="javascript:void(0)" onclick="deleteCdiscountApiConfig(${obj.id})" ><@s.message "delete"/> </a></li>
+							      	<li><a href="javascript:void(0)" onclick="updateShopConfig(${obj.id})"><@s.message "update.shopping.model.template"/></a></li>
 							      </ul>
 							    </li>
 							  </ul>
@@ -149,23 +149,23 @@
 		<input type="hidden" name="id"/>
 	 	<table class="popup_tb">
 	 		<tr>
-	 			<td class="title width_100px">店铺名<i class="star">*</i></td>
+	 			<td class="title width_100px"><@s.message "shop.name"/><i class="star">*</i></td>
 	 			<td><input type="text" class="txt width_50" name="shopName" required minlength="2"/></td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title width_100px">邮箱<i class="star">*</i></td>
+	 			<td class="title width_100px"><@s.message "email"/><i class="star">*</i></td>
 	 			<td><input type="email" class="txt width_50" name="email" email required/></td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title width_100px">API账号<i class="star">*</i></td>
+	 			<td class="title width_100px"><@s.message "api.account"/><i class="star">*</i></td>
 	 			<td><input type="text" class="txt width_70" name="apiAccount" required/></td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title width_100px">API密码<i class="star">*</i></td>
+	 			<td class="title width_100px"><@s.message "api.password"/><i class="star">*</i></td>
 	 			<td><input type="password" class="txt width_70" name="apiPassword" required/></td>
 	 		</tr>
 	 		<tr>
-	 			<td class="title width_100px">是否开启<i class="star">*</i></td>
+	 			<td class="title width_100px"><@s.message "is.open"/><i class="star">*</i></td>
 	 			<td>
 	 				<@select name="closeStatus" cssClass="sel width_100px" id="closeStatus" selected="1"  optionClass="YesNo"/>
 	 			</td>

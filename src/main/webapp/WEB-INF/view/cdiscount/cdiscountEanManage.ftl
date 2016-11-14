@@ -12,7 +12,7 @@
   	<form action="/cdiscount/cdiscountEanManage" id="mainPageForm" method="post">
 	<div class="current_nav_name clearfix"><@s.message "navigator.cdiscount.ean.manage"/>
 		<div class="fr small_size">
-			<a class="btn" onclick="showCdiscountEanDialog('批量导入EAN')"><img src="/design/frame/style/img/add.png"/>添加EAN</a>
+			<a class="btn" onclick="showCdiscountEanDialog('<@s.message "batch.add.cdiscount.ean"/>')"><img src="/design/frame/style/img/add.png"/><@s.message "batch.add.cdiscount.ean"/></a>
 		</div>
 	</div>  
 	<#include "../frame/page.ftl"/>
@@ -23,12 +23,12 @@
 	          <tr>
 	          	<th></th>
 	          	<th width="180px;">EAN</th>
-	            <th>是否已使用</th>
-	            <th width="140px;">店铺名称</th>
+	            <th><@s.message "is.used"/></th>
+	            <th width="140px;"><@s.message "shop.name"/></th>
 	            <th width="180px;">SKU</th>
-	            <th>使用时间</th>
-	            <th>创建时间</th>
-	            <th>操作</th>
+	            <th><@s.message "used.time"/></th>
+	            <th><@s.message "create.time"/></th>
+	            <th><@s.message "operating"/></th>
 	          </tr>
 	          <tr class="conditionTr">
 	          	<td></td>
@@ -64,17 +64,17 @@
 	          	<td>
 	          		<ul>
 	          			<li><input type="text" class="txt width_100px" name="params[sku]" value="${page.params.sku!''}" /></li>
-	          			<li>*&nbsp;<input type="checkbox" title="勾选启用模糊查找" name="params[skuLike]" <#if page.params.skuLike??> checked </#if>></li>
+	          			<li>*&nbsp;<input type="checkbox" title="<@s.message 'check.to.enable.blur.search'/>" name="params[skuLike]" <#if page.params.skuLike??> checked </#if>></li>
 	          		</ul>
 	          	</td>
 	          	<td>
 	          		<ul>
 	          			<li>
-	          				<label>从：</label>
+	          				<label><@s.message 'from'/>：</label>
 	          				<input type="text" class="txt width_100px datepicker" name="params[usedTimeFrom]" value="${page.params.usedTime!""}" />
 	          			</li>
 	          			<li>
-	          				<label>到：</label>
+	          				<label><@s.message 'to'/>：</label>
 	          				<input type="text" class="txt width_100px datepicker" name="params[usedTimeTimeTo]" value="${page.params.usedTime!""}" />
 	          			</li>
 	          		</ul>
@@ -82,11 +82,11 @@
 	          	<td>
 	          		<ul>
 	          			<li>
-	          				<label>从：</label>
+	          				<label><@s.message 'from'/>：</label>
 	          				<input type="text" class="txt width_100px datepicker" name="params[createTimeFrom]" value="${page.params.createTimeFrom!""}" />
 	          			</li>
 	          			<li>
-	          				<label>到：</label>
+	          				<label><@s.message 'to'/>：</label>
 	          				<input type="text" class="txt width_100px datepicker" name="params[createTimeTo]" value="${page.params.createTimeTo!""}" />
 	          			</li>
 	          		</ul>
@@ -107,9 +107,9 @@
 						<td style="width:60px; text-align:center;" >
 						 <div class="menu">
 						  <ul>
-						    <li class="option_btn" onmouseover="optionMouserover(this)" onmouseout="optionMouseout(this)"><a class="btn" href="javascript:void(0)">操作</a>
+						    <li class="option_btn" onmouseover="optionMouserover(this)" onmouseout="optionMouseout(this)"><a class="btn" href="javascript:void(0)"><@s.message 'operating'/></a>
 						      <ul class="menu_ul">
-						        <li><a href="javascript:void(0)" onclick="deleteCdiscountEan(${obj.id})" >删除 </a></li>
+						        <li><a href="javascript:void(0)" onclick="deleteCdiscountEan(${obj.id})" ><@s.message 'delete'/> </a></li>
 						      </ul>
 						    </li>
 						  </ul>
