@@ -12,4 +12,8 @@ public interface CdiscountEanDao {
 	public CdiscountEan getCdiscountEanByEan(String ean);
 
 	public void insert(CdiscountEan cdiscountEan);
+
+	public void deleteById(Integer id);
+
+	public void deleteByIdList(List<Integer> idList);
 }

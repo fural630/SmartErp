@@ -20,6 +20,7 @@ import com.smartErp.cdiscount.model.EanImportResult;
 import com.smartErp.cdiscount.service.CdiscountEanService;
 import com.smartErp.code.MainPage;
 import com.smartErp.code.session.UserSingleton;
+import com.smartErp.system.model.ReturnMessage;
 import com.smartErp.system.model.User;
 import com.smartErp.util.code.JsonUtil;
 import com.smartErp.util.code.MyDate;
@@ -85,5 +86,23 @@ public class CdiscountEanManageController extends MainPage{
 		resultMap.put("failCount", failCount);
 		resultMap.put("eanImportResultList", eanImportResultList);
 		return JsonUtil.toJsonStr(resultMap);
+	}
+	
+	@RequestMapping("deleteCdiscountEan")
+	@ResponseBody
+	public String deleteCdiscountEan (Integer id) {
+		ReturnMessage returnMessage = new ReturnMessage();
+		cdiscountEanService.deleteById(id);
+		return JsonUtil.toJsonStr(returnMessage);
+	}
+	
+	@RequestMapping("batchDeleteEan")
+	@ResponseBody
+	public String batchDeleteEan(@RequestParam(value = "idList[]", required = false) List<Integer> idList){
+		ReturnMessage returnMessage = new ReturnMessage();
+		if (CollectionUtils.isNotEmpty(idList)) {
+			cdiscountEanService.deleteByIdList(idList);
+		}
+		return JsonUtil.toJsonStr(returnMessage);
 	}
 }

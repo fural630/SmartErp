@@ -78,3 +78,56 @@ function showCdiscountEanDialog (title) {
 	$("#cdiscountEanDialog").dialog("option", "title", title);
 	$("#cdiscountEanDialog").dialog("open");
 }
+
+function deleteCdiscountEan (id) {
+	if(confirm("确定删除？")){
+		$.ajax({
+			url : "/cdiscount/deleteCdiscountEan",
+			type: 'POST',
+			dataType : "json",
+			data : {
+				id : id
+			},
+			success : function (data) {
+				$.message.showMessage(data);
+				refresh(1000);
+			}
+		});
+	}
+}
+
+function batchOptionSubmit () {
+	var batchOption = $("#batchOptionSelect").val();
+	if (batchOption == "") {
+		return;
+	} 
+	
+	var idList = getBatchOptionIds();//获取勾选的数据Id
+	if (idList.length == 0) {
+		var param = {
+			status : 0,
+			message : "请勾选需要操作的数据"
+		};
+		$.message.showMessage(param);
+		return;
+	}
+	
+	if (batchOption == "batchDelete") {
+		if(confirm("确定批量删除？")){
+			$.ajax({
+				url : "/cdiscount/batchDeleteEan",
+				type: 'POST',
+				dataType : "json",
+				data : {
+					idList : idList
+				},
+				success : function (data) {
+					$.message.showMessage(data);
+					if (data.status == 1){
+						refresh(1000);
+					}
+				}
+			});
+		}
+	}
+}

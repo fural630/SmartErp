@@ -45,5 +45,12 @@
 	<select id="getCdiscountEanByEan" parameterType="string" resultType="CdiscountEan">
 		select * from cdiscount_ean where ean = #{ean}
 	</select>
+	
+	<delete id="deleteByIdList" parameterType="java.util.List">
+    	delete from cdiscount_ean where id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+			#{item}  
+		</foreach> 
+    </delete>
       
 </mapper>  

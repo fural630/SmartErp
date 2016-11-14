@@ -32,4 +32,13 @@ public class CdiscountEanService {
 		cdiscountEanDao.insert(cdiscountEan);
 	}
 
+	public void deleteById(Integer id) {
+		cdiscountEanDao.deleteById(id);
+		
+	}
+
+	public void deleteByIdList(List<Integer> idList) {
+		cdiscountEanDao.deleteByIdList(idList);
+	}
+
 }

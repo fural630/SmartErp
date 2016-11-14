@@ -1,4 +1,6 @@
-<@spring.message ""/>
+if(confirm("确定删除？")){
+}
+<@s.message ""/>
 $.trim();
 $.unblockUI();
 $.myformPlugins.cleanForm("#cdiscountApiConfigDialog");
