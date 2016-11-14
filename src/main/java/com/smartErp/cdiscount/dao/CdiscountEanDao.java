@@ -3,6 +3,8 @@ package com.smartErp.cdiscount.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.smartErp.cdiscount.model.CdiscountEan;
 import com.smartErp.util.frame.Page;
 
@@ -16,4 +18,6 @@ public interface CdiscountEanDao {
 	public void deleteById(Integer id);
 
 	public void deleteByIdList(List<Integer> idList);
+
+	public Integer getCdiscountEanCount(@Param("userId")Integer userId, @Param("isUsed")Integer isUsed);
 }

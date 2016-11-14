@@ -52,5 +52,9 @@
 			#{item}  
 		</foreach> 
     </delete>
+    
+    <select id="getCdiscountEanCount" resultType="int">
+    	select count(1) from cdiscount_ean where creator = #{userId} and isUsed = #{isUsed}
+    </select>
       
 </mapper>  

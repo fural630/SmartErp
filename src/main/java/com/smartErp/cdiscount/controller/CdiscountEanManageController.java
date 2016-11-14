@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.smartErp.application.libraries.constentEnum.YesNoEnum;
 import com.smartErp.cdiscount.model.CdiscountEan;
 import com.smartErp.cdiscount.model.EanImportResult;
 import com.smartErp.cdiscount.service.CdiscountEanService;
@@ -104,5 +105,13 @@ public class CdiscountEanManageController extends MainPage{
 			cdiscountEanService.deleteByIdList(idList);
 		}
 		return JsonUtil.toJsonStr(returnMessage);
+	}
+	
+	@RequestMapping("getCdiscountEanCount")
+	@ResponseBody
+	public String getCdiscountEanCount() {
+		User user = UserSingleton.getInstance().getUser();
+		Integer count = cdiscountEanService.getCdiscountEanCount(user.getId(), YesNoEnum.NO.getValue());
+		return JsonUtil.toJsonStr(count);
 	}
 }

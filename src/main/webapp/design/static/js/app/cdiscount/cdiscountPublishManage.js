@@ -7,6 +7,15 @@ function init () {
 	CKEDITOR.replace('marketingDescription',  { height: '360px' });
 }
 
+function createCdiscountPublish () {
+	updateShopNameSelect("");
+	updateTemplateSelect("");
+	getDefaultsTemplateValue();
+	$("#publish_template_area").show();
+	getEanCanUsedCount();
+	showCreatePublishDialog("Cdiscount 创建商品刊登");
+}
+
 function initDialog() {
 	$("#cdiscountPublishDialog").dialog({
 		autoOpen: false,
@@ -204,14 +213,6 @@ function cleanCdiscountPublishDialog () {
 	CKEDITOR.instances["marketingDescription"].setData("");
 	$(".validateTip").html("");
 	$(".validateTip").hide();
-}
-
-function createCdiscountPublish () {
-	updateShopNameSelect("");
-	updateTemplateSelect("");
-	getDefaultsTemplateValue();
-	$("#publish_template_area").show();
-	showCreatePublishDialog("Cdiscount 创建商品刊登");
 }
 
 function updateShopNameSelect(apiId) {
@@ -1090,6 +1091,26 @@ function setAsDefaultsTemplate () {
 			}
 		});
 	}
+}
+
+function getEanCanUsedCount () {
+	$.ajax({
+		url : "/cdiscount/getCdiscountEanCount",
+		type: 'POST',
+		dataType : "json",
+		success : function (data) {
+			$.unblockUI();
+			$("#eanStockQty").html(data);
+		}
+	});
+}
+
+function randomSelectEan () {
+	
+}
+
+function selfSelectEan () {
+	
 }
 
 ///**

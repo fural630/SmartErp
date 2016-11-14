@@ -41,4 +41,8 @@ public class CdiscountEanService {
 		cdiscountEanDao.deleteByIdList(idList);
 	}
 
+	public Integer getCdiscountEanCount(Integer userId, Integer isUsed) {
+		return cdiscountEanDao.getCdiscountEanCount(userId, isUsed);
+	}
+
 }
