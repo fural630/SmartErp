@@ -1106,7 +1106,28 @@ function getEanCanUsedCount () {
 }
 
 function randomSelectEan () {
-	
+	$.ajax({
+		url : "/cdiscount/randomSelectEan",
+		type: 'POST',
+		dataType : "json",
+		success : function (data) {
+			$.unblockUI();
+			if (data == "") {
+				var param = {
+					status : 0,
+					message : "无可使用的EAN，请导入EAN"
+				};
+				$.message.showMessage(param);
+			} else {
+				$("#cdiscountPublishDialog input[name='ean']").val(data);
+				var param = {
+					status : 1,
+					message : "操作成功"
+				};
+				$.message.showMessage(param);
+			}
+		}
+	});
 }
 
 function selfSelectEan () {

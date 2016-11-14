@@ -20,4 +20,6 @@ public interface CdiscountEanDao {
 	public void deleteByIdList(List<Integer> idList);
 
 	public Integer getCdiscountEanCount(@Param("userId")Integer userId, @Param("isUsed")Integer isUsed);
+
+	public List<CdiscountEan> getCdiscountEanList(@Param("userId")Integer userId, @Param("isUsed")Integer isUsed);
 }

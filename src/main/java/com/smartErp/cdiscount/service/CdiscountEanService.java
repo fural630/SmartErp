@@ -44,5 +44,9 @@ public class CdiscountEanService {
 	public Integer getCdiscountEanCount(Integer userId, Integer isUsed) {
 		return cdiscountEanDao.getCdiscountEanCount(userId, isUsed);
 	}
+	
+	public List<CdiscountEan> getCdiscountEanList(Integer userId, Integer isUsed) {
+		return cdiscountEanDao.getCdiscountEanList(userId, isUsed);
+	}
 
 }

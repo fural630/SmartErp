@@ -114,4 +114,16 @@ public class CdiscountEanManageController extends MainPage{
 		Integer count = cdiscountEanService.getCdiscountEanCount(user.getId(), YesNoEnum.NO.getValue());
 		return JsonUtil.toJsonStr(count);
 	}
+	
+	@RequestMapping("randomSelectEan")
+	@ResponseBody
+	public String randomSelectEan () {
+		User user = UserSingleton.getInstance().getUser();
+		List<CdiscountEan> cdiscountEanList = cdiscountEanService.getCdiscountEanList(user.getId(), YesNoEnum.NO.getValue());
+		String ean = "";
+		if (CollectionUtils.isNotEmpty(cdiscountEanList)) {
+			ean = cdiscountEanList.get(0).getEan();
+		}
+		return JsonUtil.toJsonStr(ean);
+	}
 }
