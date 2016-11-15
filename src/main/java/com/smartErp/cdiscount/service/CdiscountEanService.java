@@ -48,5 +48,18 @@ public class CdiscountEanService {
 	public List<CdiscountEan> getCdiscountEanList(Integer userId, Integer isUsed) {
 		return cdiscountEanDao.getCdiscountEanList(userId, isUsed);
 	}
+	
+	public CdiscountEan getCdiscountEanByEanAndCreator(Integer userId, String ean) {
+		return cdiscountEanDao.getCdiscountEanByEanAndCreator(userId, ean);
+	}
+	
+	public void updateCdiscountEanIsUsed(Integer id, Integer isUsed) {
+		cdiscountEanDao.updateCdiscountEanIsUsed(id, isUsed);
+	}
+
+	public void updateCdiscountEan(CdiscountEan cdiscountEan) {
+		cdiscountEanDao.updateCdiscountEan(cdiscountEan);
+		
+	}
 
 }

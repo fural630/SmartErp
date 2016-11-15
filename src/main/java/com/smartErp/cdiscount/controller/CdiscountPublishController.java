@@ -17,14 +17,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.smartErp.application.libraries.constentEnum.CdiscountPublishStatusEnum;
+import com.smartErp.application.libraries.constentEnum.YesNoEnum;
 import com.smartErp.cdiscount.model.CdiscountApiConfig;
 import com.smartErp.cdiscount.model.CdiscountCategory;
+import com.smartErp.cdiscount.model.CdiscountEan;
 import com.smartErp.cdiscount.model.CdiscountPublish;
 import com.smartErp.cdiscount.model.DeliveryModeInfor;
 import com.smartErp.cdiscount.model.PublishDeliveryMode;
 import com.smartErp.cdiscount.service.CdiscountApiConfigService;
 import com.smartErp.cdiscount.service.CdiscountCategoryService;
 import com.smartErp.cdiscount.service.CdiscountDeliveryModeInfoService;
+import com.smartErp.cdiscount.service.CdiscountEanService;
 import com.smartErp.cdiscount.service.CdiscountPublishImageService;
 import com.smartErp.cdiscount.service.CdiscountPublishService;
 import com.smartErp.cdiscount.service.PublishDeliveryModeService;
@@ -36,6 +39,7 @@ import com.smartErp.system.enumerate.ReturnMessageEnum;
 import com.smartErp.system.model.ReturnMessage;
 import com.smartErp.system.model.User;
 import com.smartErp.util.code.JsonUtil;
+import com.smartErp.util.code.MyDate;
 import com.smartErp.util.code.MyLocale;
 import com.smartErp.util.code.SysRemark;
 import com.smartErp.util.frame.Page;
@@ -58,6 +62,8 @@ public class CdiscountPublishController extends MainPage{
 	private PublishDeliveryModeService publishDeliveryModeService;
 	@Autowired
 	private CdiscountPublishImageService cdiscountPublishImageService;
+	@Autowired
+	private CdiscountEanService cdiscountEanService;
 	
 	@RequestMapping("cdiscountPublishManage")
 	public String cdiscountPublishManage(Model model, Page page){
@@ -108,6 +114,7 @@ public class CdiscountPublishController extends MainPage{
 			@RequestParam("sku") String sku, @RequestParam("publishDeliveryModeList") String publishDeliveryModeStr) {
 		ReturnMessage returnMessage = new ReturnMessage();
 		MyLocale myLocale = new MyLocale();
+		
 		if (null != cdiscountPublish.getId()) {
 			CdiscountPublish cdiscountPublishOld = cdiscountPublishService.getCdiscountPublishById(cdiscountPublish.getId());
 			Integer publishStatus = cdiscountPublishOld.getPublishStatus();
@@ -129,9 +136,28 @@ public class CdiscountPublishController extends MainPage{
 				productService.insertProductImage(productId, imageUrl);
 			}
 		}
-		
 		cdiscountPublish.setProductId(productId);
+		
+		User user = UserSingleton.getInstance().getUser();
 		if (cdiscountPublish.getId() == null) {
+			CdiscountEan cdiscountEan = cdiscountEanService.getCdiscountEanByEanAndCreator(user.getId(), cdiscountPublish.getEan());
+			if (null != cdiscountEan) {
+				if (cdiscountEan.getIsUsed().equals(YesNoEnum.NO.getValue())) {
+					cdiscountEan.setIsUsed(YesNoEnum.YES.getValue());
+					cdiscountEan.setSku(sku);
+					cdiscountEan.setApiId(cdiscountPublish.getApiId());
+					cdiscountEan.setUsedTime(new MyDate().getCurrentDateTime());
+					cdiscountEanService.updateCdiscountEan(cdiscountEan);
+				} else if (sku.equals(cdiscountEan.getSku())){
+					cdiscountEan.setApiId(cdiscountPublish.getApiId());
+					cdiscountEan.setUsedTime(new MyDate().getCurrentDateTime());
+					cdiscountEanService.updateCdiscountEan(cdiscountEan);
+				} else {
+					returnMessage.setStatus(ReturnMessageEnum.FAIL.getValue());
+					returnMessage.setMessage(myLocale.getText("this.ean.is.used"));
+					return JsonUtil.toJsonStr(returnMessage);
+				}
+			}
 			cdiscountPublishService.insertCdiscountPublish(cdiscountPublish);
 		} else {
 			cdiscountPublishService.updateCdiscountPublishForm(cdiscountPublish);
@@ -155,6 +181,7 @@ public class CdiscountPublishController extends MainPage{
 				publishDeliveryModeService.insertPublishDeliveryMode(publishDeliveryMode);
 			}
 		}
+		
 		return JsonUtil.toJsonStr(returnMessage);
 	}
 	

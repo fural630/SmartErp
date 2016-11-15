@@ -60,5 +60,15 @@
     <select id="getCdiscountEanList" resultType="CdiscountEan">
     	select * from cdiscount_ean where creator = #{userId} and isUsed = #{isUsed}
     </select>
+    
+    <select id="getCdiscountEanByEanAndCreator" resultType="CdiscountEan">
+    	select * from cdiscount_ean  where creator = #{userId} and ean = #{ean}
+    </select>
+    
+    <update id="updateCdiscountEanIsUsed">
+    	update cdiscount_ean set
+    		isUsed = #{isUsed}
+    	where id = #{id}
+    </update>
       
 </mapper>  

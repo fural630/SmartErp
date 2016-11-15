@@ -22,4 +22,10 @@ public interface CdiscountEanDao {
 	public Integer getCdiscountEanCount(@Param("userId")Integer userId, @Param("isUsed")Integer isUsed);
 
 	public List<CdiscountEan> getCdiscountEanList(@Param("userId")Integer userId, @Param("isUsed")Integer isUsed);
+
+	public CdiscountEan getCdiscountEanByEanAndCreator(@Param("userId")Integer userId, @Param("ean") String ean);
+
+	public void updateCdiscountEanIsUsed(@Param("id")Integer id, @Param("isUsed") Integer isUsed);
+
+	public void updateCdiscountEan(CdiscountEan cdiscountEan);
 }

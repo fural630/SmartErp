@@ -218,7 +218,7 @@
 	 			<td>
 	 				<input type="text" class="txt width_200px" id="ean" name="ean"/>
 	 				<a class="btn" onclick="randomSelectEan()"><@s.message "random.select.ean"/></a>
-	 				<a class="btn" onclick="selfSelectEan()"><@s.message "self.select.ean"/></a>
+	 				<!--<a class="btn" onclick="selfSelectEan()"><@s.message "self.select.ean"/></a>-->
 	 				（可用EAN数据量：<span id="eanStockQty">0</span>）
 	 			</td>
 	 		</tr>
