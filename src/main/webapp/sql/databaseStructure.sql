@@ -293,3 +293,5 @@ CREATE TABLE `cdiscount_defaults_value` (
   `creator` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+alter table cdiscount_publish modify column description text;
